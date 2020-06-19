@@ -33,5 +33,6 @@ void mx_pop_front(t_list **head);
 void mx_pop_front_free_data(t_list **head);
 void mx_pop_back(t_list **head);
 void mx_push_back(t_list **list, void *data);
+void mx_strdel(char **str);
 
 #endif
