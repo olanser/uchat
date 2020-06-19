@@ -10,18 +10,21 @@
 typedef struct s_server_users {
     int socket;
     char *id_users;
+    char *buff;
     pthread_mutex_t m_write_socket;
 }              t_server_users;
 
 
 typedef struct s_server {
     int size_connekt;
-    pthread_mutex_t m_edit_database;
-    pthread_mutex_t m_edit_users;
+    pthread_rwlock_t m_edit_database;
+    pthread_rwlock_t m_edit_users;
     struct pollfd *poll_set;
     t_server_users *table_users;
     pthread_mutex_t m_works;
-    struct t_list *works;
+    t_list *works;
+    pthread_mutex_t m_list_fd_socket;
+    t_list *list_fd_socket;
     int count_thread;
     pthread_t *thread;
 }              t_server;
@@ -30,5 +33,6 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
 void *mx_thread(void *data);
 int mx_accept_new_connect(t_server *server_info, int max_connect);
 int mx_new_data_to_socket(t_server *server_info, int id);
+void mx_check_return_work(t_server *server_info);
 
 #endif

@@ -17,8 +17,8 @@ static t_server *create_malloc(int max_connect, int count_thread) {
         fprintf(stderr, "malloc: %s\n", strerror(errno));
         exit(1);
     }
-    pthread_mutex_init(&(server_info->m_edit_database), NULL);
-    pthread_mutex_init(&(server_info->m_edit_users), NULL);
+    pthread_rwlock_init(&(server_info->m_edit_database), NULL);
+    pthread_rwlock_init(&(server_info->m_edit_users), NULL);
     pthread_mutex_init(&(server_info->m_works), NULL);
     server_info->count_thread = count_thread;
     return server_info;
@@ -37,6 +37,8 @@ static void set_signal_and_create_thread(t_server *server_info) {
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
     t_server *server_info = create_malloc(max_connect, count_thread);
 
+    pthread_mutex_init(&(server_info->m_list_fd_socket), NULL);
+    server_info->list_fd_socket = 0;
     server_info->size_connekt = 1;
     server_info->works = 0;
     for (int i = 0; i < max_connect; i++) {

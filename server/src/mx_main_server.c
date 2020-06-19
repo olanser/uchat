@@ -9,12 +9,11 @@ int main() {
     int count_thread = MX_THREAD;
     t_server *server_info = mx_create_server(max_connect, server_sockfd, count_thread);
     int rc = 0;
-    char buff[1024];
-    int check;
 
     while (1) {
         // printf("1\n");
         rc = poll(server_info->poll_set, server_info->size_connekt, -1);
+        mx_check_return_work(server_info);
         if (server_info->poll_set[0].revents & POLLIN) {
             rc += mx_accept_new_connect(server_info, max_connect);
             server_info->poll_set[0].revents = 0;

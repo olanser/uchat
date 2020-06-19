@@ -4,7 +4,8 @@ SRC_PATH = src/mx_main_server.c \
 	src/mx_create_server.c \
 	src/mx_thread.c \
 	src/mx_accept_new_connect.c \
-	src/mx_new_data_to_socket.c
+	src/mx_new_data_to_socket.c \
+	src/mx_check_return_work.c
 
 # Variables
 
