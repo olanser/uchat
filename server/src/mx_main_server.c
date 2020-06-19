@@ -1,131 +1,100 @@
 #include "header.h"
 #include "mxinet.h"
-
-
-
-void registration(void) {
-    int sockL = mx_create_sockl(MX_PORT);
-    struct sockaddr addr;
-    socklen_t len = sizeof(addr);
-
-    while (1) {
-        int new_sock = accept(sockL, &addr,&len);
-
-        if (new_sock == -1) {
-            fprintf(stderr, "accept error: %s\n", strerror(errno));
-            exit(1);
-        }
-        if (fork() == 0) {
-            printf("Pid children: %d\n", getpid());
-            serve(new_sock);
-            exit(0);
-        }
-        close(new_sock);
-        printf("Pid: %d\n", getpid());
-        printf("Connected: %d %d\n", ((struct sockaddr_in*)&addr)->sin_addr.s_addr, ((struct sockaddr_in*)&addr)->sin_port);
-    }
-    return;
-}
-
-
-void* waitchildren(void *data) {
-    while (1) {
-        wait(0);
-    }
-    return (void*)0;
-}
-
-void exitchild(void) {
-    char sql[1024];
-
-    if (getpgid(getpid())== getpid()) {
-        sprintf(sql, "delete from pd;");
-    }
-    else
-        sprintf(sql, "delete from pd where pd_pid = %s;", mx_itoa(getpid()));
-    mx_do_query(sql,0,0);
-    // kill(-getpid(), SIGINT);
-    return;
-}
-void signal_stop(int sig) {
-    exit(0);
-}
-
-// int main() {
-//     pthread_t preg;
-//     sigset_t newmask;
-
-//     sigemptyset(&newmask);
-//     sigaddset(&newmask, SIGUSR1);
-//     sigprocmask(SIG_BLOCK, &newmask,0);
-//     signal(SIGINT, signal_stop);
-//     atexit(exitchild);
-//     pthread_create(&preg, 0, waitchildren, 0);
-//     registration();
-//     pthread_join(preg, 0);
-// }
-
-#define POLL_SIZE 32
-
-void *devider(void *data) {
-    int i = *((int*)data);
-    sigset_t newmask;
-    sigemptyset(&newmask);
-    sigaddset(&newmask, SIGUSR1);
-    int signo;
-    while (1) {
-        sigwait(&(newmask), &signo);
-
-        printf("treads = %d\n", i);
-        return 0;
-        usleep(1000);
-        // sleep(10);
-    }
-    return 0;
-}
+#include "defines.h"
 
 int main() {
-    struct pollfd poll_set[POLL_SIZE];
-    int numfds = 0;
-    int max_fd = 0;
-    bool end_server = 0;
-    bool close_conn = 0;
-    bool compress_array = 0;
-    pthread_t preg;
-    sigset_t newmask;
+    int port = MX_PORT_test;
+    int server_sockfd = mx_create_sockl(port);
+    int max_connect = MX_MAX_CONNECT - 5;
+    int count_thread = MX_THREAD;
+    t_server *server_info = mx_create_server(max_connect, server_sockfd, count_thread);
+    int rc = 0;
+    char buff[1024];
+    int check;
+
+    while (1) {
+        // printf("1\n");
+        rc = poll(server_info->poll_set, server_info->size_connekt, -1);
+        if (server_info->poll_set[0].revents & POLLIN) {
+            rc += mx_accept_new_connect(server_info, max_connect);
+            server_info->poll_set[0].revents = 0;
+        }
+        for (int i = 1; i < server_info->size_connekt && rc > 0; i++) {
+            if (server_info->poll_set[i].revents & POLLIN) {
+                rc += mx_new_data_to_socket(server_info, i);
+                server_info->poll_set[i].revents = 0;
+            }
+        }
+    }
+}
+/*
+        // printf("1\n");
+        if (server_info->poll_set[0].revents & POLLIN) {
+            server_info->table_users[server_info->size_connekt].socket = accept(server_sockfd, 0, 0);
+            server_info->poll_set[server_info->size_connekt].fd = server_info->table_users[server_info->size_connekt].socket;
+            server_info->size_connekt++;
+            printf("server connekt = %d\n", server_info->poll_set[server_info->size_connekt -  1].fd );
+        }
+        for (int i = 1; i < server_info->size_connekt && rc > 0; i++) {
+            if (server_info->poll_set[i].revents & POLLIN) {
+                check = read(server_info->poll_set[i].fd, buff, 1024);
+                if (check <= 0) {
+                    
+                }
+                printf("write socket  =%d read = %d\n", server_info->poll_set[i].fd, check);
+            }
+            else if (server_info->poll_set[i].revents & POLLHUP) {
+                printf("exit users = %d\n", server_info->poll_set[i].fd);
+                exit(1);
+            }
+            else if (server_info->poll_set[i].revents & POLLERR) {
+                printf("exit users = %d\n", server_info->poll_set[i].fd);
+                exit(1);
+            }
+        }
+    }
+}
+*/
+/*
+    // struct pollfd poll_set[POLL_SIZE];
+    // int numfds = 0;
+    // int max_fd = 0;
+    // bool end_server = 0;
+    // bool close_conn = 0;
+    // bool compress_array = 0;
+    // pthread_t preg;
+    // sigset_t newmask;
 
     struct sockaddr client_address;
     int client_len;
     int client_sockfd;
     int nread;
     int rc = 0;
-
     char buffer[1024];
     int len;
-
-    int server_sockfd = 0;
-
+    // int server_sockfd = 0;
 
 
 
 
 
-    sigemptyset(&newmask);
-    sigaddset(&newmask, SIGUSR1);
-    sigprocmask(SIG_BLOCK, &newmask,0);
-    int a[10] = {1,2,3,4,5,6};
-    for (int i = 0; i < 6; i++) {
-        pthread_create(&preg, 0, devider, &a[i]);
-    }
+
+    // sigemptyset(&newmask);
+    // sigaddset(&newmask, SIGUSR1);
+    // sigprocmask(SIG_BLOCK, &newmask,0);
+    // int a[10] = {1,2,3,4,5,6};
+    // for (int i = 0; i < 6; i++) {
+    //     pthread_create(&preg, 0, devider, &a[i]);
+    // }
 
 
 
-    server_sockfd = mx_create_sockl(MX_PORT);
+    // server_sockfd = mx_create_sockl(port);
 
     
-    poll_set[0].fd = server_sockfd;
-    poll_set[0].events = POLLIN;
-    numfds++;
+    // poll_set[0].fd = server_sockfd;
+    // poll_set[0].events = POLLIN;
+    // numfds++;
     
 
     // while(1) {
@@ -150,11 +119,11 @@ int main() {
          
         printf("Waiting for client (%d total)...\n", numfds);
 
-        rc = poll(poll_set, numfds, -1);
-          if (rc == 0)
-            {
-            printf("  poll() timed out.  End program.\n");
-        }
+        rc = poll(server_info->poll_set, server_info->size_connekt, -1);
+        //   if (rc == 0)
+        //     {
+        //     printf("  poll() timed out.  End program.\n");
+        // }
         for(fd_index = 0; fd_index < numfds; fd_index++) {
             if(poll_set[fd_index].revents == 0)
                 continue;
@@ -223,3 +192,4 @@ int main() {
             close(poll_set[i].fd);
     }
 }
+*/

@@ -4,7 +4,9 @@
 #define MX_COUNT_FUCTIONS 16
 #define MX_ERROR_THREAD stderr
 #define MX_DATABASE "database/database.db"
-#define MX_PORT 2365
+#define MX_PORT_test 2365
+#define MX_MAX_CONNECT 256
+#define MX_THREAD 6
 /* 
 * 0 bit of query
 * Query Status
