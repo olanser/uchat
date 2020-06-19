@@ -3,7 +3,7 @@
 #include "defines.h"
 
 int mx_new_data_to_socket(t_server *server_info, int id) {
-    char buffer[1024];
+    char *buffer = malloc(sizeof(char) * 1024);
     int rc = recv(server_info->poll_set[id].fd, buffer, 9, 0);
     int len = 0;
 
@@ -23,14 +23,20 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
         printf("Wrong Size  Connection closed\n");
     }
     else {
-        rc = recv(server_info->poll_set[id].fd, buffer, len - rc, 0);
+        rc = recv(server_info->poll_set[id].fd, &buffer[9], len - rc, 0);
         len = rc;
-        server_info->table_users[id].buff = strndup(buffer, rc);
-        printf("  %d bytes received\n", len);
+        bool check = false;
+        server_info->table_users[id].buff = buffer;
+        // printf("  %d bytes received\n", len + 9);
         pthread_mutex_lock(&(server_info->m_works));
+        if (!server_info->works)
+            check = true;
         mx_push_back(&(server_info->works), &(server_info->table_users[id]));
         pthread_mutex_unlock(&(server_info->m_works));
-
+        if (check)
+        kill(getpid(), SIGUSR1);
+        printf("GET SIGNAL\n");
+        server_info->poll_set[id].events = 0;
     }
     return -1;
 }
