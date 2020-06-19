@@ -20,6 +20,7 @@ SRC_PATH = ./src/mx_strlen.c \
 	src/mx_pop_front.c \
 	src/mx_create_node.c \
 	src/mx_push_back.c \
+	src/mx_strdel.c \
 
 SRC = $(notdir $(SRC_PATH))
 

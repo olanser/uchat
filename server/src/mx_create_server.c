@@ -12,6 +12,7 @@ static t_server *create_malloc(int max_connect, int count_thread) {
     server_info->poll_set = malloc(sizeof(struct pollfd) * max_connect);
     server_info->table_users = malloc(sizeof(t_server_users) * max_connect);
     server_info->thread = malloc(sizeof(pthread_t) * count_thread);
+    server_info->compress_array = false;
     if (server_info->poll_set == 0 || server_info->table_users == 0
         || server_info->thread == 0) {
         fprintf(stderr, "malloc: %s\n", strerror(errno));

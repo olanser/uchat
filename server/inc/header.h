@@ -27,6 +27,7 @@ typedef struct s_server {
     t_list *list_fd_socket;
     int count_thread;
     pthread_t *thread;
+    bool compress_array;
 }              t_server;
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
@@ -34,5 +35,6 @@ void *mx_thread(void *data);
 int mx_accept_new_connect(t_server *server_info, int max_connect);
 int mx_new_data_to_socket(t_server *server_info, int id);
 void mx_check_return_work(t_server *server_info);
+void mx_del_user_info(t_server_users *table_users);
 
 #endif
