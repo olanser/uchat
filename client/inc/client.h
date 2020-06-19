@@ -2,9 +2,10 @@
 #define CLIENT_H
 
 #include <gtk/gtk.h>
+#include <stdio.h>
 
 typedef struct s_info {
-    GtkWidget* curr_window;
+    int sock;
 } t_info;
 
 #endif
