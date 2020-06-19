@@ -10,6 +10,7 @@
 typedef struct s_server_users {
     int socket;
     char *id_users;
+    char *buff;
     pthread_mutex_t m_write_socket;
 }              t_server_users;
 
@@ -21,7 +22,7 @@ typedef struct s_server {
     struct pollfd *poll_set;
     t_server_users *table_users;
     pthread_mutex_t m_works;
-    struct t_list *works;
+    t_list *works;
     int count_thread;
     pthread_t *thread;
 }              t_server;

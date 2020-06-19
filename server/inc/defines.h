@@ -20,6 +20,8 @@ enum e_status {
     MX_QS_ERR_LOG_MANY = 105, // to many accounts finded(2+) when login
     MX_QS_ERR_REQUEST = 106, // request error
     MQ_QS_NOT_FOUND = 107, //
+    MX_QS_MAX_SIZE = 1024,
+    MX_QS_MAX_REQUEST = 16,
 
     MX_QS_OK = 200 // query successful
 };
