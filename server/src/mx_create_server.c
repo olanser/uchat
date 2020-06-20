@@ -1,5 +1,5 @@
 #include "header.h"
-#include "mxinet.h"
+#include "defines.h"
 
 
 static t_server *create_malloc(int max_connect, int count_thread) {
@@ -29,10 +29,20 @@ static void set_signal_and_create_thread(t_server *server_info) {
     sigset_t newmask;
     sigemptyset(&newmask);
     sigaddset(&newmask, SIGUSR1);
+    sigaddset(&newmask, SIGPIPE);
 
     sigprocmask(SIG_BLOCK, &newmask,0);
     for (int i = 0; i < server_info->count_thread; i++)
         pthread_create(&(server_info->thread[i]), 0, mx_thread, server_info);
+}
+
+static void open_db(t_server *server_info) {
+    if (sqlite3_open(MX_DATABASE, &(server_info->db)) != SQLITE_OK) {
+        fprintf(MX_ERROR_THREAD, "Cannot open database: %s\n",
+                sqlite3_errmsg(server_info->db));
+        sqlite3_close(server_info->db);
+        exit(1);
+    }
 }
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
@@ -53,5 +63,6 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
     server_info->poll_set[0].fd = fd_server;
     server_info->table_users[0].socket = fd_server;
     set_signal_and_create_thread(server_info);
+    open_db(server_info);
     return server_info;
 }

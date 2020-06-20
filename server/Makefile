@@ -34,7 +34,7 @@ CFLSGS = -lsqlite3
 # Rules
 
 all: test $(OUT_PATH)
-	clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o server -fsanitize=address
+	clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o server
 
 
 # -fsanitize=address

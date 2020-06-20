@@ -3,9 +3,9 @@
 void mx_compress_array(t_server *server_info) {
     t_server_users *temp;
 
-    // for (int i = 1; i < server_info->size_connekt; i++)
-    //     printf("%d ", server_info->poll_set[i].fd);
-    // printf("\n\n\n");
+    for (int i = 1; i < server_info->size_connekt; i++)
+        printf("%d ", server_info->poll_set[i].fd);
+    printf("\n\n\n");
     
     pthread_rwlock_wrlock(&(server_info->m_edit_users));
     for (int i = 1; i < server_info->size_connekt; i++) {
@@ -24,8 +24,8 @@ void mx_compress_array(t_server *server_info) {
         }
     }
     pthread_rwlock_unlock(&(server_info->m_edit_users));
-    // for (int i = 1; i < server_info->size_connekt; i++)
-    // printf("%d ", server_info->poll_set[i].fd);
-    // printf("\n");
+    for (int i = 1; i < server_info->size_connekt; i++)
+    printf("%d ", server_info->poll_set[i].fd);
+    printf("\n");
     server_info->compress_array = false;
 }

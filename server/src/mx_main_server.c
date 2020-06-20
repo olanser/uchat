@@ -10,7 +10,7 @@ int main() {
     int port = MX_PORT_test;
     int server_sockfd = mx_create_sockl(port);
     int max_connect = MX_MAX_CONNECT - 5;
-    int count_thread = 1;
+    int count_thread = MX_THREAD;
     t_server *server_info = mx_create_server(max_connect, server_sockfd,
                                              count_thread);
     int rc = 0;
@@ -31,8 +31,9 @@ int main() {
         }
         if (server_info->compress_array == true)
             mx_compress_array(server_info);
-        // for (int i = 1; i < server_info->size_connekt; i++)
-        // printf("%d ", server_info->poll_set[i].fd);
-        // printf("\n");
+        for (int i = 1; i < server_info->size_connekt; i++)
+        printf("%d ", server_info->poll_set[i].fd);
+        printf("\n");
+        usleep(1000);
     }
 }
