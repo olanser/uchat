@@ -11,4 +11,4 @@ void mx_connect_sock(int sock, unsigned int ip, unsigned int port) {
         fprintf(stderr, "connect error: %s\n", strerror(errno));
         exit(1);
     }
-}       
+}

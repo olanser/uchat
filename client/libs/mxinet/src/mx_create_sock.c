@@ -9,4 +9,3 @@ int mx_create_sock(int type) {
     }
     return 0;
 }
-          
