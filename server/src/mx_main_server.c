@@ -31,9 +31,9 @@ int main() {
         }
         if (server_info->compress_array == true)
             mx_compress_array(server_info);
-        for (int i = 1; i < server_info->size_connekt; i++)
-        printf("%d ", server_info->poll_set[i].fd);
-        printf("\n");
-        usleep(1000);
+        // for (int i = 1; i < server_info->size_connekt; i++)
+        // printf("%d ", server_info->poll_set[i].fd);
+        // printf("\n");
+        // usleep(1000);
     }
 }

@@ -13,6 +13,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/signup/mx_signup.c \
 	src/work_thread/signin/mx_signin.c \
 	src/work_thread/send_message/mx_send_message.c \
+	src/function/mx_write_socket.c \
 
 # Variables
 
