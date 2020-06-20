@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <sqlite3.h>
+#include <stdbool.h>
+
 #include "libmx.h"
 #include "mxinet.h"
 
@@ -17,6 +19,13 @@ typedef struct s_server_users {
     pthread_mutex_t m_if_work;
     pthread_mutex_t m_write_socket;
 }              t_server_users;
+
+typedef struct s_user_in_chat {
+    char *usr_id;
+    char *usr_nickname;
+    struct s_user_in_chat *next;
+}               t_user_in_chat;
+
 
 
 typedef struct s_server {
@@ -32,6 +41,13 @@ typedef struct s_server {
     pthread_t *thread;
     bool compress_array;
 }              t_server;
+
+typedef struct s_table_user {
+    char *first_name;
+    char *second_name;
+    char *nickname;
+    char *pass;
+} t_table_user;
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
 void *mx_thread(void *data);
