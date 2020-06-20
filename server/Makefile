@@ -5,8 +5,9 @@ SRC_PATH = src/mx_main_server.c \
 	src/mx_thread.c \
 	src/mx_accept_new_connect.c \
 	src/mx_new_data_to_socket.c \
-	src/mx_check_return_work.c \
-	src/mx_delete_struckt.c \
+	src/mx_compress_array.c \
+	src/mx_check_not_work.c \
+	src/work_thread/mx_work_thread.c \
 
 # Variables
 
@@ -35,6 +36,8 @@ CFLSGS = -lsqlite3
 all: test $(OUT_PATH)
 	clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o server -fsanitize=address
 
+
+# -fsanitize=address
 install: macos all
 
 obj/%.o: %.c $(INC)
