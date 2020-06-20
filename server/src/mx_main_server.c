@@ -29,10 +29,8 @@ int main() {
             for (int i = 1; i < server_info->size_connekt; i++) {
                 if (server_info->poll_set[i].fd == -1) {
                     server_info->poll_set[i].fd = server_info->poll_set[server_info->size_connekt].fd;
-
                     //mx_del_user_info(&(server_info->table_users[i]));
                     server_info->table_users[i] = server_info->table_users[server_info->size_connekt];
-
                     server_info->size_connekt -= 1;
                     i--;
                 }
