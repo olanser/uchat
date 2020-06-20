@@ -31,11 +31,12 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 
 all: premake libs_comile copy $(FULL_OBJS)
 	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) 
-	
+	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
+
 premake:
 	@mkdir -p tmp
 	@mkdir -p obj
-
+	
 libs_comile:
 	@make -sC libs
 	@mv $(addprefix libs/, $(LIBS)) .
@@ -43,10 +44,12 @@ libs_comile:
 	@cp libs/libmx/inc/libmx.h inc
 
 copy:
-	cp -p $(FULL_SRC) ./tmp
+	@cp -p $(FULL_SRC) ./tmp
+	@printf "\x1b[1m\x1b[38;5;26m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;26mstared\x1b[38;5;8m [$I]\x1b[0m\n"
 
 obj/%.o: tmp/%.c $(CHECK_INC)
-	clang -c $< -o $@ $(INC) $(CFG)
+	@clang -c $< -o $@ $(INC) $(CFG)
+	@printf "\x1b[38;5;118m | $@\x1b[38;18;34m compiled\n"
 
 uninstall: u
 	@make -sC libs u
