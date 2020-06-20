@@ -8,6 +8,11 @@ SRC_PATH = src/mx_main_server.c \
 	src/mx_compress_array.c \
 	src/mx_check_not_work.c \
 	src/work_thread/mx_work_thread.c \
+	src/function/mx_create_response.c \
+	src/work_thread/mx_do_request.c \
+	src/work_thread/signup/mx_signup.c \
+	src/work_thread/signin/mx_signin.c \
+	src/work_thread/send_message/mx_send_message.c \
 
 # Variables
 
