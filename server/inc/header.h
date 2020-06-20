@@ -41,11 +41,12 @@ void mx_compress_array(t_server *server_info);
 bool mx_check_not_work(t_server_users user);
 void mx_work_thread(t_server *server_info, t_server_users *user);
 char *mx_create_response(char id_request, int query, char status);
-void mx_do_request(t_server *server_info, t_server_users *user);
+char *mx_do_request(t_server *server_info, t_server_users *user);
+void mx_write_socket(int fd, char *response);
 
 //API
-void mx_signup(t_server *server_info, t_server_users *user);
-void mx_signin(t_server *server_info, t_server_users *user);
-void mx_send_message(t_server *server_info, t_server_users *user);
+char *mx_signup(t_server *server_info, t_server_users *user);
+char *mx_signin(t_server *server_info, t_server_users *user);
+char *mx_send_message(t_server *server_info, t_server_users *user);
 
 #endif

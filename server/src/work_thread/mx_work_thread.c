@@ -22,7 +22,7 @@ static bool check_request(t_server_users *user) {
         }
     }
     pthread_mutex_lock(&(user->m_write_socket));
-    write(user->socket, response, 10);
+    mx_write_socket(user->socket, response);
     pthread_mutex_unlock(&(user->m_write_socket));
     free(response);
     return false;
@@ -31,9 +31,16 @@ static bool check_request(t_server_users *user) {
 void mx_work_thread(t_server *server_info, t_server_users *user) {
     char comand = user->buff[0];
     int size = *((int*)&(user->buff[5]));
+    char *response;
 
     if (check_request(user)) {
-        mx_do_request(server_info, user);
+        response = mx_do_request(server_info, user);
+        if (response) {
+        pthread_mutex_lock(&(user->m_write_socket));
+        mx_write_socket(user->socket, response);
+        pthread_mutex_unlock(&(user->m_write_socket));
+        free(response);
+        }
     }
     // // printf("Comand id = %d and size = %d\n", comand, size);
     // if (comand == 2) {
