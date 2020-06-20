@@ -42,6 +42,8 @@ void mx_work_thread(t_server *server_info, t_server_users *user) {
         free(response);
         }
     }
+    else {
+    }
     // // printf("Comand id = %d and size = %d\n", comand, size);
     // if (comand == 2) {
     //     pthread_rwlock_rdlock(&(server_info->m_edit_users));

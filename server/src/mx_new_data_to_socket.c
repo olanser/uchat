@@ -3,9 +3,10 @@
 #include "defines.h"
 
 static bool error_case(bool *close_conn, int rc, char *buffer) {
+    // printf("buff = %d\n", buffer[0]);
     if (rc < 0) {
         if (errno != EWOULDBLOCK) {
-            perror("  recv() failed");
+            // perror("  recv() failed");
             *close_conn = true;
         }
     }
@@ -14,7 +15,7 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
         *close_conn = true;
     }
     else if (buffer[0] > MX_QS_MAX_REQUEST) {
-        printf("Wrong request  Connection closed\n");
+        // printf("Wrong request  Connection closed\n");
         *close_conn = true;
     }
     else if ((rc =*((int *)(&buffer[5]))) > MX_QS_MAX_SIZE) {   // size
@@ -24,8 +25,10 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
     return *close_conn;
 }
 
-static void read_socket(t_server *server_info, int id, char **buffer, int rc) {
-    rc = recv(server_info->poll_set[id].fd, &(*buffer)[9], rc - 9, 0);
+static void read_socket(t_server *server_info, int id, char **buffer) {
+    int len = *(int*)(&(*buffer)[5]);
+
+    recv(server_info->poll_set[id].fd, &(*buffer)[9], len - 9, 0);
     server_info->table_users[id].buff = *buffer;
     *buffer = 0;
     server_info->poll_set[id].revents = 0;
@@ -43,7 +46,7 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
 
     if (error_case(&close_conn, rc, buffer));
     else
-        read_socket(server_info, id , &buffer, rc);
+        read_socket(server_info, id , &buffer);
     if (close_conn) {
         pthread_rwlock_wrlock(&(server_info->m_edit_users));
         close(server_info->poll_set[id].fd);

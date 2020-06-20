@@ -43,6 +43,8 @@ void mx_work_thread(t_server *server_info, t_server_users *user);
 char *mx_create_response(char id_request, int query, char status);
 char *mx_do_request(t_server *server_info, t_server_users *user);
 void mx_write_socket(int fd, char *response);
+int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
+                void *param, t_server *server_info);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
