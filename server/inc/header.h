@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sqlite3.h>
 #include "libmx.h"
 #include "mxinet.h"
 
@@ -21,9 +22,10 @@ typedef struct s_server_users {
 typedef struct s_server {
     int size_connekt;
     pthread_rwlock_t m_edit_database;
+    sqlite3 *db;
     pthread_rwlock_t m_edit_users;
-    struct pollfd *poll_set;
     t_server_users *table_users;
+    struct pollfd *poll_set;
     pthread_mutex_t m_works;
     t_list *works;
     int count_thread;
