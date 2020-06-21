@@ -1,9 +1,9 @@
-#include "header.h"
+#include "server.h"
 #include "defines.h"
 
 static int callback(void *data, int columns, char **name, char **tabledata) {
     t_table_user *user =  malloc(sizeof(t_table_user));
-   
+
     user->first_name = mx_strdup(name[0]);
     user->second_name = mx_strdup(name[1]);
     user->nickname = mx_strdup(name[2]);

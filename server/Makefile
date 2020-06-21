@@ -15,6 +15,11 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/send_message/mx_send_message.c \
 	src/function/mx_write_socket.c \
 	src/function/mx_do_query.c \
+	src/function/mx_check_number.c \
+	src/function/mx_check_user_in_chat.c \
+	src/function/mx_send_response_user.c \
+	src/work_thread/edit_message/mx_edit_message.c \
+	src/work_thread/signin/mx_get_msg_login.c \
 
 # Variables
 
@@ -34,7 +39,7 @@ LIBS = libs/libmx.a \
 	libs/mxinet.a
 
 INC = inc/defines.h \
-	inc/header.h
+	inc/server.h
 
 CFLSGS = -lsqlite3
 

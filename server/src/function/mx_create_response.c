@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 
 char *mx_create_response(char id_request, int query, char status) {
     char *response = malloc(sizeof(char) * 10);

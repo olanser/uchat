@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 #include "defines.h"
 
 static bool check_request(t_server_users *user) {
@@ -21,9 +21,7 @@ static bool check_request(t_server_users *user) {
                 *(int*)&(user->buff[1]), MX_QS_ERR_RIGHT);
         }
     }
-    pthread_mutex_lock(&(user->m_write_socket));
-    mx_write_socket(user->socket, response);
-    pthread_mutex_unlock(&(user->m_write_socket));
+    mx_write_socket(user, response);
     free(response);
     return false;
 }
@@ -36,10 +34,10 @@ void mx_work_thread(t_server *server_info, t_server_users *user) {
     if (check_request(user)) {
         response = mx_do_request(server_info, user);
         if (response) {
-        pthread_mutex_lock(&(user->m_write_socket));
-        mx_write_socket(user->socket, response);
-        pthread_mutex_unlock(&(user->m_write_socket));
-        free(response);
+        // pthread_mutex_lock(&(user->m_write_socket));
+            mx_write_socket(user, response);
+        // pthread_mutex_unlock(&(user->m_write_socket));
+            free(response);
         }
     }
     else {

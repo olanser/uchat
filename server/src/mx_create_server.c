@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 #include "defines.h"
 
 
@@ -18,7 +18,7 @@ static t_server *create_malloc(int max_connect, int count_thread) {
         fprintf(stderr, "malloc: %s\n", strerror(errno));
         exit(1);
     }
-    pthread_rwlock_init(&(server_info->m_edit_database), NULL);
+    pthread_mutex_init(&(server_info->m_edit_database), NULL);
     pthread_rwlock_init(&(server_info->m_edit_users), NULL);
     pthread_mutex_init(&(server_info->m_works), NULL);
     server_info->count_thread = count_thread;

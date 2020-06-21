@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 #include "defines.h"
 
 static int callback_one(void *data, int columns, char **name, char **tabledata) {

@@ -1,5 +1,5 @@
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef SERVER_H
+#define SERVER_H
 
 #include <stdlib.h>
 #include <signal.h>
@@ -30,7 +30,7 @@ typedef struct s_user_in_chat {
 
 typedef struct s_server {
     int size_connekt;
-    pthread_rwlock_t m_edit_database;
+    pthread_mutex_t m_edit_database;
     sqlite3 *db;
     pthread_rwlock_t m_edit_users;
     t_server_users *table_users;
@@ -47,6 +47,7 @@ typedef struct s_table_user {
     char *second_name;
     char *nickname;
     char *pass;
+    char *id;
 } t_table_user;
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
@@ -54,17 +55,25 @@ void *mx_thread(void *data);
 int mx_accept_new_connect(t_server *server_info, int max_connect);
 int mx_new_data_to_socket(t_server *server_info, int id);
 void mx_compress_array(t_server *server_info);
-bool mx_check_not_work(t_server_users user);
+bool mx_check_not_work(t_server_users *user);
 void mx_work_thread(t_server *server_info, t_server_users *user);
-char *mx_create_response(char id_request, int query, char status);
 char *mx_do_request(t_server *server_info, t_server_users *user);
-void mx_write_socket(int fd, char *response);
+void mx_write_socket(t_server_users *user, char *response);
+
+//function
+char *mx_create_response(char id_request, int query, char status);
+int mx_check_number(char *str, int len);
 int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
+bool mx_check_user_in_chat(char *id_chat, char *id_user, t_server *server_info);
+void mx_send_response_user(t_server *server_info, char *response, char *sql);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
+int mx_get_msg_login(char status, char *request, t_table_user *tuser,
+                     char **response);
 char *mx_signin(t_server *server_info, t_server_users *user);
 char *mx_send_message(t_server *server_info, t_server_users *user);
+char *mx_edit_message(t_server *server_info, t_server_users *user);
 
 #endif

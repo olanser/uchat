@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 
 
 static t_user_in_chat *create_chat_users(char *user_id, char *usr_nick) {
@@ -21,8 +21,8 @@ void mx_push_char_users(t_user_in_chat **list, char *user_id, char *usr_nick) {
             buf = buf->next;
         buf->next = node;
     }
-
 }
+
 void mx_delete_chat_users(t_user_in_chat **list) {
     t_user_in_chat *tmp = NULL;
 

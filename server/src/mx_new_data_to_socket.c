@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 #include "mxinet.h"
 #include "defines.h"
 
@@ -52,6 +52,11 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
         close(server_info->poll_set[id].fd);
         server_info->poll_set[id].fd = -1;
         server_info->table_users[id].socket = -1;
+        if (server_info->table_users[id].id_users) {
+            free(server_info->table_users[id].id_users);
+            server_info->table_users[id].id_users = 0;
+        }
+        server_info->poll_set[id].events = 0;
         server_info->compress_array = true;
         pthread_rwlock_unlock(&(server_info->m_edit_users));
     }

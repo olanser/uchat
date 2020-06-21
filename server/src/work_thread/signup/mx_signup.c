@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 
 char *mx_signup(t_server *server_info, t_server_users *user) {
 
