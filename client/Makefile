@@ -10,10 +10,38 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/gtk_cycle/renderer/mx_do_iteration.c \
 	src/gtk_cycle/renderer/mx_show_window.c \
 	src/init/mx_connect_signals.c \
+	src/listener/handlers/mx_h_authenticate.c \
+	src/listener/handlers/mx_h_create_chat.c \
+	src/listener/handlers/mx_h_create_dialog.c \
+	src/listener/handlers/mx_h_delete_msg.c \
+	src/listener/handlers/mx_h_edit_msg.c \
+	src/listener/handlers/mx_h_get_chat_info.c \
+	src/listener/handlers/mx_h_get_chat_users.c \
+	src/listener/handlers/mx_h_get_file.c \
+	src/listener/handlers/mx_h_get_msgs_time.c \
+	src/listener/handlers/mx_h_get_user_info.c \
+	src/listener/handlers/mx_h_join_chat.c \
+	src/listener/handlers/mx_h_leave_chat.c \
+	src/listener/handlers/mx_h_read_message.c \
+	src/listener/handlers/mx_h_send_file.c \
+	src/listener/handlers/mx_h_send_msg.c \
+	src/listener/handlers/mx_h_show_users.c \
+	src/listener/handlers/mx_h_signin.c \
+	src/listener/handlers/mx_h_signup.c \
+	src/listener/mx_handle_response.c \
+	src/listener/mx_listener.c \
+	src/init/mx_connect.c \
+	src/api/mx_api_delete_message.c \
+	src/api/mx_api_edit_message.c \
+	src/api/mx_api_get_chat_users.c \
+	src/api/mx_api_get_user_info.c \
+	src/api/mx_api_send_file.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
 FULL_OBJS = $(addprefix obj/, $(notdir $(FULL_SRC:%.c=%.o)))
+
+A = $(foreach dir, $(dirs), $($(dir):%=)
 
 LIBS = mxinet.a \
 	libmx.a \
@@ -29,8 +57,12 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-lsqlite3 \
 	-rdynamic \
 
+SANITIZE = -fsanitize-memory-track-origins
+
+I = 0
+
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) 
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE) 
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:
@@ -45,9 +77,10 @@ libs_comile:
 
 copy:
 	@cp -p $(FULL_SRC) ./tmp
-	@printf "\x1b[1m\x1b[38;5;26m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;26mstared\x1b[38;5;8m [$I]\x1b[0m\n"
+	@printf "\x1b[1m\x1b[38;5;26m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;26mstared\x1b[38;5;8m\x1b[0m\n"
 
 obj/%.o: tmp/%.c $(CHECK_INC)
+	@$(eval I :=  $(shell echo "$$(($(I)+1))"))
 	@clang -c $< -o $@ $(INC) $(CFG)
 	@printf "\x1b[38;5;118m | $@\x1b[38;18;34m compiled\n"
 

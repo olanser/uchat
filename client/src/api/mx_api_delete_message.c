@@ -6,7 +6,7 @@
 #include "libmx.h"
 
 static int get_query(char *query, char **parameters, int query_id, int size) {
-    query[0] = 2;
+    query[0] = 4;
     *(int*)(&query[1]) = query_id;
     *(int*)(&query[5]) = size;
     memcpy(&query[9], parameters[0], mx_strlen(parameters[0]));
@@ -15,11 +15,11 @@ static int get_query(char *query, char **parameters, int query_id, int size) {
 }
 
 /* 
-* parameters[0] = chat id(10)
-* parameters[1] = data
+* parameters[0] = id msg(10)
+* parameters[1] = id chat(10)
 */
-int mx_api_send_message(char **parameters, t_info *info) {
-    int size = 20 + mx_strlen(parameters[1]) + 1;
+int mx_api_delete_message(char **parameters, t_info *info) {
+    int size = 31;
     char *query = malloc(sizeof(char) * size);
     memset(query, 0, size);
 

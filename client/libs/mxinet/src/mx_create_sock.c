@@ -7,5 +7,5 @@ int mx_create_sock(int type) {
         fprintf(stderr, "socket error: %s\n", strerror(errno));
         exit(1);
     }
-    return 0;
+    return sock;
 }

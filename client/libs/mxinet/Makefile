@@ -2,9 +2,10 @@ TARGET = mxinet.a
 
 SRC = mx_create_sock.c \
 	mx_connect_sock.c \
-	mx_create_tcp_lsock.c \
+	mx_create_tcp_csock.c \
 	mx_send_msg.c \
 	mx_tsend_msg.c \
+	mx_readn_sock.c \
 
 INC = -I inc \
 
