@@ -84,6 +84,8 @@ int mx_get_msg_login(char status, char *request, t_table_user *tuser,
 char *mx_send_message(t_server *server_info, t_server_users *user);
 char *mx_edit_message(t_server *server_info, t_server_users *user);
 char *mx_get_chat_info(t_server *server_info, t_server_users *user);
+void mx_delete_chat_users(t_user_in_chat **list);
+void mx_push_char_users(t_user_in_chat **list, char *user_id, char *usr_nick);
 char *mx_get_chat_users(t_server *server_info, t_server_users *user);
 char *mx_get_user_info(t_server *server_info, t_server_users *user);
 char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
@@ -95,5 +97,7 @@ char *mx_join_chat(t_server *server_info, t_server_users *user);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
+
+
 
 #endif

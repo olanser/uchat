@@ -24,9 +24,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/signup/mx_is_allowed_name.c \
 	src/work_thread/signup/mx_check_symbols.c \
 	src/work_thread/signup/mx_update_user.c \
-	src/work_thread/get_chat_users/mx_get_chat_users.c \
 	src/work_thread/get_chat_info/mx_get_chat_info.c \
-	src/work_thread/get_user_info/mx_get_user_info.c \
 	src/work_thread/get_msgs_time/mx_get_msgs_time.c \
 	src/work_thread/show_users/mx_show_users.c \
 	src/work_thread/delete_msg/mx_delete_msg.c \
@@ -37,6 +35,9 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/create_chat/mx_create_chat.c \
 	src/work_thread/create_dialog/mx_create_dialog.c \
 	src/work_thread/leave_chat.c/mx_leave_chat.c \
+	src/work_thread/get_user_info/mx_get_user_info.c \
+	src/work_thread/get_chat_users/mx_get_chat_users.c \
+	src/work_thread/get_chat_users/mx_chat_user_list.c \
 
 # Variables
 

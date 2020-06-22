@@ -44,7 +44,7 @@ static char mx_login_check_user(t_table_user *tuser, t_server *server_info, t_se
     return (char)MX_QS_OK;
 }
 
-void mx_free_tuser(t_table_user *tuser) {
+static void mx_free_tuser(t_table_user *tuser) {
     free(tuser->first_name);
     free(tuser->second_name);
     free(tuser->nickname);
