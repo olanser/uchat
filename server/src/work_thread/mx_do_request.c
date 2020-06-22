@@ -2,16 +2,17 @@
 
 
 char *mx_do_request(t_server *server_info, t_server_users *user) {
+    printf("in do req -- %d\n", user->buff[0]);
     char *(*api[])(t_server *, t_server_users *) = {
             mx_signup, // 0
             mx_signin, // 1
             mx_send_message, // 2
-            // mx_editmessage, // 3
-            // mx_delete_msg, // 4
-            // mx_send_file, // 5
-            //mx_get_user_info, // 6
+            0,// mx_editmessage, // 3
+            0,// mx_delete_msg, // 4
+            0,// mx_send_file, // 5
+            mx_get_user_info, // 6
             mx_get_chat_users, // 7
-            // mx_get_msgs_time, // 8 
+            0,// mx_get_msgs_time, // 8 
             // mx_show_users, // 9 
             // mx_get_chat_info, // 10 
             // 0, // 11 

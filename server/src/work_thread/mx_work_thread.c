@@ -33,15 +33,19 @@ void mx_work_thread(t_server *server_info, t_server_users *user) {
     int size = *((int*)&(user->buff[5]));
     char *response;
 
-    if (check_request(user)) {
+    
+    //if (check_request(user)) {
         response = mx_do_request(server_info, user);
         if (response) {
-        pthread_mutex_lock(&(user->m_write_socket));
-        mx_write_socket(user->socket, response);
-        pthread_mutex_unlock(&(user->m_write_socket));
-        free(response);
+            printf("id RES = %s\n", &response[9]);
+            printf("REC = %d\n", response[0]);
+            printf("first name RES = %s\n", &response[20]);
+            pthread_mutex_lock(&(user->m_write_socket));
+            mx_write_socket(user->socket, response);
+            pthread_mutex_unlock(&(user->m_write_socket));
+            free(response);
         }
-    }
+    //}
     else {
     }
     // // printf("Comand id = %d and size = %d\n", comand, size);

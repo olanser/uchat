@@ -4,7 +4,7 @@
 static int callback_one(void *data, int columns, char **name, char **tabledata) {
     for (int i = 0; i < columns; i++){
         if (i % 2 == 0) {
-            mx_push_char_users((t_user_in_chat **)data, name[i], name[i+1]);    
+            mx_push_char_users((t_user_in_chat **)data, name[i], name[i+1]);
         }
     }
     return 0;
@@ -41,21 +41,19 @@ static void build_res(t_user_in_chat *list, char **response, int len,
     }
 }
 
-static void build_answer(t_server *server_info, t_server_users *user) {
+static void build_answer(t_server_users *user, t_user_in_chat **list) {
     char sql[200];
 
-    sprintf(sql, "SELECT usr_id, usr_nickname from user where usr_id IN (SELECT cou_usr_id from cou where cou_char_id=%s);", chat_id);
-    mx_do_query(sql, callback_one, list);
+    sprintf(sql, "SELECT usr_id, usr_nickname from user where usr_id IN "
+    "(SELECT cou_usr_id from cou where cou_char_id=%s);", user->id_users);
+    mx_do_query(sql, callback_one, list, user);
 }
 
 char *mx_get_chat_users(t_server *server_info, t_server_users *user) {
     t_user_in_chat *list = NULL;
     int res_len = 10;
-
     char *response = NULL;
     char *request = user->buff;
-
-    int status = 0;
 
     if(mx_check_user_in_char(&(request[9]), user->id_users)) {
         build_answer(&(request[9]), &list);
@@ -64,7 +62,7 @@ char *mx_get_chat_users(t_server *server_info, t_server_users *user) {
         mx_delete_chat_users(&list);
     }
     else {
-        response = mx_create_response(request[0], request[1], status);
+        response = mx_create_response(request[0], request[1], (char)107);
         fprintf(MX_ERROR_THREAD, "permission\n");
     }
     return response;

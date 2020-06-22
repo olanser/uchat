@@ -15,6 +15,9 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/send_message/mx_send_message.c \
 	src/function/mx_write_socket.c \
 	src/function/mx_do_query.c \
+	src/function/mx_check_number.c \
+	src/work_thread/get_user_info/mx_get_user_info.c \
+	src/work_thread/get_user_info/mx_get_chat_users.c \
 
 # Variables
 
