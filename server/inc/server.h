@@ -67,13 +67,33 @@ int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
 bool mx_check_user_in_chat(char *id_chat, char *id_user, t_server *server_info);
 void mx_send_response_user(t_server *server_info, char *response, char *sql);
+int mx_callback_count(void *data, int columns, char **name, char **tabledata);
+int mx_return_one_str(void *param, int columns, char **data, char **names);
+bool mx_check_id_message_in_user(char *id_message, char *id_chat,
+    t_server *server_info, t_server_users *user);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
+bool mx_is_allowed_name(char *str);
+int mx_check_symbols(t_table_user *tuser);
+void mx_update_user(t_table_user* tuser, t_server_users *user,
+                    t_server *server_info);
+char *mx_signin(t_server *server_info, t_server_users *user);
 int mx_get_msg_login(char status, char *request, t_table_user *tuser,
                      char **response);
-char *mx_signin(t_server *server_info, t_server_users *user);
 char *mx_send_message(t_server *server_info, t_server_users *user);
 char *mx_edit_message(t_server *server_info, t_server_users *user);
+char *mx_get_chat_info(t_server *server_info, t_server_users *user);
+char *mx_get_chat_users(t_server *server_info, t_server_users *user);
+char *mx_get_user_info(t_server *server_info, t_server_users *user);
+char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
+char *mx_show_users(t_server *server_info, t_server_users *user);
+char *mx_delete_msg(t_server *server_info, t_server_users *user);
+char *mx_send_file(t_server *server_info, t_server_users *user);
+char *mx_authenticate(t_server *server_info, t_server_users *user);
+char *mx_join_chat(t_server *server_info, t_server_users *user);
+char *mx_create_chat(t_server *server_info, t_server_users *user);
+char *mx_create_dialog(t_server *server_info, t_server_users *user);
+char *mx_leave_chat(t_server *server_info, t_server_users *user);
 
 #endif

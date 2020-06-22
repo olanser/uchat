@@ -1,25 +1,6 @@
 #include "server.h"
 #include "defines.h"
 
-static int callback(void *data, int columns, char **name, char **tabledata) {
-    *((int*)data) += 1;
-    return 0;
-}
-
-static bool check_id_message_in_user(char *id_message, char *id_chat,
-    t_server *server_info, t_server_users *user) {
-    char sql[1024];
-    int check = 0; 
-
-    sprintf(sql, "select * from msg where msg_id='%s'and msg_creator='%s' and "
-            "msg_status!=4 and msg_chat_id = '%s';", id_message,
-            user->id_users, id_chat);
-    mx_do_query(sql, callback, &check, server_info);
-    if (check == 0)
-        return 0;
-    return 1;
-}
-
 static int edit_msg_to_db(t_server *server_info, t_server_users *user) {
     char sql[1024];
     int a = 0;
@@ -34,7 +15,7 @@ static int edit_msg_to_db(t_server *server_info, t_server_users *user) {
 }
 
 
-static int callback2(void *data, int columns, char **name, char **tabledata) {
+static int callback(void *data, int columns, char **name, char **tabledata) {
     int sum = 64 + strlen(name[5]);
     char *response =  malloc(sizeof(char) * sum);
 
@@ -60,7 +41,7 @@ static char *create_response_to_users(t_server *server_info, t_server_users *use
             "msg_status = 3 and msg_chat_id = %s and msg_data = '%s' ORDER by "
             "msg_id DESC LIMIT 1;", user->id_users, &user->buff[9],
             &user->buff[31]);
-    mx_do_query(sql, callback2, &respons, server_info);
+    mx_do_query(sql, callback, &respons, server_info);
     // if (respons) {
         // printf("Response = %s %s %s %s %s %s\n", &respons[9], &respons[20], &respons[31],
         //         &respons[42], &respons[62], &respons[63]);
@@ -80,8 +61,8 @@ char *mx_edit_message(t_server *server_info, t_server_users *user) {
         || mx_check_number(&user->buff[20], 11) == 0)
         return mx_create_response(user->buff[0], *(int*)&user->buff[1],
                                   MX_QS_ERR_FUNC);
-    if (check_id_message_in_user(&user->buff[20], &user->buff[9], server_info, 
-                                 user) == 0)
+    if (mx_check_id_message_in_user(&user->buff[20], &user->buff[9],
+                                    server_info, user) == 0)
         return mx_create_response(user->buff[0], *(int*)&user->buff[1],
                                   MX_QS_ERR_RIGHT);
     if (edit_msg_to_db(server_info, user))

@@ -20,6 +20,23 @@ SRC_PATH = src/mx_main_server.c \
 	src/function/mx_send_response_user.c \
 	src/work_thread/edit_message/mx_edit_message.c \
 	src/work_thread/signin/mx_get_msg_login.c \
+	src/function/mx_callback.c \
+	src/work_thread/signup/mx_is_allowed_name.c \
+	src/work_thread/signup/mx_check_symbols.c \
+	src/work_thread/signup/mx_update_user.c \
+	src/work_thread/get_chat_users/mx_get_chat_users.c \
+	src/work_thread/get_chat_info/mx_get_chat_info.c \
+	src/work_thread/get_user_info/mx_get_user_info.c \
+	src/work_thread/get_msgs_time/mx_get_msgs_time.c \
+	src/work_thread/show_users/mx_show_users.c \
+	src/work_thread/delete_msg/mx_delete_msg.c \
+	src/work_thread/send_file/mx_send_file.c \
+	src/function/mx_check_id_message_in_user.c \
+	src/work_thread/authenticate/mx_authenticate.c \
+	src/work_thread/join_chat/mx_join_chat.c \
+	src/work_thread/create_chat/mx_create_chat.c \
+	src/work_thread/create_dialog/mx_create_dialog.c \
+	src/work_thread/leave_chat.c/mx_leave_chat.c \
 
 # Variables
 
@@ -47,7 +64,6 @@ CFLSGS = -lsqlite3
 
 all: test $(OUT_PATH)
 	clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o server
-
 
 # -fsanitize=address
 install: macos all

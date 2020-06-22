@@ -9,6 +9,7 @@ static int callback(void *data, int columns, char **name, char **tabledata) {
         user = &server_info->table_users[i];
         if (user->socket != -1 && user->id_users != 0) {
             if (strcmp(name[0], user->id_users) == 0) {
+                printf("SEND msg id[0] = %d and id user = %s\n", respons[0], user->id_users);
                 mx_write_socket(user, respons);
             }
         }

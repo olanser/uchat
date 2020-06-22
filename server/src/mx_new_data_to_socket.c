@@ -14,11 +14,11 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
         printf("Connection closed\n");
         *close_conn = true;
     }
-    else if (buffer[0] > MX_QS_MAX_REQUEST) {
+    else if (buffer[0] > MX_COUNT_FUCTIONS) {
         // printf("Wrong request  Connection closed\n");
         *close_conn = true;
     }
-    else if ((rc =*((int *)(&buffer[5]))) > MX_QS_MAX_SIZE) {   // size
+    else if ((rc =*((int *)(&buffer[5]))) > MX_MAX_SIZE_REQUEST) {   // size
         printf("Wrong Size  Connection closed\n");
         *close_conn = true;
     }

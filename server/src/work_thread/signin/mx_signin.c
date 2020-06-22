@@ -62,22 +62,22 @@ static t_table_user* get_tuser() {
 }
 
 char *mx_signin(t_server *server_info, t_server_users *user) {
-    // t_table_user *tuser = get_tuser();
-    // char status = 0;
-    // int len = 0;
-    // char *response = 0;
+    t_table_user *tuser = get_tuser();
+    char status = 0;
+    int len = 0;
+    char *response = 0;
 
-    // read_request(user->buff, tuser);
-    // status = mx_login_check_user(tuser, server_info, user);
-    // mx_get_msg_login(status, user->buff, tuser, &response);
-    pthread_rwlock_wrlock(&(server_info->m_edit_users));
-    user->id_users = mx_strdup("1");
-    pthread_rwlock_unlock(&(server_info->m_edit_users));
-    return 0;
-    // printf("tuser->nickname: %s\n", tuser->nickname);
-    // printf("tuser->pass: %s\n", tuser->pass);
-    // printf("status: %d\n", status);
-    // mx_free_tuser(tuser);
-    // free(tuser);
-    // return response;
+    read_request(user->buff, tuser);
+    status = mx_login_check_user(tuser, server_info, user);
+    mx_get_msg_login(status, user->buff, tuser, &response);
+    // pthread_rwlock_wrlock(&(server_info->m_edit_users));
+    // user->id_users = mx_strdup("1");
+    // pthread_rwlock_unlock(&(server_info->m_edit_users));
+    // return 0;
+    printf("tuser->nickname: %s\n", tuser->nickname);
+    printf("tuser->pass: %s\n", tuser->pass);
+    printf("status: %d\n", status);
+    mx_free_tuser(tuser);
+    free(tuser);
+    return response;
 }

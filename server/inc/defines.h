@@ -7,6 +7,7 @@
 #define MX_PORT_test 2365
 #define MX_MAX_CONNECT 256
 #define MX_THREAD 6
+#define MX_MAX_SIZE_REQUEST 1024
 /* 
 * 0 bit of query
 * Query Status
@@ -21,8 +22,6 @@ enum e_status {
     MX_QS_ERR_REQUEST = 106, // request error
     MQ_QS_NOT_FOUND = 107, //
     MQ_QS_ERR_SQL = 108, // error sql database
-    MX_QS_MAX_SIZE = 1024,
-    MX_QS_MAX_REQUEST = 16,
 
     MX_QS_OK = 200 // query successful
 };
