@@ -61,7 +61,7 @@ char *mx_get_user_info(t_server *server_info, t_server_users *serv_user) {
     if (user != 0) {
         mx_get_msg_user(req, user, &response);
         mx_free_tuser(user);
-         return response;
+        return response;
     }
     response = mx_create_response(req[0], *((int *)&req[1]), (char)107);
     return response;
