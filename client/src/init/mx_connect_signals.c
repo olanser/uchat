@@ -26,6 +26,7 @@
 // }
 
 void mx_connect_signals(t_info* info) {
+    g_signal_connect(G_OBJECT(info->objs->chat_win->send_btn), "clicked", G_CALLBACK(mx_btn_send_msg_clicked), info);
     // g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "size-allocate", (GCallback) mx_resize_emitted, info->objs);
     // all signals here
 }

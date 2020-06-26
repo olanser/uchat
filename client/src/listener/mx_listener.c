@@ -27,7 +27,8 @@ char *init_response(int size, char *params) {
 void mx_listen(int socket, char **response) {
     char head[9];
     int status = 0;
-    int size = mx_read_head(socket, head);;
+    int size = mx_read_head(socket, head);
+
     if (size == -1)
         return;
     *response = init_response(size, head);

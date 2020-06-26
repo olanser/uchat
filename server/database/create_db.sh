@@ -1,0 +1,1 @@
+sqlite3 database/database.db < database/create_db.sql

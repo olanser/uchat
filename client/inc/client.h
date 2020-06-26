@@ -26,7 +26,7 @@ int mx_api_show_users(char *str, t_info *info); // -
 int mx_api_get_chat_users(char *chat_id, t_info *info); // -
 
 // signals
-gboolean mx_key_press(GtkWidget *widget, GdkEvent  *event, void* user_data);
+void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
 
 //listener
 void* mx_listener(void *data);

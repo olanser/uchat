@@ -10,8 +10,7 @@ static void resize_main_box(t_objects *objs) {
     int height = gdk_window_get_height(gdk_window);
     int width = gdk_window_get_width(gdk_window);
     int position = gtk_paned_get_position(GTK_PANED (objs->chat_win->paned_chat));
-
-        printf("height = %d and width = %d, divider position is on %d\n", height, width, position);
+        // printf("height = %d and width = %d, divider position is on %d\n", height, width, position);
         gtk_widget_set_size_request(GTK_WIDGET (objs->chat_win->main_chat_box), width, height);
 }
 
@@ -36,15 +35,15 @@ static void resize_signup_window (t_objects *objs) {
 
 void mx_resize_widgets(t_info* info) {
     if (info->scene == MX_SCENE_MAIN_CHAT) {
-        printf("MAIN CHAT WINDOW\n");
+        // printf("MAIN CHAT WINDOW\n");
         resize_main_box(info->objs);
     }
     else if (info->scene == MX_SCENE_SIGNIN) {
-        printf("SIGNIN WINDOW\n");
+        // printf("SIGNIN WINDOW\n");
         resize_signin_window(info->objs);
     }
     else if (info->scene == MX_SCENE_SIGNUP) {
-        printf("SIGNUP WINDOW\n");
+        // printf("SIGNUP WINDOW\n");
         resize_signup_window(info->objs);
     }
 }
