@@ -48,7 +48,22 @@ typedef struct s_table_user {
     char *nickname;
     char *pass;
     char *id;
-} t_table_user;
+}               t_table_user;
+
+
+
+typedef struct s_file_message {
+    char *id_query;
+    char *id_message;
+    char *id_chat;
+    int file_type;
+    char *true_name;
+    char buf_name[15];
+    int size;
+    int file_end;
+}               t_file_message;
+
+
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
 void *mx_thread(void *data);
@@ -94,6 +109,7 @@ char *mx_delete_msg(t_server *server_info, t_server_users *user);
 char *mx_send_file(t_server *server_info, t_server_users *user);
 char *mx_authenticate(t_server *server_info, t_server_users *user);
 char *mx_join_chat(t_server *server_info, t_server_users *user);
+void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);

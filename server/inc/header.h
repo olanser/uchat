@@ -26,11 +26,11 @@ typedef struct s_user_in_chat {
     struct s_user_in_chat *next;
 }               t_user_in_chat;
 
-typedef struct s_user_in_chat {
-    char *usr_id;
-    char *usr_nickname;
-    struct s_user_in_chat *next;
-}               t_user_in_chat;
+// typedef struct s_user_in_chat {
+//     char *usr_id;
+//     char *usr_nickname;
+//     struct s_user_in_chat *next;
+// }               t_user_in_chat;
 
 
 
@@ -68,6 +68,7 @@ void mx_write_socket(int fd, char *response);
 int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
 int mx_check_number(char *str, int len);
+void mx_get_msg_response_10(char status, char *request, char **response);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
