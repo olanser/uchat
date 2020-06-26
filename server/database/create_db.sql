@@ -171,8 +171,4 @@ create table pd(
    pd_user_id integer,
    pd_pid integer,
    pd_add_time datetime
-<<<<<<< HEAD
 );
-=======
-);
->>>>>>> origin/Server
