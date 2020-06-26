@@ -18,6 +18,9 @@ SRC_PATH = ./src/mx_strlen.c \
 	src/mx_str_reverse.c \
 	src/mx_push_front.c \
 	src/mx_pop_front.c \
+	src/mx_create_node.c \
+	src/mx_push_back.c \
+	src/mx_strdel.c \
 
 SRC = $(notdir $(SRC_PATH))
 
@@ -35,11 +38,16 @@ install:
 	@mkdir -p obj
 	@mv $(OUT) ./obj
 	@ar -rc $(NAME) $(OUT1)
+
 uninstall:
 	@rm -rf $(OUT1) $(SRC) $(HEADTMP)
 	@rm -rf ./obj
 	@rm -rf $(NAME)
+	@printf "\x1b[32m$(NAME):\x1b[34;1m [$@]\x1b[0m\n"
+
 clean: 
 	@rm -rf $(OUT1) $(SRC) $(HEADTMP)
 	@rm -rf ./obj
+	@printf "\x1b[32m$(NAME):\x1b[34;1m [$@]\x1b[0m\n"
+
 reinstall: uninstall install

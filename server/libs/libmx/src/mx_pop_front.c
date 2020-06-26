@@ -9,8 +9,6 @@ void mx_pop_front(t_list **head) {
     if (s != 0) {
         s = s->next;
         t = *head;
-        if (t->data != 0)
-            free(t->data);
         t->data = NULL;
         t->next = NULL;
         free(t);

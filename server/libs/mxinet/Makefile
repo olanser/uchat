@@ -12,4 +12,10 @@ all:
 
 uninstall: 
 	@rm -rf $(NAME) mx_create_sockl.o \
-	mx_set_sockaddr_any.o \
+	mx_set_sockaddr_any.o
+	@printf "\x1b[32m$(NAME):\x1b[34;1m [$@]\x1b[0m\n"
+
+clean:
+	@rm -rf mx_create_sockl.o \
+	mx_set_sockaddr_any.o
+	@printf "\x1b[32m$(NAME):\x1b[34;1m [$@]\x1b[0m\n"
