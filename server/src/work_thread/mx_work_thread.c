@@ -26,33 +26,37 @@ static bool check_request(t_server_users *user) {
     return false;
 }
 
+static bool check_size(t_server_users *user) {
+    const int min_size[19] = {313, 211, 22, 33, 31, 20, 20, 20, 29, 11, 20, 20,
+                              0, 20, 110, 20, 20, 9};
+    const int max_size[19] = {313, 211, 1024, 1024, 31, 1024, 20, 20, 29, 1024,
+                              20, 1024, 0, 20, 110, 20, 20, 9};
+    char *response = 0;
+
+    if (*((int*)&user->buff[5]) < min_size[user->buff[0]]
+        || *((int*)&user->buff[5]) > max_size[user->buff[0]]) {
+        response = mx_create_response(user->buff[0],
+                *(int*)&(user->buff[1]), MX_QS_ERR_FUNC);
+    }
+    else
+        return true;
+    printf("ERROR size query!!!!\n");
+    mx_write_socket(user, response);
+    free(response);
+    return false;
+}
+
 void mx_work_thread(t_server *server_info, t_server_users *user) {
     char comand = user->buff[0];
     int size = *((int*)&(user->buff[5]));
     char *response;
 
-    
-    //if (check_request(user)) {
+    printf("in do req -- %d\n", user->buff[0]);
+    if (check_request(user) && check_size(user)) {
         response = mx_do_request(server_info, user);
         if (response) {
-        // pthread_mutex_lock(&(user->m_write_socket));
             mx_write_socket(user, response);
-        // pthread_mutex_unlock(&(user->m_write_socket));
             free(response);
         }
-    //}
-    else {
     }
-    // // printf("Comand id = %d and size = %d\n", comand, size);
-    // if (comand == 2) {
-    //     pthread_rwlock_rdlock(&(server_info->m_edit_users));
-    //     for (int i = 1; i < server_info->size_connekt; i++)
-    //         if (server_info->table_users[i].socket != -1) {
-    //             write(server_info->table_users[i].socket, "a", 1);
-    //         }
-    //     pthread_rwlock_unlock(&(server_info->m_edit_users));
-    // }
-    // int a = 1;
-    // for (int i = 0; i < 200000000;i++)
-    //     a *=i;
 }
