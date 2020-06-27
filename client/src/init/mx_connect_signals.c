@@ -6,6 +6,7 @@
 static void connect_to_signin_window(t_info* info) {
     g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "check-resize", (GCallback) mx_resize_signin_window, info->objs);
     g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "destroy", (GCallback) mx_destroy_signin_window, NULL);
+    g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "window-state-event", (GCallback) mx_go_fullscreen_signin_window, info->objs);
 }
 
 static void connect_to_signup_window(t_info* info) {

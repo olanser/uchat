@@ -41,7 +41,7 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat) {
     main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn1"));
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
     main_chat->profile_set_btn = GTK_WIDGET(gtk_builder_get_object(builder, "profile_set_btn1"));
-    main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "chat_line"));
+    main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
 }
@@ -71,10 +71,11 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
     GdkGeometry hints;
 
-    hints.min_aspect = 1.8;
-    hints.max_aspect = 1.8;
-    gtk_window_set_geometry_hints(GTK_WINDOW (main_chat->chat_win), NULL, &hints, GDK_HINT_ASPECT);
+    // hints.min_aspect = 1.8;
+    // hints.max_aspect = 1.8;
+    // gtk_window_set_geometry_hints(GTK_WINDOW (main_chat->chat_win), NULL, &hints, GDK_HINT_ASPECT);
     gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
 }
 

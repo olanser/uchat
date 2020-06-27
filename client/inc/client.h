@@ -60,6 +60,7 @@ gboolean mx_resize_main_window (GtkWidget *window, t_objects *objs);
 gboolean mx_destroy_main_window(GtkWidget *window);
 gboolean mx_destroy_signup_window(GtkWidget *window);
 gboolean mx_destroy_signin_window(GtkWidget *window);
+gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
 //
 
 #endif

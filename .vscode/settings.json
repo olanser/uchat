@@ -40,6 +40,7 @@
         "utility": "c",
         "complex": "c",
         "client.h": "c",
-        "header.h": "c"
+        "header.h": "c",
+        "ios": "c"
     }
 }
