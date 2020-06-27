@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define MX_PATH_TO_TEMPLATE "templates/resizable.xml"
+#define MX_PATH_TO_TEMPLATE "templates/resizable7.xml"
 #define MX_COUNT_API 17
 
 typedef enum {

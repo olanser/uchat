@@ -8,4 +8,7 @@ int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
     mx_init(&info);
     mx_show_window(info);
+    gtk_main();
+    // system("leaks client");
+    // mx_show_window(info);
 }

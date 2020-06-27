@@ -52,4 +52,14 @@ int mx_h_send_msg(char *response, t_info* info);
 int mx_h_show_users(char *response, t_info* info);
 int mx_h_signin(char *response, t_info* info);
 int mx_h_signup(char *response, t_info* info);
+
+//signals_callback_func
+gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);
+gboolean mx_resize_signin_window (GtkWidget *window, t_objects *objs);
+gboolean mx_resize_main_window (GtkWidget *window, t_objects *objs);
+gboolean mx_destroy_main_window(GtkWidget *window);
+gboolean mx_destroy_signup_window(GtkWidget *window);
+gboolean mx_destroy_signin_window(GtkWidget *window);
+//
+
 #endif

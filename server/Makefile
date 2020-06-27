@@ -89,8 +89,7 @@ db:
 	@rm -rf database/database.db
 	sh database/create_db.sh
 
-uninstall:
-	@rm -rf ./obj
+uninstall: clean
 	@rm -rf ./download
 	@rm -rf server
 	@rm -rf database/database.db

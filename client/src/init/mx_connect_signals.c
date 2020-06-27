@@ -3,30 +3,24 @@
 */
 #include "client.h"
 
-// void mx_resize_emitted(GtkWidget *window, t_objects *objs) {
-//     GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
-//     GtkRequisition *new_size = gtk_requisition_new();
-//     GtkRequisition *size = gtk_requisition_new();
-//     int height = gdk_window_get_height(gdk_window);
-//     int width = gdk_window_get_width(gdk_window);
+static void connect_to_signin_window(t_info* info) {
+    g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "check-resize", (GCallback) mx_resize_signin_window, info->objs);
+    g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "destroy", (GCallback) mx_destroy_signin_window, NULL);
+}
 
-//     size->height = 750;
-//     size->width = 1350;
-//     if (height != 750 && width != 1350) {
-//         printf("height = %d and width = %d\n", height, width);
-//         new_size->height = height;
-//         new_size->width = width;
-//         // gtk_widget_get_preferred_size(GTK_WIDGET (objs->s_signin_win->signin_main_box), size, new_size);
-//         // gtk_widget_get_preferred_size(GTK_WIDGET (objs->s_signin_win->signin_child_box), size, new_size);
-//         gtk_widget_set_size_request(GTK_WIDGET (objs->s_signin_win->signin_main_box), width, height);
-//         gtk_widget_set_size_request(GTK_WIDGET (objs->s_signin_win->signin_child_box), width, height);
-//     }
-//     gtk_requisition_free(new_size);
-//     gtk_requisition_free(size);
-// }
+static void connect_to_signup_window(t_info* info) {
+    g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_win), "check-resize", (GCallback) mx_resize_signup_window, info->objs);
+    g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_win), "destroy", (GCallback) mx_destroy_signup_window, NULL);
+}
+
+static void connect_to_main_window(t_info* info) {
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->chat_win), "check-resize", (GCallback) mx_resize_main_window, info->objs);
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->chat_win), "destroy", (GCallback) mx_destroy_main_window, NULL);
+}
 
 void mx_connect_signals(t_info* info) {
-    g_signal_connect(G_OBJECT(info->objs->chat_win->send_btn), "clicked", G_CALLBACK(mx_btn_send_msg_clicked), info);
-    // g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "size-allocate", (GCallback) mx_resize_emitted, info->objs);
+    connect_to_main_window(info);
+    connect_to_signin_window(info);
+    connect_to_signup_window(info);
     // all signals here
 }
