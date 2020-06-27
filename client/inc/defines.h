@@ -2,6 +2,7 @@
 #define DEFINES_H
 
 #define MX_PATH_TO_TEMPLATE "templates/resizable2.xml"
+#define MX_TEMPLATE_SHITS "templates/notebook_chats.xml"
 #define MX_COUNT_API 17
 
 typedef enum {

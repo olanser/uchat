@@ -17,6 +17,7 @@ void mx_init_info(t_info **info) {
     (*info)->objs->chat_win = malloc(sizeof(t_main_chat_window));
     (*info)->id_chat = mx_strdup("1");
     (*info)->list_of_chats = 0;
+    pthread_mutex_init(&(*info)->m_editing_gtk, NULL);
 }
 
 void mx_init(t_info **info) {

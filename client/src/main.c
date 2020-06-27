@@ -4,7 +4,10 @@
 #include "defines.h"
 
 static void reg(t_info *info) {
-    char *argv[4] = {"a", "a"};
+    // char *argv[4] = {"a", "a", "a", "a"};
+    // mx_api_signup( argv,info);
+
+    char *argv[2] = {"a", "a"};
     mx_api_signin( argv,info);
 }
 

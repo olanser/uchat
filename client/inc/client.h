@@ -26,11 +26,12 @@ int mx_api_get_user_info(char *user_id, t_info *info);
 int mx_api_get_chat_users(char *chat_id, t_info *info);
 int mx_api_get_msgs_time(char *time, t_info *info); // -
 int mx_api_show_users(char *str, t_info *info); // -
-int mx_api_get_chat_users(char *chat_id, t_info *info); // -
+int mx_api_get_chat_info(char *chat_id, t_info *info);
 int mx_api_get_chats_info(t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
+void mx_btn_change_chat(GtkWidget* button, void* data);
 
 //listener
 void* mx_listener(void *data);

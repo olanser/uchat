@@ -16,7 +16,7 @@ static int get_query(char *query, char *parameter, int query_id, int size) {
 /* 
 * parameters[0] = user id(10)
 */
-int mx_api_get_chat_users(char *chat_id, t_info *info) {
+int mx_api_get_chat_info(char *chat_id, t_info *info) {
     int size = 20;
     char *query = malloc(sizeof(char) * size);
     memset(query, 0, size);

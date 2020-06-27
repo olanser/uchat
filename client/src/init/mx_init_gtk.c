@@ -38,15 +38,17 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat) {
     main_chat->main_chat_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_box1"));
     main_chat->paned_chat = GTK_WIDGET(gtk_builder_get_object(builder, "paned_chat1"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));
-    main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn1"));
+    main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn"));
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
     main_chat->profile_set_btn = GTK_WIDGET(gtk_builder_get_object(builder, "profile_set_btn1"));
     main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
-    main_chat->listbox_dialogs = gtk_list_box_new();
+    main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
-    gtk_container_add(GTK_CONTAINER(main_chat->search_viewport1), main_chat->listbox_dialogs);
+    main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
+    // GtkWidget* w = gtk_label_new("AAAAAA");
+    // gtk_list_box_insert(GTK_LIST_BOX(main_chat->listbox_search), w, -1);
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs) {
