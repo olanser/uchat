@@ -82,8 +82,8 @@ int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
 bool mx_check_user_in_chat(char *id_chat, char *id_user, t_server *server_info);
 void mx_send_response_user(t_server *server_info, char *response, char *sql);
-int mx_callback_count(void *data, int columns, char **name, char **tabledata);
-int mx_return_one_str(void *param, int columns, char **data, char **names);
+int mx_callback_count(void *data, int column, char **name, char **tabledata);
+int mx_return_one_str(void *param, int column, char **data, char **names);
 bool mx_check_id_message_in_user(char *id_message, char *id_chat,
     t_server *server_info, t_server_users *user);
 
@@ -113,6 +113,7 @@ void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
+char *mx_get_chats_info(t_server *server_info, t_server_users *user);
 
 
 

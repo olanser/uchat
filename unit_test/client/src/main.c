@@ -77,6 +77,16 @@ void mx_get_info_chat(t_info* info) {
     write(info->socket, buff, 20);
 }
 
+void mx_get_chats_info(t_info* info) {
+    char buff[1024];
+
+    memset(buff, 0, 9);
+    buff[0] = 17;
+    *(int*)&buff[5] = 9;
+    buff[9] = '1'; //id_chat 
+    write(info->socket, buff, 9);
+}
+
 // int checking(char *respons) {
 //     printf("Response = %s %s %s %s %s %s\n", &respons[9], &respons[20], &respons[31],
 //             &respons[42], &respons[62], &respons[63]);
@@ -114,28 +124,46 @@ void mx_get_info_chat(t_info* info) {
 int main(int argc, char *argv[]) {
     t_info **box_info =  malloc(sizeof(t_info*) * 100);
     char buff[1024];
+    int size = 100;
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < size; i++) {
         box_info[i] = mx_get_info();
         mx_signin(box_info[i]);
     }
-    for (int i = 0; i < 100; i++) {
-        read(box_info[i]->socket, buff, 1024);
+    for (int i = 0; i < size; i++) {
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
         if (buff[9] != (char)200)
             return 1;
     }
-    for (int i = 0; i < 100; i++) {
-        mx_get_info_chat(box_info[i]);
+    for (int i = 0; i < size; i++) {
+        mx_get_chats_info(box_info[i]);
     }
-    for (int i = 0; i < 100; i++) {
-        read(box_info[i]->socket, buff, 1024);
+    for (int i = 0; i < size; i++) {
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
         if (buff[9] != '2')
             return 1;
-        if (strcmp(&buff[10],"1") != 0)
+        if (!(strcmp(&buff[10],"1") == 0 || strcmp(&buff[10],"2") == 0))
             return 1;
-        if (strcmp(&buff[21], "General") != 0)
+        if (!(strcmp(&buff[21], "General") == 0 
+            || strcmp(&buff[21], "test_room") == 0))
             return 1;
+        printf("%s\n", &buff[21]);
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
+        if (buff[9] != '2')
+            return 1;
+        if (!(strcmp(&buff[10],"1") == 0 || strcmp(&buff[10],"2") == 0))
+            return 1;
+        if (!(strcmp(&buff[21], "General") == 0 
+            || strcmp(&buff[21], "test_room") == 0))
+            return 1;
+        printf("%s\n", &buff[21]);
     }
+    for (int i = 0; i < size; i++)
+        close(box_info[i]->socket);
+    printf("OK\n");
     // for (int i = 0; i < 100; i++) {
     //     read(box_info[i]->socket, buff, 1024);
     //     if (buff[9] != (char)200)

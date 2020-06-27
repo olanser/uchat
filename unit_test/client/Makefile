@@ -60,6 +60,7 @@ install: # Creating all objects
 uninstall:
 	@rm -rf $(SRC_TMP)
 	@rm -rf ./objs
+	@rm -rf client_unit_test
 
 clang:
 	@clang $(OBJS_FULL) $(INC) $(CFG) $(CFG2) -o client_unit_test

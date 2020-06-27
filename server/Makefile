@@ -38,6 +38,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/get_user_info/mx_get_user_info.c \
 	src/work_thread/get_chat_users/mx_get_chat_users.c \
 	src/work_thread/get_chat_users/mx_chat_user_list.c \
+	src/work_thread/get_chats_info/mx_get_chats_info.c \
 
 # Variables
 
@@ -67,21 +68,18 @@ all: test $(OUT_PATH)
 	clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o server
 
 # -fsanitize=address
-install: macos all
-
-obj/%.o: %.c $(INC)
-	@clang $(INCF) -c $< -o $@
-	@printf "\x1b[32mcompiled:\x1b[34;1m [$@]\x1b[0m\n"
+install: all
 
 test:
-	@cp -p $(FULL_SRC_PATH) .
-	@mkdir -p download
 	@mkdir -p obj
-
-macos:
-	@rm -rf libs/libmx.a 
-	@rm -rf libs/mxinet.a 
+	@mkdir -p temp
+	@cp -p $(FULL_SRC_PATH) ./temp
 	@make -sC libs
+	@mkdir -p download
+
+obj/%.o: temp/%.c $(INC)
+	@clang $(INCF) -c $< -o $@
+	@printf "\x1b[32mcompiled:\x1b[34;1m [$@]\x1b[0m\n"
 
 db:
 	@rm -rf database/database.db
@@ -96,7 +94,7 @@ uninstall: clean
 
 clean:
 	@make -sC libs $@
-	@rm -rf $(SRC)
+	@rm -rf ./temp
 	@rm -rf  ./obj
 
 reinstall: uninstall install
