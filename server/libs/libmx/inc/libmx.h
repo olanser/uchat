@@ -14,6 +14,8 @@ typedef struct s_list {
 #include <sys/types.h>
 #include <pwd.h>
 #include <termios.h>
+#include <string.h>
+#include <errno.h>
 
 char *mx_strjoin_len(char *s1, char *s2, unsigned int len);
 int mx_strlen(const char *s);
@@ -34,5 +36,6 @@ void mx_pop_front_free_data(t_list **head);
 void mx_pop_back(t_list **head);
 void mx_push_back(t_list **list, void *data);
 void mx_strdel(char **str);
+char *mx_file_to_str(const char *filename);
 
 #endif

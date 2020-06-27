@@ -11,7 +11,7 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
         }
     }
     else if (rc == 0) {
-        printf("Connection closed\n");
+        // printf("Connection closed\n");
         *close_conn = true;
     }
     else if (buffer[0] > MX_COUNT_FUCTIONS) {

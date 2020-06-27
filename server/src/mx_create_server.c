@@ -37,11 +37,24 @@ static void set_signal_and_create_thread(t_server *server_info) {
 }
 
 static void open_db(t_server *server_info) {
+    char *temp;
+    int a;
+    char *err;
+
     if (sqlite3_open(MX_DATABASE, &(server_info->db)) != SQLITE_OK) {
         fprintf(MX_ERROR_THREAD, "Cannot open database: %s\n",
                 sqlite3_errmsg(server_info->db));
         sqlite3_close(server_info->db);
         exit(1);
+    }
+    temp = mx_file_to_str(MX_CREATE_DATABASE);
+    if (temp) {
+        a = sqlite3_exec(server_info->db, temp, 0, temp, &err);
+        if (a != SQLITE_OK) {
+            fprintf(MX_ERROR_THREAD, "error: database query: %s\n", err);
+            sqlite3_free(err);
+        }
+        free(temp);
     }
 }
 

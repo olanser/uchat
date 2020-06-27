@@ -2,7 +2,6 @@
 
 
 char *mx_do_request(t_server *server_info, t_server_users *user) {
-    printf("in do req -- %d\n", user->buff[0]);
     char *(*api[])(t_server *, t_server_users *) = {
             mx_signup, // 0 +
             mx_signin, // 1 +
@@ -20,7 +19,8 @@ char *mx_do_request(t_server *server_info, t_server_users *user) {
             mx_join_chat, //13 +
             mx_create_chat, //14 +
             mx_create_dialog, //15 +
-            mx_leave_chat //16 +
+            mx_leave_chat, //16 +
+            mx_get_chats_info
             //mx_get_file
     };
     char *(*foo)(t_server *, t_server_users *) = (*api[user->buff[0]]);

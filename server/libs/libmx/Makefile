@@ -4,9 +4,9 @@ INC = inc/libmx.h
 
 HEADTMP = libmx.h
 
-SRC_PATH = ./src/mx_strlen.c \
-	./src/mx_strcpy.c \
-	./src/mx_strdup.c \
+SRC_PATH = src/mx_strlen.c \
+	src/mx_strcpy.c \
+	src/mx_strdup.c \
 	src/mx_strnew.c \
 	src/mx_memcpy.c \
 	src/mx_strndup.c \
@@ -21,6 +21,7 @@ SRC_PATH = ./src/mx_strlen.c \
 	src/mx_create_node.c \
 	src/mx_push_back.c \
 	src/mx_strdel.c \
+	src/mx_file_to_str.c \
 
 SRC = $(notdir $(SRC_PATH))
 
