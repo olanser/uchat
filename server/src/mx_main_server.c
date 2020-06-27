@@ -23,17 +23,13 @@ int main() {
             server_info->poll_set[0].revents = 0;
         }
         for (int i = 1; i < server_info->size_connekt && rc > 0; i++) {
-            if ((server_info->poll_set[i].revents & POLLIN) && mx_check_not_work(
-                &(server_info->table_users[i]))) {
+            if ((server_info->poll_set[i].revents & POLLIN)
+                && mx_check_not_work(&(server_info->table_users[i]))) {
                 rc += mx_new_data_to_socket(server_info, i);
                 server_info->poll_set[i].revents = 0;
             }
         }
         if (server_info->compress_array == true)
             mx_compress_array(server_info);
-        // for (int i = 1; i < server_info->size_connekt; i++)
-        // printf("%d ", server_info->poll_set[i].fd);
-        // printf("\n");
-        // usleep(1000);
     }
 }
