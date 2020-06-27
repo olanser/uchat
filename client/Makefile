@@ -42,7 +42,8 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/gtk_cycle/signals/main/main_signals.c \
 	src/mx_get_text_textview.c \
 	src/api/mx_api_get_chats_info.c \
-
+	src/listener/handlers/mx_h_get_chats_info.c \
+	
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
 FULL_OBJS = $(addprefix obj/, $(notdir $(FULL_SRC:%.c=%.o)))
@@ -63,7 +64,7 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-lsqlite3 \
 	-rdynamic \
 
-SANITIZE = -fsanitize-memory-track-origins
+SANITIZE = -fsanitize=address
 
 I = 0
 
@@ -87,7 +88,7 @@ copy:
 
 obj/%.o: tmp/%.c $(CHECK_INC)
 	@$(eval I :=  $(shell echo "$$(($(I)+1))"))
-	@clang -c $< -o $@ $(INC) $(CFG)
+	@clang -c $< -o $@ $(INC) $(CFG) $(SANITIZE)
 	@printf "\x1b[38;5;118m | $@\x1b[38;18;34m compiled\n"
 
 uninstall: u

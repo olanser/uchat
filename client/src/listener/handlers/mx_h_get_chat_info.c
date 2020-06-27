@@ -28,13 +28,13 @@ static void add_new_chat(char *response, t_info *info) {
 }
 
 int mx_h_get_chat_info(char *response, t_info *info) {
-    
-    
+    printf("A\n");
     if(is_exist(&response[21], info->list_of_chats))
         return 1;
     add_new_chat(response, info);
 
-    printf("id = %s\n", &response[21]);
+    printf("id = %s\n", &response[10]);
+    printf("name = %s\n", &response[21]);
     // GtkWidget* chat_label = gtk_label_new(&response[21]);
     // t_chat_info* chat_info = malloc(sizeof(t_chat_info));
 

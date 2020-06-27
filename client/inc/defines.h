@@ -2,7 +2,7 @@
 #define DEFINES_H
 
 #define MX_PATH_TO_TEMPLATE "templates/resizable2.xml"
-#define MX_COUNT_API 100
+#define MX_COUNT_API 17
 
 typedef enum {
     MX_SCENE_SIGNUP,
