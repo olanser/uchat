@@ -2,6 +2,7 @@
 #define OBJECTS_H
 
 #include <gtk/gtk.h>
+#include "libmx.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
@@ -12,8 +13,15 @@ typedef struct s_info {
     int sock;
     int query_id;
     int scene; // number of window
+    char *id_chat;
+    t_list* list_of_chats; // for checko=ing chats when add
     t_objects* objs;
 }              t_info;
+
+typedef struct s_chat_info {
+    int node_index;
+    char* chat_id;
+}t_chat_info;
 
 typedef struct s_objects {
     t_signin_window *s_signin_win;
@@ -35,6 +43,8 @@ struct s_main_chat_window {
     GtkWidget* chat_entry_split_box;
     GtkWidget* search_frame;
     GtkWidget* chat_frame;
+    GtkWidget* listbox_dialogs;
+    GtkWidget* search_viewport1;
 };
 
 struct s_signin_window {

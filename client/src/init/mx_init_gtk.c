@@ -44,6 +44,9 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat) {
     main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
+    main_chat->listbox_dialogs = gtk_list_box_new();
+    main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
+    gtk_container_add(GTK_CONTAINER(main_chat->search_viewport1), main_chat->listbox_dialogs);
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs) {

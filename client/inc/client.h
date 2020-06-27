@@ -4,6 +4,9 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include "objects.h"
+#include <stdbool.h>
+
+char *get_text_of_textview(GtkWidget *text_view);
 
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);
@@ -24,6 +27,7 @@ int mx_api_get_chat_users(char *chat_id, t_info *info);
 int mx_api_get_msgs_time(char *time, t_info *info); // -
 int mx_api_show_users(char *str, t_info *info); // -
 int mx_api_get_chat_users(char *chat_id, t_info *info); // -
+int mx_api_get_chats_info(t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
