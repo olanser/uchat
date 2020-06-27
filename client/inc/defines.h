@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define MX_PATH_TO_TEMPLATE "templates/resizable.xml"
+#define MX_PATH_TO_TEMPLATE "templates/resizable7.xml"
 
 typedef enum {
     MX_SCENE_SIGNUP,

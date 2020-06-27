@@ -33,6 +33,8 @@ struct s_main_chat_window {
     GtkWidget* send_btn;
     GtkWidget* search_pan_main_box;
     GtkWidget* chat_entry_split_box;
+    GtkWidget* search_frame;
+    GtkWidget* chat_frame;
 };
 
 struct s_signin_window {

@@ -70,21 +70,12 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
     GdkGeometry hints;
-    GtkRequisition min_size1;
-    GtkRequisition min_size2;
 
     hints.min_aspect = 1.8;
     hints.max_aspect = 1.8;
-    min_size1.height = 750;
-    min_size1.width = 271;
-    min_size2.height = 750;
-    min_size2.width = 235;
     gtk_window_set_geometry_hints(GTK_WINDOW (main_chat->chat_win), NULL, &hints, GDK_HINT_ASPECT);
     gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
-    // gtk_widget_get_preferred_size(GTK_WIDGET (main_chat->search_pan_main_box), &min_size1, NULL);
-    gtk_widget_set_size_request(main_chat->search_pan_main_box, 171, -1);
-    // gtk_widget_get_preferred_size();
 }
 
 void mx_set_properties(t_objects *objs) {
