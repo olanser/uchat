@@ -13,7 +13,7 @@
 
 typedef struct s_server_users {
     int socket;
-    char *id_users;
+    int id_users;
     char *buff;
     bool work;
     pthread_mutex_t m_if_work;
@@ -21,7 +21,7 @@ typedef struct s_server_users {
 }              t_server_users;
 
 typedef struct s_user_in_chat {
-    char *usr_id;
+    int usr_id;
     char *usr_nickname;
     struct s_user_in_chat *next;
 }               t_user_in_chat;
@@ -32,6 +32,8 @@ typedef struct s_server {
     int size_connekt;
     pthread_mutex_t m_edit_database;
     sqlite3 *db;
+    pthread_mutex_t m_logfile;
+    int fd_logfile;
     pthread_rwlock_t m_edit_users;
     t_server_users *table_users;
     struct pollfd *poll_set;
@@ -47,7 +49,7 @@ typedef struct s_table_user {
     char *second_name;
     char *nickname;
     char *pass;
-    char *id;
+    int id;
     char avatar;
 }               t_table_user;
 
@@ -81,11 +83,11 @@ char *mx_create_response(char id_request, int query, char status);
 int mx_check_number(char *str, int len);
 int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
-bool mx_check_user_in_chat(char *id_chat, char *id_user, t_server *server_info);
+bool mx_check_user_in_chat(int id_chat, int id_user, t_server *server_info);
 void mx_send_response_user(t_server *server_info, char *response, char *sql);
 int mx_callback_count(void *data, int column, char **name, char **tabledata);
 int mx_return_one_str(void *param, int column, char **data, char **names);
-bool mx_check_id_message_in_user(char *id_message, char *id_chat,
+bool mx_check_id_message_in_user(int id_message, int id_chat,
     t_server *server_info, t_server_users *user);
 bool mx_check_avatar(char avatar);
 

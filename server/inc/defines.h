@@ -9,6 +9,7 @@
 #define MX_MAX_CONNECT 256
 #define MX_THREAD 6
 #define MX_MAX_SIZE_REQUEST 1024
+#define MX_LOG_FILE "database/log.txt"
 /* 
 * 0 bit of query
 * Query Status

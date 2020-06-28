@@ -58,6 +58,18 @@ static void open_db(t_server *server_info) {
     }
 }
 
+static void open_log_file(t_server *server_info, int fd_server) {
+    int fd = open(MX_LOG_FILE, O_RDWR | O_APPEND | O_CREAT , S_IRWXU);
+    if (fd == -1) {
+        printf("ERROR OPEN LOG FILE\n");
+        exit(1);
+    }
+    server_info->fd_logfile = fd;
+    pthread_mutex_init(&(server_info->m_logfile), NULL);
+    server_info->poll_set[0].fd = fd_server;
+    server_info->table_users[0].socket = fd_server;
+}
+
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
     t_server *server_info = create_malloc(max_connect, count_thread);
 
@@ -73,9 +85,7 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
         pthread_mutex_init(&(server_info->table_users[i].m_write_socket), NULL);
         pthread_mutex_init(&(server_info->table_users[i].m_if_work), NULL);
     }
-    server_info->poll_set[0].fd = fd_server;
-    server_info->table_users[0].socket = fd_server;
-    set_signal_and_create_thread(server_info);
+    open_log_file(server_info, fd_server);
     open_db(server_info);
     return server_info;
 }

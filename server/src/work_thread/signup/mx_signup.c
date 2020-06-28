@@ -89,11 +89,11 @@ int get_response(char *request, char **response, char status,
     }
     *response = malloc(sizeof(char) * 21);
     mx_memcpy(*response,  request, 5);
-    memset(&(*response)[5], 0, 16);
-    (*response)[5] = 21; // size
+    memset(&(*response)[5], 0, 4);
+    (*response)[5] = 14; // size
     (*response)[9] = status; // status
-    strcpy(&(*response)[10], user->id_users);
-    return 21;
+    *(int*)(&(*response)[10]) = user->id_users;
+    return 14;
 }
 
 char *mx_signup(t_server *server_info, t_server_users *user) {

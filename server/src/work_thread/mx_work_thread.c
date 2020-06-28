@@ -4,7 +4,7 @@
 static bool check_request(t_server_users *user) {
     char *response = 0;
 
-    if (user->id_users) {
+    if (user->id_users != 0) {
         if (user->buff[0] == 0 || user->buff[0] == 1) {
             response = mx_create_response(user->buff[0],
                 *(int*)&(user->buff[1]), MX_QS_ERR_LOG_MANY);

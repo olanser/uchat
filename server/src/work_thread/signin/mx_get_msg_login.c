@@ -2,16 +2,17 @@
 #include "defines.h"
 
 static int get_ok_msg(char **response, t_table_user *tuser) {
-    int size = 225;
+    int size = 218;
 
     *response = malloc(sizeof(char) * size);
     memset(*response, 0, size);
     (*response)[9] = (char)200;
-    mx_strcpy(&(*response)[10], tuser->id);
-    mx_strcpy(&(*response)[21], tuser->first_name);
-    mx_strcpy(&(*response)[72], tuser->second_name);
-    mx_strcpy(&(*response)[123], tuser->nickname);
-    (*response)[224] = tuser->avatar;
+    *((int*)(&(*response)[10])) = tuser->id;
+    // mx_strcpy(&(*response)[10], tuser->id);//10
+    mx_strcpy(&(*response)[14], tuser->first_name);//21
+    mx_strcpy(&(*response)[65], tuser->second_name);//72
+    mx_strcpy(&(*response)[116], tuser->nickname);//123
+    (*response)[217] = tuser->avatar;//224
     return size;
 }
 
@@ -35,6 +36,6 @@ int mx_get_msg_login(char status, char *request, t_table_user *tuser,
     }
     mx_memcpy(*response, request, 5);
     (*response)[9] = status;
-    *(int*)(&(*response)[5]) = total_len;
+    *((int*)(&(*response)[5])) = total_len;
     return total_len;
 }

@@ -16,7 +16,7 @@ static int callback(void *param, int column, char** data, char** name) {
     if (*count == 1) {
         tuser->first_name = mx_strdup(data[1]);
         tuser->second_name = mx_strdup(data[2]);
-        user->id_users = mx_strdup(data[0]);
+        user->id_users = atoi(data[0]);
         tuser->id = user->id_users;
         tuser->avatar = data[6][0];
     }
@@ -55,7 +55,6 @@ static t_table_user* get_tuser() {
     tuser->second_name = 0;
     tuser->nickname = 0;
     tuser->pass = 0;
-    tuser->id = 0;
     return tuser;
 }
 
