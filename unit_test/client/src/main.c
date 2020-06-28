@@ -32,15 +32,17 @@ t_info *mx_get_info() {
     return info;
 }
 
-void mx_signin(t_info* info) {
+void mx_signup(t_info* info) {
     char buff[1024];
 
-    memset(buff, 0, 211);
-    buff[0] = 1;
-    *(int*)&buff[5] = 211;
+    memset(buff, 0, 313);
+    buff[0] = 0;
+    *(int*)&buff[5] = 313;
     sprintf(&buff[9], "%s", "asd");
-    sprintf(&buff[110], "%s", "asd");
-    write(info->socket, buff, 211);
+    sprintf(&buff[60], "%s", "asd");
+    sprintf(&buff[111], "%s", "asd");
+    sprintf(&buff[212], "%s", "asd");
+    write(info->socket, buff, 313);
 }
 
 void mx_get_chat_msg(t_info* info) {
@@ -64,7 +66,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < size; i++) {
         box_info[i] = mx_get_info();
-        mx_signin(box_info[i]);
+        mx_signup(box_info[i]);
     }
     for (int i = 0; i < size; i++) {
         read(box_info[i]->socket, buff, 9);

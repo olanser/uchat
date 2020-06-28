@@ -18,7 +18,6 @@ void mx_init_info(t_info **info) {
     (*info)->id_chat = 1;
     (*info)->list_of_chats = 0;
     (*info)->user_info = 0;
-    pthread_mutex_init(&(*info)->m_editing_gtk, NULL);
 }
 
 void mx_init(t_info **info) {

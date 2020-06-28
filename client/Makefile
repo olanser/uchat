@@ -71,7 +71,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE) 
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) 
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:
@@ -90,7 +90,7 @@ copy:
 
 obj/%.o: tmp/%.c $(CHECK_INC)
 	@$(eval I :=  $(shell echo "$$(($(I)+1))"))
-	@clang -c $< -o $@ $(INC) $(CFG) $(SANITIZE)
+	@clang -c $< -o $@ $(INC) $(CFG) 
 	@printf "\x1b[38;5;118m | $@\x1b[38;18;34m compiled\n"
 
 uninstall: u

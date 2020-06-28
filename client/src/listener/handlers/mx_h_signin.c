@@ -2,7 +2,7 @@
 
 static t_user_info* get_user(t_info* info) {
     t_user_info* uinfo = malloc(sizeof(t_user_info));
-    uinfo->avatar = 0;
+    uinfo->avatar = '1';
     uinfo->frst_name = 0; 
     uinfo->nickname = 0;
     uinfo->scnd_name = 0;
