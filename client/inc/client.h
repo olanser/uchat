@@ -4,6 +4,9 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include "objects.h"
+#include <stdbool.h>
+
+char *get_text_of_textview(GtkWidget *text_view);
 
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);
@@ -23,10 +26,12 @@ int mx_api_get_user_info(char *user_id, t_info *info);
 int mx_api_get_chat_users(char *chat_id, t_info *info);
 int mx_api_get_msgs_time(char *time, t_info *info); // -
 int mx_api_show_users(char *str, t_info *info); // -
-int mx_api_get_chat_users(char *chat_id, t_info *info); // -
+int mx_api_get_chat_info(char *chat_id, t_info *info);
+int mx_api_get_chats_info(t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
+void mx_btn_change_chat(GtkWidget* button, void* data);
 
 //listener
 void* mx_listener(void *data);
@@ -52,6 +57,7 @@ int mx_h_send_msg(char *response, t_info* info);
 int mx_h_show_users(char *response, t_info* info);
 int mx_h_signin(char *response, t_info* info);
 int mx_h_signup(char *response, t_info* info);
+int mx_h_get_chats_info(char *response, t_info *info);
 
 //signals_callback_func
 gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);

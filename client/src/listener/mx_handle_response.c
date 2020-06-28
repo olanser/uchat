@@ -19,7 +19,8 @@ int mx_handle_response(t_info *info, char *response) {
         mx_h_join_chat, // 13
         mx_h_create_chat, // 14
         mx_h_create_dialog, // 15
-        mx_h_leave_chat // 16
+        mx_h_leave_chat, // 16
+        mx_h_get_chats_info
         };
 
     if (response[0] > MX_COUNT_API) {
