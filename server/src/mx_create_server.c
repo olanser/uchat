@@ -31,7 +31,7 @@ static void set_signal_and_create_thread(t_server *server_info) {
     sigaddset(&newmask, SIGUSR1);
     sigaddset(&newmask, SIGPIPE);
 
-    sigprocmask(SIG_BLOCK, &newmask,0);
+    sigprocmask(SIG_BLOCK, &newmask, 0);
     for (int i = 0; i < server_info->count_thread; i++)
         pthread_create(&(server_info->thread[i]), 0, mx_thread, server_info);
 }
@@ -86,6 +86,7 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
         pthread_mutex_init(&(server_info->table_users[i].m_if_work), NULL);
     }
     open_log_file(server_info, fd_server);
+    set_signal_and_create_thread(server_info);
     open_db(server_info);
     return server_info;
 }

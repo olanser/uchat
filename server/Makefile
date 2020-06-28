@@ -93,6 +93,7 @@ uninstall: clean
 	@rm -rf ./download
 	@rm -rf server
 	@rm -rf database/database.db
+	@rm -rf database/log.txt
 	@printf "\x1b[32mserver:\x1b[34;1m [$@]\x1b[0m\n"
 
 clean:
