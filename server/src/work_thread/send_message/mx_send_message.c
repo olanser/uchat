@@ -5,8 +5,8 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
     char sql[1024];
     int a = 0;
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
-            "msg_chat_id, msg_avatar) VALUES (%d, datetime('now'), \'%s\', %d"
-            " '%c');", user->id_users, &user->buff[14], *((int*)&user->buff[9]),
+            "msg_chat_id, msg_avatar) VALUES (%d, datetime('now'), \'%s\', %d,"
+            " %c);", user->id_users, &user->buff[14], *((int*)&user->buff[9]),
             user->buff[13]);
     printf("%s\n", sql);
     a = mx_do_query(sql, 0, 0,server_info);

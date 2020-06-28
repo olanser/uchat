@@ -17,5 +17,6 @@ void mx_show_window(t_info* info) {
     while(1) {
         // resize(info->objs);
         mx_do_iteration(info);
+        
     }
 }

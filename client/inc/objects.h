@@ -15,7 +15,6 @@ typedef struct s_info {
     int query_id;
     int scene; // number of window
     int id_chat;
-    pthread_mutex_t m_editing_gtk;
     t_list* list_of_chats; // for checko=ing chats when add
     t_user_info* user_info;
     t_objects* objs;

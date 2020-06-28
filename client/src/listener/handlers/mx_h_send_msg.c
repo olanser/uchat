@@ -13,10 +13,26 @@ GtkWidget* get_list_box(t_list* list, int id) {
     return 0;
 }
 
-void mx_add_msg_to_box(GtkWidget*listbox, char *response) {
+static gboolean foo(void* data) {
+    GtkWidget* listbox = (GtkWidget*)((void**)data)[0];
+    char* response = (char*)((void**)data)[1];
     GtkWidget* label = gtk_label_new(&response[42]);
+
     gtk_list_box_insert(GTK_LIST_BOX(listbox), label, -1);
     gtk_widget_show(label);
+    
+    free(response);
+    free(data);
+    return FALSE;
+}
+
+void mx_add_msg_to_box(GtkWidget*listbox, char *response) {
+    void **data = malloc(sizeof(void*) * 2);
+
+    data[0] = listbox;
+    data[1] = malloc(*(int*)&response[5]);
+    memcpy(data[1], response, *(int*)&response[5]);
+    gdk_threads_add_idle(foo, data);
 }
 
 int check(char *response, t_info *info) {
@@ -43,7 +59,9 @@ int mx_h_send_msg(char *response, t_info *info) {
        mx_api_get_chat_info(*(int*)&response[13], info);
     }
     else { // if listbox finded
+
         mx_add_msg_to_box(listbox, response);
     }
+    printf("END RECEIVE\n");
     return 0;
 }
