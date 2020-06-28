@@ -30,7 +30,7 @@ char *mx_get_chats_info(t_server *server_info, t_server_users *user) {
     t_list *list = 0;
 
     sprintf(sql, "select chat_name, chat_type, chat_id from chat where chat_id "
-            "in (select cou_char_id from cou where cou_usr_id = %s);",
+            "in (select cou_chat_id from cou where cou_usr_id = %s);",
             user->id_users);
     if (mx_do_query(sql, callback, &list, server_info) != SQLITE_OK) {
         write_server(&list, user);

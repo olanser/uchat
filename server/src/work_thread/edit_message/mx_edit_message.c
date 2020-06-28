@@ -58,7 +58,8 @@ char *mx_edit_message(t_server *server_info, t_server_users *user) {
                                   MX_QS_ERR_FUNC);
     }
     if (mx_check_number(&user->buff[9], 11) == 0
-        || mx_check_number(&user->buff[20], 11) == 0)
+        || mx_check_number(&user->buff[20], 11) == 0 
+        || mx_check_avatar(user->buff[31]) == 0)
         return mx_create_response(user->buff[0], *(int*)&user->buff[1],
                                   MX_QS_ERR_FUNC);
     if (mx_check_id_message_in_user(&user->buff[20], &user->buff[9],

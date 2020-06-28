@@ -87,6 +87,7 @@ int mx_callback_count(void *data, int column, char **name, char **tabledata);
 int mx_return_one_str(void *param, int column, char **data, char **names);
 bool mx_check_id_message_in_user(char *id_message, char *id_chat,
     t_server *server_info, t_server_users *user);
+bool mx_check_avatar(char avatar);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
