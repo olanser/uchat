@@ -7,7 +7,7 @@ all:
 unisntall u:
 	@make -sC libmx $@
 	@make -sC mxinet $@
-	@rm -f libmx.a mxinet.a
+	@rm -rf libmx.a mxinet.a
 
 # uninstall one lib. usge: u[libname]. example: ulibmx
 u%:

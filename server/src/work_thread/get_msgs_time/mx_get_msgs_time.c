@@ -26,7 +26,7 @@ static bool check_time(char *time) {
     return 1;
 }
 
-static int callback(void *param, int columns, char **data, char **names) {
+static int callback(void *param, int column, char **data, char **names) {
     char *respons;
     int sum;
 
@@ -62,8 +62,8 @@ char *mx_get_msgs_time(t_server *server_info, t_server_users *user) {
         return mx_create_response(user->buff[0], *(int*)&user->buff[1],
                                   MX_QS_ERR_FUNC);
     sprintf(sql, "select msg.msg_id, msg.msg_chat_id, msg.msg_creator, "
-        "msg.msg_send_time, msg.msg_data, msg.msg_status, msg.msg_status_see "
-        "from msg where msg.msg_chat_id in (select cou.cou_char_id  from cou "
+        "msg.msg_send_time, msg.msg_data, msg.msg_status, msg.msg_avatar "
+        "from msg where msg.msg_chat_id in (select cou.cou_chat_id  from cou "
         "where cou.cou_usr_id == %s) and msg.msg_send_time >= '%s';",
         user->id_users, &user->buff[9]);
     

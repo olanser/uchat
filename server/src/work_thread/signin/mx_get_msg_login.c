@@ -2,7 +2,7 @@
 #include "defines.h"
 
 static int get_ok_msg(char **response, t_table_user *tuser) {
-    int size = 224;
+    int size = 225;
 
     *response = malloc(sizeof(char) * size);
     memset(*response, 0, size);
@@ -11,6 +11,7 @@ static int get_ok_msg(char **response, t_table_user *tuser) {
     mx_strcpy(&(*response)[21], tuser->first_name);
     mx_strcpy(&(*response)[72], tuser->second_name);
     mx_strcpy(&(*response)[123], tuser->nickname);
+    (*response)[224] = tuser->avatar;
     return size;
 }
 

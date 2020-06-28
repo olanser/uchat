@@ -14,6 +14,8 @@
 
 typedef struct s_info {
     int socket;
+    char *id_user;
+    char avatar;
 } t_info;
 
 #endif

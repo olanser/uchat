@@ -1,7 +1,7 @@
 #include "server.h"
 #include "defines.h"
 
-static int callback_one(void *data, int columns, char **name, char **tabledata) {
+static int callback_one(void *data, int column, char **name, char **tabledata) {
     mx_push_char_users((t_user_in_chat **)data, name[0], name[1]);
     return 0;
 }
@@ -42,7 +42,7 @@ static void build_answer(t_server_users *user, t_user_in_chat **list,
     char sql[200];
 
     sprintf(sql, "SELECT usr_id, usr_nickname from user where usr_id IN "
-    "(SELECT cou_usr_id from cou where cou_char_id=%s);", &user->buff[9]);
+    "(SELECT cou_usr_id from cou where cou_chat_id=%s);", &user->buff[9]);
     mx_do_query(sql, callback_one, list, server_info);
 }
 
@@ -64,6 +64,3 @@ char *mx_get_chat_users(t_server *server_info, t_server_users *user) {
     }
     return response;
 }
-
-
-

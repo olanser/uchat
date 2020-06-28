@@ -48,6 +48,7 @@ typedef struct s_table_user {
     char *nickname;
     char *pass;
     char *id;
+    char avatar;
 }               t_table_user;
 
 
@@ -107,13 +108,14 @@ char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
 char *mx_show_users(t_server *server_info, t_server_users *user);
 char *mx_delete_msg(t_server *server_info, t_server_users *user);
 char *mx_send_file(t_server *server_info, t_server_users *user);
-char *mx_authenticate(t_server *server_info, t_server_users *user);
+char *mx_change_avatar(t_server *server_info, t_server_users *user);
 char *mx_join_chat(t_server *server_info, t_server_users *user);
 void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
 char *mx_get_chats_info(t_server *server_info, t_server_users *user);
+char *mx_get_chat_msg(t_server *server_info, t_server_users *user);
 
 
 

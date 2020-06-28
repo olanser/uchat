@@ -90,8 +90,8 @@ obj/%.o: tmp/%.c $(CHECK_INC)
 
 uninstall: u
 	@make -sC libs u
-	@rm $(LIBS)
+	@rm -rf $(LIBS)
 
 u:
-	rm -rf tmp
-	rm -rf obj
+	@rm -rf tmp
+	@rm -rf obj

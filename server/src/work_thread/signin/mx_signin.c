@@ -7,7 +7,7 @@ static int read_request(char *request, t_table_user *tuser) {
     return 0;
 }
 
-static int callback(void *param, int columns, char** data, char** name) {
+static int callback(void *param, int column, char** data, char** name) {
     int* count = (int*)((void**)param)[1];
     t_table_user *tuser = (t_table_user*)((void**)param)[0];
     t_server_users *user = (t_server_users *)((void**)param)[2];
@@ -18,6 +18,7 @@ static int callback(void *param, int columns, char** data, char** name) {
         tuser->second_name = mx_strdup(data[2]);
         user->id_users = mx_strdup(data[0]);
         tuser->id = user->id_users;
+        tuser->avatar = data[6][0];
     }
     return 0;
 }

@@ -5,7 +5,7 @@ static bool check_request(t_server_users *user) {
     char *response = 0;
 
     if (user->id_users) {
-        if (user->buff[0] == 0 || user->buff[0] == 1 || user->buff[0] == 12) {
+        if (user->buff[0] == 0 || user->buff[0] == 1) {
             response = mx_create_response(user->buff[0],
                 *(int*)&(user->buff[1]), MX_QS_ERR_LOG_MANY);
         }
@@ -13,7 +13,7 @@ static bool check_request(t_server_users *user) {
             return true;
     }
     else {
-        if (user->buff[0] == 0 || user->buff[0] == 1 || user->buff[0] == 12) {
+        if (user->buff[0] == 0 || user->buff[0] == 1) {
             return true;
         }
         else {
@@ -27,10 +27,10 @@ static bool check_request(t_server_users *user) {
 }
 
 static bool check_size(t_server_users *user) {
-    const int min_size[19] = {313, 211, 22, 33, 31, 20, 20, 20, 29, 11, 20, 20,
-                              0, 20, 110, 20, 20, 9};
-    const int max_size[19] = {313, 211, 1024, 1024, 31, 1024, 20, 20, 29, 1024,
-                              20, 1024, 0, 20, 110, 20, 20, 9};
+    const int min_size[20] = {313, 211, 23, 34, 31, 20, 20, 20, 29, 11, 20, 20,
+                              35, 20, 110, 20, 20, 9, 10};
+    const int max_size[20] = {313, 211, 1024, 1024, 31, 1024, 20, 20, 29, 1024,
+                              20, 1024, 35, 20, 110, 20, 20, 9, 10};
     char *response = 0;
 
     if (*((int*)&user->buff[5]) < min_size[user->buff[0]]

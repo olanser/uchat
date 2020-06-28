@@ -15,12 +15,13 @@ char *mx_do_request(t_server *server_info, t_server_users *user) {
             mx_show_users, // 9 +
             mx_get_chat_info, // 10 +
             0, // 11
-            mx_authenticate, // 12
+            mx_get_chat_msg, // 12
             mx_join_chat, //13 +
             mx_create_chat, //14 +
             mx_create_dialog, //15 +
             mx_leave_chat, //16 +
-            mx_get_chats_info
+            mx_get_chats_info, // 17
+            mx_change_avatar // 18
             //mx_get_file
     };
     char *(*foo)(t_server *, t_server_users *) = (*api[user->buff[0]]);

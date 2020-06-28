@@ -10,14 +10,9 @@ OBJS_TMP = $(SRC_TMP:%.c=%.o)
 
 OBJS_FULL = $(addprefix $(OBJD)/, $(OBJS_TMP))
 
-INC = -I inc 
+INC = -I inc \
+	-I libmx\inc \
 
-CFG = `pkg-config --cflags gtk+-3.0`
-
-CFG2 = `pkg-config --libs gtk+-3.0` \
-	-pthread \
-	-lsqlite3 \
-	-rdynamic \
 
 INCLUDE = inc/client_unit.h \
 
@@ -26,13 +21,14 @@ WORKING_TMP = $(notdir $(WORKING))
 WORKING_OBJ = $(WORKING_TMP:%.c=%.o)
 
 all: test $(OBJS_FULL)# update only objects from WORKING
-	@clang $(OBJS_FULL) $(INC) $(CFG) $(CFG2) -o client_unit_test
+	@clang $(OBJS_FULL) $(INC) libmx/libmx.a -o client_unit_test
 
 $(OBJD)/%.o: %.c $(INCLUDE)
-	@clang $(INC) -c $< -o $@ $(CFG)
+	@clang $(INC) -c $< -o $@ 
 	@printf "\x1b[32mcompiled:\x1b[34;1m [$@]\x1b[0m\n"
 
 test:
+	@make -sC libmx
 	@cp -p $(FULL_PATH_SRC) .
 	@mkdir -p $(OBJD)
 
@@ -58,6 +54,7 @@ install: # Creating all objects
 
 # -fsanitize=address
 uninstall:
+	@make -sC libmx $@
 	@rm -rf $(SRC_TMP)
 	@rm -rf ./objs
 	@rm -rf client_unit_test

@@ -1,7 +1,7 @@
 #include "server.h"
 #include "defines.h"
 
-static int callback(void *param, int columns, char **data, char **names) {
+static int callback(void *param, int column, char **data, char **names) {
     char *response = malloc(sizeof(char) * 122);
 
     memset(response, 0, 122);

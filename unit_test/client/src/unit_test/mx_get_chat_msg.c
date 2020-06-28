@@ -1,5 +1,4 @@
 #include "client_unit.h"
-#include "libmx.h"
 
 static void set_sockaddr(struct sockaddr_in *addr, int port) {
     addr->sin_family = AF_INET;
@@ -43,17 +42,16 @@ void mx_signin(t_info* info) {
     write(info->socket, buff, 211);
 }
 
-void mx_change_avatar(t_info* info) {
+void mx_get_chat_msg(t_info* info) {
     char buff[1024];
-    int size = 10;
+    int size = 35;
 
     memset(buff, 0, size);
-    buff[0] = 18;
+    buff[0] = 12;
     *(int*)&buff[5] = size;
-    buff[9] = '9'; //id_chat 
-    // buff[20] = '7'; //id_msg
-    // buff[31] = info->avatar;
-    // sprintf(&buff[32], "dawawdawd"); //data end \0;
+    buff[9] = '1'; //id_chat
+    buff[20] = '0';
+    *(int*)&buff[31] = 5;
     write(info->socket, buff, size);
 }
 
@@ -71,29 +69,26 @@ int main(int argc, char *argv[]) {
         read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
         if (buff[9] != (char)200)
             return 1;
-        box_info[i]->id_user = mx_strdup(&buff[10]);
-        box_info[i]->avatar = buff[224];
-        printf("ID user = %s and AVATAR = %d\n", box_info[i]->id_user,  box_info[i]->avatar);
     }
     for (int i = 0; i < size; i++) {
-        mx_change_avatar(box_info[i]);
+        mx_get_chat_msg(box_info[i]);
     }
-    // for (int i = 0; i < size; i++) {
-    //     while(1) {
-    //     read(box_info[i]->socket, buff, 9);
-    //     read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
-    //     if (*(int*)&buff[5] < 65) {
-    //         printf("ERROR response %d status = %d!! size %d\n", buff[0], buff[9], *(int*)&buff[5]);
-    //         return 1;
-    //     }
-    //     if (!(buff[0] == 2 || buff[0] == 3)) {
-    //         printf("ERROR API %d!!", buff[0]);
-    //         return 1;
-    //     }
-    //     printf("API = %d, ID msg = %s, ID chat = %s, ID user = %s, TIME = %s, AVATAR = %d, MSG = %s\n",
-    //         buff[0], &buff[9], &buff[20], &buff[31], &buff[42], buff[62], &buff[63]);
-    //     }
-    // }
+    for (int i = 0; i < size; i++) {
+        while(1) {
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
+        if (*(int*)&buff[5] < 65) {
+            printf("ERROR response %d status = %d!! size %d\n", buff[0], buff[9], *(int*)&buff[5]);
+            return 1;
+        }
+        if (!(buff[0] == 2 || buff[0] == 3)) {
+            printf("ERROR API %d!!", buff[0]);
+            return 1;
+        }
+        printf("API = %d, ID msg = %s, ID chat = %s, ID user = %s, TIME = %s, AVATAR = %d, MSG = %s\n",
+            buff[0], &buff[9], &buff[20], &buff[31], &buff[42], buff[62], &buff[63]);
+        }
+    }
     for (int i = 0; i < size; i++)
         close(box_info[i]->socket);
     printf("OK\n");

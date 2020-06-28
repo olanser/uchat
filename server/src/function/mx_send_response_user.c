@@ -1,6 +1,6 @@
 #include "server.h"
 
-static int callback(void *data, int columns, char **name, char **tabledata) {
+static int callback(void *data, int column, char **name, char **tabledata) {
     char *respons = (char*)(((void**)data)[1]);
     t_server *server_info = (t_server *)(((void**)data)[0]);
     t_server_users *user = 0;

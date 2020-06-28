@@ -5,7 +5,7 @@ bool mx_check_user_in_chat(char *id_chat, char *id_user,
     char sql[85];
     int check = 0;
 
-    sprintf(sql, "SELECT * FROM cou where cou_char_id = '%s' AND cou_usr_id "
+    sprintf(sql, "SELECT * FROM cou where cou_chat_id = '%s' AND cou_usr_id "
             "= '%s';", id_chat, id_user);
     if (mx_do_query(sql, mx_callback_count, &check, server_info) == 0) {
         if (check != 0) {
