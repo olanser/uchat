@@ -5,12 +5,12 @@
 #include "client.h"
 #include "libmx.h"
 
-static int get_query(char *query, char **parameters, int query_id, int size) {
+static int get_query(char *query, void **parameters, int query_id, int size) {
     query[0] = 2;
     *(int*)(&query[1]) = query_id;
     *(int*)(&query[5]) = size;
-    memcpy(&query[9], parameters[0], mx_strlen(parameters[0]));
-    memcpy(&query[20], parameters[1], mx_strlen(parameters[1]));
+    *(int*)(&query[9]) = *(int*)parameters[0];
+    memcpy(&query[14], parameters[1], mx_strlen((char*)parameters[1]));
     return 0;
 }
 
@@ -18,11 +18,13 @@ static int get_query(char *query, char **parameters, int query_id, int size) {
 * parameters[0] = chat id(10)
 * parameters[1] = data
 */
-int mx_api_send_message(char **parameters, t_info *info) {
-    int size = 20 + mx_strlen(parameters[1]) + 1;
+int mx_api_send_message(int chat_id, char *msg, t_info *info) {
+    int size = 14 + mx_strlen(msg) + 1;
     char *query = malloc(sizeof(char) * size);
+    void *parameters[2] = {&chat_id, msg};
     memset(query, 0, size);
 
+    query[13] = info->user_info->avatar;
     get_query(query, parameters, info->query_id, size);
     mx_tsend_msg(info->sock, query, size);
     return 0;

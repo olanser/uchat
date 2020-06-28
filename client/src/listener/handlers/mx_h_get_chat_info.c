@@ -1,11 +1,11 @@
 #include "client.h"
 #include "defines.h"
 
-static bool is_exist(char *id, t_list* list_of_chats) {
+static bool is_exist(char id, t_list* list_of_chats) {
     t_list* tmp = list_of_chats;
 
     while(tmp) {
-        if (mx_strcmp(((t_chat_info*)tmp->data)->chat_id, id) == 0) {
+        if (((t_chat_info*)tmp->data)->chat_id == id) {
             return true;
         }
         tmp = tmp->next;
@@ -22,8 +22,7 @@ static void fill_structure(t_chat_info* chat_info, char* response, t_info *info)
         GTK_NOTEBOOK(info->objs->chat_win->notebook),
         chat_scroll_box,
         0);
-    chat_info->chat_id = mx_strdup(&response[10]);
-
+    chat_info->chat_id = *(int*)&response[10];
 }
 
 /* 
@@ -48,15 +47,8 @@ static void add_new_chat(char *response, t_info *info) {
 
 int mx_h_get_chat_info(char *response, t_info *info) {
 
-    if(is_exist(&response[10], info->list_of_chats))
+    if(is_exist(*(int*)&response[10], info->list_of_chats) || (*(int*)&response[5] < 11))
         return 1;
     add_new_chat(response, info);
-
-    // GtkWidget* chat_label = gtk_label_new(&response[21]);
-    // t_chat_info* chat_info = malloc(sizeof(t_chat_info));
-
-    // chat_info->chat_id = mx_strdup(&response[21]);
-    // mx_push_back(&info->list_of_chats, chat_info);
-    // g_object_set_data(G_OBJECT(chat_label), "chat_info", chat_info);
     return 0;
 }
