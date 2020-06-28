@@ -68,6 +68,7 @@ static void open_log_file(t_server *server_info, int fd_server) {
     pthread_mutex_init(&(server_info->m_logfile), NULL);
     server_info->poll_set[0].fd = fd_server;
     server_info->table_users[0].socket = fd_server;
+    mx_add_log(server_info, "Start server\n");
 }
 
 t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
@@ -85,8 +86,8 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
         pthread_mutex_init(&(server_info->table_users[i].m_write_socket), NULL);
         pthread_mutex_init(&(server_info->table_users[i].m_if_work), NULL);
     }
-    open_log_file(server_info, fd_server);
-    set_signal_and_create_thread(server_info);
     open_db(server_info);
+    set_signal_and_create_thread(server_info);
+    open_log_file(server_info, fd_server);
     return server_info;
 }

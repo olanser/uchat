@@ -24,7 +24,4 @@
         "server/inc",
         "client/inc"
     ],
-    "files.associations": {
-        "sstream": "c"
-    },
 }
