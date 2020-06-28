@@ -17,17 +17,18 @@ void mx_connect_signals(t_info* info);
 void mx_connect(t_info *info);
 
 // api
-int mx_api_signup(char **parameters, t_info *info);
-int mx_api_signin(char **parameters, t_info *info);
-int mx_api_send_message(char **parameters, t_info *info);
-int mx_api_edit_message(char **parameters, t_info *info);
-int mx_api_delete_message(char **parameters, t_info *info);
-int mx_api_get_user_info(char *user_id, t_info *info);
-int mx_api_get_chat_users(char *chat_id, t_info *info);
-int mx_api_get_msgs_time(char *time, t_info *info); // -
-int mx_api_show_users(char *str, t_info *info); // -
-int mx_api_get_chat_info(char *chat_id, t_info *info);
+int mx_api_delete_message(int id_msg, int id_chat, t_info *info);
+int mx_api_edit_message(int id_chat, int id_msg, char *msg, t_info *info);
+int mx_api_get_chat_info(int chat_id, t_info *info);
+int mx_api_get_chat_users(int chat_id, t_info *info);
 int mx_api_get_chats_info(t_info *info);
+int mx_api_get_chats_info(t_info *info);
+int mx_api_get_msgs_time(char *time, t_info *info);
+int mx_api_get_user_info(int user_id, t_info *info);
+int mx_api_send_message(int chat_id, char *msg, t_info *info);
+int mx_api_show_users(char *str, t_info *info);
+int mx_api_signin(char **parameters, t_info *info);
+int mx_api_signup(char **parameters, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);

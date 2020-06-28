@@ -8,22 +8,36 @@ typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
 typedef struct s_signup_window t_signup_window;
 typedef struct s_main_chat_window t_main_chat_window;
+typedef struct s_user_info t_user_info;
 
 typedef struct s_info {
     int sock;
     int query_id;
     int scene; // number of window
-    char *id_chat;
+    int id_chat;
     pthread_mutex_t m_editing_gtk;
     t_list* list_of_chats; // for checko=ing chats when add
+    t_user_info* user_info;
     t_objects* objs;
 }              t_info;
 
+typedef struct s_user_info {
+    char avatar;
+    char* nickname;
+    char* frst_name;
+    char* scnd_name;
+} t_user_info;
+
 typedef struct s_chat_info {
     int node_index;
-    char* chat_id;
-    GtkWidget* list_box;
+    int chat_id;
+    t_list *msgs; // t_msg list of msgs
+    GtkWidget* list_box; // list box of msgs
 }t_chat_info;
+
+typedef struct s_msg{
+
+} t_msg;
 
 typedef struct s_objects {
     t_signin_window *s_signin_win;
