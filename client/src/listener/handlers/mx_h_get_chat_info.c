@@ -23,6 +23,7 @@ static void fill_structure(t_chat_info* chat_info, char* response, t_info *info)
         chat_scroll_box,
         0);
     chat_info->chat_id = *(int*)&response[10];
+    chat_info->msgs = 0;
 }
 
 static gboolean foo(void*data) {

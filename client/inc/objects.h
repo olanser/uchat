@@ -35,7 +35,12 @@ typedef struct s_chat_info {
 }t_chat_info;
 
 typedef struct s_msg{
-
+    int msg_id;
+    int msg_id_chat;
+    int msg_id_user;
+    char* msg_time;
+    char msg_avatar;
+    char* msg_data;
 } t_msg;
 
 typedef struct s_objects {
