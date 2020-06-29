@@ -47,6 +47,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_get_chat_info.c \
 	src/api/mx_api_get_chat_msgs.c \
 	src/mx_get_path_to_sticker.c \
+	src/mx_file_reg.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -100,6 +101,7 @@ obj/%.o: tmp/%.c $(CHECK_INC)
 uninstall: u
 	@make -sC libs u
 	@rm -rf $(LIBS)
+	@rm -rf database/reg
 
 u:
 	@rm -rf tmp

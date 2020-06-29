@@ -36,11 +36,11 @@ char *mx_get_chat_info(t_server *server_info, t_server_users *user) {
 
     if (mx_check_user_in_chat(*((int*)&user->buff[9]), user->id_users,
                               server_info) == 0)
-        return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MX_QS_ERR_RIGHT);
+        return mx_create_respons_error_and_log(server_info, user, 
+            MX_DONT_HAVE_CHAT_USER, MX_QS_ERR_RIGHT);
     if (get_info_chat(server_info, user, &response))
-        return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
+                                               MQ_QS_ERR_SQL);
     if (response)
         return response;
     return 0;

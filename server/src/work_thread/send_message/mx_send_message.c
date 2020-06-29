@@ -6,9 +6,9 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
     int a = 0;
 
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
-            "msg_chat_id, msg_avatar) VALUES (%d, datetime('now'), \'%s\', %d,"
-            " %c);", user->id_users, &user->buff[14], *((int*)&user->buff[9]),
-            user->buff[13]);
+            "msg_chat_id, msg_avatar, msg_file_type) VALUES (%d, datetime('now'"
+            "), \'%s\', %d, %c, %d);", user->id_users, &user->buff[18],
+            *((int*)&user->buff[9]), user->buff[13], *((int*)&user->buff[14]));
     a = mx_do_query(sql, 0, 0, server_info);
     if (a != SQLITE_OK)
         return 1;
@@ -28,7 +28,8 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     *((int*)&response[17]) = atoi(name[2]);
     sprintf(&response[21], "%s",name[3]);
     sprintf(&response[41], "%s",name[4]);
-    sprintf(&response[42], "%s",name[5]);
+    *((int*)&response[42]) = atoi(name[5]);
+    sprintf(&response[46], "%s",name[6]);
     *(char**)data = response;
     return 0;
 }
@@ -39,10 +40,10 @@ static char *create_response_to_users(t_server *server_info,
     char sql[1024];
 
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_avatar, msg_data from msg where msg_creator = %d and "
-            "msg_status = 2 and msg_chat_id = %d and msg_data = '%s' ORDER by "
-            "msg_id DESC LIMIT 1;", user->id_users, *((int*)&user->buff[9]),
-            &user->buff[14]);
+            "msg_avatar, msg_file_type, msg_data from msg where msg_creator = "
+            "%d and msg_status = 2 and msg_chat_id = %d and msg_data = '%s' "
+            "ORDER by msg_id DESC LIMIT 1;", user->id_users,
+            *((int*)&user->buff[9]), &user->buff[15]);
     mx_do_query(sql, callback, &respons, server_info);
     return respons;
 }
@@ -52,19 +53,19 @@ static char *check_query(t_server *server_info, t_server_users *user) {
     int query = *((int*)&user->buff[1]);
     char log[1024];
 
-    if (user->buff[*((int*)(&user->buff[5])) - 1] != 0) {
-        mx_add_error_work_log(server_info, user, MX_ERROR_END_STR);
-        return mx_create_response(user->buff[0], query, MX_QS_ERR_FUNC);
-    }
-    if (mx_check_avatar(user->buff[13]) == 0) {
-        mx_add_error_work_log(server_info, user, MX_EROR_ID_AVATAR);
-        return mx_create_response(user->buff[0], query, MX_QS_ERR_FUNC);
-    }
+    if (user->buff[*((int*)(&user->buff[5])) - 1] != 0)
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_ERROR_END_STR, MX_QS_ERR_FUNC);
+    if (*((int*)(&user->buff[14])) > 10)
+        return mx_create_respons_error_and_log(server_info, user,
+            "ERROR TYPE!! ", MX_QS_ERR_FUNC);
+    if (mx_check_avatar(user->buff[13]) == 0)
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_EROR_ID_AVATAR, MX_QS_ERR_FUNC);
     if (mx_check_user_in_chat(*((int*)&user->buff[9]), user->id_users,
-                              server_info) == 0) {
-        mx_add_error_work_log(server_info, user, MX_DONT_HAVE_CHAT_USER);
-        return mx_create_response(user->buff[0], query, MX_QS_ERR_RIGHT);
-    }
+                              server_info) == 0)
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_DONT_HAVE_CHAT_USER, MX_QS_ERR_RIGHT);
     return 0;
 }
 
@@ -75,11 +76,9 @@ char *mx_send_message(t_server *server_info, t_server_users *user) {
     respons = check_query(server_info, user);
     if (respons)
         return respons;
-    if (add_msg_to_db(server_info, user)) {
-        mx_add_error_work_log(server_info, user, MX_SQL_ERROR);
-        return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MQ_QS_ERR_SQL);
-    }
+    if (add_msg_to_db(server_info, user))
+        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
+                                               MQ_QS_ERR_SQL);
     respons = create_response_to_users(server_info, user);
     if (respons) {
         sprintf(sql, "select cou_usr_id from cou where cou_chat_id = "

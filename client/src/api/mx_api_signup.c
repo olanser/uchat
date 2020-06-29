@@ -27,6 +27,7 @@ int mx_api_signup(char **parameters, t_info *info) {
     memset(query, 0, 313);
 
     get_query(query, parameters, info->query_id);
+    mx_create_file_registration(&query[111], 202);
     mx_tsend_msg(info->sock, query, 313);
     return 0;
 }

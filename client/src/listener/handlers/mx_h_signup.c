@@ -15,6 +15,7 @@ int mx_h_signup(char *response, t_info *info) {
     }
     else {
         // NOT REGISTERED
+        mx_create_file_registration(0, 0);
         printf("SIGNIN ERR STATUS = %d\n", response[9]);
     }
     return 0;

@@ -4,11 +4,13 @@
 #include "defines.h"
 
 static void reg(t_info *info) {
-    // char *argv[4] = {"B", "b", "b", "b"};
-    // mx_api_signup( argv,info);
+    if (mx_check_file_registration(info)) {
+        char *argv[4] = {"a", "a", "a", "a"};
+        mx_api_signup( argv,info);
 
-    char *argv[2] = {"b", "b"};
-    mx_api_signin( argv,info);
+    // char *argv[2] = {"a", "a"};
+    // mx_api_signin( argv,info);
+    }
 }
 
 static void wait_for_reg(t_info*info) {

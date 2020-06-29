@@ -18,18 +18,17 @@ char *mx_change_avatar(t_server *server_info, t_server_users *user) {
     char *response;
 
     if (mx_check_avatar(user->buff[9]) == 0)
-        return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MX_QS_ERR_FUNC);
+        return mx_create_respons_error_and_log(server_info, user, 
+            MX_EROR_ID_AVATAR, MX_QS_ERR_FUNC);
     sprintf(sql, "update user set user_avatar='%c' where usr_id=%d",
             user->buff[9], user->id_users);
     if (mx_do_query(sql, 0, 0,server_info) != SQLITE_OK)
-    return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
+                                               MQ_QS_ERR_SQL);
     sprintf(sql, "update msg set msg_avatar='%c' where msg_creator=%d",
             user->buff[9], user->id_users);
-    printf("%s\n", sql);
     if (mx_do_query(sql, 0, 0,server_info) != SQLITE_OK)
-    return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
+                                               MQ_QS_ERR_SQL);
     return create_response(user);
 }
