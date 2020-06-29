@@ -2,11 +2,6 @@
 <!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.22"/>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">system-log-out-symbolic</property>
-  </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -39,6 +34,9 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
+                      <placeholder/>
+                    </child>
+                    <child>
                       <object class="GtkButton" id="profile_set_btn1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -48,31 +46,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkFixed">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="btn_logout">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="image">image2</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -344,20 +318,23 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkLayout" id="signin_layout">
+        <property name="visible">False</property>
         <property name="can_focus">False</property>
         <child>
           <object class="GtkGrid" id="signin_main_grid">
             <property name="width_request">100</property>
             <property name="height_request">80</property>
+            <property name="visible">False</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkBox" id="signin_child_box">
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkFixed">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                   </object>
                   <packing>
@@ -368,6 +345,7 @@
                 </child>
                 <child>
                   <object class="GtkFixed">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                   </object>
                   <packing>
@@ -378,10 +356,12 @@
                 </child>
                 <child>
                   <object class="GtkBox">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -392,6 +372,7 @@
                     </child>
                     <child>
                       <object class="GtkAspectFrame">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
@@ -412,6 +393,7 @@
                     </child>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -429,14 +411,17 @@
                 </child>
                 <child>
                   <object class="GtkBox">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkBox">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkFixed">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                           </object>
                           <packing>
@@ -447,6 +432,7 @@
                         </child>
                         <child>
                           <object class="GtkFixed">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                           </object>
                           <packing>
@@ -457,6 +443,7 @@
                         </child>
                         <child>
                           <object class="GtkAspectFrame">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
@@ -484,6 +471,7 @@
                     </child>
                     <child>
                       <object class="GtkAspectFrame">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
@@ -506,6 +494,7 @@
                     </child>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -523,10 +512,12 @@
                 </child>
                 <child>
                   <object class="GtkBox">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -537,6 +528,7 @@
                     </child>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -547,9 +539,11 @@
                     </child>
                     <child>
                       <object class="GtkBox">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <child>
                           <object class="GtkAspectFrame">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
@@ -559,7 +553,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="relief">none</property>
+                                <property name="relief">GTK_RELIEF_NONE</property>
                               </object>
                             </child>
                           </object>
@@ -571,6 +565,7 @@
                         </child>
                         <child>
                           <object class="GtkFixed">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                           </object>
                           <packing>
@@ -581,6 +576,7 @@
                         </child>
                         <child>
                           <object class="GtkFixed">
+                            <property name="visible">False</property>
                             <property name="can_focus">False</property>
                           </object>
                           <packing>
@@ -605,10 +601,12 @@
                 </child>
                 <child>
                   <object class="GtkBox">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -619,6 +617,7 @@
                     </child>
                     <child>
                       <object class="GtkAspectFrame">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
@@ -640,6 +639,7 @@
                     </child>
                     <child>
                       <object class="GtkFixed">
+                        <property name="visible">False</property>
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
@@ -657,6 +657,7 @@
                 </child>
                 <child>
                   <object class="GtkFixed">
+                    <property name="visible">False</property>
                     <property name="can_focus">False</property>
                   </object>
                   <packing>
