@@ -27,7 +27,7 @@ static bool check_time(char *time) {
 }
 
 static char *create_resp_send_edit(char **data) {
-    int sum = 43 + strlen(data[4]);
+    int sum = 47 + strlen(data[4]);
     char *respons = malloc(sizeof(char) * sum);
 
     memset(respons, 0, 5);

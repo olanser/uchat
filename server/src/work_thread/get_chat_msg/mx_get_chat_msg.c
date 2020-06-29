@@ -5,7 +5,7 @@ static int callback(void *param, int column, char **data, char **names) {
     char *respons;
     int sum;
 
-    sum = 43 + strlen(data[4]);
+    sum = 47 + strlen(data[4]);
     respons =  malloc(sizeof(char) * sum);
     memset(&respons[1], 0, 4);
     respons[0] = data[5][0] - '0';

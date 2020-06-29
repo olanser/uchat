@@ -17,7 +17,7 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
 
 
 static int callback(void *data, int column, char **name, char **tabledata) {
-    int sum = 43 + strlen(name[5]);
+    int sum = 47 + strlen(name[5]);
     char *response =  malloc(sizeof(char) * sum);
 
     memset(&response[1], 0, 4);
@@ -43,7 +43,7 @@ static char *create_response_to_users(t_server *server_info,
             "msg_avatar, msg_file_type, msg_data from msg where msg_creator = "
             "%d and msg_status = 2 and msg_chat_id = %d and msg_data = '%s' "
             "ORDER by msg_id DESC LIMIT 1;", user->id_users,
-            *((int*)&user->buff[9]), &user->buff[15]);
+            *((int*)&user->buff[9]), &user->buff[18]);
     mx_do_query(sql, callback, &respons, server_info);
     return respons;
 }
