@@ -20,7 +20,7 @@ static int get_query(char *query, void **parameters, int query_id, int size) {
 * parameters[1] = data
 */
 int mx_api_send_message(int chat_id, char *msg, t_info *info) {
-    int size = 14 + mx_strlen(msg) + 1;
+    int size = 18 + mx_strlen(msg) + 1;
     char *query = malloc(sizeof(char) * size);
     void *parameters[2] = {&chat_id, msg};
     memset(query, 0, size);
