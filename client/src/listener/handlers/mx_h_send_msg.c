@@ -2,11 +2,11 @@
 #include "libmx.h"
 
 /* find listbox of chat */
-t_chat_info* get_chat_info(t_list* list, int id) {
+t_chat_info* get_chat_info(t_list* list, int id_chat) {
     t_list* tmp = list;
 
     while (tmp) {
-        if (((t_chat_info*)tmp->data)->chat_id == id)
+        if (((t_chat_info*)tmp->data)->chat_id == id_chat)
             return ((t_chat_info*)tmp->data);
         tmp = tmp->next;
     }
@@ -46,6 +46,7 @@ int check(char *response, t_info *info) {
 
 t_msg* mx_get_msg_from_resp(char *resp) {
     t_msg *msg = malloc(sizeof(t_msg));
+
     msg->msg_id = *(int*)&resp[9];
     msg->msg_id_chat = *(int*)&resp[13];
     msg->msg_id_user = *(int*)&resp[17];
@@ -76,13 +77,28 @@ int mx_add_msg_to_list(t_list **list_, t_msg *msg) {
     return i;
 }
 
+bool is_msg_exist_free(t_chat_info *chat, t_msg *msg) {
+    t_list *tmp = chat->msgs;
+
+    while(tmp) {
+        if (((t_msg*)tmp->data)->msg_id == msg->msg_id) {
+            free(msg);
+            return true;
+        }
+        tmp = tmp->next;
+    }
+    return false;
+}
+
+static void update_chat(t_chat_info*chat, t_msg *msg) {
+    if (msg->msg_id < chat->last_id_msg 
+        || chat->last_id_msg == 0)
+    {
+        chat->last_id_msg = msg->msg_id;
+    }
+}
+
 int mx_h_send_msg(char *response, t_info *info) {
-    printf("RECEIVE\n");
-    // printf("id msg = %s\n", &response[9]);
-    // printf("id chat = %s\n", &response[20]);
-    // printf("id user = %s\n", &response[31]);
-    // printf("time = %s\n", &response[42]);
-    // printf("msg = %s\n", &response[63]);
     t_chat_info* chat = 0;
     t_msg *msg = 0;
     int index = 0;
@@ -95,9 +111,11 @@ int mx_h_send_msg(char *response, t_info *info) {
     }
     else { // if listbox finded
         msg = mx_get_msg_from_resp(response);
+        if (is_msg_exist_free(chat, msg))
+            return 1;
         index = mx_add_msg_to_list(&chat->msgs, msg);
-        printf("index = %d\n", index);
         mx_add_msg_to_box(chat->list_box, response, index);
+        update_chat(chat, msg);
     }
     return 0;
 }

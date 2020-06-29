@@ -29,6 +29,7 @@ int mx_api_send_message(int chat_id, char *msg, t_info *info);
 int mx_api_show_users(char *str, t_info *info);
 int mx_api_signin(char **parameters, t_info *info);
 int mx_api_signup(char **parameters, t_info *info);
+int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);

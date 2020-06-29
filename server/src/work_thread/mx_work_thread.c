@@ -27,8 +27,8 @@ static bool check_request(t_server_users *user) {
 }
 
 static bool check_size(t_server_users *user) {
-    const int min_size[20] = {313, 211, 16, 34, 31, 20, 20, 20, 29, 11, 20, 20,
-                              35, 20, 110, 20, 20, 9, 10};
+    const int min_size[20] = {313, 211, 16, 34, 31, 20, 20, 20, 29, 11, 13, 20,
+                              21, 20, 110, 20, 20, 9, 10};
     const int max_size[20] = {313, 211, 1024, 1024, 31, 1024, 20, 20, 29, 1024,
                               20, 1024, 35, 20, 110, 20, 20, 9, 10};
     char *response = 0;
@@ -40,7 +40,7 @@ static bool check_size(t_server_users *user) {
     }
     else
         return true;
-    printf("ERROR size query!!!!\n");
+    printf("ERROR size query!!!!: %d\n", user->buff[0]);
     mx_write_socket(user, response);
     free(response);
     return false;

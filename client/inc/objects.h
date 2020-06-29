@@ -15,7 +15,7 @@ typedef struct s_info {
     int query_id;
     int scene; // number of window
     int id_chat;
-    t_list* list_of_chats; // for checko=ing chats when add
+    t_list* list_of_chats; // t_chat_info
     t_user_info* user_info;
     t_objects* objs;
 }              t_info;
@@ -30,6 +30,7 @@ typedef struct s_user_info {
 typedef struct s_chat_info {
     int node_index;
     int chat_id;
+    int last_id_msg;
     t_list *msgs; // t_msg list of msgs
     GtkWidget* list_box; // list box of msgs
 }t_chat_info;

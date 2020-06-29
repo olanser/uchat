@@ -13,31 +13,45 @@ static bool is_exist(char id, t_list* list_of_chats) {
     return false;
 }
 
-static void fill_structure(t_chat_info* chat_info, char* response, t_info *info) {
-    GtkBuilder* builder = gtk_builder_new_from_file(MX_TEMPLATE_SHITS);
-    GtkWidget* chat_scroll_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_scroll_box"));
-
-    chat_info->list_box = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_chat"));
-    chat_info->node_index = gtk_notebook_append_page(
-        GTK_NOTEBOOK(info->objs->chat_win->notebook),
-        chat_scroll_box,
-        0);
-    chat_info->chat_id = *(int*)&response[10];
-    chat_info->msgs = 0;
+static GtkWidget* mx_create_chat_widget(char *response) {
+    GtkWidget* widget = gtk_button_new_with_label(&response[14]);
+    return widget;
 }
 
-static gboolean foo(void*data) {
+static t_chat_info* get_chat_info(char* response, t_info *info) {
+    t_chat_info *chat_info = malloc(sizeof(t_chat_info));
+    GtkBuilder* builder = gtk_builder_new_from_file(MX_TEMPLATE_SHITS);
+    // notebool widget
+    GtkWidget* chat_scroll_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_scroll_box"));
+
+    // inside scroll box
+    chat_info->list_box = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_chat"));
+    chat_info->node_index = gtk_notebook_append_page(
+            GTK_NOTEBOOK(info->objs->chat_win->notebook), // notebook
+            chat_scroll_box, // widget inside notebook
+            0); // label
+    chat_info->chat_id = *(int*)&response[10];
+    chat_info->msgs = 0;
+    chat_info->last_id_msg = 0;
+    return chat_info;
+}
+
+static gboolean add_chat(void*data) {
     t_info *info = (t_info*)((void**)data)[0];
     char *response = (char*)((void**)data)[1];
-    GtkWidget* listbox_search = info->objs->chat_win->listbox_search;
     GtkWidget* chat_widget = 0;
-    t_chat_info* chat_info = malloc(sizeof(t_chat_info));
+    t_chat_info* chat_info = 0;
 
-    chat_widget = gtk_button_new_with_label(&response[14]);
-    fill_structure(chat_info, response, info);
+    if(is_exist(*(int*)&response[10], info->list_of_chats))
+        return FALSE;
+    
+    chat_widget = mx_create_chat_widget(response);
+    chat_info = get_chat_info(response, info);
     mx_push_back(&info->list_of_chats, chat_info);
+    // add to chat widget chat data
     g_object_set_data(G_OBJECT(chat_widget), "chat_info", chat_info);
-    gtk_list_box_insert(GTK_LIST_BOX(listbox_search), chat_widget, -1);
+    // insert chat
+    gtk_list_box_insert(GTK_LIST_BOX(info->objs->chat_win->listbox_search), chat_widget, -1);
     g_signal_connect(G_OBJECT(chat_widget), "clicked", G_CALLBACK(mx_btn_change_chat), info);
     gtk_widget_show(chat_widget);
     free(response);
@@ -51,11 +65,11 @@ static gboolean foo(void*data) {
 * add new node to list of chats
 */
 static void add_new_chat(char *response, t_info *info) {
-    void **data = malloc(sizeof(void*) * 2);
+    void **data = malloc(sizeof(void*) * 3);
     data[0] = info;
     data[1] = malloc(*(int*)&response[5]);
     memcpy(data[1], response, *(int*)&response[5]);
-    gdk_threads_add_idle(foo, data);  
+    gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, add_chat, data, 0);
 }
 
 static int check(char *response) {
@@ -65,11 +79,9 @@ static int check(char *response) {
     }
     return 0;
 }
+
 int mx_h_get_chat_info(char *response, t_info *info) {
-    
     if(check(response) == 1)
-        return 1;
-    if(is_exist(*(int*)&response[10], info->list_of_chats) || (*(int*)&response[5] < 11))
         return 1;
     add_new_chat(response, info);
     return 0;
