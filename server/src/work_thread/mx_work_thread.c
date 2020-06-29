@@ -1,7 +1,7 @@
 #include "server.h"
 #include "defines.h"
 
-static bool check_request(t_server_users *user) {
+static bool check_request(t_server_users *user, t_server *server_info) {
     char *response = 0;
 
     if (user->id_users != 0) {
@@ -26,12 +26,13 @@ static bool check_request(t_server_users *user) {
     return false;
 }
 
-static bool check_size(t_server_users *user) {
-    const int min_size[20] = {313, 211, 16, 34, 31, 20, 20, 20, 29, 11, 13, 20,
-                              21, 20, 110, 20, 20, 9, 10};
-    const int max_size[20] = {313, 211, 1024, 1024, 31, 1024, 20, 20, 29, 1024,
-                              20, 1024, 35, 20, 110, 20, 20, 9, 10};
+static bool check_size(t_server_users *user, t_server *server_info) {
+    const int min_size[20] = {313, 211, 16, 20, 17, 0, 0, 0, 0, 11, 13, 0,
+                              21, 0, 0, 0, 0, 9, 10};
+    const int max_size[20] = {313, 211, 1024, 1024, 17, 0, 0, 0, 0, 1024,
+                              13, 0, 21, 0, 0, 0, 0, 9, 10};
     char *response = 0;
+    char log[75];
 
     if (*((int*)&user->buff[5]) < min_size[user->buff[0]]
         || *((int*)&user->buff[5]) > max_size[user->buff[0]]) {
@@ -40,7 +41,9 @@ static bool check_size(t_server_users *user) {
     }
     else
         return true;
-    printf("ERROR size query!!!!: %d\n", user->buff[0]);
+    sprintf(log, "ERROR size query!! work ID user = %d, API = %d, SIZE = %d\n",
+            user->id_users, user->buff[0], *((int*)&user->buff[5]));
+    mx_add_log(server_info, log);
     mx_write_socket(user, response);
     free(response);
     return false;
@@ -50,13 +53,19 @@ void mx_work_thread(t_server *server_info, t_server_users *user) {
     char comand = user->buff[0];
     int size = *((int*)&(user->buff[5]));
     char *response;
+    char log[75];
 
-    printf("in do req -- %d\n", user->buff[0]);
-    if (check_request(user) && check_size(user)) {
+    sprintf(log, "Start work ID user = %d, API = %d\n", user->id_users,
+            user->buff[0]);
+    mx_add_log(server_info, log);
+    if (check_request(user, server_info) && check_size(user, server_info)) {
         response = mx_do_request(server_info, user);
         if (response) {
             mx_write_socket(user, response);
             free(response);
         }
     }
+    sprintf(log, "FINISH work ID user = %d, API = %d\n", user->id_users,
+            user->buff[0]);
+    mx_add_log(server_info, log);
 }

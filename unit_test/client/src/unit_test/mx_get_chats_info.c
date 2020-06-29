@@ -53,9 +53,9 @@ void mx_get_chats_info(t_info* info) {
 }
 
 int main(int argc, char *argv[]) {
-    t_info **box_info =  malloc(sizeof(t_info*) * 100);
-    char buff[1024];
     int size = 100;
+    t_info **box_info =  malloc(sizeof(t_info*) * size);
+    char buff[1024];
 
     for (int i = 0; i < size; i++) {
         box_info[i] = mx_get_info();

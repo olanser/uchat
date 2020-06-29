@@ -10,6 +10,11 @@
 #define MX_THREAD 6
 #define MX_MAX_SIZE_REQUEST 1024
 #define MX_LOG_FILE "database/log.txt"
+#define MX_ERROR_END_STR "DONT HAVE 0 TO END!!" // don't have \0 end str;
+#define MX_EROR_ID_AVATAR "ERROR AVATAR!!" //id avatar error see mx_check_avatar;
+#define MX_DONT_ID_MSG_IN_USER "DONT HAVE MSG!!" //this msg dont user
+#define MX_SQL_ERROR "ERROR SQL!!!" // sql have error
+#define MX_DONT_HAVE_CHAT_USER "DONT HAVE CHAT USER!!" //this chat dont have user
 /* 
 * 0 bit of query
 * Query Status

@@ -90,6 +90,9 @@ int mx_return_one_str(void *param, int column, char **data, char **names);
 bool mx_check_id_message_in_user(int id_message, int id_chat,
     t_server *server_info, t_server_users *user);
 bool mx_check_avatar(char avatar);
+void mx_add_log(t_server *server_info, char *msg);
+void mx_add_error_work_log(t_server *server_info, t_server_users *user,
+                           char *msg);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
