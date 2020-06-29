@@ -17,7 +17,7 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
 
 
 static int callback(void *data, int column, char **name, char **tabledata) {
-    int sum = 47 + strlen(name[5]);
+    int sum = 47 + strlen(name[6]);
     char *response =  malloc(sizeof(char) * sum);
 
     memset(&response[1], 0, 4);
