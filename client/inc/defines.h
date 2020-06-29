@@ -5,6 +5,7 @@
 #define MX_TEMPLATE_SHITS "templates/notebook_chats.xml"
 #define MX_COUNT_API 17
 #define MX_FILE_REG "database/reg"
+#define SIGNIN_CSS_STYLE "templates/signin_theme.css"
 
 typedef enum {
     MX_SCENE_SIGNUP,
