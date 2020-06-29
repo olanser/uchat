@@ -7,6 +7,8 @@
 #include <stdbool.h>
 
 char *get_text_of_textview(GtkWidget *text_view);
+bool mx_check_file_registration(t_info *info);
+void mx_create_file_registration(char *buff, int len);
 
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);

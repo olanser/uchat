@@ -5,12 +5,15 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     t_server *server_info = (t_server *)(((void**)data)[0]);
     t_server_users *user = 0;
     int id_user = atoi(name[0]);
+    char log[1024];
 
     for (int i = 1; i < server_info->size_connekt; i++) {
         user = &server_info->table_users[i];
         if (user->socket != -1 && user->id_users != 0) {
             if (id_user == user->id_users) {
-                printf("SEND msg id[0] = %d and id user = %d\n", respons[0], user->id_users);
+                sprintf(log, "SEND msg id[0] = %d and id user = %d id msg = %d"
+                        "\n", respons[0], user->id_users, *((int*)&respons[9]));
+                mx_add_log(server_info, log);
                 mx_write_socket(user, respons);
             }
         }

@@ -34,8 +34,8 @@ char *mx_get_chats_info(t_server *server_info, t_server_users *user) {
             user->id_users);
     if (mx_do_query(sql, callback, &list, server_info) != SQLITE_OK) {
         write_server(&list, user);
-        return mx_create_response(user->buff[0], *((int*)&user->buff[1]),
-                                  MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
+                                               MQ_QS_ERR_SQL);
     }
     write_server(&list, user);
     return 0;
