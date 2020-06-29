@@ -143,12 +143,40 @@
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <child>
-                                  <object class="GtkSearchEntry" id="search_line1">
+                                  <object class="GtkExpander">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="primary_icon_name">edit-find-symbolic</property>
-                                    <property name="primary_icon_activatable">False</property>
-                                    <property name="primary_icon_sensitive">False</property>
+                                    <property name="expanded">True</property>
+                                    <property name="resize_toplevel">False</property>
+                                    <child>
+                                      <object class="GtkScrolledWindow">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="shadow_type">in</property>
+                                        <child>
+                                          <object class="GtkViewport">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <child>
+                                              <object class="GtkListBox">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child type="label">
+                                      <object class="GtkSearchEntry">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="primary_icon_name">edit-find-symbolic</property>
+                                        <property name="primary_icon_activatable">False</property>
+                                        <property name="primary_icon_sensitive">False</property>
+                                        <property name="placeholder_text" translatable="yes">search</property>
+                                      </object>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -182,18 +210,6 @@
                                         <property name="expand">True</property>
                                         <property name="fill">True</property>
                                         <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkScrollbar" id="search_scrollbar1">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="orientation">vertical</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -357,7 +373,7 @@
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkFixed">
-                    <property name="visible">False</property>
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                   </object>
                   <packing>

@@ -72,6 +72,7 @@ struct s_signin_window {
     GtkWidget* signin_button;
     GtkWidget* signin_vissible_pass;
     GtkWidget* save_user_tick;
+    GtkWidget *layout;
 };
 
 struct s_signup_window {
