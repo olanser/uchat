@@ -56,7 +56,7 @@ void mx_add_msg_to_box(GtkWidget*listbox, char *response, int index) {
     data[1] = malloc(*(int*)&response[5]);
     data[2] = (void*)(long long)index;
     memcpy(data[1], response, *(int*)&response[5]);
-    if (*(int*)&response[41] == 1)
+    if (*(int*)&response[42] == 1)
         gdk_threads_add_idle(add_msg, data);
     else
         gdk_threads_add_idle(add_sticker, data);
@@ -76,8 +76,8 @@ t_msg* mx_get_msg_from_resp(char *resp) {
     msg->msg_id = *(int*)&resp[9];
     msg->msg_id_chat = *(int*)&resp[13];
     msg->msg_id_user = *(int*)&resp[17];
-    msg->msg_type = *(int*)&resp[41];
-    msg->msg_avatar = *(int*)&resp[42];
+    msg->msg_avatar = *(int*)&resp[41];
+    msg->msg_type = *(int*)&resp[42];
     return msg;
 }
 
@@ -137,9 +137,11 @@ int mx_h_send_msg(char *response, t_info *info) {
        mx_api_get_chat_info(*(int*)&response[13], info);
     }
     else { // if listbox finded
+        
         msg = mx_get_msg_from_resp(response);
         if (is_msg_exist_free(chat, msg))
             return 1;
+        printf("type = %d\n", msg->msg_type);
         index = mx_add_msg_to_list(&chat->msgs, msg);
         mx_add_msg_to_box(chat->list_box, response, index);
         update_chat(chat, msg);
