@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 char *get_text_of_textview(GtkWidget *text_view);
+char *mx_get_path_to_sticker(int number);
 
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);

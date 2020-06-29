@@ -46,6 +46,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/gtk_cycle/signals/main/mx_btn_change_chat.c \
 	src/api/mx_api_get_chat_info.c \
 	src/api/mx_api_get_chat_msgs.c \
+	src/mx_get_path_to_sticker.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -58,7 +59,9 @@ LIBS = mxinet.a \
 
 INC = -I inc
 
-CHECK_INC = inc/defines.h
+CHECK_INC = inc/defines.h \
+	inc/client.h \
+	inc/objects.h \
 
 CFG = `pkg-config --cflags gtk+-3.0` 
 

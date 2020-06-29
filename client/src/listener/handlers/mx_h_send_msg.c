@@ -13,13 +13,36 @@ t_chat_info* get_chat_info(t_list* list, int id_chat) {
     return 0;
 }
 
-static gboolean foo(void* data) {
+static gboolean add_msg(void* data) {
     GtkWidget* listbox = (GtkWidget*)((void**)data)[0];
     char* response = (char*)((void**)data)[1];
     int index = (int)(long long)((void**)data)[2];
     GtkWidget* label = gtk_label_new(&response[42]);
     gtk_list_box_insert(GTK_LIST_BOX(listbox), label, index);
     gtk_widget_show(label);
+    
+    free(response);
+    free(data);
+    return FALSE;
+}
+
+GtkWidget* get_image(int number) {
+    GtkWidget *img = 0;
+    char *name = mx_get_path_to_sticker(number);
+
+    img = gtk_image_new_from_file(name);
+    free(name);
+    return img;
+}
+
+static gboolean add_sticker(void* data) {
+    GtkWidget* listbox = (GtkWidget*)((void**)data)[0];
+    char* response = (char*)((void**)data)[1];
+    int index = (int)(long long)((void**)data)[2];
+    GtkWidget* image = get_image(*(int*)&response[42]);
+
+    gtk_list_box_insert(GTK_LIST_BOX(listbox), image, index);
+    gtk_widget_show(image);
     
     free(response);
     free(data);
@@ -33,7 +56,10 @@ void mx_add_msg_to_box(GtkWidget*listbox, char *response, int index) {
     data[1] = malloc(*(int*)&response[5]);
     data[2] = (void*)(long long)index;
     memcpy(data[1], response, *(int*)&response[5]);
-    gdk_threads_add_idle(foo, data);
+    if (*(int*)&response[41] == 1)
+        gdk_threads_add_idle(add_msg, data);
+    else
+        gdk_threads_add_idle(add_sticker, data);
 }
 
 int check(char *response, t_info *info) {
@@ -50,7 +76,8 @@ t_msg* mx_get_msg_from_resp(char *resp) {
     msg->msg_id = *(int*)&resp[9];
     msg->msg_id_chat = *(int*)&resp[13];
     msg->msg_id_user = *(int*)&resp[17];
-    msg->msg_avatar = resp[41];
+    msg->msg_type = *(int*)&resp[41];
+    msg->msg_avatar = *(int*)&resp[42];
     return msg;
 }
 

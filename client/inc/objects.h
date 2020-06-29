@@ -42,6 +42,7 @@ typedef struct s_msg{
     char* msg_time;
     char msg_avatar;
     char* msg_data;
+    int msg_type; // 1- msg; 2 - sticker
 } t_msg;
 
 typedef struct s_objects {
