@@ -17,7 +17,7 @@ static gboolean add_msg(void* data) {
     GtkWidget* listbox = (GtkWidget*)((void**)data)[0];
     char* response = (char*)((void**)data)[1];
     int index = (int)(long long)((void**)data)[2];
-    GtkWidget* label = gtk_label_new(&response[42]);
+    GtkWidget* label = gtk_label_new(&response[46]);
     gtk_list_box_insert(GTK_LIST_BOX(listbox), label, index);
     gtk_widget_show(label);
     
@@ -39,7 +39,7 @@ static gboolean add_sticker(void* data) {
     GtkWidget* listbox = (GtkWidget*)((void**)data)[0];
     char* response = (char*)((void**)data)[1];
     int index = (int)(long long)((void**)data)[2];
-    GtkWidget* image = get_image(*(int*)&response[42]);
+    GtkWidget* image = get_image(*(int*)&response[46]);
 
     gtk_list_box_insert(GTK_LIST_BOX(listbox), image, index);
     gtk_widget_show(image);
@@ -51,7 +51,6 @@ static gboolean add_sticker(void* data) {
 
 void mx_add_msg_to_box(GtkWidget*listbox, char *response, int index) {
     void **data = malloc(sizeof(void*) * 3);
-
     data[0] = listbox;
     data[1] = malloc(*(int*)&response[5]);
     data[2] = (void*)(long long)index;
@@ -141,7 +140,6 @@ int mx_h_send_msg(char *response, t_info *info) {
         msg = mx_get_msg_from_resp(response);
         if (is_msg_exist_free(chat, msg))
             return 1;
-        printf("type = %d\n", msg->msg_type);
         index = mx_add_msg_to_list(&chat->msgs, msg);
         mx_add_msg_to_box(chat->list_box, response, index);
         update_chat(chat, msg);

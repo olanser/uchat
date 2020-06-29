@@ -48,6 +48,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_get_chat_msgs.c \
 	src/mx_get_path_to_sticker.c \
 	src/mx_file_reg.c \
+	src/api/mx_api_show_users.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -76,7 +77,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) 
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:
