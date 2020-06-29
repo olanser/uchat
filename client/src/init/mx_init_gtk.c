@@ -29,6 +29,7 @@ void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
     signin->save_user_tick = GTK_WIDGET(gtk_builder_get_object(builder, "save_user_tick"));
     signin->signin_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "signin_main_grid"));
     signin->signin_child_box = GTK_WIDGET(gtk_builder_get_object(builder, "signin_child_box"));
+    signin->layout = GTK_WIDGET(gtk_builder_get_object(builder, "signin_layout"));
 }
 
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat) {
@@ -47,8 +48,6 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat) {
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
-    // GtkWidget* w = gtk_label_new("AAAAAA");
-    // gtk_list_box_insert(GTK_LIST_BOX(main_chat->listbox_search), w, -1);
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs) {
@@ -85,7 +84,7 @@ void mx_connect_builder(t_info* info) {
 
 // void mx_connect_css(void) {
 //     GtkCssProvider *provider = gtk_css_provider_new();
-//     gtk_css_provider_load_from_path(provider, "templates/signin_theme.css", NULL);
+//     gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
 //         gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 //                                GTK_STYLE_PROVIDER(provider),
 //                                GTK_STYLE_PROVIDER_PRIORITY_USER);
