@@ -75,6 +75,7 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
     if (main_chat->chat_win == 0)
         fprintf(stderr, "error of open file!\n");
+    main_chat->layout_main = GTK_WIDGET(gtk_builder_get_object(builder, "layout_main"));
     main_chat->main_chat_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_box1"));
     main_chat->paned_chat = GTK_WIDGET(gtk_builder_get_object(builder, "paned_chat1"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));

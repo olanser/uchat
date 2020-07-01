@@ -12,6 +12,8 @@ gboolean mx_resize_main_window (GtkWidget *window, t_objects *objs) {
 gboolean mx_destroy_main_window(GtkWidget *window) {
     if (window)
         gtk_window_close(GTK_WINDOW (window));
+    printf("leaks in // main_signal.c\n");
+    system("leaks client");
     exit(0);
     return FALSE;
 }
