@@ -38,6 +38,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/get_user_info/mx_get_user_info.c \
 	src/work_thread/get_chat_users/mx_get_chat_users.c \
 	src/work_thread/get_chat_users/mx_chat_user_list.c \
+	src/work_thread/send_file/mx_create_unique_name.c \
 
 # Variables
 

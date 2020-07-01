@@ -113,6 +113,7 @@ void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
+char *mx_create_unique_name(t_server *server_info, t_server_users *user);
 
 
 
