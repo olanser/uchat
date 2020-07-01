@@ -56,6 +56,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_is_chat_exist.c \
 	src/gtk_cycle/mx_go_to_dialog.c \
 	src/api/mx_api_create_dialog.c \
+	src/gtk_cycle/renderer/mx_scene_cycle.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -65,12 +66,14 @@ A = $(foreach dir, $(dirs), $($(dir):%=)
 
 LIBS = mxinet.a \
 	libmx.a \
+	mxdraw.a \
 
 INC = -I inc
 
 CHECK_INC = inc/defines.h \
 	inc/client.h \
 	inc/objects.h \
+
 
 CFG = `pkg-config --cflags gtk+-3.0` 
 
@@ -84,7 +87,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) 
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:
@@ -96,6 +99,7 @@ libs_comile:
 	@mv $(addprefix libs/, $(LIBS)) .
 	@cp libs/mxinet/inc/mxinet.h inc
 	@cp libs/libmx/inc/libmx.h inc
+	@cp libs/mxdraw/inc/mxdraw.h inc
 
 copy:
 	@cp -p $(FULL_SRC) ./tmp

@@ -20,7 +20,7 @@
   <object class="GtkWindow" id="main_chat_window1">
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkLayout">
+      <object class="GtkLayout" id="layout_main">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>

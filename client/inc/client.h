@@ -13,6 +13,7 @@ void mx_create_file_registration(char *buff, int len);
 bool mx_is_chat_exist(char id, t_list* list_of_chats);
 void mx_go_to_dialog(t_info*info, int user_id);
 
+gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);
 int mx_chang_scene(t_info *info, int scene);

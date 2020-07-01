@@ -3,6 +3,7 @@
 
 #include <gtk/gtk.h>
 #include "libmx.h"
+#include "characters.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
@@ -18,6 +19,7 @@ typedef struct s_info {
     t_list* list_of_chats; // t_chat_info
     t_user_info* user_info;
     t_objects* objs;
+    t_characters *chars;
 }              t_info;
 
 typedef struct s_user_info {
@@ -56,6 +58,7 @@ typedef struct s_objects {
 
 
 struct s_main_chat_window {
+    GtkWidget* layout_main;
     GtkWidget* chat_win;
     GtkWidget* main_chat_box;
     GtkWidget* profile_set_btn;

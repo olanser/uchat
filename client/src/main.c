@@ -28,7 +28,8 @@ int main(int argc, char *argv[]) {
     wait_for_reg(info);
 
     mx_api_get_chats_info(info);
-    mx_api_show_users("a", info);
+    gdk_threads_add_timeout(33, mx_scene_cycle, info);
     // exit(0);
     mx_show_window(info);
+    
 }
