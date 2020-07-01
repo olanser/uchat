@@ -58,13 +58,13 @@ void mx_work_thread(t_server *server_info, t_server_users *user) {
     sprintf(log, "Start work ID user = %d, API = %d\n", user->id_users,
             user->buff[0]);
     mx_add_log(server_info, log);
-    if (check_request(user, server_info) && check_size(user, server_info)) {
+    //if (check_request(user, server_info) && check_size(user, server_info)) {
         response = mx_do_request(server_info, user);
         if (response) {
             mx_write_socket(user, response);
             free(response);
         }
-    }
+   // }
     sprintf(log, "FINISH work ID user = %d, API = %d\n", user->id_users,
             user->buff[0]);
     mx_add_log(server_info, log);

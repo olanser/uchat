@@ -38,5 +38,6 @@ void mx_pop_back(t_list **head);
 void mx_push_back(t_list **list, void *data);
 void mx_strdel(char **str);
 char *mx_file_to_str(const char *filename);
+char *mx_itoa(int number);
 
 #endif
