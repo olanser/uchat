@@ -87,6 +87,9 @@ struct s_signin_window {
     GtkWidget* signin_vissible_pass;
     GtkWidget* save_user_tick;
     GtkWidget *layout;
+    GtkWidget *image_name;
+    GtkWidget *broken_screen;
+    GtkWidget *broken_lbl;
 };
 
 struct s_signup_window {

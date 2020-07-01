@@ -14,7 +14,9 @@
 // }
 
 static void show_signin(t_objects *objs) {
-    gtk_widget_show(objs->s_signin_win->signin_win);
+    gtk_widget_show_all(objs->s_signin_win->signin_win);
+    gtk_widget_hide(GTK_WIDGET (objs->s_signin_win->broken_screen));
+    gtk_widget_hide(GTK_WIDGET (objs->s_signin_win->broken_lbl));
     // resize(objs);
 }
 
@@ -32,7 +34,7 @@ static void show_chat(t_objects *objs) {
 }
 
 static void show_signup(t_objects *objs) {
-    gtk_widget_show(objs->s_signup_win->signup_win);
+    gtk_widget_show_all(objs->s_signup_win->signup_win);
 }
 
 int mx_chang_scene(t_info *info, int scene) {
