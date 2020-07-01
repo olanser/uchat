@@ -14,7 +14,7 @@ typedef struct s_list {
 #include <sys/types.h>
 #include <pwd.h>
 #include <termios.h>
-#include <term.h>
+// #include <term.h>
 
 int mx_strlen(const char *s);
 void mx_printchar(char c);
