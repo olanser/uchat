@@ -5,18 +5,14 @@ static int count_response_len(t_user_in_chat *list) {
     int len = 10;
 
     while (list) {
-        len = len + 112;
+        len = len + 105;
         list = list->next;
     }
     return len;
 }
 
-static int callback_one(void *data, int columns, char **tdata, char **name) {
-    for (int i = 0; i < columns; i++) {
-        if (i % 2 == 0) {
-            mx_push_char_users((t_user_in_chat **)data, tdata[i], tdata[i+1]);
-        }
-    }
+static int callback_one(void *data, int column, char **tdata, char **name) {
+    mx_push_char_users((t_user_in_chat **)data, tdata[0], tdata[1]);
     return 0;
 }
 
@@ -30,11 +26,11 @@ static void build_answer(t_user_in_chat *find, char **response,
     memset(*response, 0, size);
     *response[0] = req[0];
     *((int*)&((*response)[1])) = *((int *)&req[1]);
-    *((int *)&((*response)[5])) = (int) size;
+    *((int*)&((*response)[5])) = size;
     (*response)[9] = (char)200;
     while (list) {
-        mx_memcpy(&((*response)[counter]), list->usr_id, strlen(list->usr_id));
-        counter = counter + 11;
+        *(int*)&(*response)[counter] = list->usr_id;
+        counter = counter + 4;
         mx_memcpy(&((*response)[counter]), list->usr_nickname, 
                     strlen(list->usr_nickname));
         counter = counter + 101;

@@ -13,7 +13,7 @@
 
 typedef struct s_server_users {
     int socket;
-    char *id_users;
+    int id_users;
     char *buff;
     bool work;
     pthread_mutex_t m_if_work;
@@ -21,7 +21,7 @@ typedef struct s_server_users {
 }              t_server_users;
 
 typedef struct s_user_in_chat {
-    char *usr_id;
+    int usr_id;
     char *usr_nickname;
     struct s_user_in_chat *next;
 }               t_user_in_chat;
@@ -32,6 +32,8 @@ typedef struct s_server {
     int size_connekt;
     pthread_mutex_t m_edit_database;
     sqlite3 *db;
+    pthread_mutex_t m_logfile;
+    int fd_logfile;
     pthread_rwlock_t m_edit_users;
     t_server_users *table_users;
     struct pollfd *poll_set;
@@ -47,7 +49,8 @@ typedef struct s_table_user {
     char *second_name;
     char *nickname;
     char *pass;
-    char *id;
+    int id;
+    char avatar;
 }               t_table_user;
 
 
@@ -58,9 +61,8 @@ typedef struct s_file_message {
     char *id_chat;
     int file_type;
     char *true_name;
-    char buf_name[15];
+    char *unique_name;
     int size;
-    int file_end;
 }               t_file_message;
 
 
@@ -80,12 +82,18 @@ char *mx_create_response(char id_request, int query, char status);
 int mx_check_number(char *str, int len);
 int mx_do_query(char *sql, int (*callback)(void*,int,char**,char**),
                 void *param, t_server *server_info);
-bool mx_check_user_in_chat(char *id_chat, char *id_user, t_server *server_info);
+bool mx_check_user_in_chat(int id_chat, int id_user, t_server *server_info);
 void mx_send_response_user(t_server *server_info, char *response, char *sql);
-int mx_callback_count(void *data, int columns, char **name, char **tabledata);
-int mx_return_one_str(void *param, int columns, char **data, char **names);
-bool mx_check_id_message_in_user(char *id_message, char *id_chat,
+int mx_callback_count(void *data, int column, char **name, char **tabledata);
+int mx_return_one_str(void *param, int column, char **data, char **names);
+bool mx_check_id_message_in_user(int id_message, int id_chat,
     t_server *server_info, t_server_users *user);
+bool mx_check_avatar(char avatar);
+void mx_add_log(t_server *server_info, char *msg);
+void mx_add_error_work_log(t_server *server_info, t_server_users *user,
+                           char *msg);
+char *mx_create_respons_error_and_log(t_server *server_info,
+    t_server_users *user, char *msg, char status);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
@@ -107,13 +115,16 @@ char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
 char *mx_show_users(t_server *server_info, t_server_users *user);
 char *mx_delete_msg(t_server *server_info, t_server_users *user);
 char *mx_send_file(t_server *server_info, t_server_users *user);
-char *mx_authenticate(t_server *server_info, t_server_users *user);
+char *mx_change_avatar(t_server *server_info, t_server_users *user);
 char *mx_join_chat(t_server *server_info, t_server_users *user);
 void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
 char *mx_create_unique_name(t_server *server_info, t_server_users *user);
+char *mx_get_chats_info(t_server *server_info, t_server_users *user);
+char *mx_get_chat_msg(t_server *server_info, t_server_users *user);
+char *mx_end_of_file(t_server *server_info, t_server_users *user);
 
 
 

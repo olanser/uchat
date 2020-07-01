@@ -1,4 +1,5 @@
 #include "client_unit.h"
+#include "libmx.h"
 
 static void set_sockaddr(struct sockaddr_in *addr, int port) {
     addr->sin_family = AF_INET;
@@ -31,137 +32,75 @@ t_info *mx_get_info() {
     return info;
 }
 
-void mx_signin(t_info* info) {
+void mx_signup(t_info* info) {
     char buff[1024];
 
-    memset(buff, 0, 211);
-    buff[0] = 1;
-    *(int*)&buff[5] = 211;
+    memset(buff, 0, 313);
+    buff[0] = 0;
+    *(int*)&buff[5] = 313;
     sprintf(&buff[9], "%s", "asd");
-    sprintf(&buff[110], "%s", "asd");
-    write(info->socket, buff, 211);
+    sprintf(&buff[60], "%s", "asd");
+    sprintf(&buff[111], "%s", "asd");
+    sprintf(&buff[212], "%s", "asd");
+    write(info->socket, buff, 313);
 }
 
-void mx_sendmsg(t_info* info) {
+void mx_get_chat_msg(t_info* info) {
     char buff[1024];
+    int size = 21;
 
-    memset(buff, 0, 30);
-    buff[0] = 2;
-    *(int*)&buff[5] = 30;
-    buff[9] = '1'; //id_chat
-    sprintf(&buff[20], "dawawdawd"); //data end \0;
-    write(info->socket, buff, 30);
+    memset(buff, 0, size);
+    buff[0] = 12;
+    *(int*)&buff[5] = size;
+    *(int*)&buff[9] = 1; //id_chat
+    *(int*)&buff[13] = 0;
+    *(int*)&buff[17] = 5;
+    write(info->socket, buff, size);
 }
 
-void mx_editmsg(t_info* info) {
-    char buff[1024];
-
-    memset(buff, 0, 41);
-    buff[0] = 3;
-    *(int*)&buff[5] = 41;
-    buff[9] = '1'; //id_chat 
-    buff[20] = '1'; //id_msg
-    sprintf(&buff[31], "dawawdawd"); //data end \0;
-    write(info->socket, buff, 41);
-}
-
-
-
-void mx_get_info_chat(t_info* info) {
-    char buff[1024];
-
-    memset(buff, 0, 20);
-    buff[0] = 10;
-    *(int*)&buff[5] = 20;
-    buff[9] = '1'; //id_chat 
-    write(info->socket, buff, 20);
-}
-
-// int checking(char *respons) {
-//     printf("Response = %s %s %s %s %s %s\n", &respons[9], &respons[20], &respons[31],
-//             &respons[42], &respons[62], &respons[63]);
-//     if (strcmp(&respons[20], "1") != 0)
-//         return 1;
-//     if (strcmp(&respons[31], "1") != 0)
-//         return 1;
-//     if (strcmp(&respons[62], "0dawawdawd") != 0)
-//         return 1;
-//     if (strcmp(&respons[63], "dawawdawd") != 0)
-//         return 1;
-//     return 0;
-// }
-
-// int mx_read(t_info* info) {
-//     char buff[1024];
-//     int a;
-//     bool check = true;
-//     while (check) {
-//         read(info->socket, buff, 9);
-//         printf("buff = %d size = %d\n", buff[0], *(int*)&buff[5]);
-//         a = read(info->socket, &buff[9], *((int *)&buff[5]));
-//         printf("size = %d\n", *(int*)&buff[5]);
-//         if (a + 9 != *(int *)&buff[5]) {
-//             printf("not size %d %d != %d\n", buff[0], a + 9, *((int *)&buff[5]));
-//             return 1;
-//         }
-//         printf("BUFF = %d\n", buff[0]);
-//         if (buff[0] == 2)
-//             return checking(buff);
-//     }
-//     return 0;
-// }
 
 int main(int argc, char *argv[]) {
-    t_info **box_info =  malloc(sizeof(t_info*) * 100);
+    int size = 1;
+    t_info **box_info =  malloc(sizeof(t_info*) * size);
     char buff[1024];
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < size; i++) {
         box_info[i] = mx_get_info();
-        mx_signin(box_info[i]);
+        mx_signup(box_info[i]);
     }
-    for (int i = 0; i < 100; i++) {
-        read(box_info[i]->socket, buff, 1024);
-        if (buff[9] != (char)200)
+    for (int i = 0; i < size; i++) {
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
+        if (buff[9] != (char)200) {
+            printf("Status = %d\n", buff[9]);
             return 1;
+        }
+        box_info[i]->id_user = *((int*)&buff[10]);
+        box_info[i]->avatar = buff[217];
+        printf("ID user = %d and AVATAR = %d and SIZE = %d\n", box_info[i]->id_user,box_info[i]->avatar, *(int*)&buff[5]);
+        // printf("ID user = %s and AVATAR = %d\n", box_info[i]->id_user,  box_info[i]->avatar);
     }
-    for (int i = 0; i < 100; i++) {
-        mx_get_info_chat(box_info[i]);
+    for (int i = 0; i < size; i++) {
+        mx_get_chat_msg(box_info[i]);
     }
-    for (int i = 0; i < 100; i++) {
-        read(box_info[i]->socket, buff, 1024);
-        if (buff[9] != '2')
+    for (int i = 0; i < size; i++) {
+        while(1) {
+        read(box_info[i]->socket, buff, 9);
+        read(box_info[i]->socket, &buff[9], *(int*)&buff[5] - 9);
+        if (*(int*)&buff[5] < 44) {
+            printf("ERROR response %d status = %d!! size %d\n", buff[0], buff[9], *(int*)&buff[5]);
             return 1;
-        if (strcmp(&buff[10],"1") != 0)
+        }
+        if (!(buff[0] == 2 || buff[0] == 3)) {
+            printf("ERROR API %d!!", buff[0]);
             return 1;
-        if (strcmp(&buff[21], "General") != 0)
-            return 1;
+        }
+        printf("API = %d, ID msg = %d, ID chat = %d, ID user = %d, TIME = %s, AVATAR = %d, MSG = %s\n",
+            buff[0], *((int*)&buff[9]), *((int*)&buff[13]), *((int*)&buff[17]), &buff[21], buff[41], &buff[42]);
+        }
     }
-    // for (int i = 0; i < 100; i++) {
-    //     read(box_info[i]->socket, buff, 1024);
-    //     if (buff[9] != (char)200)
-    //         return 1;
-    // }
-    // for (int i = 0; i < 100; i++)
-    //     mx_sendmsg(box_info[i]);
-
-    // mx_editmsg(box_info[0]);
-    // mx_sendmsg(box_info[0]);
-    // mx_sendmsg(box_info[1]);
-    // mx_sendmsg(box_info[2]);
-    // sleep(1);
-    // for (int i = 0; i <100; i++) {
-        // return mx_read(box_info[0]);
-    // }
-
-    // sleep(3);
-    // t_info *info = mx_get_info();
-
-
-    // sleep(10);
-    // mx_init(info, &argc, &argv);
-    // mx_signin(info);
-    // mx_sendmsg(info);
-    // mx_registration(info);
-    // mx_main(info);
+    for (int i = 0; i < size; i++)
+        close(box_info[i]->socket);
+    printf("OK\n");
     return 0;
 }

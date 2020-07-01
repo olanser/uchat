@@ -18,13 +18,12 @@ int mx_accept_new_connect(t_server *server_info, int max_connect) {
     if (pos == 0) {
         fd = accept(server_info->poll_set[0].fd, 0, 0);
         close(fd);
+        mx_add_log(server_info, "DON'T have slot to server\n");
     }
     else {
         pthread_rwlock_wrlock(&(server_info->m_edit_users));
         server_info->table_users[pos].socket = accept(
             server_info->poll_set[0].fd, 0, 0);
-        if (server_info->table_users[pos].id_users)
-            free(server_info->table_users[pos].id_users);
         server_info->table_users[pos].id_users = 0;
         server_info->poll_set[pos].fd =
             server_info->table_users[pos].socket;
@@ -33,6 +32,7 @@ int mx_accept_new_connect(t_server *server_info, int max_connect) {
         if (pos == server_info->size_connekt)
             server_info->size_connekt++;
         pthread_rwlock_unlock(&(server_info->m_edit_users));
+        mx_add_log(server_info, "ADD new user to server\n");
     }
     return -1;
 }

@@ -50,13 +50,12 @@ int check_tuser(t_table_user *tuser, t_server *server_info) {
 int change_db( t_server *server_info, t_table_user *tuser) {
     char sql[500];
 
-    sprintf(sql, "insert into user values(NULL, '%s', '%s', '%s', '%s', 1);",
+    sprintf(sql, "insert into user values(NULL, '%s', '%s', '%s', '%s', 1, 1);",
         tuser->first_name, tuser->second_name, tuser->nickname, tuser->pass);
     if (mx_do_query(sql, 0, 0, server_info) != SQLITE_OK)
         return 1;
     return 0;
 }
-
 
 static char get_status(t_table_user *tuser, t_server *server_info) {
     char status = (char)MX_QS_OK;
@@ -90,11 +89,11 @@ int get_response(char *request, char **response, char status,
     }
     *response = malloc(sizeof(char) * 21);
     mx_memcpy(*response,  request, 5);
-    memset(&(*response)[5], 0, 16);
-    (*response)[5] = 21; // size
+    memset(&(*response)[5], 0, 4);
+    (*response)[5] = 14; // size
     (*response)[9] = status; // status
-    strcpy(&(*response)[10], user->id_users);
-    return 21;
+    *(int*)(&(*response)[10]) = user->id_users;
+    return 14;
 }
 
 char *mx_signup(t_server *server_info, t_server_users *user) {

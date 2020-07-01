@@ -16,14 +16,15 @@ create table if not exists user(
     usr_nickname varchar(100) UNIQUE,
     usr_pass varchar(64), -- hased pass --
     usr_group integer,
+    user_avatar varchar(1) DEFAULT '0',
     foreign key(usr_group) references group_g(gg_id)
 );
 
-insert OR IGNORE into user values(1, 'Admin','admin', 'Admin', '1234', 1);
-insert OR IGNORE into user values(2, 'Admin','admin', 'Admin1', '1234', 1);
-insert OR IGNORE into user values(3, 'Admin','admin', 'Admin2', '1234', 1);
-insert OR IGNORE into user values(4, 'Admin','admin', 'Admin3', '1234', 1);
-insert OR IGNORE into user values(5, 'Admin','admin', 'Admin4', '1234', 1);
+insert OR IGNORE into user values(1, 'Admin','admin', 'Admin', '1234', 1, 1);
+insert OR IGNORE into user values(2, 'Admin','admin', 'Admin1', '1234', 1, 1);
+insert OR IGNORE into user values(3, 'Admin','admin', 'Admin2', '1234', 1, 1);
+insert OR IGNORE into user values(4, 'Admin','admin', 'Admin3', '1234', 1, 1);
+insert OR IGNORE into user values(5, 'Admin','admin', 'Admin4', '1234', 1, 1);
 
 create table if not exists chat(
     chat_id integer not null primary key AUTOINCREMENT,
@@ -35,7 +36,7 @@ create table if not exists chat(
 );
 
 insert OR IGNORE into chat values(1, 'General', '2', '1' , '0', datetime('now'));
-insert OR IGNORE into chat values(2, 'test_room', '1', '1', '3', datetime('now'));
+insert OR IGNORE into chat values(2, 'test_room', '2', '1', '0', datetime('now'));
 
 create table if not exists msg(
     msg_id integer not null primary key AUTOINCREMENT,
@@ -44,7 +45,7 @@ create table if not exists msg(
     msg_data blob,
     msg_chat_id integer,
     msg_status varchar(1) DEFAULT '2',
-    msg_status_see VARCHAR(1) DEFAULT '0',
+    msg_avatar VARCHAR(1) DEFAULT '1',
     msg_file_type INTEGER DEFAULT 0,
     msg_file_name VARCHAR(51),
     msg_file_size INTEGER DEFAULT 0,
@@ -83,10 +84,10 @@ create table if not exists gou(
 );
 create table if not exists  cou(
    cou_id integer not null primary key AUTOINCREMENT,
-   cou_char_id integer,
+   cou_chat_id integer,
    cou_usr_id integer,
    cou_premission smallint, -- 0 - user, 1 - admin
-   foreign key (cou_char_id) references chat(chat_id),
+   foreign key (cou_chat_id) references chat(chat_id),
    foreign key (cou_usr_id) references user(usr_id)
 );
 
@@ -110,6 +111,7 @@ insert into cou values(NULL, NEW.chat_id, NEW.chat_id_creater, '1');
 END;
 
 insert OR IGNORE into cou values(1, 1, 1, 1);
+insert OR IGNORE into cou values(2, 2, 1, 1);
 
 create table if not exists pd(
    pd_id integer not null primary key AUTOINCREMENT,

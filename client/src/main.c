@@ -1,21 +1,33 @@
+  
 #include "client.h"
+#include "mxinet.h"
+#include "defines.h"
 
-void mx_init_gtk() {
-    mx_connect_builder();
-    mx_connect_signals();
+static void reg(t_info *info) {
+    if (mx_check_file_registration(info)) {
+        char *argv[4] = {"a", "a", "a", "a"};
+        mx_api_signup( argv,info);
+
+    // char *argv[2] = {"a", "a"};
+    // mx_api_signin( argv,info);
+    }
 }
 
-void mx_init() {
-    mx_connect();
-    mx_init_info();
-    mx_init_gtk();
-} 
-
-void mx_show_window() {
-    mx_show();
+static void wait_for_reg(t_info*info) {
+    while(info->user_info != 0) { 
+        usleep(1000);
+    }
 }
 
-int main() {
-    mx_init();
-    mx_start_window();
+int main(int argc, char *argv[]) {
+    t_info *info = 0;
+    gtk_init(&argc, &argv);
+    mx_init(&info);
+    
+    reg(info); // registration just for testing
+    wait_for_reg(info);
+    
+    mx_api_get_chats_info(info);
+    // exit(0);
+    mx_show_window(info);
 }

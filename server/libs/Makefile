@@ -3,10 +3,19 @@ LIB_FILES = libmx/libmx.a \
 
 LIB_FILES_TMP = $(notdir $(LIB_FILES))
 
-all:
+all: MAKE_LIB $(LIB_FILES_TMP)
+
+MAKE_LIB:
 	@make -sC libmx
 	@make -sC mxinet
-	@cp $(LIB_FILES) .
+
+%.a: libmx/%.a
+	@cp -p $< .
+	@printf "\x1b[32mCP:\x1b[34;1m [$@]\x1b[0m\n"
+
+%.a: mxinet/%.a
+	@cp -p $< .
+	@printf "\x1b[32mCP:\x1b[34;1m [$@]\x1b[0m\n"
 
 uninstall: clean
 	@make -sC libmx $@
