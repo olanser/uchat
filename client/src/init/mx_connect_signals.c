@@ -18,6 +18,9 @@ static void connect_to_main_window(t_info* info) {
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->chat_win), "check-resize", (GCallback) mx_resize_main_window, info->objs);
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->chat_win), "destroy", (GCallback) mx_destroy_main_window, NULL);
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->send_btn), "clicked", G_CALLBACK(mx_btn_send_msg_clicked), info);
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->search_users), "focus-in-event", G_CALLBACK(mx_expand_focus_in), info);
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->search_users), "focus-out-event", G_CALLBACK(mx_expand_focus_out), info);
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->search_users), "changed", G_CALLBACK(mx_expand_changed), info);
 }
 
 void mx_connect_signals(t_info* info) {

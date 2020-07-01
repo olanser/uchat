@@ -7,6 +7,8 @@ button {
     background: transparent;
     border: none;
     color: #7fff00;
+    font-size: 4.125em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /* button:focus {
@@ -31,7 +33,7 @@ button:focus {
 
 entry {
     color: #7fff00;
-    font-size: 4.125em;
+    font-size: 2.125em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -57,13 +59,8 @@ checkbutton:checked check {
 
 /* glitch efect on label */
 
-label {
-    font-size: 8.125em;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-}
 
-label::before, label::after {
+/*label#lbl_chat_name ::before, label#lbl_chat_name ::after {
     display: block;
     content: attr(label);
     position: absolute;
@@ -72,18 +69,18 @@ label::before, label::after {
     height: 100%;
     width: 100%;
     opacity: .8;
-} label::after {
+} label#lbl_chat_name ::after {
     color: #f0f;
     z-index: -2;
-} label::before {
+} label#lbl_chat_name ::before {
     color: #0ff;
     z-index: -1;
 }
 
-label:hover::before {
+label#lbl_chat_name :hover::before {
     animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both 5
 }
-label:hover::after {
+label#lbl_chat_name :hover::after {
     animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both 5
 }
 
@@ -106,4 +103,4 @@ label:hover::after {
     to {
         transform: translate(0);
     }
-}
+} */

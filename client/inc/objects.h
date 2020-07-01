@@ -21,6 +21,7 @@ typedef struct s_info {
 }              t_info;
 
 typedef struct s_user_info {
+    char id;
     char avatar;
     char* nickname;
     char* frst_name;
@@ -31,6 +32,8 @@ typedef struct s_chat_info {
     int node_index;
     int chat_id;
     int last_id_msg;
+    int type_of_chat;
+    char *name;
     t_list *msgs; // t_msg list of msgs
     GtkWidget* list_box; // list box of msgs
 }t_chat_info;
@@ -68,6 +71,10 @@ struct s_main_chat_window {
     GtkWidget* chat_frame;
     GtkWidget* listbox_search;
     GtkWidget* search_viewport1;
+    GtkWidget* expand_users;
+    GtkWidget* search_users;
+    GtkWidget* list_box_users;
+        GtkWidget **user_widgets; // mass
 };
 
 struct s_signin_window {
@@ -79,6 +86,7 @@ struct s_signin_window {
     GtkWidget* signin_button;
     GtkWidget* signin_vissible_pass;
     GtkWidget* save_user_tick;
+    GtkWidget *layout;
 };
 
 struct s_signup_window {

@@ -1,18 +1,6 @@
 #include "client.h"
 #include "defines.h"
 
-static bool is_exist(char id, t_list* list_of_chats) {
-    t_list* tmp = list_of_chats;
-
-    while(tmp) {
-        if (((t_chat_info*)tmp->data)->chat_id == id) {
-            return true;
-        }
-        tmp = tmp->next;
-    }
-    return false;
-}
-
 static GtkWidget* mx_create_chat_widget(char *response) {
     GtkWidget* widget = gtk_button_new_with_label(&response[14]);
     return widget;
@@ -33,6 +21,8 @@ static t_chat_info* get_chat_info(char* response, t_info *info) {
     chat_info->chat_id = *(int*)&response[10];
     chat_info->msgs = 0;
     chat_info->last_id_msg = 0;
+    chat_info->type_of_chat = response[9];
+    chat_info->name = mx_strdup(&response[14]);
     return chat_info;
 }
 
@@ -42,7 +32,7 @@ static gboolean add_chat(void*data) {
     GtkWidget* chat_widget = 0;
     t_chat_info* chat_info = 0;
 
-    if(is_exist(*(int*)&response[10], info->list_of_chats))
+    if(mx_is_chat_exist(*(int*)&response[10], info->list_of_chats))
         return FALSE;
     
     chat_widget = mx_create_chat_widget(response);

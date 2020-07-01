@@ -49,6 +49,13 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_get_path_to_sticker.c \
 	src/mx_file_reg.c \
 	src/api/mx_api_show_users.c \
+	src/gtk_cycle/signals/main/mx_expand_focus_in.c \
+	src/gtk_cycle/signals/main/mx_expand_focus_out.c \
+	src/gtk_cycle/signals/main/mx_expand_changed.c \
+	src/gtk_cycle/signals/main/mx_expand_user_click.c \
+	src/mx_is_chat_exist.c \
+	src/gtk_cycle/mx_go_to_dialog.c \
+	src/api/mx_api_create_dialog.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

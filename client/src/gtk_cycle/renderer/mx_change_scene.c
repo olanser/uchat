@@ -14,7 +14,7 @@
 // }
 
 static void show_signin(t_objects *objs) {
-    gtk_widget_show_all(objs->s_signin_win->signin_win);
+    gtk_widget_show(objs->s_signin_win->signin_win);
     // resize(objs);
 }
 
@@ -27,12 +27,12 @@ static void show_signin(t_objects *objs) {
 // }
 
 static void show_chat(t_objects *objs) {
-    gtk_widget_show_all(objs->chat_win->chat_win);
+    gtk_widget_show(objs->chat_win->chat_win);
     // resize_main_box(objs->chat_win);
 }
 
 static void show_signup(t_objects *objs) {
-    gtk_widget_show_all(objs->s_signup_win->signup_win);
+    gtk_widget_show(objs->s_signup_win->signup_win);
 }
 
 int mx_chang_scene(t_info *info, int scene) {
