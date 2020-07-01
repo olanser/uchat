@@ -16,6 +16,7 @@ typedef struct s_list {
 #include <termios.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 
 char *mx_strjoin_len(char *s1, char *s2, unsigned int len);
 int mx_strlen(const char *s);
