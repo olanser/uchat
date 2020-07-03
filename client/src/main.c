@@ -5,11 +5,12 @@
 
 static void reg(t_info *info) {
     // if (mx_check_file_registration(info)) {
-        // char *argv[4] = {"b", "b", "b", "b"};
-        // mx_api_signup( argv,info);
+        char ch[] = "k";
+        char *argv[4] = {ch, ch, ch, ch};
+        mx_api_signup( argv,info);
 
-    char *argv[2] = {"a", "a"};
-    mx_api_signin( argv,info);
+    // char *argv[2] = {ch, ch};
+    // mx_api_signin( argv,info);
     // }
 }
 
@@ -28,8 +29,9 @@ int main(int argc, char *argv[]) {
     wait_for_reg(info);
 
     mx_api_get_chats_info(info);
-    gdk_threads_add_timeout(33, mx_scene_cycle, info);
+    mx_api_get_chat_msgs(info->id_chat, 0, 10, info);
+    // gdk_threads_add_timeout(33, mx_scene_cycle, info);
     // exit(0);
-    mx_show_window(info);
-    
+    // mx_show_window(info);
+    gtk_main();
 }

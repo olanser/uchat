@@ -100,7 +100,7 @@ static gboolean add_chat(void*data) {
     return FALSE;
 }
 
-/* 
+/*
 * add button to the left list box,
 * create widget for new list of msgs
 * add new node to list of chats

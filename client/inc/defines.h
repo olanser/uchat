@@ -7,6 +7,7 @@
 #define MX_FILE_REG "database/reg"
 #define SIGNIN_CSS_STYLE "templates/signin_theme.css"
 #define MX_MAX_SICKER 0
+#define MX_MAX_AVA 3
 
 typedef enum {
     MX_SCENE_SIGNUP,

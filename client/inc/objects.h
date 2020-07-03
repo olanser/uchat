@@ -10,12 +10,15 @@ typedef struct s_signin_window t_signin_window;
 typedef struct s_signup_window t_signup_window;
 typedef struct s_main_chat_window t_main_chat_window;
 typedef struct s_user_info t_user_info;
+typedef struct s_msg_widget t_msg_widget;
 
 typedef struct s_info {
     int sock;
     int query_id;
     int scene; // number of window
     int id_chat;
+    int id_of_editing_msg; /* if we now edit msg else 0*/
+    int id_of_editing_chat; /* if we now edit msg else 0*/
     t_list* list_of_chats; // t_chat_info
     t_user_info* user_info; // our user
     t_objects* objs;
@@ -50,7 +53,13 @@ typedef struct s_msg{
     char msg_avatar;
     char* msg_data;
     int msg_type; // 1- msg; 2 - sticker
+    t_msg_widget *msg_widget;    
 } t_msg;
+
+typedef struct s_msg_widget {
+    GtkWidget *widget;
+    GtkWidget *label;
+} s_msg_widget;
 
 typedef struct s_objects {
     t_signin_window *s_signin_win;

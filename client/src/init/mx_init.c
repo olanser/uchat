@@ -19,6 +19,8 @@ void mx_init_info(t_info **info) {
     (*info)->id_chat = 1;
     (*info)->list_of_chats = 0;
     (*info)->user_info = 0;
+    (*info)->id_of_editing_msg = 0;
+    (*info)->id_of_editing_chat = 0;
 }
 
 t_pacman *get_pacman(t_info *info) {

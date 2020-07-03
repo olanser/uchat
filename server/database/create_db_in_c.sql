@@ -45,7 +45,7 @@ create table if not exists msg(
     msg_data blob,
     msg_chat_id integer,
     msg_status varchar(1) DEFAULT '2',
-    msg_avatar VARCHAR(1) DEFAULT '1',
+    msg_avatar VARCHAR(1) DEFAULT '2',
     msg_file_type INTEGER DEFAULT 1,
     msg_file_name VARCHAR(51),
     msg_file_size INTEGER DEFAULT 0,

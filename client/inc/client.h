@@ -12,6 +12,13 @@ bool mx_check_file_registration(t_info *info);
 void mx_create_file_registration(char *buff, int len);
 bool mx_is_chat_exist(char id, t_list* list_of_chats);
 void mx_go_to_dialog(t_info*info, int user_id);
+t_chat_info* mx_get_chat_info(t_list* list, int id_chat);
+t_msg* mx_get_msg_by_id(t_list *list_msg, int msg_id);
+t_msg* mx_find_msg(t_list *chat_list, int msg_id, int chat_id);
+t_msg* mx_get_msg_from_resp(char *resp, t_info *info);
+int mx_add_msg_to_list(t_list **list_, t_msg *msg);
+void mx_add_msg_to_box(GtkWidget*listbox, GtkWidget*widget, int index);
+const char *mx_get_path_to_ava(int number);
 
 gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info);
@@ -44,6 +51,8 @@ gboolean mx_expand_focus_in(GtkWidget *widget, GdkEvent *event, void* data);
 gboolean mx_expand_focus_out(GtkWidget *widget, GdkEvent *event, void* data);
 void mx_expand_changed(GtkWidget *widget, void* data);
 gboolean mx_expand_user_click(GtkWidget* widget, GdkEvent* event, void* data);
+void mx_btn_del_msg(GtkWidget *button, GdkEvent*event, void *data);
+void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
 
 //listener
 void* mx_listener(void *data);
@@ -70,6 +79,9 @@ int mx_h_show_users(char *response, t_info* info);
 int mx_h_signin(char *response, t_info* info);
 int mx_h_signup(char *response, t_info* info);
 int mx_h_get_chats_info(char *response, t_info *info);
+
+//sendmsg
+t_msg_widget* mx_get_msg_widget(char *response, t_info *info);
 
 //signals_callback_func
 gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);
