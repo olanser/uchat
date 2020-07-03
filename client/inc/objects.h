@@ -17,7 +17,7 @@ typedef struct s_info {
     int scene; // number of window
     int id_chat;
     t_list* list_of_chats; // t_chat_info
-    t_user_info* user_info;
+    t_user_info* user_info; // our user
     t_objects* objs;
     t_characters *chars;
 }              t_info;
@@ -34,10 +34,12 @@ typedef struct s_chat_info {
     int node_index;
     int chat_id;
     int last_id_msg;
-    int type_of_chat;
+    int type_of_chat; // 50 - chat, 49 - dialog
+        int id_user; // for dialogs
     char *name;
     t_list *msgs; // t_msg list of msgs
     GtkWidget* list_box; // list box of msgs
+    GtkWidget* chat_widget; // button widget(in left box)
 }t_chat_info;
 
 typedef struct s_msg{

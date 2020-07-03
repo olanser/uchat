@@ -20,6 +20,7 @@ void mx_init_info(t_info **info) {
     (*info)->list_of_chats = 0;
     (*info)->user_info = 0;
 }
+
 t_pacman *get_pacman(t_info *info) {
     t_pacman* pacman = malloc(sizeof(t_pacman));
     t_movable mov = {100, 100, 2, 0};
