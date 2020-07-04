@@ -20,11 +20,11 @@ create table if not exists user(
     foreign key(usr_group) references group_g(gg_id)
 );
 
-insert OR IGNORE into user values(1, 'Admin','admin', 'Admin', '1234', 1, 1);
-insert OR IGNORE into user values(2, 'Admin','admin', 'Admin1', '1234', 1, 1);
-insert OR IGNORE into user values(3, 'Admin','admin', 'Admin2', '1234', 1, 1);
-insert OR IGNORE into user values(4, 'Admin','admin', 'Admin3', '1234', 1, 1);
-insert OR IGNORE into user values(5, 'Admin','admin', 'Admin4', '1234', 1, 1);
+insert OR IGNORE into user values(1, 'Admin_name1','admin', 'Admin', '1234', 1, 1);
+insert OR IGNORE into user values(2, 'Admin_name2','admin', 'Admin1', '1234', 1, 1);
+insert OR IGNORE into user values(3, 'Admin_name3','admin', 'Admin2', '1234', 1, 1);
+insert OR IGNORE into user values(4, 'Admin_name4','admin', 'Admin3', '1234', 1, 1);
+insert OR IGNORE into user values(5, 'Admin_name5','admin', 'Admin4', '1234', 1, 1);
 
 create table if not exists chat(
     chat_id integer not null primary key AUTOINCREMENT,

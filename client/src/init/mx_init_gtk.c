@@ -12,7 +12,7 @@ void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
     signup->signup_buton = GTK_WIDGET(gtk_builder_get_object(builder, "signup_btn"));
     signup->signup_login = GTK_WIDGET(gtk_builder_get_object(builder, "signup_log"));
     signup->signup_pass1 = GTK_WIDGET(gtk_builder_get_object(builder, "signup_pass1"));
-    signup->signup_pass2 = GTK_WIDGET(gtk_builder_get_object(builder, "sighup_pass2"));
+    signup->signup_pass2 = GTK_WIDGET(gtk_builder_get_object(builder, "signup_pass2"));
     signup->signup_vissible_pass = GTK_WIDGET(gtk_builder_get_object(builder, "signup_show_pass_tick"));
     signup->signup_main_grid = GTK_WIDGET(gtk_builder_get_object(builder, "signup_main_grid"));
     signup->signup_child_box = GTK_WIDGET(gtk_builder_get_object(builder, "signup_child_box"));
@@ -74,7 +74,7 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
     if (main_chat->chat_win == 0)
-        fprintf(stderr, "error of open file!\n");
+        fprintf(stderr, "error of open file!\n"); 
     main_chat->layout_main = GTK_WIDGET(gtk_builder_get_object(builder, "layout_main"));
     main_chat->main_chat_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_box1"));
     main_chat->paned_chat = GTK_WIDGET(gtk_builder_get_object(builder, "paned_chat1"));
@@ -88,9 +88,9 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
+    main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
     gtk_widget_show_all(main_chat->chat_win);
     mx_init_search_user(builder, main_chat, info);
-    
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
@@ -108,9 +108,10 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 540, 300);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 540, 300);
+    gtk_widget_set_size_request(main_chat->chat_win, 800, 400);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 800, 400);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
+    gtk_widget_hide(main_chat->chat_win);
 }
 
 void mx_set_properties(t_objects *objs) {

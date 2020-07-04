@@ -5,7 +5,7 @@
 
 static void reg(t_info *info) {
     // if (mx_check_file_registration(info)) {
-        char ch[] = "k";
+        char ch[] = "p";
         char *argv[4] = {ch, ch, ch, ch};
         mx_api_signup( argv,info);
 
@@ -25,11 +25,10 @@ int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
     mx_init(&info);
 
-    reg(info); // registration just for testing
-    wait_for_reg(info);
+    // reg(info); // registration just for testing
+    // wait_for_reg(info);
 
-    mx_api_get_chats_info(info);
-    mx_api_get_chat_msgs(info->id_chat, 0, 10, info);
+    
     // gdk_threads_add_timeout(33, mx_scene_cycle, info);
     // exit(0);
     // mx_show_window(info);

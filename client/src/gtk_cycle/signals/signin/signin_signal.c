@@ -5,7 +5,6 @@ gboolean mx_resize_signin_window (GtkWidget *window, t_objects *objs) {
     int height = gdk_window_get_height(gdk_window);
     int width = gdk_window_get_width(gdk_window);
 
-    printf("HEIGHT = %d and WIDTH = %d\n", height, width);
     gtk_widget_set_size_request(GTK_WIDGET (objs->s_signin_win->signin_main_box), width, height);
     gtk_widget_set_size_request(GTK_WIDGET (objs->s_signin_win->signin_child_box), width, height);
     gtk_widget_set_size_request(GTK_WIDGET (objs->s_signin_win->image_name), width, -1);
