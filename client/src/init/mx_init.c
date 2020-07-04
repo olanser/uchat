@@ -45,8 +45,13 @@ void mx_init(t_info **info) {
     mx_init_gtk(*info);
     // mx_init_characters(*info);
     // mx_chang_scene(*info, MX_SCENE_MAIN_CHAT);
+<<<<<<< HEAD
     // mx_chang_scene(*info, MX_SCENE_SIGNUP);
     mx_chang_scene(*info, MX_SCENE_SIGNIN);
+=======
+    mx_chang_scene(*info, MX_SCENE_SIGNUP);
+    // mx_chang_scene(*info, MX_SCENE_SIGNIN);
+>>>>>>> vlad
 }
 
 // void mx_show_window() {
