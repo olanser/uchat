@@ -1,5 +1,5 @@
 #include "icons.h"
-#include "defines.h"
+#include "defines_client.h"
 
 const char *mx_get_path_to_ava(int number) {
     static const char *mas[] = {

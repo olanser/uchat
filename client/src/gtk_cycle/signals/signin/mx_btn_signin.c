@@ -14,8 +14,10 @@ gboolean mx_btn_signin(GtkButton *button, t_info *info) {
 
     if (check_valid((char**)parameters) == false)
         return true;
+    mx_create_file_registration(0, 0);
+    mx_create_file_registration((char*)login, (char*)pass);
     mx_api_signin((char**)parameters, info);
-
+   
 
     return TRUE;
 }

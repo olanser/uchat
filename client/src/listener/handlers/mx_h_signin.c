@@ -1,5 +1,5 @@
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 static t_user_info* get_user(t_info* info, char* response) {
     t_user_info* uinfo = malloc(sizeof(t_user_info));
@@ -33,6 +33,7 @@ gboolean signin(void *data) {
 
 int mx_h_signin(char *response, t_info *info) {
     void **data = malloc(sizeof(void*) * 2);
+
     data[0] = info;
     data[1] = malloc(*(int*)&response[5]);
     memcpy(data[1], response, *(int*)&response[5]);

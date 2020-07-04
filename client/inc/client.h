@@ -9,7 +9,7 @@
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);
 bool mx_check_file_registration(t_info *info);
-void mx_create_file_registration(char *buff, int len);
+void mx_create_file_registration(char *login, char *password);
 bool mx_is_chat_exist(char id, t_list* list_of_chats);
 void mx_go_to_dialog(t_info*info, int user_id);
 t_chat_info* mx_get_chat_info(t_list* list, int id_chat);
@@ -44,6 +44,7 @@ int mx_api_signin(char **parameters, t_info *info);
 int mx_api_signup(char **parameters, t_info *info);
 int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info);
 int mx_api_create_dialog(int id_user, t_info *info);
+void mx_btn_exit(GtkButton *button, GdkEvent *event, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);

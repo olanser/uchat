@@ -41,6 +41,7 @@ static void connect_to_main_window(t_info* info) {
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->search_users), "focus-out-event", G_CALLBACK(mx_expand_focus_out), info);
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->search_users), "changed", G_CALLBACK(mx_expand_changed), info);
     g_signal_connect(GTK_WIDGET (info->objs->chat_win->btn_choose_file), "clicked", G_CALLBACK(mx_btn_choose_file), info);
+    g_signal_connect(GTK_WIDGET (info->objs->chat_win->btn_logout), "clicked", G_CALLBACK(mx_btn_exit), info);
 }
 
 void mx_connect_signals(t_info* info) {

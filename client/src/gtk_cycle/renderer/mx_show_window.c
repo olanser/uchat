@@ -3,7 +3,7 @@
 * cycle for show window
 */
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 // static void resize(t_objects *objs) {
 //     GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(objs->s_signin_win->signin_win));

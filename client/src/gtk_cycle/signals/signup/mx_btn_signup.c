@@ -20,5 +20,7 @@ void mx_btn_signup(GtkWidget* button, void* data) {
     }
     if (check_valid((char**)parameters) == false)
         return;
+    mx_create_file_registration(0, 0);
+    mx_create_file_registration((char*)login, (char*)pass1);
     mx_api_signup((char**)parameters, info);
 }

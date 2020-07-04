@@ -1,5 +1,5 @@
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 static GtkWidget* mx_create_chat_widget(char *response) {
     GtkWidget* widget = gtk_button_new_with_label(&response[14]);

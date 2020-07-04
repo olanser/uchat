@@ -88,6 +88,7 @@ struct s_main_chat_window {
     GtkWidget* expand_users;
     GtkWidget* search_users;
     GtkWidget* btn_choose_file;
+    GtkWidget* btn_logout;
     GtkWidget* list_box_users;
         GtkWidget **user_widgets; // mass
 };

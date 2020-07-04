@@ -1,5 +1,5 @@
-#ifndef DEFINES_H
-#define DEFINES_H
+#ifndef DEFINES_CLIENT_H
+#define DEFINES_CLIENT_H
 
 #define MX_PATH_TO_TEMPLATE "templates/resizable6.xml" //resizable6 - has expander; resizable2 - without;
 #define MX_TEMPLATE_SHITS "templates/notebook_chats.xml"
@@ -9,10 +9,8 @@
 #define MX_MAX_SICKER 0
 #define MX_MAX_AVA 3
 
-typedef enum {
-    MX_SCENE_SIGNUP,
-    MX_SCENE_SIGNIN,
-    MX_SCENE_MAIN_CHAT
-} t_num_scenes;
+#define MX_SCENE_SIGNUP 0
+#define MX_SCENE_SIGNIN 1
+#define MX_SCENE_MAIN_CHAT 2
 
 #endif

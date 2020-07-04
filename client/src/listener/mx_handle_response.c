@@ -1,5 +1,5 @@
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 static int check(t_info *info, char *response) {
     if (info->user_info == 0 && response[0] > 1) {

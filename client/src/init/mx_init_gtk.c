@@ -3,7 +3,7 @@
 * load all objects an signals from builder
 */
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
     signup->signup_win = GTK_WIDGET(gtk_builder_get_object(builder, "signup_window"));
@@ -78,6 +78,7 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->layout_main = GTK_WIDGET(gtk_builder_get_object(builder, "layout_main"));
     main_chat->main_chat_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_box1"));
     main_chat->paned_chat = GTK_WIDGET(gtk_builder_get_object(builder, "paned_chat1"));
+    main_chat->btn_logout = GTK_WIDGET(gtk_builder_get_object(builder, "btn_logout"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));
     main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn"));
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
@@ -101,10 +102,12 @@ void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
 
 void mx_set_signin_win_properties(t_signin_window *signin) {
     gtk_widget_set_size_request(signin->signin_win, 1350, 750);
+    gtk_widget_show_all(signin->signin_win);
 }
 
 void mx_set_signup_win_properties(t_signup_window *signup) {
     gtk_widget_set_size_request(signup->signup_win, 540, 300);
+    gtk_widget_show_all(signup->signup_win);
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {

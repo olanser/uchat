@@ -1,5 +1,5 @@
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 char *mx_get_path_to_sticker(int number) {
     static const char *mas[] = {
