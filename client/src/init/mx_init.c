@@ -43,9 +43,9 @@ void mx_init(t_info **info) {
     mx_connect(*info);
     pthread_create(&th_listener, 0, mx_listener, *info);
     mx_init_gtk(*info);
-    mx_init_characters(*info);
-    mx_chang_scene(*info, MX_SCENE_MAIN_CHAT);
-    // mx_chang_scene(*info, MX_SCENE_SIGNUP);
+    // mx_init_characters(*info);
+    // mx_chang_scene(*info, MX_SCENE_MAIN_CHAT);
+    mx_chang_scene(*info, MX_SCENE_SIGNUP);
     // mx_chang_scene(*info, MX_SCENE_SIGNIN);
 }
 

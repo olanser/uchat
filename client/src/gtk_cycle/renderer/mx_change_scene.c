@@ -20,21 +20,16 @@ static void show_signin(t_objects *objs) {
     // resize(objs);
 }
 
-// static void resize_main_box(t_main_chat_window *main_chat) {
-//     GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(main_chat->chat_win));
-//     int height = gdk_window_get_height(gdk_window);
-//     int width = gdk_window_get_width(gdk_window);
-
-//     printf("height = %d and width = %d\n", height, width);
-// }
-
 static void show_chat(t_objects *objs) {
     gtk_widget_show(objs->chat_win->chat_win);
-    // resize_main_box(objs->chat_win);
+    gtk_widget_hide(objs->s_signin_win->signin_win);
+    gtk_widget_hide(objs->s_signup_win->signup_win);
 }
 
 static void show_signup(t_objects *objs) {
-    gtk_widget_show_all(objs->s_signup_win->signup_win);
+    gtk_widget_show(objs->s_signup_win->signup_win);
+    gtk_widget_hide(objs->s_signup_win->signup_win);
+    gtk_widget_hide(objs->chat_win->chat_win);
 }
 
 int mx_chang_scene(t_info *info, int scene) {

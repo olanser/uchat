@@ -37,7 +37,6 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_get_user_info.c \
 	src/api/mx_api_send_file.c \
 	src/gtk_cycle/signals/main/mx_btn_send_msg_clicked.c \
-	src/gtk_cycle/signals/reg/reg_signals.c \
 	src/gtk_cycle/signals/signin/signin_signal.c \
 	src/gtk_cycle/signals/main/main_signals.c \
 	src/mx_get_text_textview.c \
@@ -67,6 +66,11 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/listener/handlers/send_msg/mx_add_msg_to_box.c \
 	src/listener/handlers/send_msg/mx_add_msg_to_list.c \
 	src/mx_get_path_to_ava.c \
+	src/gtk_cycle/signals/signup/reg_signals.c \
+	src/gtk_cycle/signals/signup/mx_btn_signup.c \
+	src/gtk_cycle/signals/signin/mx_btn_signin.c \
+	src/mx_show_file_dialog.c \
+	src/gtk_cycle/signals/main/mx_btn_choose_file.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

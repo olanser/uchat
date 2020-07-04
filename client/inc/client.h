@@ -19,6 +19,7 @@ t_msg* mx_get_msg_from_resp(char *resp, t_info *info);
 int mx_add_msg_to_list(t_list **list_, t_msg *msg);
 void mx_add_msg_to_box(GtkWidget*listbox, GtkWidget*widget, int index);
 const char *mx_get_path_to_ava(int number);
+char *mx_show_file_dialog(t_info *info);
 
 gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info);
@@ -53,6 +54,13 @@ void mx_expand_changed(GtkWidget *widget, void* data);
 gboolean mx_expand_user_click(GtkWidget* widget, GdkEvent* event, void* data);
 void mx_btn_del_msg(GtkWidget *button, GdkEvent*event, void *data);
 void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
+void mx_btn_choose_file(GtkWidget *button, t_info *info);
+
+//signup
+void mx_btn_signup(GtkWidget* button, void* data);
+
+// signin
+gboolean mx_btn_signin(GtkButton *button, t_info *info);
 
 //listener
 void* mx_listener(void *data);
