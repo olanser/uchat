@@ -92,9 +92,13 @@ struct s_main_chat_window {
     GtkWidget* btn_logout;
     GtkWidget* list_box_users;
         GtkWidget **user_widgets; // mass
-    GtkWidget* btn_show_sticker; // change
+
     // stickers
+    GtkWidget* btn_show_sticker; // change
     GtkWidget* notebook_stickers;
+
+    // settings
+    GtkWidget* btn_settings;
 };
 
 struct s_signin_window {

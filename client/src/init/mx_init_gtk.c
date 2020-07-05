@@ -93,6 +93,7 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
     main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
     main_chat->btn_show_sticker = GTK_WIDGET(gtk_builder_get_object(builder, "btn_show_sticker"));
+    main_chat->btn_settings = GTK_WIDGET(gtk_builder_get_object(builder, "btn_settings"));
     gtk_widget_show_all(main_chat->chat_win);
     main_chat->notebook_stickers = mx_get_stickers_notebook(builder, info);
     mx_init_search_user(builder, main_chat, info);

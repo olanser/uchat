@@ -65,6 +65,7 @@ void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
 void mx_btn_choose_file(GtkWidget *button, t_info *info);
 void mx_btn_show_stickers(GtkWidget* button, t_info* info);
 void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
+void mx_btn_settings(GtkWidget *btn, void*data);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
