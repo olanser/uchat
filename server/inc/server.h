@@ -58,11 +58,12 @@ typedef struct s_table_user {
 typedef struct s_file_message {
     char *id_query;
     char *id_message;
-    char *id_chat;
+    int id_chat;
     int file_type;
     char *true_name;
     char *unique_name;
     int size;
+    int avatar;
 }               t_file_message;
 
 

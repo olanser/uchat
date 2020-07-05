@@ -40,7 +40,7 @@ static char *create_response_to_users(t_server *server_info,
     char sql[1024];
 
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_avatar, msg_file_type, msg_data from msg where msg_creator = "
+            "msg_avatar, msg_type, msg_data from msg where msg_creator = "
             "%d and msg_status = 2 and msg_chat_id = %d and msg_data = '%s' "
             "ORDER by msg_id DESC LIMIT 1;", user->id_users,
             *((int*)&user->buff[9]), &user->buff[18]);
@@ -63,7 +63,7 @@ static char *check_query(t_server *server_info, t_server_users *user) {
         return mx_create_respons_error_and_log(server_info, user,
             MX_EROR_ID_AVATAR, MX_QS_ERR_FUNC);
     if (mx_check_user_in_chat(*((int*)&user->buff[9]), user->id_users,
-                              server_info) == 0)
+                            server_info) == 0)
         return mx_create_respons_error_and_log(server_info, user,
             MX_DONT_HAVE_CHAT_USER, MX_QS_ERR_RIGHT);
     return 0;
