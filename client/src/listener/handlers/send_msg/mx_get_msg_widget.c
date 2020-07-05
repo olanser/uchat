@@ -1,5 +1,6 @@
 #include "client.h"
 #include "icons.h"
+#include "defines_client.h"
 
 static void con_edit_btn(GtkWidget *edit_button, char *response, t_info *info) {
     int* id_msg = malloc(sizeof(int));
@@ -56,13 +57,36 @@ static void fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid)
     // gtk_box_pack_start(GTK_BOX(middle_box), label, TRUE, TRUE, 1);
     gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
     gtk_box_pack_start(GTK_BOX(box), middle_box, TRUE, TRUE, 1);
-    gtk_widget_set_hexpand(avatar, FALSE);
-    if (*(int*)&response[17] == info->user_info->id) {
+    gtk_widget_set_hexpand(label, TRUE);
+    if (*(int*)&response[17] == info->user_info->id) { // our msg
         right_box = get_right_box(response, info);
         gtk_box_pack_start(GTK_BOX(box), right_box, TRUE, TRUE, 1);
+        gtk_widget_set_name(box, MX_CSS_OUR_MSG_BOX);
+    }
+    else{ // not our msg
+        gtk_widget_set_name(box, MX_CSS_OTHER_MSG);
     }
     gtk_widget_show_all(box);
     msg_wid->label = label;
+    msg_wid->widget = box;
+}
+
+static void fill_sticker_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(&response[46], 100, 100, 0);
+    GtkWidget *image = gtk_image_new_from_pixbuf(pixbuf);
+    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41] - 49));
+
+    gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
+    gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 1);
+
+    if (*(int*)&response[17] == info->user_info->id) { // our msg
+        gtk_widget_set_name(box, MX_CSS_OUR_MSG_BOX);
+    }
+    else{
+        gtk_widget_set_name(box, MX_CSS_OTHER_MSG);
+    }
+    gtk_widget_show_all(box);
     msg_wid->widget = box;
 }
 
@@ -71,5 +95,8 @@ t_msg_widget* mx_get_msg_widget(char *response, t_info *info) {
 
     if (*(int*)&response[42] == 1)
         fill_msg_widget(response, info, msg_widget);
+    if (*(int*)&response[42] == 2)
+        fill_sticker_widget(response, info, msg_widget);
+        // fill_msg_widget(response, info, msg_widget);
     return msg_widget;
 }

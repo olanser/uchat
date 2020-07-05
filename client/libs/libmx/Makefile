@@ -68,6 +68,8 @@ SRC = mx_add_strarr.c \
 	mx_strstr.c \
 	mx_strtrim.c \
 	mx_swap_char.c \
+	mx_get_dir_filenames.c \
+	mx_dirlen.c \
 
 INC = -I inc \
 

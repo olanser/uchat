@@ -6,6 +6,10 @@
 #include "objects.h"
 #include <stdbool.h>
 
+// dirs
+#include <sys/types.h>
+#include <dirent.h>
+
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);
 bool mx_check_file_registration(t_info *info);
@@ -30,6 +34,9 @@ void mx_show_window(t_info* info);
 void mx_connect_signals(t_info* info);
 void mx_connect(t_info *info);
 
+// init gtk
+GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info);
+
 // api
 int mx_api_delete_message(int id_msg, int id_chat, t_info *info);
 int mx_api_edit_message(int id_chat, int id_msg, char *msg, t_info *info);
@@ -38,7 +45,7 @@ int mx_api_get_chat_users(int chat_id, t_info *info);
 int mx_api_get_chats_info(t_info *info);
 int mx_api_get_msgs_time(char *time, t_info *info);
 int mx_api_get_user_info(int user_id, t_info *info);
-int mx_api_send_message(int chat_id, char *msg, t_info *info);
+int mx_api_send_message(int chat_id, char *msg, int type, t_info *info);
 int mx_api_show_users(char *str, t_info *info);
 int mx_api_signin(char **parameters, t_info *info);
 int mx_api_signup(char **parameters, t_info *info);
@@ -56,6 +63,8 @@ gboolean mx_expand_user_click(GtkWidget* widget, GdkEvent* event, void* data);
 void mx_btn_del_msg(GtkWidget *button, GdkEvent*event, void *data);
 void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
 void mx_btn_choose_file(GtkWidget *button, t_info *info);
+void mx_btn_show_stickers(GtkWidget* button, t_info* info);
+void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);

@@ -19,9 +19,9 @@ void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
 }
 
 static void place_label(t_signin_window *signin) {
-    signin->image_name = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background1.png");
-    signin->broken_screen = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background.png");
-    signin->broken_lbl = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background3.png");
+    signin->image_name = gtk_image_new_from_file("templates/signin_background1.png");
+    signin->broken_screen = gtk_image_new_from_file("templates/signin_background.png");
+    signin->broken_lbl = gtk_image_new_from_file("templates/signin_background3.png");
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->image_name), 0, 0);
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->broken_screen), 0, 0);
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->broken_lbl), 0, 0);
@@ -71,6 +71,8 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
     gtk_widget_show(main_chat->search_users);
 }
 
+
+
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
     if (main_chat->chat_win == 0)
@@ -90,7 +92,9 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
     main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
+    main_chat->btn_show_sticker = GTK_WIDGET(gtk_builder_get_object(builder, "btn_show_sticker"));
     gtk_widget_show_all(main_chat->chat_win);
+    main_chat->notebook_stickers = mx_get_stickers_notebook(builder, info);
     mx_init_search_user(builder, main_chat, info);
 }
 
@@ -129,16 +133,20 @@ void mx_connect_builder(t_info* info) {
     mx_set_properties(info->objs);
 }
 
-// void mx_connect_css(void) {
-//     GtkCssProvider *provider = gtk_css_provider_new();
-//     gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
-//         gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-//                                GTK_STYLE_PROVIDER(provider),
-//                                GTK_STYLE_PROVIDER_PRIORITY_USER);
-// }
+void mx_connect_css(void) {
+    GtkCssProvider *provider = gtk_css_provider_new();
+    // gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
+    //     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+    //                            GTK_STYLE_PROVIDER(provider),
+    //                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_css_provider_load_from_path(provider, MX_CSS_MAIN_STYLES, NULL);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                            GTK_STYLE_PROVIDER(provider),
+                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+}
 
 void mx_init_gtk(t_info* info) {
-    // mx_connect_css();
+    mx_connect_css();
     mx_connect_builder(info);
     mx_connect_signals(info);
 }

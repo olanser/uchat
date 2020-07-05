@@ -1,0 +1,28 @@
+/* 
+* our_msg_box - box of msg our user
+* other_msg - msgs box of other users
+*/
+
+/* scrolledwindow {
+    background-image: url("../res/background/texture1.jpeg");
+} */
+
+
+#our_msg_box {
+    /* background-color: #f00; */
+    background: linear-gradient(96deg, rgba(0, 238, 255, 1), rgba(0, 238, 255, 0) 70%);
+}
+
+#other_msg {
+    background: linear-gradient(127deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%);
+}
+
+#chat_line_editing {
+    padding: 10px; 
+    background-color: #0f0;
+    font-style: italic;
+}
+
+#chat_line {
+    background-color: #fff;
+}

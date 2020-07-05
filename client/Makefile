@@ -72,6 +72,9 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_show_file_dialog.c \
 	src/gtk_cycle/signals/main/mx_btn_choose_file.c \
 	src/gtk_cycle/signals/main/mx_btn_exit.c \
+	src/gtk_cycle/signals/main/mx_btn_show_stickers.c \
+	src/init/init_gtk/mx_get_stickers_notebook.c \
+	src/gtk_cycle/signals/main/mx_btn_send_sticker.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -102,7 +105,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:

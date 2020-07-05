@@ -30,8 +30,6 @@ static int check(char *response, t_info *info) {
     return 0;
 }
 
-
-
 static gboolean handle_edit_msg(void* data) {
     t_info *info = (t_info*)((void**)data)[0];
     char* response = (char*)((void**)data)[1];
@@ -48,6 +46,8 @@ static gboolean handle_edit_msg(void* data) {
         msg = mx_get_msg_by_id(chat->msgs, *(int*)&response[9]);
         if (msg != 0) {
             change_msg_data(msg, &response[46]);
+            free(response);
+            free(data);
             return 0;
         }
         insert_msg(info, response, chat);

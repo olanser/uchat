@@ -70,6 +70,7 @@ typedef struct s_objects {
 
 struct s_main_chat_window {
     GtkWidget* layout_main;
+    
     GtkWidget* chat_win;
     GtkWidget* main_chat_box;
     GtkWidget* profile_set_btn;
@@ -91,6 +92,9 @@ struct s_main_chat_window {
     GtkWidget* btn_logout;
     GtkWidget* list_box_users;
         GtkWidget **user_widgets; // mass
+    GtkWidget* btn_show_sticker; // change
+    // stickers
+    GtkWidget* notebook_stickers;
 };
 
 struct s_signin_window {
