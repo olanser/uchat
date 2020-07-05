@@ -51,7 +51,7 @@ int mx_api_signin(char **parameters, t_info *info);
 int mx_api_signup(char **parameters, t_info *info);
 int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info);
 int mx_api_create_dialog(int id_user, t_info *info);
-void mx_btn_exit(GtkButton *button, GdkEvent *event, t_info *info);
+int mx_api_get_unique_name_of_file(t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
@@ -66,6 +66,7 @@ void mx_btn_choose_file(GtkWidget *button, t_info *info);
 void mx_btn_show_stickers(GtkWidget* button, t_info* info);
 void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
 void mx_btn_settings(GtkWidget *btn, void*data);
+void mx_btn_exit(GtkButton *button, GdkEvent *event, t_info *info);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);

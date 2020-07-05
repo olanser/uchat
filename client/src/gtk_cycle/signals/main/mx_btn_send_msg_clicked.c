@@ -5,6 +5,11 @@ void mx_btn_send_msg_clicked(GtkWidget* button, void* data) {
     char*str = 0;
 
     str = (char*)get_text_of_textview(info->objs->chat_win->chat_line);
+    if (mx_strlen(str) > 1000) {
+        printf("TOO MUCH\n");
+        free(str);
+        return;
+    }
     if (info->user_info == 0)
         return;
     if (info->id_of_editing_msg == 0)

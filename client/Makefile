@@ -76,6 +76,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/init/init_gtk/mx_get_stickers_notebook.c \
 	src/gtk_cycle/signals/main/mx_btn_send_sticker.c \
 	src/gtk_cycle/signals/main/mx_btn_settings.c \
+	src/api/mx_api_get_unique_name_of_file.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

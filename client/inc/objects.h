@@ -19,6 +19,7 @@ typedef struct s_info {
     int id_chat;
     int id_of_editing_msg; /* if we now edit msg else 0*/
     int id_of_editing_chat; /* if we now edit msg else 0*/
+    t_list* list_of_files; // t_file list of sending files
     t_list* list_of_chats; // t_chat_info
     t_user_info* user_info; // our user
     t_objects* objs;
@@ -32,6 +33,15 @@ typedef struct s_user_info {
     char* frst_name;
     char* scnd_name;
 } t_user_info;
+
+typedef struct s_file {
+    int fd;
+    size_t size; // size of file
+    size_t pos; // current pos in file
+    char *name; // reak naem
+    long long unique_name; // unique name for file
+
+} t_file;
 
 typedef struct s_chat_info {
     int node_index;
