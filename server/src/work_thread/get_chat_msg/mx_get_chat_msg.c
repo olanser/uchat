@@ -32,7 +32,7 @@ char *mx_get_chat_msg(t_server *server_info, t_server_users *user) {
     if (*((int*)&user->buff[13]) == 0)
         *((int*)&user->buff[13]) = 2147483647;
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_data, msg_status, msg_avatar, msg_file_type from (select * "
+            "msg_data, msg_status, msg_avatar, msg_type from (select * "
             "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < %d"
             " order by msg_id DESC LIMIT %d) order by msg_id ASC;",
             *((int*)&user->buff[9]), *((int*)&user->buff[13]), 

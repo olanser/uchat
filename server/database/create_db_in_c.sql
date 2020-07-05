@@ -16,7 +16,7 @@ create table if not exists user(
     usr_nickname varchar(100) UNIQUE,
     usr_pass varchar(64), -- hased pass --
     usr_group integer,
-    user_avatar varchar(1) DEFAULT '0',
+    user_avatar integer DEFAULT 0,
     foreign key(usr_group) references group_g(gg_id)
 );
 
@@ -45,7 +45,8 @@ create table if not exists msg(
     msg_data blob,
     msg_chat_id integer,
     msg_status varchar(1) DEFAULT '2',
-    msg_avatar VARCHAR(1) DEFAULT '1',
+    msg_avatar integer DEFAULT 0,
+    msg_type INTEGER DEFAULT 0,
     msg_file_type INTEGER DEFAULT 0,
     msg_file_name VARCHAR(51),
     msg_file_size INTEGER DEFAULT 0,
