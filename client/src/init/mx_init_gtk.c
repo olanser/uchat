@@ -116,8 +116,8 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 800, 400);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 800, 400);
+    gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
     gtk_widget_hide(main_chat->chat_win);
 }
