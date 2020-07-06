@@ -9,6 +9,7 @@
 #define MX_MAX_SICKER 0
 #define MX_MAX_AVA 3
 #define MX_DIR_STICKERS "res/stickers/"
+#define MX_DIR_DOWNLOAD "downloads/"
 
 #define MX_SCENE_SIGNUP 0
 #define MX_SCENE_SIGNIN 1

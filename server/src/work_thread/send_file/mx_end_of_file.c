@@ -76,7 +76,7 @@ static char *check_query(t_server *server_info, t_server_users *user) {
 }
 
 static int callback(void *data, int column, char **name, char **tabledata) {
-    int sum = 52 + strlen(name[6]);
+    int sum = 307;
     char *response =  malloc(sizeof(char) * sum);
 
     memset(response, 0, sum);
@@ -91,6 +91,7 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     sprintf(&response[46], "%s",name[6]);
     response[302] = atoi(name[7]);
     *((int*)&response[303]) = atoi(name[8]);
+    
     *(char**)data = response;
     return 0;
 }
