@@ -76,7 +76,7 @@ list {
     border-radius: 30px;
     /* background-color: #222629; */
     /* background: radial-gradient(circle at center, #060829, transparent); */
-    background:  #060829;
+    background:  transparent;
     /* opacity: 30; */
     /* background: url('/Users/akrasnosel/Desktop/client/client/res/imgs/chat_default_bg.jpg');
     background-repeat: no-repeat;
@@ -101,7 +101,25 @@ notebook frame -> right side of gtk paned (that is only in our case);
 */
 notebook.frame {
     border: none;
-    /* background: #ff4d4d; */
+    /* background: linear-gradient(135deg, #0D202F, #03070B); */
+    /* background-color: #0cbaba;
+    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%); */
+
+    background-color: #000000;
+background-image: linear-gradient(180deg, #000000 0%, #0D202F 74%);
+
+}
+
+box {
+    background: transparent;
+}
+
+textview.view text {
+    background: #03070B;
+}
+
+button#profile_btn {
+    background: aquamarine;
 }
 
 /*

@@ -71,6 +71,10 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
     gtk_widget_show(main_chat->search_users);
 }
 
+static void set_names(t_main_chat_window *main_chat) {
+    gtk_widget_set_name(GTK_WIDGET (main_chat->profile_set_btn), "profile_btn");
+}
+
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
     if (main_chat->chat_win == 0)
@@ -87,6 +91,7 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
+    set_names(main_chat);
     gtk_widget_show_all(main_chat->chat_win);
     mx_init_search_user(builder, main_chat, info);
     
