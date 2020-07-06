@@ -44,6 +44,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/send_file/mx_end_of_file.c \
 	src/function/mx_check_avatar.c \
 	src/function/mx_add_log.c \
+	src/work_thread/send_file/mx_get_file.c \
 
 
 # Variables

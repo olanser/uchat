@@ -126,6 +126,7 @@ char *mx_create_unique_name(t_server *server_info, t_server_users *user);
 char *mx_get_chats_info(t_server *server_info, t_server_users *user);
 char *mx_get_chat_msg(t_server *server_info, t_server_users *user);
 char *mx_end_of_file(t_server *server_info, t_server_users *user);
+char *mx_get_file(t_server *server_info, t_server_users *user);
 
 
 

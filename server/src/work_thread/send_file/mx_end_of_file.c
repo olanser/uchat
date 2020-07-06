@@ -119,7 +119,7 @@ static char *create_response_to_users(t_server *server_info,
 }
 
 char *mx_end_of_file(t_server *server_info, t_server_users *user) {
-    // user->id_users = 1;
+    //user->id_users = 1; //!!!!!!!!!!!!!!!!!
 
     t_file_message message;
     char sql_request[1024];
