@@ -5,10 +5,10 @@
 
 
 static char *get_unique_name(char *request, t_server_users *user) {
-    int user_req_id = *((int *)&request[70]);
+    int user_req_id = *((int *)&request[275]);
 
     printf("uniq user_id == %d\n", user_req_id);
-    printf("sec == %d\n", *((int *)&request[74]));
+    printf("sec == %d\n", *((int *)&request[279]));//+255
 
     printf("tru name - %s\n", &request[19]);
 
@@ -17,7 +17,7 @@ static char *get_unique_name(char *request, t_server_users *user) {
     else
     {
         char *first_part = mx_itoa(user_req_id);
-        char *second_part = mx_itoa(*((int *)&request[74]));
+        char *second_part = mx_itoa(*((int *)&request[279]));
         char *unique_name = mx_strjoin3(first_part, second_part);
 
         return unique_name;
@@ -39,9 +39,9 @@ int mx_check_file(char *request, t_file_message *message,
     message->true_name = &((char *)request)[19]; //19
     message->size = *(int *)(&request[10]);
     message->file_type = request[9];
-    message->avatar = request[79];
+    message->avatar = request[284];//+255
 
-    printf("avatar = %d\n", request[79]);
+    printf("avatar = %d\n", request[284]);
 
     printf("check file end\n");
     return 0;
@@ -89,8 +89,8 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     sprintf(&response[41], "%s",name[4]);
     *((int*)&response[42]) = atoi(name[5]);
     sprintf(&response[46], "%s",name[6]);
-    *((int*)&response[47 + strlen(name[6])]) = atoi(name[7]);
-    *((int*)&response[48 + strlen(name[6])]) = atoi(name[8]);
+    response[302] = atoi(name[7]);
+    *((int*)&response[303]) = atoi(name[8]);
     *(char**)data = response;
     return 0;
 }
@@ -108,6 +108,7 @@ static char *create_response_to_users(t_server *server_info,
             "msg_file_name = '%s' ORDER by msg_id DESC LIMIT 1;",
             user->id_users, message.id_chat, message.true_name);
     printf("in middle\n");
+    // printf("msg_true_name = %s\n", message.true_name);
     mx_do_query(sql, callback, &respons, server_info);
 
     printf("end\n");
@@ -117,18 +118,15 @@ static char *create_response_to_users(t_server *server_info,
 }
 
 char *mx_end_of_file(t_server *server_info, t_server_users *user) {
-    user->id_users = 1;
+    // user->id_users = 1;
 
     t_file_message message;
-    char sql_request[500];
+    char sql_request[1024];
     char *response = check_query(server_info, user);
     char *request = user->buff;
-    char name[100];
-
-     printf("avatar11 = %d\n", request[79]);
+    char name[256];
 
     if (response) {
-        printf("thre\n");
         return response;
     }
     if (mx_check_file(request, &message, user) == 1) {
@@ -136,7 +134,6 @@ char *mx_end_of_file(t_server *server_info, t_server_users *user) {
         response = mx_create_response(request[0], *(int *)(&request[1]), (char)103);
     }
     else {
-        printf("in req\n");
         create_sql_request(message, user, sql_request);
         mx_do_query(sql_request,0,0, server_info);
         sprintf(sql_request, "SELECT msg_id from msg where msg_creator = '%d' ORDER by msg_id DESC LIMIT 1;", user->id_users);
@@ -146,21 +143,13 @@ char *mx_end_of_file(t_server *server_info, t_server_users *user) {
         rename(sql_request, name);
         free(message.unique_name);
         free(message.id_message);
-
-        printf("start send\n");
-
         response = create_response_to_users(server_info, user, message);
         if (response) {
             sprintf(sql_request, "select cou_usr_id from cou where cou_chat_id = "
                     "%d;", message.id_chat);
-            printf("RESPONSE - %s\n", response);
             mx_send_response_user(server_info, response, sql_request);
             free(response);
         }
-
-
-
-
     }
 
     return NULL;

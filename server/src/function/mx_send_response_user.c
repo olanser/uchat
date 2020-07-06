@@ -23,8 +23,9 @@ static int callback(void *data, int column, char **name, char **tabledata) {
 
 void mx_send_response_user(t_server *server_info, char *response, char *sql) {
     void *send[2] = {server_info,response};
-
+    printf("A // mx_send_response_user\n");
     pthread_rwlock_rdlock(&(server_info->m_edit_users));
+    printf("B // mx_send_response_user\n");
     mx_do_query(sql, callback, send, server_info);
     pthread_rwlock_unlock(&(server_info->m_edit_users));
 }

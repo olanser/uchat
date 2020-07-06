@@ -48,7 +48,7 @@ create table if not exists msg(
     msg_avatar integer DEFAULT 0,
     msg_type INTEGER DEFAULT 0,
     msg_file_type INTEGER DEFAULT 0,
-    msg_file_name VARCHAR(51),
+    msg_file_name VARCHAR(256),
     msg_file_size INTEGER DEFAULT 0,
     foreign key(msg_creator) references user(usr_id),
     foreign key(msg_chat_id) references chat(chat_id)
