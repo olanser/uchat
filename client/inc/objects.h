@@ -11,6 +11,7 @@ typedef struct s_signup_window t_signup_window;
 typedef struct s_main_chat_window t_main_chat_window;
 typedef struct s_user_info t_user_info;
 typedef struct s_msg_widget t_msg_widget;
+typedef struct s_msg t_msg;
 
 typedef struct s_info {
     int sock;
@@ -21,9 +22,11 @@ typedef struct s_info {
     int id_of_editing_chat; /* if we now edit msg else 0*/
     t_list* list_of_files; // t_file list of sending files
     t_list* list_of_chats; // t_chat_info
+    t_list* list_of_recv_files; // list of receiving files
     t_user_info* user_info; // our user
     t_objects* objs;
     pthread_mutex_t m_file_list;
+    pthread_mutex_t m_file_recv_list;
     pthread_mutex_t m_write_sock;
     t_characters *chars;
 }              t_info;
@@ -39,11 +42,11 @@ typedef struct s_user_info {
 typedef struct s_file {
     int fd;
     int chat_id; // chat where sended
+    t_msg* msg_of_file;
     size_t size; // size of file
     size_t pos; // current pos in file
     char *name; // reak naem
     long long unique_name; // unique name for file
-
 } t_file;
 
 typedef struct s_chat_info {
@@ -65,7 +68,10 @@ typedef struct s_msg{
     char* msg_time;
     char msg_avatar;
     char* msg_data;
-    int msg_type; // 1- msg; 2 - sticker
+    int msg_type; // 1- msg; 2 - sticker ; 3 - file
+    char *msg_f_name_of_file;
+    char msg_f_type; // filetype
+    int msg_f_size; // size_of_file
     t_msg_widget *msg_widget;    
 } t_msg;
 

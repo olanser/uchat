@@ -83,6 +83,8 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_tsend_msg_.c \
 	src/mx_send_msg_.c \
 	src/listener/handlers/mx_h_who_is_that.c \
+	src/api/mx_api_get_file.c \
+	src/gtk_cycle/signals/main/mx_btn_get_file.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
