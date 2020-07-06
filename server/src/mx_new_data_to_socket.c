@@ -30,6 +30,7 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
     char log[1024];
 
     recv(server_info->poll_set[id].fd, &(*buffer)[9], len - 9, 0);
+   
     server_info->table_users[id].buff = *buffer;
     *buffer = 0;
     server_info->poll_set[id].revents = 0;

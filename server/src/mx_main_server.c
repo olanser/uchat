@@ -18,6 +18,7 @@ int main() {
     signal(SIGINT, signal_stop);
     while (1) {
         rc = poll(server_info->poll_set, server_info->size_connekt, -1);
+
         if (server_info->poll_set[0].revents & POLLIN) {
             rc += mx_accept_new_connect(server_info, max_connect);
             server_info->poll_set[0].revents = 0;

@@ -27,10 +27,10 @@ static bool check_request(t_server_users *user, t_server *server_info) {
 }
 
 static bool check_size(t_server_users *user, t_server *server_info) {
-    const int min_size[20] = {313, 211, 16, 20, 17, 0, 13, 0, 29, 11, 13, 0,
-                              21, 0, 0, 13, 0, 9, 10};
-    const int max_size[20] = {313, 211, 1024, 1024, 17, 0, 13, 0, 29, 1024,
-                              13, 0, 21, 0, 0, 13, 0, 9, 10};
+    const int min_size[23] = {313, 211, 16, 20, 17, 0, 13, 0, 29, 11, 13, 0,
+                              21, 0, 0, 13, 0, 9, 10, 0, 0, 0};
+    const int max_size[23] = {313, 211, 1024, 1024, 17, 0, 13, 0, 29, 1024,
+                              13, 0, 21, 0, 0, 13, 0, 9, 10, 10000, 10000, 10000};
     char *response = 0;
     char log[75];
 
@@ -41,6 +41,8 @@ static bool check_size(t_server_users *user, t_server *server_info) {
     }
     else
         return true;
+    printf("ERROR size query!! work ID user = %d, API = %d, SIZE = %d\n",
+            user->id_users, user->buff[0], *((int*)&user->buff[5]));
     sprintf(log, "ERROR size query!! work ID user = %d, API = %d, SIZE = %d\n",
             user->id_users, user->buff[0], *((int*)&user->buff[5]));
     mx_add_log(server_info, log);

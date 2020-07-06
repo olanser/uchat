@@ -29,14 +29,6 @@ t_file* get_file_with_uniq_name(t_list **list) {
     return 0;
 }
 
-static void get_head(char *buff, t_file *file, t_info *info) {
-    memset(buff, 0, 1024);
-    buff[0] = 20;
-    *(int*)&buff[1] = info->query_id;
-    *(int*)&buff[5] = 1024;
-    *(long long*)&buff[9] = file->unique_name;
-}
-
 static void send_end_file(t_info *info, t_file *file) {
     int type = 0;
     void *parameters[6] = {&type, 
@@ -45,8 +37,20 @@ static void send_end_file(t_info *info, t_file *file) {
         file->name, 
         &file->unique_name, 
         &info->user_info->avatar};
-    printf("avatar1 = %d\n", info->user_info->avatar);
     mx_api_end_send_file(parameters, info);
+}
+
+void mx_free_file(t_file *file) {
+    free(file->name);
+    free(file);
+}
+
+static void get_head(char *buff, t_file *file, t_info *info) {
+    // memset(buff, 0, 1024);
+    buff[0] = 20;
+    *(int*)&buff[1] = info->query_id;
+    *(int*)&buff[5] = 1024;
+    *(long long*)&buff[9] = file->unique_name;
 }
 
 void write_file(t_info *info) {
@@ -54,16 +58,22 @@ void write_file(t_info *info) {
     char buff[1024];
     int count  = 0;
 
+    memset(buff, 0, 1024);
     pthread_mutex_lock(&info->m_file_list);
     file = get_file_with_uniq_name(&info->list_of_files);
     pthread_mutex_unlock(&info->m_file_list);
     if (file == 0)
         return;
     get_head(buff, file, info);
-    while((count = read(file->fd, &buff[17], 1007))) {
-        mx_send_msg_(info->sock, buff, count + 17, info);
+     while((count = read(file->fd, &buff[18], 1006))) {
+        *((int*)&buff[5]) = 18 + count;
+        mx_send_msg_(info->sock, buff, count + 18, info);
     }
     send_end_file(info, file);
+    mx_free_file(file);
+
+    if (info->list_of_files != 0)
+        write_file(info);
 }
 
 void *mx_thread_send_file(void *data) {
