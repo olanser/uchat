@@ -12,14 +12,11 @@ static void reg(t_info *info) {
     }
 }
 
-#include <errno.h>
-
 int main(int argc, char *argv[]) {
     t_info *info = 0;
     gtk_init(&argc, &argv);
     mx_init(&info);
 
-    reg(info); // registration just for testing
+    reg(info);
     gtk_main();
-
 }

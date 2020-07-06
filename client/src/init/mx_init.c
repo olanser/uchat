@@ -18,9 +18,12 @@ void mx_init_info(t_info **info) {
     (*info)->objs->chat_win = malloc(sizeof(t_main_chat_window));
     (*info)->id_chat = 1;
     (*info)->list_of_chats = 0;
+    (*info)->list_of_files = 0;
     (*info)->user_info = 0;
     (*info)->id_of_editing_msg = 0;
     (*info)->id_of_editing_chat = 0;
+    pthread_mutex_init(&(*info)->m_file_list, 0);
+    pthread_mutex_init(&(*info)->m_write_sock, 0);
 }
 
 t_pacman *get_pacman(t_info *info) {
@@ -37,11 +40,22 @@ void mx_init_characters(t_info *info) {
     info->chars->pacman = get_pacman(info);
 }
 
+void mx_init_signals() {
+    sigset_t newmask;
+
+    sigemptyset(&newmask);
+    sigaddset(&newmask, SIGUSR1); // new file sending
+    sigprocmask(SIG_BLOCK, &newmask, 0);
+}
 void mx_init(t_info **info) {
     pthread_t th_listener;
+    pthread_t th_sender;
+
+    mx_init_signals();
     mx_init_info(info);
     mx_connect(*info);
     pthread_create(&th_listener, 0, mx_listener, *info);
+    pthread_create(&th_sender, 0, mx_thread_send_file, *info);
     mx_init_gtk(*info);
     // mx_init_characters(*info);
     // mx_chang_scene(*info, MX_SCENE_MAIN_CHAT);

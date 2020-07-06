@@ -32,7 +32,9 @@ static void insert_msg(t_info*info, char *response, t_chat_info *chat) {
     t_msg *msg = mx_get_msg_from_resp(response, info);
     // printf("msg->w = %d\n", msg->widget);
     int index = mx_add_msg_to_list(&chat->msgs, msg);
+
     mx_add_msg_to_box(chat->list_box, msg->msg_widget->widget, index);
+    
     update_chat(chat, msg);
 }
 

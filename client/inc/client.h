@@ -9,6 +9,7 @@
 // dirs
 #include <sys/types.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);
@@ -24,7 +25,10 @@ int mx_add_msg_to_list(t_list **list_, t_msg *msg);
 void mx_add_msg_to_box(GtkWidget*listbox, GtkWidget*widget, int index);
 const char *mx_get_path_to_ava(int number);
 char *mx_show_file_dialog(t_info *info);
+int mx_send_msg_(int socket, char *buff, int size, t_info *info);
+int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
 
+void mx_init_signals();
 gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info);
 void mx_init_gtk(t_info* info);
@@ -52,6 +56,7 @@ int mx_api_signup(char **parameters, t_info *info);
 int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info);
 int mx_api_create_dialog(int id_user, t_info *info);
 int mx_api_get_unique_name_of_file(t_info *info);
+int mx_api_end_send_file(void **parameters, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
@@ -79,6 +84,7 @@ void* mx_listener(void *data);
 int mx_handle_response(t_info *info, char *response);
 
 // handlers
+int mx_h_who_is_that(char *response, t_info *info);
 int mx_h_authenticate(char *response, t_info *info);
 int mx_h_authenticate(char *response, t_info* info);
 int mx_h_create_chat(char *response, t_info* info);
@@ -99,6 +105,8 @@ int mx_h_show_users(char *response, t_info* info);
 int mx_h_signin(char *response, t_info* info);
 int mx_h_signup(char *response, t_info* info);
 int mx_h_get_chats_info(char *response, t_info *info);
+int mx_h_get_unique_name(char *response, t_info *info);
+
 
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info);
@@ -112,5 +120,8 @@ gboolean mx_destroy_signup_window(GtkWidget *window);
 gboolean mx_destroy_signin_window(GtkWidget *window);
 gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
 //
+
+// thread send file
+void *mx_thread_send_file(void *data);
 
 #endif

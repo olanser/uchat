@@ -23,6 +23,8 @@ typedef struct s_info {
     t_list* list_of_chats; // t_chat_info
     t_user_info* user_info; // our user
     t_objects* objs;
+    pthread_mutex_t m_file_list;
+    pthread_mutex_t m_write_sock;
     t_characters *chars;
 }              t_info;
 
@@ -36,6 +38,7 @@ typedef struct s_user_info {
 
 typedef struct s_file {
     int fd;
+    int chat_id; // chat where sended
     size_t size; // size of file
     size_t pos; // current pos in file
     char *name; // reak naem
