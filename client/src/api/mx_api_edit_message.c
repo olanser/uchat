@@ -23,6 +23,6 @@ int mx_api_edit_message(int id_chat, int id_msg, char *msg, t_info *info) {
     memset(query, 0, size);
     query[17] = info->user_info->avatar;
     get_query(query, parameters, info->query_id, size);
-    mx_tsend_msg(info->sock, query, size);
+    mx_tsend_msg_(info->sock, query, size, info);
     return 0;
 }

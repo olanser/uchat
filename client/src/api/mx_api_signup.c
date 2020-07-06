@@ -31,6 +31,6 @@ int mx_api_signup(char **parameters, t_info *info) {
     printf("scnd = %s\n", &query[60]);
     printf("nick = %s\n", &query[111]);
     printf("pass = %s\n", &query[212]);
-    mx_tsend_msg(info->sock, query, 313);
+    mx_tsend_msg_(info->sock, query, 313, info);
     return 0;
 }

@@ -22,6 +22,6 @@ int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info)
 
     memset(query, 0, size);
     get_query(query, mas, info->query_id, size);
-    mx_tsend_msg(info->sock, query, size);
+    mx_tsend_msg_(info->sock, query, size, info);
     return 0;
 }

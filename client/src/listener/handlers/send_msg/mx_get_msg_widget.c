@@ -95,8 +95,13 @@ t_msg_widget* mx_get_msg_widget(char *response, t_info *info) {
 
     if (*(int*)&response[42] == 1)
         fill_msg_widget(response, info, msg_widget);
-    if (*(int*)&response[42] == 2)
+    else if (*(int*)&response[42] == 2)
         fill_sticker_widget(response, info, msg_widget);
+    else {
+        msg_widget->widget = gtk_label_new("UNDEFINED TYPE OF MSG");
+        gtk_widget_show(msg_widget->widget);
+    }
+        
         // fill_msg_widget(response, info, msg_widget);
     return msg_widget;
 }

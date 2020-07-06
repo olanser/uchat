@@ -39,9 +39,9 @@ int mx_check_file(char *request, t_file_message *message,
     message->true_name = &((char *)request)[19]; //19
     message->size = *(int *)(&request[10]);
     message->file_type = request[9];
-    message->avatar = request[80];
+    message->avatar = request[79];
 
-    printf("avatar = %d\n", request[80]);
+    printf("avatar = %d\n", request[79]);
 
     printf("check file end\n");
     return 0;
@@ -125,7 +125,7 @@ char *mx_end_of_file(t_server *server_info, t_server_users *user) {
     char *request = user->buff;
     char name[100];
 
-     printf("avatar11 = %d\n", request[80]);
+     printf("avatar11 = %d\n", request[79]);
 
     if (response) {
         printf("thre\n");

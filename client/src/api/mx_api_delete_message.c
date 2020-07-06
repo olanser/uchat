@@ -21,6 +21,6 @@ int mx_api_delete_message(int id_msg, int id_chat, t_info *info) {
     memset(query, 0, size);
 
     get_query(query, parameters, info->query_id, size);
-    mx_tsend_msg(info->sock, query, size);
+    mx_tsend_msg_(info->sock, query, size, info);
     return 0;
 }
