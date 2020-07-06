@@ -34,7 +34,7 @@ char *mx_send_file(t_server *server_info, t_server_users *user) {
     char *uniq_name = NULL;
     char *request = user->buff;
 
-    user->id_users = 1;
+    //user->id_users = 1;
     uniq_name = get_unique_name(request, user);
     if (uniq_name != NULL) {
         save_file(user, uniq_name, request);

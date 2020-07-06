@@ -23,10 +23,10 @@ char *mx_do_request(t_server *server_info, t_server_users *user) {
             mx_leave_chat, //16 +
             mx_get_chats_info, // 17
             mx_change_avatar, // 18
-            mx_create_unique_name, //19
-            mx_send_file, //20
-            mx_end_of_file //21
-            //mx_get_file
+            mx_create_unique_name, //19 +
+            mx_send_file, //20 + 
+            mx_end_of_file, //21 +
+            mx_get_file //22 +
     };
     char *(*foo)(t_server *, t_server_users *) = (*api[user->buff[0]]);
     return foo(server_info, user);
