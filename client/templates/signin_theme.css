@@ -1,7 +1,10 @@
 
 
-/* suits for signin and signup windows*/
-window {
+/* 
+suits for signin and signup windows
+*/
+
+/* window {
     background-color: #000000;
 }
 
@@ -51,4 +54,121 @@ checkbutton:checked check {
     background-color:  #7fff00;
     background: #000000;
     color: #7fff00;
+} */
+
+/*
+CHAT WINDOW CSS DESIGN
+*/
+
+box {
+    border-radius: 30px;
 }
+
+window {
+    /* background: url('/Users/akrasnosel/Desktop/client/client/res/imgs/chat_green_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; */
+    /* background: linear-gradient(45deg, #00bf8f, #001510); */
+    background: #000000;
+}
+
+list {
+    border-radius: 30px;
+    /* background-color: #222629; */
+    /* background: radial-gradient(circle at center, #060829, transparent); */
+    background:  #060829;
+    /* opacity: 30; */
+    /* background: url('/Users/akrasnosel/Desktop/client/client/res/imgs/chat_default_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; */
+    /* background: url('/Users/akrasnosel/Desktop/client/client/res/imgs/trip.jpg'); */
+}
+
+/* paned.separator {
+    background: #060829;
+} */
+
+/*
+to change paned separator;
+*/
+
+separator.wide {
+    background: radial-gradient(circle at center, #0f1472, transparent);
+  }
+
+/*
+notebook frame -> right side of gtk paned (that is only in our case);
+*/
+notebook.frame {
+    border: none;
+    /* background: #ff4d4d; */
+}
+
+/*
+This frame changes left side;
+*/
+
+/* frame { */
+    /* background: #ff4d4d; */
+/* } */
+
+/*
+Changes both of panels;
+*/
+
+/* viewport {
+    background: #ff4d4d;
+} */
+
+/* scrolledwindow {
+    background: #ff4d4d;
+} */
+
+
+/* frame.border {
+    background: #ff4d4d;
+} */
+
+/* 
+beautiful gradient combos
+
+
+#c2e59c
+→                green - blue
+#64b3f4
+
+
+#00bf8f
+→               ligth green - dark green
+#001510
+
+
+#360033
+→                   purple - blue
+#0b8793     
+
+
+#1e130c
+→               dark brown - beige
+#9a8478
+
+
+#fdfc47
+→                   neon yellow - green (kinda neon)
+#24fe41
+
+#70e1f5
+→           light blue - beige
+#ffd194
+
+#9d50bb
+→               pink voilet - dark purple
+#6e48aa
+
+
+
+#b3ffab
+→               light lemon green and somewhat between neon green and baby blue
+#12fff7
+
+*/

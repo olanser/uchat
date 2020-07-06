@@ -107,8 +107,8 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 540, 300);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 540, 300);
+    gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
 }
 
@@ -124,16 +124,16 @@ void mx_connect_builder(t_info* info) {
     mx_set_properties(info->objs);
 }
 
-// void mx_connect_css(void) {
-//     GtkCssProvider *provider = gtk_css_provider_new();
-//     gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
-//         gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-//                                GTK_STYLE_PROVIDER(provider),
-//                                GTK_STYLE_PROVIDER_PRIORITY_USER);
-// }
+void mx_connect_css(void) {
+    GtkCssProvider *provider = gtk_css_provider_new();
+    gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
+        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                               GTK_STYLE_PROVIDER(provider),
+                               GTK_STYLE_PROVIDER_PRIORITY_USER);
+}
 
 void mx_init_gtk(t_info* info) {
-    // mx_connect_css();
+    mx_connect_css();
     mx_connect_builder(info);
     mx_connect_signals(info);
 }
