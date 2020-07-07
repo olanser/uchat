@@ -2,6 +2,7 @@
 
 bool check(char *response) {
     if (*(int*)&response[5] < 12) {
+        fprintf(stderr, "error check status = %d\n", response[10]);
         return false;
     }
     return true;
@@ -22,9 +23,10 @@ int mx_h_get_file(char *response, t_info *info) {
     t_file *file = 0;
     int size = *(int*)&response[5];
     char *buff = malloc(size);
-
+    printf("B\n");
     if (check(response) == false)
         return 1;
+    printf("D\n");
     // get file with id from msg
     pthread_mutex_lock(&info->m_file_recv_list);
     file = get_file_with_msg_id(info->list_of_recv_files, 
@@ -38,14 +40,16 @@ int mx_h_get_file(char *response, t_info *info) {
     // lseek(file->fd, file->pos, SEEK_SET);
     write(file->fd, buff, size - 21);
     // FILE DOWNLOADED
-    if (*(int*)&response[13] == file->size) {
+    printf("*************file size = %zu***************\n", file->size);
+    if (*(int*)&response[13] >= (int)file->size) {
         printf("file downloaded\n");
         close(file->fd);
         return 0;
     }
-
+    printf("A\n");
     int a[2] = {*(int*)&response[13], 1024};
-    void *parameters[4] = {&file->msg_of_file->msg_id, &file->msg_of_file->msg_id, &a[0], &a[1]};
+    void *parameters[4] = {&file->msg_of_file->msg_id_chat, &file->msg_of_file->msg_id, &a[0], &a[1]};
+    printf("msg_id = %d\n", file->msg_of_file->msg_id_chat);
     mx_api_get_file(parameters, info);
     return 0;
 }

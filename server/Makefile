@@ -80,7 +80,7 @@ all: install
 install: $(SERVER)
 
 $(SERVER): create $(OUT_PATH)
-	@clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o $(SERVER) $(SANITIZE)
+	@clang -pthread $(CFLSGS) $(OUT_PATH) $(LIBS) -o $(SERVER)
 	@printf "\x1b[32mcompiled:\x1b[34;1m [SERVER]\x1b[0m\n"
 
 create:

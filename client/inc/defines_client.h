@@ -15,6 +15,7 @@
 #define MX_SCENE_SIGNIN 1
 #define MX_SCENE_MAIN_CHAT 2
 
+#define MX_SIZE_SEND_BYTES 4096
 
 // STYLES
 #define MX_CSS_OUR_MSG_BOX "our_msg_box"

@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);

@@ -14,7 +14,9 @@ void mx_btn_get_file(GtkButton *button, t_info *info) {
     file->size = msg->msg_f_size;
     file->pos = 0;
     file->msg_of_file = msg;
-    file->fd = open(name_of_file, O_CREAT | O_RDWR | O_APPEND, S_IREAD | S_IWRITE);
+    file->fd = open(name_of_file, O_CREAT | O_RDWR | O_TRUNC, S_IREAD | S_IWRITE);
+    printf("BTN CLICKED\n");
+    printf("file->size= %d\n", file->size);
     printf("name_of_file = %s\n", name_of_file);
     printf("msg_id_chat = %d\n", msg->msg_id_chat);
     printf("msg_id = %d\n", msg->msg_id);

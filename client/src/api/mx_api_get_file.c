@@ -13,6 +13,10 @@ static int get_query(char *query, int size, void **parameters, int query_id) {
     *(int*)(&query[13]) = *(int*)parameters[1];
     *(int*)(&query[17]) = *(int*)parameters[2];
     *(int*)(&query[21]) = *(int*)parameters[3];
+    printf("\nchat_id = %d\n", *(int*)parameters[0]);
+    printf("msg_id = %d\n", *(int*)parameters[1]);
+    printf("pos = %d\n", *(int*)parameters[2]);
+    printf("count = %d\n\n", *(int*)parameters[3]);
     return 0;
 }
 

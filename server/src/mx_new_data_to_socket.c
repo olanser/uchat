@@ -27,7 +27,7 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
 
 static void read_socket(t_server *server_info, int id, char **buffer) {
     int len = *(int*)(&(*buffer)[5]);
-    char log[1024];
+    char log[MX_MAX_SIZE_REQUEST];
 
     recv(server_info->poll_set[id].fd, &(*buffer)[9], len - 9, 0);
    
@@ -46,7 +46,7 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
 }
 
 int mx_new_data_to_socket(t_server *server_info, int id) {
-    char *buffer = malloc(sizeof(char) * 1024);
+    char *buffer = malloc(sizeof(char) * MX_MAX_SIZE_REQUEST);
     int rc = recv(server_info->poll_set[id].fd, buffer, 9, 0);
     bool close_conn = false;
     char log[100];

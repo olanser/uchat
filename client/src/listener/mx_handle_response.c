@@ -37,7 +37,7 @@ int mx_handle_response(t_info *info, char *response) {
         mx_h_get_unique_name, // 19
         mx_h_who_is_that, // 20
         mx_h_who_is_that, //21
-        mx_h_who_is_that, //22
+        mx_h_get_file, //22
         mx_h_who_is_that //23
         };
         if (check(info, response) == 1)

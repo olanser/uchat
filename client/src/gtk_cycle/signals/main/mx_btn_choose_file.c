@@ -28,9 +28,19 @@ void mx_btn_choose_file(GtkWidget *button, t_info *info) {
     file->chat_id = info->id_chat;
     file->unique_name = 0;
     file->fd = open(filename, O_RDONLY);
+    if (file->fd == -1) {
+        printf("file open err = %s\n", strerror(errno));
+        // exit(0);
+    }
     file->name = mx_get_not_dir(filename);
     file->pos = 0;
     file->size = st.st_size;
+    if (file->size == 0) { // FILE EMPTY
+        free(file->name);
+        free(file);
+        printf(" file is empty\n");
+        return;
+    }
     pthread_mutex_lock(&info->m_file_list);
     mx_push_back(&info->list_of_files, file);
     pthread_mutex_unlock(&info->m_file_list);

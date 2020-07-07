@@ -1,5 +1,6 @@
 #include "client.h"
 #include "mxinet.h"
+#include "defines_client.h"
 
 static sigset_t set_mask(void) {
     sigset_t newmask;
@@ -49,23 +50,23 @@ static void get_head(char *buff, t_file *file, t_info *info) {
     // memset(buff, 0, 1024);
     buff[0] = 20;
     *(int*)&buff[1] = info->query_id;
-    *(int*)&buff[5] = 1024;
+    *(int*)&buff[5] = MX_SIZE_SEND_BYTES;
     *(long long*)&buff[9] = file->unique_name;
 }
 
 void write_file(t_info *info) {
     t_file *file = 0; // LEAK
-    char buff[1024];
+    char buff[MX_SIZE_SEND_BYTES];
     int count  = 0;
 
-    memset(buff, 0, 1024);
+    memset(buff, 0, MX_SIZE_SEND_BYTES);
     pthread_mutex_lock(&info->m_file_list);
     file = get_file_with_uniq_name(&info->list_of_files);
     pthread_mutex_unlock(&info->m_file_list);
     if (file == 0)
         return;
     get_head(buff, file, info);
-     while((count = read(file->fd, &buff[18], 1006))) {
+    while((count = read(file->fd, &buff[18], MX_SIZE_SEND_BYTES - 18))) {
         *((int*)&buff[5]) = 18 + count;
         mx_send_msg_(info->sock, buff, count + 18, info);
     }

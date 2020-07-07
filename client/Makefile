@@ -119,6 +119,7 @@ all: premake libs_comile copy $(FULL_OBJS)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:
+	@mkdir -p downloads
 	@mkdir -p tmp
 	@mkdir -p obj
 	
@@ -142,7 +143,7 @@ uninstall: u
 	@make -sC libs u
 	@rm -rf $(LIBS)
 	@rm -rf database/reg
-
+	@rm -rf downloads
 u:
 	@rm -rf tmp
 	@rm -rf obj
