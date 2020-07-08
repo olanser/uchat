@@ -85,7 +85,11 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/listener/handlers/mx_h_who_is_that.c \
 	src/api/mx_api_get_file.c \
 	src/gtk_cycle/signals/main/mx_btn_get_file.c \
-
+	src/mx_get_file_by_msg_id.c \
+	src/listener/handlers/send_msg/mx_get_widget_of_file.c \
+	src/mx_get_sized_img.c \
+	src/gtk_cycle/signals/main/mx_btn_downloaded_click.c \
+	
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
 FULL_OBJS = $(addprefix obj/, $(notdir $(FULL_SRC:%.c=%.o)))

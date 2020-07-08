@@ -20,7 +20,7 @@ static char *download_file(t_server_users *user) {
     memset(response, 0, 21+count_bytes);
     response[0] = user->buff[0];
     *(int*)&response[1] = *((int*)&user->buff[1]);
-    *(int*)&response[5] = 21 + count_bytes;
+    
     *(int*)&response[9] = *((int*)&user->buff[13]);
     
     *(unsigned int*)&response[17] = count_bytes;
@@ -33,6 +33,7 @@ static char *download_file(t_server_users *user) {
     printf("count = %d\n", count_bytes);
     printf("position1 = %d\n", position);
     count_bytes = read(file_fd, &response[21], count_bytes);
+    *(int*)&response[5] = 21 + count_bytes;
      printf("position1 = %d\n", position);
     if (count_bytes == -1){
         printf("ERROR READ: %s\n", strerror(errno));

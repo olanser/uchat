@@ -1,3 +1,7 @@
+/* 
+* author vbalachevs
+* get widget for msg
+*/
 #include "client.h"
 #include "icons.h"
 #include "defines_client.h"
@@ -91,7 +95,7 @@ static void fill_sticker_widget(char *response, t_info *info, t_msg_widget* msg_
 }
 
 static void fill_file_widget(char *response, t_info *info, t_msg_widget* msg_wid, t_msg *msg) {
-    
+    printf("type of file  = %d\n", msg->msg_f_type);
     msg_wid->widget = gtk_button_new_with_label(&response[46]);
     g_object_set_data(G_OBJECT(msg_wid->widget), "msg", msg);
 

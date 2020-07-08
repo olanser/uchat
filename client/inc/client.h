@@ -28,6 +28,8 @@ const char *mx_get_path_to_ava(int number);
 char *mx_show_file_dialog(t_info *info);
 int mx_send_msg_(int socket, char *buff, int size, t_info *info);
 int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
+t_file *mx_get_file_by_msg_id(t_list *list, int id);
+GtkWidget* mx_get_sized_img(const char *path, int width, int height);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);
@@ -75,6 +77,7 @@ void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
 void mx_btn_settings(GtkWidget *btn, void*data);
 void mx_btn_exit(GtkButton *button, t_info *info);
 void mx_btn_get_file(GtkButton *button, t_info *info);
+void mx_btn_downloaded_click(GtkButton *button, void*data);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
@@ -113,6 +116,7 @@ int mx_h_get_unique_name(char *response, t_info *info);
 
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg);
+GtkWidget* mx_get_widget_of_file(t_file *file);
 
 //signals_callback_func
 gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);

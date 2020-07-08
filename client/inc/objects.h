@@ -61,6 +61,21 @@ typedef struct s_chat_info {
     GtkWidget* chat_widget; // button widget(in left box)
 }t_chat_info;
 
+/*
+* structure for describe msg
+*
+* msg type:
+*   1 - msg;
+*   2 - sticker;
+*   3 - file;
+*
+* msg_f_type:
+*   1 - img;
+*   2 - text;
+*   3 - video;
+*   4 - audio;
+*   5 - zip;
+*/
 typedef struct s_msg{
     int msg_id;
     int msg_id_chat;
@@ -68,9 +83,9 @@ typedef struct s_msg{
     char* msg_time;
     char msg_avatar;
     char* msg_data;
-    int msg_type; // 1- msg; 2 - sticker ; 3 - file
+    int msg_type;
     char *msg_f_name_of_file;
-    char msg_f_type; // filetype
+    char msg_f_type;
     int msg_f_size; // size_of_file
     t_msg_widget *msg_widget;    
 } t_msg;

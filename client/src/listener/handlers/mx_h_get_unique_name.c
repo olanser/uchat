@@ -20,7 +20,6 @@ int mx_h_get_unique_name(char *response, t_info *info) {
     pthread_mutex_unlock(&info->m_file_list);
     if (file == 0)
         return 1;
-    printf("uniq name %d // mx_h_get_unique_name\n", file->unique_name);
     file->unique_name = *(long long *)&response[9];
     kill(getpid(), SIGUSR1); // new file sending
     return 0;

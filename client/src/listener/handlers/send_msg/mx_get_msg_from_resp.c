@@ -1,6 +1,40 @@
 #include "client.h"
 #include "libmx.h"
 
+static char *get_last(char **mas) {
+    int i = -1;
+
+    while (mas[++i]);
+    if ( i == 0)
+        return 0;
+    return mas[i - 1];
+}
+
+static int get_file_type(char *file_name) {
+    int file_type = 6;
+    char **file_res = mx_strsplit(file_name, '.');
+    char *extension = get_last(file_res);
+
+    if (strcmp(extension, "png") == 0 || strcmp(extension, "jpg") == 0
+        || strcmp(extension, "bmp") == 0) {
+        file_type = 1;
+    }
+    if (strcmp(extension, "txt") == 0 || strcmp(extension, "doc") == 0
+        || strcmp(extension, "docx") == 0) {
+        file_type = 2;
+    }
+    if (strcmp(extension, "mp4") == 0 || strcmp(extension, "avi") == 0
+        || strcmp(extension, "mov") == 0 || strcmp(extension, "wav") == 0) {
+        file_type = 3;
+    }
+    if (strcmp(extension, "mp3") == 0 || strcmp(extension, "m4a") == 0)
+        file_type = 4;
+    if (strcmp(extension, "rar") == 0 || strcmp(extension, "zip") == 0)
+        file_type = 5;
+    mx_del_strarr(&file_res);
+    return file_type;
+}
+
 t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
     t_msg *msg = malloc(sizeof(t_msg));
 
@@ -16,9 +50,8 @@ t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
     msg->msg_f_type = 0;
     if (msg->msg_type == 3) {
         msg->msg_f_name_of_file = mx_strdup(&resp[46]);
-        msg->msg_f_type = resp[302];
+        msg->msg_f_type = get_file_type(msg->msg_f_name_of_file);
         msg->msg_f_size = *(int*)&resp[303];
-        printf("size = %d\n", *(int*)&resp[303]);
     }
     else
     {

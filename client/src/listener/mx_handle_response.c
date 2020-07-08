@@ -39,10 +39,10 @@ int mx_handle_response(t_info *info, char *response) {
         mx_h_who_is_that, //21
         mx_h_get_file, //22
         mx_h_who_is_that //23
-        };
-        if (check(info, response) == 1)
-            return -1;
-        printf("number of query = %d // mx_handle_response\n", response[0]);
+    };
+    if (check(info, response) == 1)
+        return -1;
+    printf("number of query = %d // mx_handle_response\n", response[0]);
     int (*foo)(char *, t_info *) =  (*handlers[response[0]]);
     return foo(response, info);
 }

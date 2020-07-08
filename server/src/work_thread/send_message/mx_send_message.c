@@ -2,7 +2,7 @@
 #include "defines.h"
 
 static int add_msg_to_db(t_server *server_info, t_server_users *user) {
-    char sql[1024];
+    char sql[10000];
     int a = 0;
 
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
@@ -37,7 +37,7 @@ static int callback(void *data, int column, char **name, char **tabledata) {
 static char *create_response_to_users(t_server *server_info,
                                       t_server_users *user) {
     char *respons = 0;
-    char sql[1024];
+    char sql[10000];
 
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
             "msg_avatar, msg_type, msg_data from msg where msg_creator = "
@@ -51,7 +51,6 @@ static char *create_response_to_users(t_server *server_info,
 
 static char *check_query(t_server *server_info, t_server_users *user) {
     int query = *((int*)&user->buff[1]);
-    char log[1024];
 
     if (user->buff[*((int*)(&user->buff[5])) - 1] != 0)
         return mx_create_respons_error_and_log(server_info, user,

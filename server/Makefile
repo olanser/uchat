@@ -46,7 +46,6 @@ SRC_PATH = src/mx_main_server.c \
 	src/function/mx_add_log.c \
 	src/work_thread/send_file/mx_get_file.c \
 
-
 # Variables
 
 SRC = $(notdir $(SRC_PATH))
