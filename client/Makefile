@@ -89,7 +89,12 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/listener/handlers/send_msg/mx_get_widget_of_file.c \
 	src/mx_get_sized_img.c \
 	src/gtk_cycle/signals/main/mx_btn_downloaded_click.c \
-	
+	src/listener/handlers/send_msg/mx_fill_msg_widget.c \
+	src/listener/handlers/send_msg/mx_set_markup.c \
+	src/mx_get_pango_from_uchat.c \
+	src/mx_create_tag.c \
+	src/mx_str_insert.c \
+
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
 FULL_OBJS = $(addprefix obj/, $(notdir $(FULL_SRC:%.c=%.o)))
@@ -119,7 +124,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:

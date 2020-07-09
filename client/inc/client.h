@@ -30,6 +30,9 @@ int mx_send_msg_(int socket, char *buff, int size, t_info *info);
 int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
 t_file *mx_get_file_by_msg_id(t_list *list, int id);
 GtkWidget* mx_get_sized_img(const char *path, int width, int height);
+char *mx_get_pango_from_uchat(char *uchat_format);
+t_tag* mx_create_tag(char *uchat_f, char *pango_f, int start, int end) ;
+char *mx_str_insert(char *string, char *substr, int index_to);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);
@@ -117,6 +120,8 @@ int mx_h_get_unique_name(char *response, t_info *info);
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg);
 GtkWidget* mx_get_widget_of_file(t_file *file);
+void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid);
+void mx_set_markup(GtkWidget *label, char *str);
 
 //signals_callback_func
 gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);

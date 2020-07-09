@@ -90,6 +90,13 @@ typedef struct s_msg{
     t_msg_widget *msg_widget;    
 } t_msg;
 
+typedef struct s_tag {
+    int start;
+    int end;
+    char *pango; // pango format
+    char *uchat; // uchat format
+} t_tag;
+
 typedef struct s_msg_widget {
     GtkWidget *widget;
     GtkWidget *label;
