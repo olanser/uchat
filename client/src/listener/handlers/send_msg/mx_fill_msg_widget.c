@@ -40,7 +40,7 @@ static GtkWidget *get_right_box(char *response, t_info *info) {
 void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3);
     GtkWidget *right_box = 0;
-    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41] - 49));
+    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41]));
     GtkWidget *middle_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
     GtkWidget *label = gtk_label_new(NULL);
 

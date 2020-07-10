@@ -116,8 +116,8 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
+    gtk_widget_set_size_request(main_chat->chat_win, MX_WIN_WIDTH, MX_WIN_HEIGHT);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), MX_WIN_WIDTH, MX_WIN_HEIGHT);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
     gtk_widget_hide(main_chat->chat_win);
 }
@@ -128,10 +128,43 @@ void mx_set_properties(t_objects *objs) {
     mx_set_main_chat_properties(objs->chat_win);
 }
 
+void mx_init_profile(t_info *info) {
+    GtkBuilder* builder = gtk_builder_new_from_file(MX_PATH_PROFILE);
+    t_win_profile *prof = info->objs->s_win_profile;
+
+    prof->box_profile = GTK_WIDGET(gtk_builder_get_object(builder, "box_profile"));
+    prof->theme1_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme1_btn"));
+    prof->theme2_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme2_btn"));
+    prof->theme3_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme3_btn"));
+    prof->theme4_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme4_btn"));
+    prof->theme5_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme5_btn"));
+    prof->save_btn = GTK_WIDGET(gtk_builder_get_object(builder, "save_btn"));
+    prof->ev_box_profile_img = GTK_WIDGET(gtk_builder_get_object(builder, "ev_box_profile_img"));
+    prof->profile_img = GTK_WIDGET(gtk_builder_get_object(builder, "profile_img"));
+    prof->grid_avatars = GTK_WIDGET(gtk_builder_get_object(builder, "grid_avatars"));
+
+    gtk_layout_put(GTK_LAYOUT(info->objs->chat_win->layout_main), prof->box_profile,
+        (MX_WIN_WIDTH / 2) - (MX_WIN_PROF_W / 2),
+        (MX_WIN_HEIGHT / 2) - (MX_WIN_PROF_H / 2));
+    gtk_widget_show_all(prof->box_profile);
+    gtk_widget_hide(prof->box_profile);
+
+    gtk_widget_set_size_request(prof->box_profile, MX_WIN_PROF_W, MX_WIN_PROF_H);
+    gtk_widget_set_name(prof->box_profile, "box_profile");
+
+    g_signal_connect(G_OBJECT(prof->theme1_btn), "clicked", G_CALLBACK(mx_btn_theme1), info);
+    g_signal_connect(G_OBJECT(prof->theme2_btn), "clicked", G_CALLBACK(mx_btn_theme2), info);
+    g_signal_connect(G_OBJECT(prof->theme3_btn), "clicked", G_CALLBACK(mx_btn_theme3), info);
+    g_signal_connect(G_OBJECT(prof->theme4_btn), "clicked", G_CALLBACK(mx_btn_theme4), info);
+    g_signal_connect(G_OBJECT(prof->theme5_btn), "clicked", G_CALLBACK(mx_btn_theme5), info);
+    g_signal_connect(G_OBJECT(prof->save_btn), "clicked", G_CALLBACK(mx_btn_save), info);
+}
+
 void mx_connect_builder(t_info* info) {
     GtkBuilder* builder = gtk_builder_new_from_file(MX_PATH_TO_TEMPLATE);
     mx_init_objects(builder, info->objs, info);
     mx_set_properties(info->objs);
+    mx_init_profile(info);
 }
 
 void mx_connect_css(void) {

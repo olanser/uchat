@@ -48,7 +48,7 @@ static int callback(void *param, int column, char **data, char **names) {
     *((int*)&respons[13]) = atoi(data[1]);
     *((int*)&respons[17]) = atoi(data[2]);
     sprintf(&respons[21], "%s", data[3]);
-    sprintf(&respons[41], "%s", data[6]);
+    respons[41] = data[6][0];
     *((int*)&respons[42]) = atoi(data[7]);
     set_data(respons, *((int*)&respons[42]), data);
     mx_write_socket(param, respons);

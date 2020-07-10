@@ -33,6 +33,7 @@ GtkWidget* mx_get_sized_img(const char *path, int width, int height);
 char *mx_get_pango_from_uchat(char *uchat_format);
 t_tag* mx_create_tag(char *uchat_f, char *pango_f, int start, int end) ;
 char *mx_str_insert(char *string, char *substr, int index_to);
+void mx_write_theme(char *theme_path);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);
@@ -46,6 +47,7 @@ void mx_connect(t_info *info);
 
 // init gtk
 GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info);
+void mx_set_profile_window(t_info *info);
 
 // api
 int mx_api_delete_message(int id_msg, int id_chat, t_info *info);
@@ -64,6 +66,7 @@ int mx_api_create_dialog(int id_user, t_info *info);
 int mx_api_get_unique_name_of_file(t_info *info);
 int mx_api_end_send_file(void **parameters, t_info *info);
 int mx_api_get_file(void **parameters, t_info *info);
+int mx_api_change_avatar(int avatar, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
@@ -77,10 +80,19 @@ void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
 void mx_btn_choose_file(GtkWidget *button, t_info *info);
 void mx_btn_show_stickers(GtkWidget* button, t_info* info);
 void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
-void mx_btn_settings(GtkWidget *btn, void*data);
+void mx_btn_settings(GtkWidget *btn, t_info *info);
 void mx_btn_exit(GtkButton *button, t_info *info);
 void mx_btn_get_file(GtkButton *button, t_info *info);
 void mx_btn_downloaded_click(GtkButton *button, void*data);
+void mx_btn_change_avatar(GtkWidget *button, GdkEvent *event,  t_info *info);
+
+//profile signals
+void mx_btn_theme1(GtkWidget* button, t_info *info);
+void mx_btn_theme2(GtkWidget* button, t_info *info);
+void mx_btn_theme3(GtkWidget* button, t_info *info);
+void mx_btn_theme4(GtkWidget* button, t_info *info);
+void mx_btn_theme5(GtkWidget* button, t_info *info);
+void mx_btn_save(GtkWidget* button, t_info *info);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);

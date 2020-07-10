@@ -94,6 +94,16 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_get_pango_from_uchat.c \
 	src/mx_create_tag.c \
 	src/mx_str_insert.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme1.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme2.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme3.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme4.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme5.c \
+	src/mx_write_theme.c \
+	src/gtk_cycle/signals/profile/mx_btn_save.c \
+	src/init/init_gtk/mx_set_profile_window.c \
+	src/gtk_cycle/signals/profile/mx_btn_change_avatar.c \
+	src/api/mx_api_change_avatar.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -124,7 +134,7 @@ SANITIZE = -fsanitize=address
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2)
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:

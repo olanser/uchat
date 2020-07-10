@@ -25,3 +25,8 @@
 #chat_line {
     background-color: #fff;
 }
+
+#box_profile {
+    border: 1px solid silver;
+    background-color: #eeeeee;
+}

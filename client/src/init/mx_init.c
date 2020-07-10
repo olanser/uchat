@@ -16,6 +16,7 @@ void mx_init_info(t_info **info) {
     (*info)->objs->s_signin_win = malloc(sizeof(t_signin_window));
     (*info)->objs->s_signup_win = malloc(sizeof(t_signup_window));
     (*info)->objs->chat_win = malloc(sizeof(t_main_chat_window));
+    (*info)->objs->s_win_profile = malloc(sizeof(t_win_profile));
     (*info)->id_chat = 1;
     (*info)->list_of_chats = 0;
     (*info)->list_of_files = 0;

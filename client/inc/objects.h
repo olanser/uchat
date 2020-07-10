@@ -12,6 +12,7 @@ typedef struct s_main_chat_window t_main_chat_window;
 typedef struct s_user_info t_user_info;
 typedef struct s_msg_widget t_msg_widget;
 typedef struct s_msg t_msg;
+typedef struct s_win_profile t_win_profile;
 
 typedef struct s_info {
     int sock;
@@ -105,6 +106,7 @@ typedef struct s_msg_widget {
 typedef struct s_objects {
     t_signin_window *s_signin_win;
     t_signup_window *s_signup_win;
+    t_win_profile *s_win_profile;
     t_main_chat_window *chat_win;
 } t_objects;
 
@@ -167,5 +169,18 @@ struct s_signup_window {
     GtkWidget* signup_main_grid;
     GtkWidget* signup_child_box;
 };
+
+typedef struct s_win_profile {
+    GtkWidget* box_profile;
+    GtkWidget* theme1_btn;
+    GtkWidget* theme2_btn;
+    GtkWidget* theme3_btn;
+    GtkWidget* theme4_btn;
+    GtkWidget* theme5_btn;
+    GtkWidget* save_btn;
+    GtkWidget* profile_img;
+    GtkWidget* ev_box_profile_img;
+    GtkWidget* grid_avatars;
+} t_win_profile;
 
 #endif
