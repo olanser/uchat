@@ -2,7 +2,7 @@
 
 
 char *mx_do_request(t_server *server_info, t_server_users *user) {
-    printf("HERE - %d\n", user->buff[0]);
+    printf("mx_do_request - %d\n", user->buff[0]);
     char *(*api[])(t_server *, t_server_users *) = {
             mx_signup, // 0 +
             mx_signin, // 1 +

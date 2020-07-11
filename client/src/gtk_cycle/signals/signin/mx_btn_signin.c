@@ -12,6 +12,7 @@ gboolean mx_btn_signin(GtkButton *button, t_info *info) {
     const char *pass = gtk_entry_get_text(GTK_ENTRY(info->objs->s_signin_win->signin_password));
     const char *parameters[2] = {login, pass};
 
+    printf("signin\n");
     if (check_valid((char**)parameters) == false)
         return true;
     mx_create_file_registration(0, 0);

@@ -81,14 +81,15 @@ static gboolean add_chat(void*data) {
 
     if(mx_is_chat_exist(*(int*)&response[10], info->list_of_chats))
         return FALSE;
-    if (response[9] == 50) {
+    if (response[9] == 50) { // chat
         chat_widget = mx_create_chat_widget(response);
         chat_info = get_chat_info(response, info, chat_widget);
     }
-    else {
+    else { // dialog
         chat_widget = mx_create_dialog_widget(response);
         chat_info = get_dialog_info(response, info, chat_widget);
     }
+    
     mx_push_back(&info->list_of_chats, chat_info);
     // add to chat widget chat data
     g_object_set_data(G_OBJECT(chat_widget), "chat_info", chat_info);
@@ -96,6 +97,7 @@ static gboolean add_chat(void*data) {
     gtk_list_box_insert(GTK_LIST_BOX(info->objs->chat_win->listbox_search), chat_widget, -1);
     g_signal_connect(G_OBJECT(chat_widget), "clicked", G_CALLBACK(mx_btn_change_chat), info);
     gtk_widget_show(chat_widget);
+    mx_api_get_chat_msgs(chat_info->chat_id, chat_info->last_id_msg, 10, info);
     free(response);
     free(data);
     return FALSE;

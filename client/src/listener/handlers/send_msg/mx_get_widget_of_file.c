@@ -38,7 +38,7 @@ static GtkWidget* get_else_widget(t_file *file) {
 GtkWidget* mx_get_widget_of_file(t_file *file) {
     GtkWidget *new_widget = 0;
 
-    printf("file->msg_of_file->msg_f_type = %d\n", file->msg_of_file->msg_f_type);
+    printf("FILE // mx_get_widget_of_file\n");
     if (file->msg_of_file->msg_f_type == 1) {
         new_widget = get_img_widget(file);
     }

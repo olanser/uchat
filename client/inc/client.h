@@ -90,6 +90,7 @@ void mx_btn_get_file(GtkButton *button, t_info *info);
 void mx_btn_downloaded_click(GtkButton *button, void*data);
 void mx_btn_change_avatar(GtkWidget *button, GdkEvent *event,  t_info *info);
 
+
 //profile signals
 void mx_btn_theme1(GtkWidget* button, t_info *info);
 void mx_btn_theme2(GtkWidget* button, t_info *info);
@@ -100,9 +101,11 @@ void mx_btn_save(GtkWidget* button, t_info *info);
 
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
+gboolean mx_key_press_signup(GtkWidget*widget, GdkEvent *event, t_info *info);
 
 // signin
 gboolean mx_btn_signin(GtkButton *button, t_info *info);
+gboolean mx_key_press_signin(GtkWidget*widget, GdkEvent *event, t_info *info);
 
 //listener
 void* mx_listener(void *data);

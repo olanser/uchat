@@ -54,7 +54,7 @@ static GtkWidget *sent_msg_build(char *response, t_msg_widget* msg_wid, t_info *
     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
     gtk_label_set_max_width_chars(GTK_LABEL (label), 5);
     time_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "send_time_lbl"));
-    //HERE SET THE TIME//
+    gtk_label_set_text(GTK_LABEL(time_lbl), &response[21]);
     gtk_widget_set_name(GTK_WIDGET (time_lbl), "time_lbl");
     del_button = GTK_WIDGET(gtk_builder_get_object(builder, "del_btn"));
     gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
@@ -92,7 +92,6 @@ static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_in
 void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
     GtkWidget *mainbox;
 
-    fprintf(stdout, "IM HERE\n");
     if (*(int*)&response[17] == info->user_info->id) { // our msg
         mainbox = sent_msg_build(response, msg_wid, info);
     }

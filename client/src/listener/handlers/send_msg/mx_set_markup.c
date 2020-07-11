@@ -46,18 +46,15 @@ char *get_formated_substr(char *str, int *index, int *start_, int *end_) {
 static bool check_color(char *str) {
     int i = 0;
 
-    printf("check color |%s|\n", str);
     for (int j = 0; j < 6; j++) {
         if (((str[++i] < 48) || (str[i] > 57)) // 0-10
             && ((str[i] < 65) || (str[i] > 70)) // A-F
             && ((str[i] < 97) || (str[i] > 102))) // a-f
             {
-                printf("color false\n");
                 return false;
             }
     }
     if (str[++i] != '\0') {
-        printf("symbol false\n");
         return false;
     }
     return true;
@@ -68,14 +65,11 @@ static bool check_tags(char *str, int end_format) {
     char **tags = mx_strsplit(format, ' ');
     int i = -1;
 
-    printf("format = %s\n", format);
     free(format);
-    
     while (tags[++i]) {
         if (tags[i][0] == '#') {
             if (!check_color(tags[i])) {
                 mx_del_strarr(&tags);
-                printf("unvalid 1\n");
                 return false;
             }
         }
@@ -89,7 +83,6 @@ static bool check_tags(char *str, int end_format) {
                 || mx_strcmp(tags[i], "u") == 0)) 
             {
                 mx_del_strarr(&tags);
-                printf("unvalid 2\n");
                 return false;
             }
     }
@@ -141,12 +134,10 @@ char *mx_insert_str_between3(int start, int end, char*str_f, char*substr_f) {
     else if (substr_f == 0 && str_f == 0)
         new_str = mx_strdup("");
     if (new_str) {
-        printf("BB\n");
         free(str_f);
         free(substr_f);
         return new_str;
     } 
-    printf("AA\n");
     len = mx_strlen(str_f) - end + start + mx_strlen(substr_f) + 1;
     new_str = malloc(len);
     memset(new_str, 0, len);
@@ -172,13 +163,8 @@ char* get_markup(char *string) {
         if (is_substr_valid(substr)) {
             markup = mx_insert_str_between3(start, end, markup, mx_get_pango_from_uchat(substr));
         }
-        else {
-            printf("unvalid\n");
-        }
         free(substr);
     }
-    
-    printf("FINAL MARKUP = |%s|\n", markup);
     return markup;
 }
 
