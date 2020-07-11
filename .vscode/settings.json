@@ -24,4 +24,6 @@
         "server/inc",
         "client/inc"
     ],
+    "editor.rulers": [78],
+    
 }

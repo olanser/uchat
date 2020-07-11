@@ -11,12 +11,5 @@ static int get_node_index(t_list* chats, int chat_id) {
 }
 
 void mx_go_to_dialog(t_info*info, int user_id) {
-    // if (get_node_index(info->list_of_chats, chat_id) != -1) {
-    //     mx_change_chat(info, chat_id);
-    // }
-    // else { // new dialog
-        
-    // }
-    // new dialog
     mx_api_create_dialog(user_id, info);
 }

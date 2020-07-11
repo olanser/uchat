@@ -23,11 +23,8 @@ gboolean signup(void *data) {
         mx_api_get_chats_info(info);
     }
     else {
-        // NOT REGISTERED
         mx_create_file_registration(0, 0);
-        printf("SIGNUP ERR STATUS = %d\n", response[9]);
     }
-    
     free(response);
     free(data);
     return false;

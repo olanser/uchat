@@ -15,8 +15,8 @@ static int get_query(char *query, int query_id, int size) {
 int mx_api_get_chats_info(t_info *info) {
     int size = 9;
     char *query = malloc(sizeof(char) * size);
-    memset(query, 0, size);
 
+    memset(query, 0, size);
     get_query(query, info->query_id, size);
     mx_tsend_msg_(info->sock, query, size, info);
     return 0;

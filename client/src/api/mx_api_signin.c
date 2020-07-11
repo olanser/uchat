@@ -20,8 +20,8 @@ static int get_query(char *query, char **parameters, int query_id) {
 */
 int mx_api_signin(char **parameters, t_info *info) {
     char *query = malloc(sizeof(char) * 211);
-    memset(query, 0, 211);
 
+    memset(query, 0, 211);
     get_query(query, parameters, info->query_id);
     mx_tsend_msg_(info->sock, query, 211, info);
     return 0;

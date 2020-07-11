@@ -107,6 +107,20 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_change_avatar.c \
 	src/gtk_cycle/signals/signup/mx_key_press_signup.c \
 	src/gtk_cycle/signals/signin/mx_key_press_signin.c \
+	src/file_sender/mx_write_file.c \
+	src/file_sender/mx_free_file.c \
+	src/init/mx_build_get.c \
+	src/init/mx_init_main_chat_win.c \
+	src/init/mx_init_profile.c \
+	src/listener/handlers/send_msg/mx_sent_msg_build.c \
+	src/mx_insert_str_between3.c \
+	src/listener/handlers/send_msg/mx_get_formated_substr.c \
+	src/listener/handlers/send_msg/mx_is_substr_valid.c \
+	src/listener/handlers/edit_msg/mx_handle_edit_msg.c \
+	src/listener/handlers/get_chat_info/mx_add_chat.c \
+	src/listener/handlers/get_chat_info/mx_create_dialog_info.c \
+	src/listener/handlers/mx_get_file/mx_handler_get_file.c \
+	src/listener/handlers/send_msg/mx_handle_add_msg.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

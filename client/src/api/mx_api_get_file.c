@@ -29,8 +29,8 @@ static int get_query(char *query, int size, void **parameters, int query_id) {
 int mx_api_get_file(void **parameters, t_info *info) {
     int size = 25;
     char *query = malloc(sizeof(char) * size);
-    memset(query, 0, size);
 
+    memset(query, 0, size);
     get_query(query, size, parameters, info->query_id);
     mx_tsend_msg_(info->sock, query, size, info);
     return 0;
