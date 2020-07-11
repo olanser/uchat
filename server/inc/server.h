@@ -72,7 +72,7 @@ typedef struct s_file_message {
 
 
 
-t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
+t_server *mx_create_server(int fd_server);
 void *mx_thread(void *data);
 int mx_accept_new_connect(t_server *server_info, int max_connect);
 int mx_new_data_to_socket(t_server *server_info, int id);
@@ -106,9 +106,12 @@ char *mx_create_respons_error_and_log(t_server *server_info,
 char *mx_signup(t_server *server_info, t_server_users *user);
 bool mx_is_allowed_name(char *str);
 int mx_check_symbols(t_table_user *tuser);
+int mx_check_tuser(t_table_user *tuser, t_server *server_info);
 void mx_update_user(t_table_user* tuser, t_server_users *user,
                     t_server *server_info);
 char *mx_signin(t_server *server_info, t_server_users *user);
+char mx_login_check_user(t_table_user *tuser, t_server *server_info,
+                                t_server_users *user);
 int mx_get_msg_login(char status, char *request, t_table_user *tuser,
                      char **response);
 char *mx_send_message(t_server *server_info, t_server_users *user);

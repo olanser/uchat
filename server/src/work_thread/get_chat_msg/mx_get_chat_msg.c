@@ -3,7 +3,7 @@
 
 static int get_size(int type, char**data) {
     int size = 0;
-    
+
     if (type == 3) {
         size = 47 + 255 + 1 + 5;
     }
@@ -18,7 +18,7 @@ static void set_data(char *respons, int type, char **data) {
         sprintf(&respons[46], "%s", data[9]);
         respons[302] = (char)atoi(data[8]);
         *(int*)&respons[303] = atoi(data[10]);
-    } 
+    }
     else {
         sprintf(&respons[46], "%s", data[4]);
     }
@@ -40,6 +40,7 @@ static void set_data(char *respons, int type, char **data) {
 static int callback(void *param, int column, char **data, char **names) {
     char *respons = 0;
     int size = get_size(atoi(data[7]) ,data);
+
     respons =  malloc(sizeof(char) * size);
     memset(respons, 0, size);
     respons[0] = data[5][0] - '0';
@@ -66,7 +67,8 @@ char *mx_get_chat_msg(t_server *server_info, t_server_users *user) {
     if (*((int*)&user->buff[13]) == 0)
         *((int*)&user->buff[13]) = 2147483647;
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_data, msg_status, msg_avatar, msg_type, msg_file_type, msg_file_name, msg_file_size from (select * "
+            "msg_data, msg_status, msg_avatar, msg_type, msg_file_type, "
+            "msg_file_name, msg_file_size from (select * "
             "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < %d"
             " order by msg_id DESC LIMIT %d) order by msg_id ASC;",
             *((int*)&user->buff[9]), *((int*)&user->buff[13]), 

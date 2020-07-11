@@ -71,7 +71,6 @@ char *mx_edit_message(t_server *server_info, t_server_users *user) {
     char *respons = 0;
     char sql[100];
 
-
     respons = check_query(server_info, user);
     if (respons)
         return respons;

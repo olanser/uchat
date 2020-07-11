@@ -46,7 +46,6 @@ char *mx_show_users(t_server *server_info, t_server_users *user) {
 
     sprintf(sql, "select usr_id, usr_nickname from user where usr_nickname"
                 " like '%s\%\%' LIMIT 10;", &request[9]);
-    
     mx_do_query(sql, callback_one, &find_users, server_info);
     build_answer(find_users, &response, request);
     mx_delete_chat_users(&find_users);

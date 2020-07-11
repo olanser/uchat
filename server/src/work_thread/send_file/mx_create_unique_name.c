@@ -1,7 +1,8 @@
 #include "server.h"
 #include "defines.h"
 
-static void build_req(char **response, char *request, t_server_users *user, unsigned int seconds) {
+static void build_req(char **response, char *request, t_server_users *user,
+                      unsigned int seconds) {
     *response = (char *)malloc(17);
 
     *response[0] = request[0];
@@ -15,14 +16,9 @@ char *mx_create_unique_name(t_server *server_info, t_server_users *user) {
     char *response = NULL;
     char *request = user->buff;
 
-    //user->id_users = 1;  //!!!!!!!!!!!!!!!!!!!!
-
     time_t seconds;
-
     time(&seconds);
     unsigned int secs = (unsigned int) seconds;
     build_req(&response, request, user, secs);
-
-   
     return response;
 }

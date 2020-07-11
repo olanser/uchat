@@ -72,12 +72,12 @@ static void open_log_file(t_server *server_info, int fd_server) {
     mx_add_log(server_info, "Start server\n");
 }
 
-t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
-    t_server *server_info = create_malloc(max_connect, count_thread);
+t_server *mx_create_server(int fd_server) {
+    t_server *server_info = create_malloc(MX_MAX_CONNECT, MX_THREAD);
 
     server_info->size_connekt = 1;
     server_info->works = 0;
-    for (int i = 0; i < max_connect; i++) {
+    for (int i = 0; i < MX_MAX_CONNECT; i++) {
         server_info->poll_set[i].fd = 0;
         server_info->poll_set[i].events = POLLIN;
         server_info->poll_set[i].revents = 0;

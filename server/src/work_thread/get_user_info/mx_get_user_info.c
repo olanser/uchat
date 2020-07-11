@@ -49,8 +49,8 @@ char *mx_get_user_info(t_server *server_info, t_server_users *serv_user) {
     sprintf(sql,"select usr_frst_name, usr_scnd_name, usr_nickname, usr_id "
     "from user where usr_id = '%d';", *((int*)&req[9]));
     if (mx_do_query(sql,callback, &user, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, serv_user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, serv_user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (user != 0) {
         mx_get_msg_user(req, user, &response);
         mx_free_tuser(user);

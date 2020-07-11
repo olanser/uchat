@@ -41,7 +41,8 @@ char *mx_delete_msg(t_server *server_info, t_server_users *user) {
     }
     sprintf(sql, "select cou_usr_id from cou where cou_chat_id = "
             "%d;", *(int*)&user->buff[13]);
-    response = create_response(*((int*)&user->buff[9]), *((int*)&user->buff[13]));
+    response = create_response(*((int*)&user->buff[9]),
+                               *((int*)&user->buff[13]));
     mx_send_response_user(server_info, response, sql);
     free(response);
     return 0;
