@@ -4,6 +4,8 @@
 #include <gtk/gtk.h>
 #include "libmx.h"
 #include "characters.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
@@ -15,6 +17,8 @@ typedef struct s_msg t_msg;
 
 typedef struct s_info {
     int sock;
+    SSL *ssl;
+    SSL_CTX *ctx;
     int query_id;
     int scene; // number of window
     int id_chat;

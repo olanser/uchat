@@ -10,9 +10,12 @@
 
 #include "libmx.h"
 #include "mxinet.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 
 typedef struct s_server_users {
     int socket;
+    SSL *ssl;
     int id_users;
     char *buff;
     bool work;
@@ -30,6 +33,7 @@ typedef struct s_user_in_chat {
 
 typedef struct s_server {
     int size_connekt;
+    SSL_CTX *ctx;
     pthread_mutex_t m_edit_database;
     sqlite3 *db;
     pthread_mutex_t m_logfile;
@@ -77,6 +81,8 @@ bool mx_check_not_work(t_server_users *user);
 void mx_work_thread(t_server *server_info, t_server_users *user);
 char *mx_do_request(t_server *server_info, t_server_users *user);
 void mx_write_socket(t_server_users *user, char *response);
+void mx_start_demon(t_server *server_info);
+void mx_init_ssl(t_server *server_info);
 
 //function
 char *mx_create_response(char id_request, int query, char status);

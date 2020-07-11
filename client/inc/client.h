@@ -6,6 +6,9 @@
 #include "objects.h"
 #include <stdbool.h>
 
+#include "openssl/ssl.h"
+#include "openssl/err.h"
+
 // dirs
 #include <sys/types.h>
 #include <dirent.h>
@@ -30,6 +33,7 @@ int mx_send_msg_(int socket, char *buff, int size, t_info *info);
 int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
 t_file *mx_get_file_by_msg_id(t_list *list, int id);
 GtkWidget* mx_get_sized_img(const char *path, int width, int height);
+void mx_hash(const char *pass, const char *log);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);

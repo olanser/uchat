@@ -24,6 +24,15 @@ int mx_accept_new_connect(t_server *server_info, int max_connect) {
         pthread_rwlock_wrlock(&(server_info->m_edit_users));
         server_info->table_users[pos].socket = accept(
             server_info->poll_set[0].fd, 0, 0);
+        server_info->table_users[pos].ssl = SSL_new(server_info->ctx);
+        SSL_set_fd(server_info->table_users[pos].ssl,
+                   server_info->table_users[pos].socket);
+        if (SSL_accept(server_info->table_users[pos].ssl) == 0) {
+            ERR_print_errors_fp(stderr);
+            SSL_free(server_info->table_users[pos].ssl);
+            close(server_info->table_users[pos].socket);
+        }
+        else {
         server_info->table_users[pos].id_users = 0;
         server_info->poll_set[pos].fd =
             server_info->table_users[pos].socket;
@@ -33,6 +42,7 @@ int mx_accept_new_connect(t_server *server_info, int max_connect) {
             server_info->size_connekt++;
         pthread_rwlock_unlock(&(server_info->m_edit_users));
         mx_add_log(server_info, "ADD new user to server\n");
+        }
     }
     return -1;
 }
