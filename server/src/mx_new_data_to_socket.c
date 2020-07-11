@@ -29,7 +29,8 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
     int len = *(int*)(&(*buffer)[5]);
     char log[MX_MAX_SIZE_REQUEST];
 
-    SSL_read(server_info->table_users[id].ssl, &(*buffer)[9], len - 9);
+    if (len != 9)
+        SSL_read(server_info->table_users[id].ssl, &(*buffer)[9], len - 9);
     server_info->table_users[id].buff = *buffer;
     *buffer = 0;
     server_info->poll_set[id].revents = 0;
@@ -50,6 +51,10 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
     bool close_conn = false;
     char log[100];
 
+    char *str;
+    str = mx_itoa(buffer[0]);
+    write(1, str, mx_strlen(str));
+    write(1, "\n", 1);
     if (error_case(&close_conn, rc, buffer));
     else
         read_socket(server_info, id , &buffer);

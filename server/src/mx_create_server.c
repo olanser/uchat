@@ -68,7 +68,7 @@ static void open_log_file(t_server *server_info, int fd_server) {
     pthread_mutex_init(&(server_info->m_logfile), NULL);
     server_info->poll_set[0].fd = fd_server;
     server_info->table_users[0].socket = fd_server;
-    mx_start_demon(server_info);
+    // mx_start_demon(server_info);
     mx_add_log(server_info, "Start server\n");
 }
 

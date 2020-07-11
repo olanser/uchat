@@ -41,7 +41,7 @@ int mx_check_file(char *request, t_file_message *message,
     message->file_type = request[9];
     message->avatar = request[284];//+255
 
-    printf("avatar = %d\n", request[284]);
+    printf("avatar1 = %d\n", request[284]);
 
     printf("check file end\n");
     return 0;
@@ -49,9 +49,12 @@ int mx_check_file(char *request, t_file_message *message,
 }
 
 static void create_sql_request(t_file_message message, t_server_users *user, char *buf) {
-
-    sprintf(buf, "INSERT INTO msg (msg_creator, msg_send_time, msg_file_type, msg_chat_id, msg_file_size, msg_status, msg_file_name, msg_avatar, msg_type) VALUES (%d, datetime('now'), %d, %d, %d, %s, '%s', %d, %d);", user->id_users, message.file_type, message.id_chat, message.size, "5", message.true_name, message.avatar, 3);
-
+    sprintf(buf, "INSERT INTO msg (msg_creator, msg_send_time, msg_file_type,"
+        " msg_chat_id, msg_file_size, msg_status, msg_file_name, msg_avatar, msg_type)"
+        " VALUES (%d, datetime('now'), %d, %d, %d, %s, '%s', '%c', %d);", 
+        user->id_users, message.file_type, message.id_chat, message.size, 
+        "5", message.true_name, 
+        message.avatar, 3);
 }
 
 static int callback_one(void *data, int col, char **name, char **tabledata) {
@@ -86,7 +89,7 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     *((int*)&response[13]) = atoi(name[1]);
     *((int*)&response[17]) = atoi(name[2]);
     sprintf(&response[21], "%s",name[3]);
-    sprintf(&response[41], "%s",name[4]);
+    response[41] = name[4][0];
     *((int*)&response[42]) = atoi(name[5]);
     sprintf(&response[46], "%s",name[6]);
     response[302] = atoi(name[7]);

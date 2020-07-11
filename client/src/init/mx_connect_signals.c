@@ -21,6 +21,7 @@ static void connect_to_signin_window(t_info* info) {
     g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "destroy", (GCallback) mx_destroy_signin_window, NULL);
     g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "window-state-event", (GCallback) mx_go_fullscreen_signin_window, info->objs);
     g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_button), "clicked", (GCallback) mx_btn_signin, info);
+    g_signal_connect(GTK_WIDGET (info->objs->s_signin_win->signin_win), "key-press-event", (GCallback) mx_key_press_signin, info);
 
     // gtk_widget_hide(GTK_WIDGET (info->objs->s_signin_win->broken_screen));
     // gtk_widget_hide(GTK_WIDGET (info->objs->s_signin_win->broken_lbl));
@@ -31,6 +32,7 @@ static void connect_to_signup_window(t_info* info) {
     g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_win), "check-resize", (GCallback) mx_resize_signup_window, info->objs);
     g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_win), "destroy", (GCallback) mx_destroy_signup_window, NULL);
     g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_buton), "clicked", (GCallback) mx_btn_signup, info);
+    g_signal_connect(GTK_WIDGET (info->objs->s_signup_win->signup_win), "key-press-event", (GCallback) mx_key_press_signup, info);
 }
 
 static void connect_to_main_window(t_info* info) {

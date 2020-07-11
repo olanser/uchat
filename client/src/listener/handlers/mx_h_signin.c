@@ -20,8 +20,8 @@ gboolean signin(void *data) {
         info->user_info = get_user(info, response);
         mx_set_profile_window(info);
         mx_chang_scene(info, MX_SCENE_MAIN_CHAT);
+        printf("mx_api_get_chats_info // signin\n");
         mx_api_get_chats_info(info);
-        mx_api_get_chat_msgs(info->id_chat, 0, 10, info);
     }
     else {
         // NOT REGISTERED

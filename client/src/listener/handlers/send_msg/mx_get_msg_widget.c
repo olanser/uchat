@@ -133,17 +133,13 @@ static void fill_file_widget(char *response, t_info *info, t_msg_widget* msg_wid
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg) {
     t_msg_widget *msg_widget = malloc(sizeof(t_msg_widget));
 
-    printf("GET MSG WIDGET\n");
     if (*(int*)&response[42] == 1) {
-        printf("MSG\n");
         mx_fill_msg_widget(response, info, msg_widget);
     }
     else if (*(int*)&response[42] == 2) {
-        printf("STICKER\n");
         fill_sticker_widget(response, info, msg_widget);
     }
     else if (*(int*)&response[42] == 3) {
-        printf("FILE\n");
         fill_file_widget(response, info, msg_widget, msg);
     }
         
