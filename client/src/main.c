@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     t_info *info = 0;
 
     gtk_init(&argc, &argv);
-    mx_init(&info);
+    mx_init(&info, argc, argv);
     reg(info);
     gtk_main();
 }

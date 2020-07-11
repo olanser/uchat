@@ -50,12 +50,12 @@
 
 //CUTE OUTLINE
 #define MX_EXIT_ICON_CO "client/res/imgs/cute_outline/exit_icon.png"
-#define MX_ATTACH_ICON_CO "client/res/imgs/cute_outline/attach_icon.png"
-#define MX_INVISIBLE_ICON_CO "client/res/imgs/cute_outline/invisible_icon.png"
-#define MX_NEW_CHAT_ICON_CO "client/res/imgs/cute_outline/new_chat_icon.png"
+#define MX_ATACH_ICON_CO "client/res/imgs/cute_outline/attach_icon.png"
+#define MX_INVIS_ICON_CO "client/res/imgs/cute_outline/invisible_icon.png"
+#define MX_NEWCH_ICON_CO "client/res/imgs/cute_outline/new_chat_icon.png"
 #define MX_SEND_ICON_CO "client/res/imgs/cute_outline/send_icon.png"
-#define MX_SETTINGS_ICON_CO "client/res/imgs/cute_outline/settings_icon.png"
-#define MX_STICKERS_ICON_CO "client/res/imgs/cute_outline/stickers_icon.png"
+#define MX_STNGS_ICON_CO "client/res/imgs/cute_outline/settings_icon.png"
+#define MX_STICK_ICON_CO "client/res/imgs/cute_outline/stickers_icon.png"
 #define MX_VISIBLE_ICON_CO "client/res/imgs/cute_outline/visible_icon.png"
 #define MX_DEL_MSG_BTN_CO "client/res/imgs/cute_outline/delete_msg_icon.png"
 #define MX_EDIT_MSG_BTN_CO "client/res/imgs/cute_outline/edit_msg_icon.png"

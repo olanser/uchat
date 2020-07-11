@@ -74,11 +74,6 @@ char *mx_get_pango_from_uchat(char *uchat_format) {
     char *uchat_string = get_string(uchat_format);
     char *pango_str = get_pango(attributes, uchat_string);
 
-    // pango_str = get_pango_str(uchat_format);
-    printf("uchat str = %s\n", uchat_format);
-    printf("  uchat format = %s\n", format);
-    printf("  uchat string = %s\n", uchat_string);
-    printf("  pango string = %s\n", pango_str);
     free(format);
     free(uchat_string);
     mx_del_strarr(&attributes);

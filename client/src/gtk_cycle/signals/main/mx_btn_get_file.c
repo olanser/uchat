@@ -14,7 +14,8 @@ void mx_btn_get_file(GtkButton *button, t_info *info) {
     file->size = msg->msg_f_size;
     file->pos = 0;
     file->msg_of_file = msg;
-    file->fd = open(name_of_file, O_CREAT | O_RDWR | O_TRUNC, S_IREAD | S_IWRITE);
+    file->fd = open(name_of_file, O_CREAT
+        | O_RDWR | O_TRUNC, S_IREAD | S_IWRITE);
     pthread_mutex_lock(&info->m_file_recv_list);
     mx_push_back(&info->list_of_recv_files, file);
     pthread_mutex_unlock(&info->m_file_recv_list);

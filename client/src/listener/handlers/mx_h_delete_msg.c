@@ -8,7 +8,6 @@ static bool check(char *response) {
 }
 
 void mx_delete_msg(t_msg *msg) {
-    
     gtk_widget_destroy(gtk_widget_get_parent(msg->msg_widget->widget));
     free(msg->msg_widget);
     free(msg->msg_time);

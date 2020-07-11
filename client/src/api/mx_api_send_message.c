@@ -24,8 +24,8 @@ int mx_api_send_message(int chat_id, char *msg, int type, t_info *info) {
     int size = 18 + mx_strlen(msg) + 1;
     char *query = malloc(sizeof(char) * size);
     void *parameters[3] = {&chat_id, msg, &type};
-    memset(query, 0, size);
 
+    memset(query, 0, size);
     query[13] = info->user_info->avatar;
     get_query(query, parameters, info->query_id, size);
     mx_tsend_msg_(info->sock, query, size, info);

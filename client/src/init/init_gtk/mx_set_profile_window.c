@@ -23,8 +23,11 @@ void mx_set_profile_window(t_info *info) {
 
     
     for (i = 0; i < dirlen - 3; i++) {
-        GtkWidget * w = attach_img_at_pos(GTK_GRID(prof->grid_avatars), mx_get_path_to_ava(i + 1), i, dirlen - 3);
-        g_signal_connect(G_OBJECT(w), "button-press-event", G_CALLBACK(mx_btn_change_avatar), info);
+        GtkWidget * w = attach_img_at_pos(
+            GTK_GRID(prof->grid_avatars), mx_get_path_to_ava(i + 1),
+            i, dirlen - 3);
+        g_signal_connect(G_OBJECT(w), "button-press-event", 
+                         G_CALLBACK(mx_btn_change_avatar), info);
     }
     gtk_widget_show_all(prof->grid_avatars);
 }

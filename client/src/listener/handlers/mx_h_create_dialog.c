@@ -11,7 +11,6 @@ static bool check(char *response, t_info *info) {
 int mx_h_create_dialog(char *response, t_info *info) {
     if (check(response, info) == false) 
         return 1;
-    printf("chat _id = %d\n", *(int*)&response[9]);
     mx_api_get_chat_info(*(int*)&response[9], info);
     return 0;
 }

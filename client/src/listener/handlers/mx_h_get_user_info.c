@@ -19,7 +19,8 @@ t_chat_info *get_dialog_info(int id_user, t_list *list_of_chats) {
 gboolean update_dialogs(void *data) {
     t_info *info = (t_info*)((void**)data)[0];
     char *response = (char*)((void**)data)[1];
-    t_chat_info *chat_info = get_dialog_info(*(int*)&response[9], info->list_of_chats);
+    t_chat_info *chat_info = get_dialog_info(*(int*)&response[9], 
+                                             info->list_of_chats);
 
     if (chat_info == 0)
         return false;
@@ -32,6 +33,7 @@ gboolean update_dialogs(void *data) {
 
 int mx_h_get_user_info(char *response, t_info *info) {
     void **data = malloc(sizeof(void*) * 2);
+
     data[0] = info;
     data[1] = malloc(*(int*)&response[5]);
     memcpy(data[1], response, *(int*)&response[5]);

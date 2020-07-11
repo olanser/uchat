@@ -6,7 +6,6 @@ static char *mx_get_not_dir(char *full_name) {
     int i = 0;
 
     memset(str, 0, 256);
-
     if (full_name[index] == '/') {
         index--;
     }
@@ -17,25 +16,33 @@ static char *mx_get_not_dir(char *full_name) {
     return mx_strdup(str);
 }
 
-void mx_btn_choose_file(GtkWidget *button, t_info *info) {
-    char *filename = mx_show_file_dialog(info);
-    t_file *file = malloc(sizeof(t_file));
+static bool set_file(t_file *file, t_info* info, char *filename) {
     struct stat st;
 
-    if (filename == 0)
-        return;
-    stat(filename, &st);
+    if (stat(filename, &st) == -1) {
+        free(file);
+        return false;
+    }
     file->chat_id = info->id_chat;
     file->unique_name = 0;
     file->fd = open(filename, O_RDONLY);
-    if (file->fd == -1) {
+    if (file->fd == -1)
         printf("file open err = %s\n", strerror(errno));
-        // exit(0);
-    }
     file->name = mx_get_not_dir(filename);
     file->pos = 0;
     file->size = st.st_size;
-    if (file->size == 0) { // FILE EMPTY
+    return true;
+}
+
+void mx_btn_choose_file(GtkWidget *button, t_info *info) {
+    char *filename = mx_show_file_dialog(info);
+    t_file *file = malloc(sizeof(t_file));
+
+    if (filename == 0)
+        return;
+    if (set_file(file, info, filename) == false)
+        return;
+    if (file->size == 0 || file->fd == -1) {
         free(file->name);
         free(file);
         printf(" file is empty\n");
