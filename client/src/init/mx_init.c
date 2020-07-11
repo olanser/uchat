@@ -23,6 +23,7 @@ void mx_init_info(t_info **info) {
     (*info)->id_of_editing_msg = 0;
     (*info)->id_of_editing_chat = 0;
     (*info)->list_of_recv_files = 0;
+    (*info)->music = mx_init_music();
     pthread_mutex_init(&(*info)->m_file_list, 0);
     pthread_mutex_init(&(*info)->m_write_sock, 0);
     pthread_mutex_init(&(*info)->m_file_recv_list, 0);

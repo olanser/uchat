@@ -94,6 +94,8 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_get_pango_from_uchat.c \
 	src/mx_create_tag.c \
 	src/mx_str_insert.c \
+	src/gtk_cycle/signals/main/music/mx_play_btn.c \
+	src/gtk_cycle/signals/main/music/mx_scale_changed.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -118,6 +120,8 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-pthread \
 	-lsqlite3 \
 	-rdynamic \
+	-L . \
+	-lfmodex
 
 SANITIZE = -fsanitize=address
 

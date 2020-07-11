@@ -33,7 +33,7 @@ static void set_signal_and_create_thread(t_server *server_info) {
 
     sigprocmask(SIG_BLOCK, &newmask, 0);
     for (int i = 0; i < server_info->count_thread; i++)
-        pthread_create(&(server_info->thread[i]), 0, mx_thread, server_info);
+        pthread_create(&(server_info->thread[i]), 0, mx_thread, server_info); 
 }
 
 static void open_db(t_server *server_info) {

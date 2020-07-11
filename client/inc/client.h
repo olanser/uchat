@@ -4,6 +4,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include "objects.h"
+
 #include <stdbool.h>
 
 // dirs
@@ -11,6 +12,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include "fmod.h"
 
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);
@@ -81,7 +83,12 @@ void mx_btn_settings(GtkWidget *btn, void*data);
 void mx_btn_exit(GtkButton *button, t_info *info);
 void mx_btn_get_file(GtkButton *button, t_info *info);
 void mx_btn_downloaded_click(GtkButton *button, void*data);
-
+void mx_play_btn(GtkButton *btn, void*data);
+gboolean mx_scale_changed (GtkRange     *range,
+               GtkScrollType scroll,
+               gdouble       value,
+               void *user_data);
+void mx_stop_btn(GtkButton *btn, void*data);
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
 
@@ -119,7 +126,7 @@ int mx_h_get_unique_name(char *response, t_info *info);
 
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg);
-GtkWidget* mx_get_widget_of_file(t_file *file);
+GtkWidget* mx_get_widget_of_file(t_file *file, t_info *info);
 void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid);
 void mx_set_markup(GtkWidget *label, char *str);
 
@@ -135,5 +142,8 @@ gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *
 
 // thread send file
 void *mx_thread_send_file(void *data);
+
+//music
+t_fmod_info *mx_init_music();
 
 #endif

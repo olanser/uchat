@@ -68,7 +68,7 @@ void write_file(t_info *info) {
     get_head(buff, file, info);
     while((count = read(file->fd, &buff[18], MX_SIZE_SEND_BYTES - 18))) {
         *((int*)&buff[5]) = 18 + count;
-        usleep(10000);
+        // usleep(10000);
         mx_send_msg_(info->sock, buff, count + 18, info);
     }
     send_end_file(info, file);
