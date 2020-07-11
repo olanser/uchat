@@ -1,7 +1,8 @@
 #include "server.h"
+#include "defines.h"
 
 static void change_fd(t_server *server_info) {
-    int fd = open("database/log2.txt", O_RDWR | O_APPEND | O_CREAT , S_IRWXU);
+    int fd = open(MX_LOG_FILE2, O_RDWR | O_APPEND | O_CREAT , S_IRWXU);
     int fds[3];
 
     if (fd == -1) {

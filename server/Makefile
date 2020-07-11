@@ -66,10 +66,10 @@ LIBS = libs/libmx.a \
 INC = inc/defines.h \
 	inc/server.h
 
-CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror -L ./lib -lssl -lcrypto
+CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror -L libs -lssl -lcrypto
 SANITIZE = -fsanitize=address
 
-SERVER = server
+SERVER = chat_server
 # Rules
 
 VPATH = $(dir $(SRC_PATH));
@@ -98,10 +98,11 @@ db:
 uninstall: clean
 	@make -sC libs $@
 	@rm -rf ./download
-	@rm -rf server
+	@rm -rf $(SERVER)
 	@rm -rf database/database.db
 	@rm -rf database/log.txt
 	@rm -rf database/log2.txt
+	@rm -rf inc/openssl
 	@printf "\x1b[32mserver:\x1b[34;1m [$@]\x1b[0m\n"
 
 clean:

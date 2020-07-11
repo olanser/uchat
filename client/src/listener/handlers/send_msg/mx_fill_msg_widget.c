@@ -31,7 +31,7 @@ static void set_del_btn(char *response, t_info *info, GtkBuilder* builder) {
 }
 
 static GtkWidget *sent_msg_build(char *response, t_msg_widget* msg_wid, t_info *info) {
-    GtkBuilder *builder = gtk_builder_new_from_file("templates/message_box.xml");
+    GtkBuilder *builder = gtk_builder_new_from_file("client/templates/message_box.xml");
     GtkWidget *box = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *msg_box = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *avatar = (GtkWidget *)malloc(sizeof(GtkWidget));
@@ -43,7 +43,7 @@ static GtkWidget *sent_msg_build(char *response, t_msg_widget* msg_wid, t_info *
 
     box = GTK_WIDGET(gtk_builder_get_object(builder, "send_mainbox"));
     msg_bbl = GTK_WIDGET(gtk_builder_get_object(builder, "send_msg_tail_img"));
-    gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "res/imgs/send_msg_tail.png");
+    gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "client/res/imgs/send_msg_tail.png");
     msg_box = GTK_WIDGET(gtk_builder_get_object(builder, "send_msg_lbl"));
     gtk_widget_set_name(msg_box, MX_CSS_OUR_MSG_BOX);
     avatar = GTK_WIDGET(gtk_builder_get_object(builder, "send_avatar"));
@@ -67,7 +67,7 @@ static GtkWidget *sent_msg_build(char *response, t_msg_widget* msg_wid, t_info *
 }
 
 static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_info *info) {
-    GtkBuilder *builder = gtk_builder_new_from_file("templates/message_box.xml");
+    GtkBuilder *builder = gtk_builder_new_from_file("client/templates/message_box.xml");
     GtkWidget *box = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *msg_box = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *avatar = (GtkWidget *)malloc(sizeof(GtkWidget));
@@ -76,7 +76,7 @@ static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_in
 
     box = GTK_WIDGET(gtk_builder_get_object(builder, "rec_mainbox"));
     msg_bbl = GTK_WIDGET(gtk_builder_get_object(builder, "rec_msg_tail_img"));
-    gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "res/imgs/rec_msg_tail.png");
+    gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "client/res/imgs/rec_msg_tail.png");
     msg_box = GTK_WIDGET(gtk_builder_get_object(builder, "rec_msg_lbl"));
     gtk_widget_set_name(msg_box, MX_CSS_OTHER_MSG);
     avatar = GTK_WIDGET(gtk_builder_get_object(builder, "rec_avatar"));

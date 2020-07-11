@@ -2,7 +2,7 @@
 #include "defines.h"
 
 void signal_stop(int sig) {
-    system("leaks server");
+    system("leaks chat_server");
     exit(0);
 }
 

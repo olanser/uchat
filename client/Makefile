@@ -1,4 +1,4 @@
-TARGET = client
+TARGET = uchat
 
 FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_signin.c \
@@ -129,7 +129,7 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-pthread \
 	-lsqlite3 \
 	-rdynamic \
-	-L lib -lssl -lcrypto
+	-L libs -lssl -lcrypto
 
 SANITIZE = -fsanitize=address
 
@@ -165,6 +165,10 @@ uninstall: u
 	@rm -rf $(LIBS)
 	@rm -rf database/reg
 	@rm -rf downloads
+	@rm -rf inc/openssl
+	@rm -rf $(TARGET)
 u:
 	@rm -rf tmp
 	@rm -rf obj
+
+clean: u
