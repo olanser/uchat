@@ -1,7 +1,6 @@
 #include "server.h"
 #include "defines.h"
 
-
 static t_server *create_malloc(int max_connect, int count_thread) {
     t_server *server_info = malloc(sizeof(t_server));
 
@@ -64,10 +63,12 @@ static void open_log_file(t_server *server_info, int fd_server) {
         printf("ERROR OPEN LOG FILE\n");
         exit(1);
     }
+    mx_init_ssl(server_info);
     server_info->fd_logfile = fd;
     pthread_mutex_init(&(server_info->m_logfile), NULL);
     server_info->poll_set[0].fd = fd_server;
     server_info->table_users[0].socket = fd_server;
+    mx_start_demon(server_info);
     mx_add_log(server_info, "Start server\n");
 }
 
@@ -86,8 +87,8 @@ t_server *mx_create_server(int max_connect, int fd_server, int count_thread) {
         pthread_mutex_init(&(server_info->table_users[i].m_write_socket), NULL);
         pthread_mutex_init(&(server_info->table_users[i].m_if_work), NULL);
     }
+    open_log_file(server_info, fd_server);
     open_db(server_info);
     set_signal_and_create_thread(server_info);
-    open_log_file(server_info, fd_server);
     return server_info;
 }

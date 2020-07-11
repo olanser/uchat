@@ -72,6 +72,28 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
 }
 
 
+static void set_icons(t_main_chat_window *main_chat, GtkBuilder *builder) {
+    GdkPixbuf *pixbuf;
+
+    main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SEND_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->send_img), pixbuf);
+    main_chat->exit_img = GTK_WIDGET(gtk_builder_get_object(builder, "image2"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EXIT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->exit_img), pixbuf);
+    main_chat->settings_img = GTK_WIDGET(gtk_builder_get_object(builder, "image3"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SETTINGS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->settings_img), pixbuf);
+    main_chat->new_chat_img = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_NEW_CHAT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->new_chat_img), pixbuf);
+    main_chat->stickers_img = GTK_WIDGET(gtk_builder_get_object(builder, "image5"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_STICKERS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->stickers_img), pixbuf);
+    main_chat->attach_img = GTK_WIDGET(gtk_builder_get_object(builder, "image6"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_ATTACH_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->attach_img), pixbuf);
+}
 
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
@@ -83,17 +105,22 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->btn_logout = GTK_WIDGET(gtk_builder_get_object(builder, "btn_logout"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));
     main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn"));
+    // main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    // gtk_image_set_from_file(GTK_IMAGE (main_chat->send_img), "res/imgs/send_btn.png");
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
     main_chat->profile_set_btn = GTK_WIDGET(gtk_builder_get_object(builder, "profile_set_btn1"));
     main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->chat_line), "text_entry");
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->listbox_search), "search_panel");
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
     main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
     main_chat->btn_show_sticker = GTK_WIDGET(gtk_builder_get_object(builder, "btn_show_sticker"));
     main_chat->btn_settings = GTK_WIDGET(gtk_builder_get_object(builder, "btn_settings"));
+    set_icons(main_chat, builder);
     gtk_widget_show_all(main_chat->chat_win);
     main_chat->notebook_stickers = mx_get_stickers_notebook(builder, info);
     mx_init_search_user(builder, main_chat, info);

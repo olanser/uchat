@@ -18,6 +18,8 @@
 
 
 #define MX_DIR_DOWNLOAD "download"
+#define MX_FILE_SERT "database/cert.pem"
+#define MX_FILE_KEY "database/key.pem"
 /* 
 * 0 bit of query
 * Query Status

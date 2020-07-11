@@ -4,6 +4,8 @@
 #include <gtk/gtk.h>
 #include "libmx.h"
 #include "characters.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
@@ -13,9 +15,12 @@ typedef struct s_user_info t_user_info;
 typedef struct s_msg_widget t_msg_widget;
 typedef struct s_msg t_msg;
 typedef struct s_win_profile t_win_profile;
+typedef struct s_win_size t_win_size;
 
 typedef struct s_info {
     int sock;
+    SSL *ssl;
+    SSL_CTX *ctx;
     int query_id;
     int scene; // number of window
     int id_chat;
@@ -112,8 +117,8 @@ typedef struct s_objects {
 
 
 struct s_main_chat_window {
+    t_win_size *size;
     GtkWidget* layout_main;
-    
     GtkWidget* chat_win;
     GtkWidget* main_chat_box;
     GtkWidget* profile_set_btn;
@@ -134,6 +139,12 @@ struct s_main_chat_window {
     GtkWidget* btn_choose_file;
     GtkWidget* btn_logout;
     GtkWidget* list_box_users;
+    GtkWidget* send_img;
+    GtkWidget* exit_img;
+    GtkWidget* settings_img;
+    GtkWidget* stickers_img;
+    GtkWidget* attach_img;
+    GtkWidget* new_chat_img;
         GtkWidget **user_widgets; // mass
 
     // stickers
@@ -182,5 +193,11 @@ typedef struct s_win_profile {
     GtkWidget* ev_box_profile_img;
     GtkWidget* grid_avatars;
 } t_win_profile;
+
+struct s_win_size {
+    int height;
+    int width;
+    int position;
+};
 
 #endif

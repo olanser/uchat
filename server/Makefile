@@ -45,6 +45,8 @@ SRC_PATH = src/mx_main_server.c \
 	src/function/mx_check_avatar.c \
 	src/function/mx_add_log.c \
 	src/work_thread/send_file/mx_get_file.c \
+	src/mx_start_demon.c \
+	src/mx_init_ssl.c \
 
 # Variables
 
@@ -64,8 +66,7 @@ LIBS = libs/libmx.a \
 INC = inc/defines.h \
 	inc/server.h
 
-CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror
-
+CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror -L ./lib -lssl -lcrypto
 SANITIZE = -fsanitize=address
 
 SERVER = server
@@ -100,6 +101,7 @@ uninstall: clean
 	@rm -rf server
 	@rm -rf database/database.db
 	@rm -rf database/log.txt
+	@rm -rf database/log2.txt
 	@printf "\x1b[32mserver:\x1b[34;1m [$@]\x1b[0m\n"
 
 clean:

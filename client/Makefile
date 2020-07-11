@@ -89,6 +89,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/listener/handlers/send_msg/mx_get_widget_of_file.c \
 	src/mx_get_sized_img.c \
 	src/gtk_cycle/signals/main/mx_btn_downloaded_click.c \
+	src/mx_hash.c \
 	src/listener/handlers/send_msg/mx_fill_msg_widget.c \
 	src/listener/handlers/send_msg/mx_set_markup.c \
 	src/mx_get_pango_from_uchat.c \
@@ -128,6 +129,7 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-pthread \
 	-lsqlite3 \
 	-rdynamic \
+	-L lib -lssl -lcrypto
 
 SANITIZE = -fsanitize=address
 
