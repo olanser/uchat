@@ -7,7 +7,7 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
 
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
             "msg_chat_id, msg_avatar, msg_type) VALUES (%d, datetime('now'"
-            "), \'%s\', %d, %c, %d);", user->id_users, &user->buff[18],
+            "), \'%s\', %d, '%c', %d);", user->id_users, &user->buff[18],
             *((int*)&user->buff[9]), user->buff[13], *((int*)&user->buff[14]));
     a = mx_do_query(sql, 0, 0, server_info);
     if (a != SQLITE_OK)
@@ -27,7 +27,8 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     *((int*)&response[13]) = atoi(name[1]);
     *((int*)&response[17]) = atoi(name[2]);
     sprintf(&response[21], "%s",name[3]);
-    sprintf(&response[41], "%s",name[4]);
+    response[41] = name[4][0];
+    printf("ava = %d\n", name[4][0]);
     *((int*)&response[42]) = atoi(name[5]);
     sprintf(&response[46], "%s",name[6]);
     *(char**)data = response;

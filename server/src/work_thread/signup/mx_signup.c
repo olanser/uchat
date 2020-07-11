@@ -50,10 +50,13 @@ int check_tuser(t_table_user *tuser, t_server *server_info) {
 int change_db( t_server *server_info, t_table_user *tuser) {
     char sql[500];
 
-    sprintf(sql, "insert into user values(NULL, '%s', '%s', '%s', '%s', 1, 1);",
-        tuser->first_name, tuser->second_name, tuser->nickname, tuser->pass);
-    if (mx_do_query(sql, 0, 0, server_info) != SQLITE_OK)
+    sprintf(sql, "insert into user values(NULL, '%s', '%s', '%s', '%s', 1, '%c');",
+        tuser->first_name, tuser->second_name, tuser->nickname, tuser->pass, 1);
+    if (mx_do_query(sql, 0, 0, server_info) != SQLITE_OK) {
+        printf("ERROR SQL\n");
         return 1;
+    }
+        
     return 0;
 }
 

@@ -72,6 +72,28 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
 }
 
 
+static void set_icons(t_main_chat_window *main_chat, GtkBuilder *builder) {
+    GdkPixbuf *pixbuf;
+
+    main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SEND_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->send_img), pixbuf);
+    main_chat->exit_img = GTK_WIDGET(gtk_builder_get_object(builder, "image2"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EXIT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->exit_img), pixbuf);
+    main_chat->settings_img = GTK_WIDGET(gtk_builder_get_object(builder, "image3"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SETTINGS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->settings_img), pixbuf);
+    main_chat->new_chat_img = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_NEW_CHAT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->new_chat_img), pixbuf);
+    main_chat->stickers_img = GTK_WIDGET(gtk_builder_get_object(builder, "image5"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_STICKERS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->stickers_img), pixbuf);
+    main_chat->attach_img = GTK_WIDGET(gtk_builder_get_object(builder, "image6"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_ATTACH_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->attach_img), pixbuf);
+}
 
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
@@ -83,17 +105,22 @@ void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t
     main_chat->btn_logout = GTK_WIDGET(gtk_builder_get_object(builder, "btn_logout"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));
     main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn"));
+    // main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    // gtk_image_set_from_file(GTK_IMAGE (main_chat->send_img), "res/imgs/send_btn.png");
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
     main_chat->profile_set_btn = GTK_WIDGET(gtk_builder_get_object(builder, "profile_set_btn1"));
     main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->chat_line), "text_entry");
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->listbox_search), "search_panel");
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
     main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
     main_chat->btn_show_sticker = GTK_WIDGET(gtk_builder_get_object(builder, "btn_show_sticker"));
     main_chat->btn_settings = GTK_WIDGET(gtk_builder_get_object(builder, "btn_settings"));
+    set_icons(main_chat, builder);
     gtk_widget_show_all(main_chat->chat_win);
     main_chat->notebook_stickers = mx_get_stickers_notebook(builder, info);
     mx_init_search_user(builder, main_chat, info);
@@ -116,8 +143,8 @@ void mx_set_signup_win_properties(t_signup_window *signup) {
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
+    gtk_widget_set_size_request(main_chat->chat_win, MX_WIN_WIDTH, MX_WIN_HEIGHT);
+    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), MX_WIN_WIDTH, MX_WIN_HEIGHT);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
     gtk_widget_hide(main_chat->chat_win);
 }
@@ -128,10 +155,43 @@ void mx_set_properties(t_objects *objs) {
     mx_set_main_chat_properties(objs->chat_win);
 }
 
+void mx_init_profile(t_info *info) {
+    GtkBuilder* builder = gtk_builder_new_from_file(MX_PATH_PROFILE);
+    t_win_profile *prof = info->objs->s_win_profile;
+
+    prof->box_profile = GTK_WIDGET(gtk_builder_get_object(builder, "box_profile"));
+    prof->theme1_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme1_btn"));
+    prof->theme2_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme2_btn"));
+    prof->theme3_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme3_btn"));
+    prof->theme4_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme4_btn"));
+    prof->theme5_btn = GTK_WIDGET(gtk_builder_get_object(builder, "theme5_btn"));
+    prof->save_btn = GTK_WIDGET(gtk_builder_get_object(builder, "save_btn"));
+    prof->ev_box_profile_img = GTK_WIDGET(gtk_builder_get_object(builder, "ev_box_profile_img"));
+    prof->profile_img = GTK_WIDGET(gtk_builder_get_object(builder, "profile_img"));
+    prof->grid_avatars = GTK_WIDGET(gtk_builder_get_object(builder, "grid_avatars"));
+
+    gtk_layout_put(GTK_LAYOUT(info->objs->chat_win->layout_main), prof->box_profile,
+        (MX_WIN_WIDTH / 2) - (MX_WIN_PROF_W / 2),
+        (MX_WIN_HEIGHT / 2) - (MX_WIN_PROF_H / 2));
+    gtk_widget_show_all(prof->box_profile);
+    gtk_widget_hide(prof->box_profile);
+
+    gtk_widget_set_size_request(prof->box_profile, MX_WIN_PROF_W, MX_WIN_PROF_H);
+    gtk_widget_set_name(prof->box_profile, "box_profile");
+
+    g_signal_connect(G_OBJECT(prof->theme1_btn), "clicked", G_CALLBACK(mx_btn_theme1), info);
+    g_signal_connect(G_OBJECT(prof->theme2_btn), "clicked", G_CALLBACK(mx_btn_theme2), info);
+    g_signal_connect(G_OBJECT(prof->theme3_btn), "clicked", G_CALLBACK(mx_btn_theme3), info);
+    g_signal_connect(G_OBJECT(prof->theme4_btn), "clicked", G_CALLBACK(mx_btn_theme4), info);
+    g_signal_connect(G_OBJECT(prof->theme5_btn), "clicked", G_CALLBACK(mx_btn_theme5), info);
+    g_signal_connect(G_OBJECT(prof->save_btn), "clicked", G_CALLBACK(mx_btn_save), info);
+}
+
 void mx_connect_builder(t_info* info) {
     GtkBuilder* builder = gtk_builder_new_from_file(MX_PATH_TO_TEMPLATE);
     mx_init_objects(builder, info->objs, info);
     mx_set_properties(info->objs);
+    mx_init_profile(info);
 }
 
 void mx_connect_css(void) {

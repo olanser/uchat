@@ -7,22 +7,112 @@
     background-image: url("../res/background/texture1.jpeg");
 } */
 
-
-#our_msg_box {
-    /* background-color: #f00; */
-    background: linear-gradient(96deg, rgba(0, 238, 255, 1), rgba(0, 238, 255, 0) 70%);
+window {
+    background: #0b0c10;
+    /* background-image: url("/Users/akrasnosel/Desktop/client/client/res/imgs/bg/black_liquid.png"); */
+    /* background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%); */
 }
+
+window * {
+    border: none;
+    -gtk-icon-shadow: none;
+}
+
+/* notebook.frame {
+    background: #F2F4F4;
+    border: none;
+} */
+
+/* notebook header.top tabs {
+    background: rgb(216, 189, 189);
+} */
+
+list {
+    border: none;
+    background: #060608;
+    opacity: 50;
+    /* background: #1f2833; */
+    /* background-image: linear-gradient(to bottom, #1f2833 0%, #0b0c10 100%); */
+}
+
+#search_panel {
+    background: #0b0c10;
+}
+
+list row.activatable {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+/* separator.wide {
+    background: radial-gradient(circle at center, #F1C40F, #F4D03F, #F7DC6F);
+} */
+
+/* #our_msg_box {
+    background-color: #f00;
+} */
+
+button {
+    background: transparent;
+}
+
+button {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    border: none;
+}
+
+/* button.image-button image:hover {
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+} */
 
 #other_msg {
-    background: linear-gradient(127deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%);
+    padding: 10px;
+    border-radius: 10px;
+    background: #c5c6c7;
+    margin-right: 250px;
 }
 
-#chat_line_editing {
-    padding: 10px; 
-    background-color: #0f0;
-    font-style: italic;
+#our_msg_box {
+    padding: 10px;
+    margin-left: 250px;
+    margin-right: 0px;
+    border-radius: 10px;
+    background: #66fcf1;
 }
 
-#chat_line {
-    background-color: #fff;
+#send_sticker_msg {
+    background: transparent;
+    margin-left: 250px;
+}
+
+#rec_sticker_msg {
+    background: transparent;
+    margin-right: 250px;
+}
+
+#text_entry.view text {
+    padding: 3px;
+    background: #0b0c10;
+    background: linear-gradient(to right, #060608, #0b0c10);
+}
+
+#chat_names {
+    background: #060608;
+}
+
+button#chat_names:hover {
+    border: #66fcf1;
+}
+
+paned separator.wide {
+    background: #020303;
+}
+
+#box_profile {
+    border: 1px solid silver;
+    background-color: #eeeeee;
 }

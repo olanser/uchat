@@ -1,101 +1,128 @@
-/* 
-* author vbalachevs
-* get widget for msg
-*/
 #include "client.h"
 #include "icons.h"
 #include "defines_client.h"
 
-static void con_edit_btn(GtkWidget *edit_button, char *response, t_info *info) {
-    int* id_msg = malloc(sizeof(int));
-    *id_msg = *(int*)&response[9];
+// static void set_edit_btn(char *response, t_info *info, GtkBuilder* builder) {
+//     GtkWidget *edit_button = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *img = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EDIT_MSG_BTN, 10, 10, NULL);
+//     int* id_msg = malloc(sizeof(int));
 
-    g_object_set_data(G_OBJECT(edit_button), "id_msg", id_msg);
-    g_signal_connect(G_OBJECT(edit_button), "clicked", G_CALLBACK(mx_btn_edit_msg), info);
-}
+//     *id_msg = *(int*)&response[9];
+//     edit_button = GTK_WIDGET(gtk_builder_get_object(builder, "edit_btn"));
+//     img = GTK_WIDGET(gtk_builder_get_object(builder, "edit_img"));
+//     gtk_image_set_from_pixbuf(GTK_IMAGE (img), pixbuf);
+//     g_object_set_data(G_OBJECT(edit_button), "id_msg", id_msg);
+//     g_signal_connect(G_OBJECT(edit_button), "button-press-event", G_CALLBACK(mx_btn_edit_msg), info);
+// }
 
-static GtkWidget* get_del_btn(char *response, t_info *info) {
-    GtkWidget *ev_box = gtk_event_box_new();
-    GtkWidget *image = gtk_image_new_from_file (MX_ICON_DELETE);
-    int* id_msg = malloc(sizeof(int));
+// static void set_del_btn(char *response, t_info *info, GtkBuilder* builder) {
+//     GtkWidget *del_button = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *img = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(MX_DEL_MSG_BTN, 10, 10, NULL);
+//     int* id_msg = malloc(sizeof(int));
 
-    gtk_container_add(GTK_CONTAINER(ev_box), image);
-    *id_msg = *(int*)&response[9];
-    g_object_set_data(G_OBJECT(ev_box), "id_msg", id_msg);
-    g_signal_connect(G_OBJECT(ev_box), "button-press-event", G_CALLBACK(mx_btn_del_msg), info);
-    return ev_box;
-}
+//     *id_msg = *(int*)&response[9];
+//     del_button = GTK_WIDGET(gtk_builder_get_object(builder, "del_btn"));
+//     img = GTK_WIDGET(gtk_builder_get_object(builder, "del_img"));
+//     gtk_image_set_from_pixbuf(GTK_IMAGE (img), pixbuf);
+//     g_object_set_data(G_OBJECT(del_button), "id_msg", id_msg);
+//     g_signal_connect(G_OBJECT(del_button), "button-press-event", G_CALLBACK(mx_btn_del_msg), info);
+// }
 
-static GtkWidget* get_edit_btn(char *response, t_info *info) {
-    GtkWidget *ev_box = gtk_event_box_new();
-    GtkWidget *image = gtk_image_new_from_file (MX_ICON_EDIT);
-    int* id_msg = malloc(sizeof(int));
+// static GtkWidget *sent_msg_build(char *response, t_msg_widget* msg_wid, t_info *info) {
+//     GtkBuilder *builder = gtk_builder_new_from_file("templates/message_box.xml");
+//     GtkWidget *box = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *msg_box = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *avatar = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *label = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *del_button = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *edit_button = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *msg_bbl = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *time_lbl = (GtkWidget *)malloc(sizeof(GtkWidget));
 
-    gtk_container_add(GTK_CONTAINER(ev_box), image);
-    *id_msg = *(int*)&response[9];
-    g_object_set_data(G_OBJECT(ev_box), "id_msg", id_msg);
-    g_signal_connect(G_OBJECT(ev_box), "button-press-event", G_CALLBACK(mx_btn_edit_msg), info);
-    return ev_box;
-}
+//     box = GTK_WIDGET(gtk_builder_get_object(builder, "send_mainbox"));
+//     msg_bbl = GTK_WIDGET(gtk_builder_get_object(builder, "send_msg_tail_img"));
+//     gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "res/imgs/send_msg_tail.png");
+//     msg_box = GTK_WIDGET(gtk_builder_get_object(builder, "send_msg_lbl"));
+//     gtk_widget_set_name(msg_box, MX_CSS_OUR_MSG_BOX);
+//     avatar = GTK_WIDGET(gtk_builder_get_object(builder, "send_avatar"));
+//     gtk_widget_set_name(GTK_WIDGET (avatar), "avatar");
+//     gtk_image_set_from_file(GTK_IMAGE (avatar), mx_get_path_to_ava(response[41]));
+//     label = GTK_WIDGET(gtk_builder_get_object(builder, "send_msg_lbl"));
+//     gtk_label_set_label(GTK_LABEL (label), &response[46]);
+//     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
+//     gtk_label_set_max_width_chars(GTK_LABEL (label), 5);
+//     time_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "send_time_lbl"));
+//     //HERE SET THE TIME//
+//     gtk_widget_set_name(GTK_WIDGET (time_lbl), "time_lbl");
+//     del_button = GTK_WIDGET(gtk_builder_get_object(builder, "del_btn"));
+//     gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
+//     edit_button = GTK_WIDGET(gtk_builder_get_object(builder, "edit_btn"));
+//     gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
+//     set_del_btn(response, info, builder);
+//     set_edit_btn(response, info, builder);
+//     msg_wid->label = label;
+//     return box;
+// }
 
-static GtkWidget *get_right_box(char *response, t_info *info) {
-    GtkWidget *rigth_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
-    GtkWidget *del_button = get_del_btn(response, info);
-    GtkWidget *edit_button = get_edit_btn(response, info);
+// static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_info *info) {
+//     GtkBuilder *builder = gtk_builder_new_from_file("templates/message_box.xml");
+//     GtkWidget *box = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *msg_box = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *avatar = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *label = (GtkWidget *)malloc(sizeof(GtkWidget));
+//     GtkWidget *msg_bbl = (GtkWidget *)malloc(sizeof(GtkWidget));
 
-    gtk_box_pack_start(GTK_BOX(rigth_box), del_button, TRUE, TRUE, 1);
-    gtk_box_pack_start(GTK_BOX(rigth_box), edit_button, TRUE, TRUE, 1);
-    return rigth_box;
-}
+//     box = GTK_WIDGET(gtk_builder_get_object(builder, "rec_mainbox"));
+//     msg_bbl = GTK_WIDGET(gtk_builder_get_object(builder, "rec_msg_tail_img"));
+//     gtk_image_set_from_file(GTK_IMAGE (msg_bbl), "res/imgs/rec_msg_tail.png");
+//     msg_box = GTK_WIDGET(gtk_builder_get_object(builder, "rec_msg_lbl"));
+//     gtk_widget_set_name(msg_box, MX_CSS_OTHER_MSG);
+//     avatar = GTK_WIDGET(gtk_builder_get_object(builder, "rec_avatar"));
+//     gtk_image_set_from_file(GTK_IMAGE (avatar), mx_get_path_to_ava(response[41]));
+//     label = GTK_WIDGET(gtk_builder_get_object(builder, "rec_msg_lbl"));
+//     gtk_label_set_label(GTK_LABEL (label), &response[46]);
+//     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
+//     // gtk_label_set_max_width_chars(GTK_LABEL (label), 75);
+//     msg_wid->label = label;
+//     return box;
+// }
 
+// static void fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
+//     GtkWidget *mainbox;
 
-static void fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
-    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3);
-    GtkWidget *right_box = 0;
-    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41] - 49));
-    GtkWidget *middle_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
-    GtkWidget *label = gtk_label_new(&response[46]);
-
-    gtk_box_pack_start(GTK_BOX(middle_box), label, TRUE, TRUE, 1);
-
-    // gtk_box_pack_start(GTK_BOX(middle_box), label, TRUE, TRUE, 1);
-    gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
-    gtk_box_pack_start(GTK_BOX(box), middle_box, TRUE, TRUE, 1);
-    gtk_widget_set_hexpand(label, TRUE);
-    if (*(int*)&response[17] == info->user_info->id) { // our msg
-        right_box = get_right_box(response, info);
-        gtk_box_pack_start(GTK_BOX(box), right_box, TRUE, TRUE, 1);
-        gtk_widget_set_name(box, MX_CSS_OUR_MSG_BOX);
-    }
-    else{ // not our msg
-        gtk_widget_set_name(box, MX_CSS_OTHER_MSG);
-    }
-    gtk_widget_show_all(box);
-    msg_wid->label = label;
-    msg_wid->widget = box;
-}
+//     fprintf(stdout, "IM HERE\n");
+//     if (*(int*)&response[17] == info->user_info->id) { // our msg
+//         mainbox = sent_msg_build(response, msg_wid, info);
+//     }
+//     else{ // not our msg
+//         mainbox = received_msg_build(response, msg_wid, info);
+//     }
+//     gtk_widget_show_all(mainbox);
+//     msg_wid->widget = mainbox;
+// }
 
 static void fill_sticker_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(&response[46], 100, 100, 0);
     GtkWidget *image = gtk_image_new_from_pixbuf(pixbuf);
-    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41] - 49));
+    GtkWidget *avatar = gtk_image_new_from_file(mx_get_path_to_ava(response[41]));
 
     gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
     gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 1);
 
     if (*(int*)&response[17] == info->user_info->id) { // our msg
-        gtk_widget_set_name(box, MX_CSS_OUR_MSG_BOX);
+        gtk_widget_set_name(box, "send_sticker_msg");
     }
     else{
-        gtk_widget_set_name(box, MX_CSS_OTHER_MSG);
+        gtk_widget_set_name(box, "rec_sticker_msg");
     }
     gtk_widget_show_all(box);
     msg_wid->widget = box;
 }
 
 static void fill_file_widget(char *response, t_info *info, t_msg_widget* msg_wid, t_msg *msg) {
-    printf("type of file  = %d\n", msg->msg_f_type);
     msg_wid->widget = gtk_button_new_with_label(&response[46]);
     g_object_set_data(G_OBJECT(msg_wid->widget), "msg", msg);
 
@@ -106,11 +133,17 @@ static void fill_file_widget(char *response, t_info *info, t_msg_widget* msg_wid
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg) {
     t_msg_widget *msg_widget = malloc(sizeof(t_msg_widget));
 
-    if (*(int*)&response[42] == 1)
-        fill_msg_widget(response, info, msg_widget);
-    else if (*(int*)&response[42] == 2)
+    printf("GET MSG WIDGET\n");
+    if (*(int*)&response[42] == 1) {
+        printf("MSG\n");
+        mx_fill_msg_widget(response, info, msg_widget);
+    }
+    else if (*(int*)&response[42] == 2) {
+        printf("STICKER\n");
         fill_sticker_widget(response, info, msg_widget);
+    }
     else if (*(int*)&response[42] == 3) {
+        printf("FILE\n");
         fill_file_widget(response, info, msg_widget, msg);
     }
         

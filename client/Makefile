@@ -90,7 +90,22 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_get_sized_img.c \
 	src/gtk_cycle/signals/main/mx_btn_downloaded_click.c \
 	src/mx_hash.c \
-	
+	src/listener/handlers/send_msg/mx_fill_msg_widget.c \
+	src/listener/handlers/send_msg/mx_set_markup.c \
+	src/mx_get_pango_from_uchat.c \
+	src/mx_create_tag.c \
+	src/mx_str_insert.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme1.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme2.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme3.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme4.c \
+	src/gtk_cycle/signals/profile/theme_selection/mx_btn_theme5.c \
+	src/mx_write_theme.c \
+	src/gtk_cycle/signals/profile/mx_btn_save.c \
+	src/init/init_gtk/mx_set_profile_window.c \
+	src/gtk_cycle/signals/profile/mx_btn_change_avatar.c \
+	src/api/mx_api_change_avatar.c \
+
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
 FULL_OBJS = $(addprefix obj/, $(notdir $(FULL_SRC:%.c=%.o)))

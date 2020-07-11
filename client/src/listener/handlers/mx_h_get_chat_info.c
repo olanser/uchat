@@ -3,6 +3,7 @@
 
 static GtkWidget* mx_create_chat_widget(char *response) {
     GtkWidget* widget = gtk_button_new_with_label(&response[14]);
+    gtk_widget_set_name(GTK_WIDGET (widget), "chat_names");
     return widget;
 }
 
