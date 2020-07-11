@@ -142,8 +142,8 @@ char *mx_end_of_file(t_server *server_info, t_server_users *user) {
         mx_do_query(sql_request,0,0, server_info);
         sprintf(sql_request, "SELECT msg_id from msg where msg_creator = '%d' ORDER by msg_id DESC LIMIT 1;", user->id_users);
         mx_do_query(sql_request, callback_one, &(message.id_message), server_info);
-        sprintf(sql_request, "download/%s", message.unique_name);
-        sprintf(name, "download/%s", message.id_message);
+        sprintf(sql_request, "%s/%s", MX_DIR_DOWNLOAD, message.unique_name);
+        sprintf(name, "%s/%s", MX_DIR_DOWNLOAD, message.id_message);
         rename(sql_request, name);
         free(message.unique_name);
         free(message.id_message);

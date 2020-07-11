@@ -51,10 +51,6 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
     bool close_conn = false;
     char log[100];
 
-    char *str;
-    str = mx_itoa(buffer[0]);
-    write(1, str, mx_strlen(str));
-    write(1, "\n", 1);
     if (error_case(&close_conn, rc, buffer));
     else
         read_socket(server_info, id , &buffer);

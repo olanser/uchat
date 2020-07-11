@@ -11,6 +11,7 @@
 #define MX_MAX_SIZE_REQUEST 4096
 #define MX_LOG_FILE "server/database/log.txt"
 #define MX_LOG_FILE2 "server/database/log2.txt"
+#define MX_DIR_DOWLOAD "server/download"
 #define MX_ERROR_END_STR "DONT HAVE 0 TO END!!" // don't have \0 end str;
 #define MX_EROR_ID_AVATAR "ERROR AVATAR!!" //id avatar error see mx_check_avatar;
 #define MX_DONT_ID_MSG_IN_USER "DONT HAVE MSG!!" //this msg dont user

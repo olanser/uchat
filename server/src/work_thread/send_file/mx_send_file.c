@@ -6,12 +6,13 @@ static void save_file(t_server_users *user, char *unique_name, char *request) {
     int file_fd;
     char *buf = &request[18];
 
-    sprintf(path, "%s/%s", "download", unique_name);
+    sprintf(path, "%s/%s", MX_DIR_DOWNLOAD, unique_name);
     printf("PATH = %s\n", path);
     file_fd = open(path, O_RDWR | O_CREAT | O_APPEND, S_IWRITE | S_IREAD);
     if (file_fd == -1) {
         fprintf(stderr, "file err // save file = %s\n", strerror(errno));
-        exit(0);
+        return;
+        //exit(0);
     }
     write(file_fd, buf, *((int *)&request[5]) - 18);
     close(file_fd);
