@@ -2,13 +2,14 @@
 #include "defines.h"
 
 
-static char *create_response(int id_msg) {
-    char *respons = malloc(sizeof(char) * 13);
+static char *create_response(int id_msg, int id_chat) {
+    char *respons = malloc(sizeof(char) * 17);
 
-    memset(respons, 0, 13);
+    memset(respons, 0, 17);
     respons[0] = 4;
-    respons[5] = 13;
+    respons[5] = 17;
     *((int*)&respons[9]) = id_msg;
+    *((int*)&respons[13]) = id_chat;
     return respons;
 }
 
@@ -40,7 +41,7 @@ char *mx_delete_msg(t_server *server_info, t_server_users *user) {
     }
     sprintf(sql, "select cou_usr_id from cou where cou_chat_id = "
             "%d;", *(int*)&user->buff[13]);
-    response = create_response(*((int*)&user->buff[9]));
+    response = create_response(*((int*)&user->buff[9]), *((int*)&user->buff[13]));
     mx_send_response_user(server_info, response, sql);
     free(response);
     return 0;

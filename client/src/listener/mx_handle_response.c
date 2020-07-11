@@ -1,5 +1,5 @@
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 static int check(t_info *info, char *response) {
     if (info->user_info == 0 && response[0] > 1) {
@@ -32,7 +32,13 @@ int mx_handle_response(t_info *info, char *response) {
         mx_h_create_chat, // 14
         mx_h_create_dialog, // 15
         mx_h_leave_chat, // 16
-        mx_h_get_chats_info
+        mx_h_get_chats_info, // 17
+        mx_h_who_is_that, // 18
+        mx_h_get_unique_name, // 19
+        mx_h_who_is_that, // 20
+        mx_h_who_is_that, //21
+        mx_h_who_is_that, //22
+        mx_h_who_is_that //23
         };
         if (check(info, response) == 1)
             return -1;

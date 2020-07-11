@@ -40,8 +40,11 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/get_chat_msg/mx_get_chat_msg.c \
 	src/work_thread/change_avatar/mx_change_avatar.c \
 	src/work_thread/get_chat_users/mx_chat_user_list.c \
+	src/work_thread/send_file/mx_create_unique_name.c \
+	src/work_thread/send_file/mx_end_of_file.c \
 	src/function/mx_check_avatar.c \
-	src/function/mx_add_log.c
+	src/function/mx_add_log.c \
+
 
 # Variables
 

@@ -58,12 +58,12 @@ typedef struct s_table_user {
 typedef struct s_file_message {
     char *id_query;
     char *id_message;
-    char *id_chat;
+    int id_chat;
     int file_type;
     char *true_name;
-    char buf_name[15];
+    char *unique_name;
     int size;
-    int file_end;
+    int avatar;
 }               t_file_message;
 
 
@@ -122,8 +122,10 @@ void mx_get_msg_response_10(char status, char *request, char **response);
 char *mx_create_chat(t_server *server_info, t_server_users *user);
 char *mx_create_dialog(t_server *server_info, t_server_users *user);
 char *mx_leave_chat(t_server *server_info, t_server_users *user);
+char *mx_create_unique_name(t_server *server_info, t_server_users *user);
 char *mx_get_chats_info(t_server *server_info, t_server_users *user);
 char *mx_get_chat_msg(t_server *server_info, t_server_users *user);
+char *mx_end_of_file(t_server *server_info, t_server_users *user);
 
 
 

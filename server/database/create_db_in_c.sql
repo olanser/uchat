@@ -16,15 +16,15 @@ create table if not exists user(
     usr_nickname varchar(100) UNIQUE,
     usr_pass varchar(64), -- hased pass --
     usr_group integer,
-    user_avatar varchar(1) DEFAULT '0',
+    user_avatar integer DEFAULT 0,
     foreign key(usr_group) references group_g(gg_id)
 );
 
-insert OR IGNORE into user values(1, 'Admin','admin', 'Admin', '1234', 1, 1);
-insert OR IGNORE into user values(2, 'Admin','admin', 'Admin1', '1234', 1, 1);
-insert OR IGNORE into user values(3, 'Admin','admin', 'Admin2', '1234', 1, 1);
-insert OR IGNORE into user values(4, 'Admin','admin', 'Admin3', '1234', 1, 1);
-insert OR IGNORE into user values(5, 'Admin','admin', 'Admin4', '1234', 1, 1);
+insert OR IGNORE into user values(1, 'Admin_name1','admin', 'Admin', '1234', 1, 1);
+insert OR IGNORE into user values(2, 'Admin_name2','admin', 'Admin1', '1234', 1, 1);
+insert OR IGNORE into user values(3, 'Admin_name3','admin', 'Admin2', '1234', 1, 1);
+insert OR IGNORE into user values(4, 'Admin_name4','admin', 'Admin3', '1234', 1, 1);
+insert OR IGNORE into user values(5, 'Admin_name5','admin', 'Admin4', '1234', 1, 1);
 
 create table if not exists chat(
     chat_id integer not null primary key AUTOINCREMENT,
@@ -45,8 +45,9 @@ create table if not exists msg(
     msg_data blob,
     msg_chat_id integer,
     msg_status varchar(1) DEFAULT '2',
-    msg_avatar VARCHAR(1) DEFAULT '1',
-    msg_file_type INTEGER DEFAULT 1,
+    msg_avatar integer DEFAULT 0,
+    msg_type INTEGER DEFAULT 0,
+    msg_file_type INTEGER DEFAULT 0,
     msg_file_name VARCHAR(51),
     msg_file_size INTEGER DEFAULT 0,
     foreign key(msg_creator) references user(usr_id),

@@ -3,7 +3,7 @@
 * load all objects an signals from builder
 */
 #include "client.h"
-#include "defines.h"
+#include "defines_client.h"
 
 void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
     signup->signup_win = GTK_WIDGET(gtk_builder_get_object(builder, "signup_window"));
@@ -12,16 +12,16 @@ void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
     signup->signup_buton = GTK_WIDGET(gtk_builder_get_object(builder, "signup_btn"));
     signup->signup_login = GTK_WIDGET(gtk_builder_get_object(builder, "signup_log"));
     signup->signup_pass1 = GTK_WIDGET(gtk_builder_get_object(builder, "signup_pass1"));
-    signup->signup_pass2 = GTK_WIDGET(gtk_builder_get_object(builder, "sighup_pass2"));
+    signup->signup_pass2 = GTK_WIDGET(gtk_builder_get_object(builder, "signup_pass2"));
     signup->signup_vissible_pass = GTK_WIDGET(gtk_builder_get_object(builder, "signup_show_pass_tick"));
     signup->signup_main_grid = GTK_WIDGET(gtk_builder_get_object(builder, "signup_main_grid"));
     signup->signup_child_box = GTK_WIDGET(gtk_builder_get_object(builder, "signup_child_box"));
 }
 
 static void place_label(t_signin_window *signin) {
-    signin->image_name = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background1.png");
-    signin->broken_screen = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background.png");
-    signin->broken_lbl = gtk_image_new_from_file("/Users/akrasnosel/Desktop/client/client/templates/signin_background3.png");
+    signin->image_name = gtk_image_new_from_file("templates/signin_background1.png");
+    signin->broken_screen = gtk_image_new_from_file("templates/signin_background.png");
+    signin->broken_lbl = gtk_image_new_from_file("templates/signin_background3.png");
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->image_name), 0, 0);
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->broken_screen), 0, 0);
     gtk_layout_put(GTK_LAYOUT (signin->layout), GTK_WIDGET (signin->broken_lbl), 0, 0);
@@ -71,30 +71,59 @@ void mx_init_search_user(GtkBuilder *builder, t_main_chat_window *main_chat, t_i
     gtk_widget_show(main_chat->search_users);
 }
 
-static void set_names(t_main_chat_window *main_chat) {
-    gtk_widget_set_name(GTK_WIDGET (main_chat->profile_set_btn), "profile_btn");
+
+static void set_icons(t_main_chat_window *main_chat, GtkBuilder *builder) {
+    GdkPixbuf *pixbuf;
+
+    main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SEND_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->send_img), pixbuf);
+    main_chat->exit_img = GTK_WIDGET(gtk_builder_get_object(builder, "image2"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EXIT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->exit_img), pixbuf);
+    main_chat->settings_img = GTK_WIDGET(gtk_builder_get_object(builder, "image3"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SETTINGS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->settings_img), pixbuf);
+    main_chat->new_chat_img = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_NEW_CHAT_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->new_chat_img), pixbuf);
+    main_chat->stickers_img = GTK_WIDGET(gtk_builder_get_object(builder, "image5"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_STICKERS_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->stickers_img), pixbuf);
+    main_chat->attach_img = GTK_WIDGET(gtk_builder_get_object(builder, "image6"));
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_ATTACH_ICON_CO, 30, 30, NULL);
+    gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->attach_img), pixbuf);
 }
 
 void mx_init_main_chat_win(GtkBuilder *builder, t_main_chat_window *main_chat, t_info *info) {
     main_chat->chat_win = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_window1"));
     if (main_chat->chat_win == 0)
-        fprintf(stderr, "error of open file!\n");
+        fprintf(stderr, "error of open file!\n"); 
+    main_chat->layout_main = GTK_WIDGET(gtk_builder_get_object(builder, "layout_main"));
     main_chat->main_chat_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_chat_box1"));
     main_chat->paned_chat = GTK_WIDGET(gtk_builder_get_object(builder, "paned_chat1"));
+    main_chat->btn_logout = GTK_WIDGET(gtk_builder_get_object(builder, "btn_logout"));
     main_chat->selected_chat_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "selected_chat_lbl1"));
     main_chat->send_btn = GTK_WIDGET(gtk_builder_get_object(builder, "send_btn"));
+    // main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
+    // gtk_image_set_from_file(GTK_IMAGE (main_chat->send_img), "res/imgs/send_btn.png");
     main_chat->search_line = GTK_WIDGET(gtk_builder_get_object(builder, "search_line1"));
     main_chat->profile_set_btn = GTK_WIDGET(gtk_builder_get_object(builder, "profile_set_btn1"));
     main_chat->chat_line = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_msg"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->chat_line), "text_entry");
     main_chat->search_pan_main_box = GTK_WIDGET(gtk_builder_get_object(builder, "search_pan_main_box"));
     main_chat->chat_entry_split_box = GTK_WIDGET(gtk_builder_get_object(builder, "chat_entry_split_box"));
     main_chat->listbox_search = GTK_WIDGET(gtk_builder_get_object(builder, "listbox_search"));
+    gtk_widget_set_name(GTK_WIDGET (main_chat->listbox_search), "search_panel");
     main_chat->search_viewport1 = GTK_WIDGET(gtk_builder_get_object(builder, "search_viewport1"));
     main_chat->notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
-    set_names(main_chat);
+    main_chat->btn_choose_file = GTK_WIDGET(gtk_builder_get_object(builder, "btn_choose_file"));
+    main_chat->btn_show_sticker = GTK_WIDGET(gtk_builder_get_object(builder, "btn_show_sticker"));
+    main_chat->btn_settings = GTK_WIDGET(gtk_builder_get_object(builder, "btn_settings"));
+    set_icons(main_chat, builder);
     gtk_widget_show_all(main_chat->chat_win);
+    main_chat->notebook_stickers = mx_get_stickers_notebook(builder, info);
     mx_init_search_user(builder, main_chat, info);
-    
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
@@ -105,16 +134,19 @@ void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
 
 void mx_set_signin_win_properties(t_signin_window *signin) {
     gtk_widget_set_size_request(signin->signin_win, 1350, 750);
+    gtk_widget_show_all(signin->signin_win);
 }
 
 void mx_set_signup_win_properties(t_signup_window *signup) {
     gtk_widget_set_size_request(signup->signup_win, 540, 300);
+    gtk_widget_show_all(signup->signup_win);
 }
 
 void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
     gtk_widget_set_size_request(main_chat->chat_win, 1350, 750);
     gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 1350, 750);
     gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
+    gtk_widget_hide(main_chat->chat_win);
 }
 
 void mx_set_properties(t_objects *objs) {
@@ -131,10 +163,14 @@ void mx_connect_builder(t_info* info) {
 
 void mx_connect_css(void) {
     GtkCssProvider *provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
-        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-                               GTK_STYLE_PROVIDER(provider),
-                               GTK_STYLE_PROVIDER_PRIORITY_USER);
+    // gtk_css_provider_load_from_path(provider, SIGNIN_CSS_STYLE, NULL);
+    //     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+    //                            GTK_STYLE_PROVIDER(provider),
+    //                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_css_provider_load_from_path(provider, MX_CSS_MAIN_STYLES, NULL);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                            GTK_STYLE_PROVIDER(provider),
+                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
 
 void mx_init_gtk(t_info* info) {

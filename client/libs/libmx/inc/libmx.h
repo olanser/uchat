@@ -14,6 +14,7 @@ typedef struct s_list {
 #include <sys/types.h>
 #include <pwd.h>
 #include <termios.h>
+#include <dirent.h>
 // #include <term.h>
 
 int mx_strlen(const char *s);
@@ -90,5 +91,9 @@ unsigned int mx_getchar();
 char* mx_arrstr_to_str(char **strs);
 char **mx_dupstrarr(char **strs);
 bool mx_is_str_starts(char *string, char *start);
+
+// dirs
+int mx_dirlen(char *rel_path);
+char **mx_get_dir_filenames(char *rel_path_to_dir);
 
 #endif

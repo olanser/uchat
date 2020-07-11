@@ -39,7 +39,7 @@ static char *create_response_to_users(t_server *server_info,
     char sql[1024];
 
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_avatar, msg_data, msg_file_type from msg where msg_creator = "
+            "msg_avatar, msg_data, msg_type from msg where msg_creator = "
             "%d and msg_status = 3 and msg_chat_id = %d and msg_data = '%s' "
             "ORDER by msg_id DESC LIMIT 1;", user->id_users,
             *((int*)&user->buff[9]), &user->buff[18]);

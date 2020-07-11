@@ -1,7 +1,7 @@
 #ifndef MX_DEFINES_H
 #define MX_DEFINES_H
 
-#define MX_COUNT_FUCTIONS 18
+#define MX_COUNT_FUCTIONS 22
 #define MX_ERROR_THREAD stderr
 #define MX_DATABASE "database/database.db"
 #define MX_CREATE_DATABASE "database/create_db_in_c.sql"

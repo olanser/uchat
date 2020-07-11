@@ -3,21 +3,30 @@
 
 #include <gtk/gtk.h>
 #include "libmx.h"
+#include "characters.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
 typedef struct s_signup_window t_signup_window;
 typedef struct s_main_chat_window t_main_chat_window;
 typedef struct s_user_info t_user_info;
+typedef struct s_msg_widget t_msg_widget;
+typedef struct s_win_size t_win_size;
 
 typedef struct s_info {
     int sock;
     int query_id;
     int scene; // number of window
     int id_chat;
+    int id_of_editing_msg; /* if we now edit msg else 0*/
+    int id_of_editing_chat; /* if we now edit msg else 0*/
+    t_list* list_of_files; // t_file list of sending files
     t_list* list_of_chats; // t_chat_info
-    t_user_info* user_info;
+    t_user_info* user_info; // our user
     t_objects* objs;
+    pthread_mutex_t m_file_list;
+    pthread_mutex_t m_write_sock;
+    t_characters *chars;
 }              t_info;
 
 typedef struct s_user_info {
@@ -28,14 +37,26 @@ typedef struct s_user_info {
     char* scnd_name;
 } t_user_info;
 
+typedef struct s_file {
+    int fd;
+    int chat_id; // chat where sended
+    size_t size; // size of file
+    size_t pos; // current pos in file
+    char *name; // reak naem
+    long long unique_name; // unique name for file
+
+} t_file;
+
 typedef struct s_chat_info {
     int node_index;
     int chat_id;
     int last_id_msg;
-    int type_of_chat;
+    int type_of_chat; // 50 - chat, 49 - dialog
+        int id_user; // for dialogs
     char *name;
     t_list *msgs; // t_msg list of msgs
     GtkWidget* list_box; // list box of msgs
+    GtkWidget* chat_widget; // button widget(in left box)
 }t_chat_info;
 
 typedef struct s_msg{
@@ -46,7 +67,13 @@ typedef struct s_msg{
     char msg_avatar;
     char* msg_data;
     int msg_type; // 1- msg; 2 - sticker
+    t_msg_widget *msg_widget;    
 } t_msg;
+
+typedef struct s_msg_widget {
+    GtkWidget *widget;
+    GtkWidget *label;
+} s_msg_widget;
 
 typedef struct s_objects {
     t_signin_window *s_signin_win;
@@ -56,6 +83,8 @@ typedef struct s_objects {
 
 
 struct s_main_chat_window {
+    t_win_size *size;
+    GtkWidget* layout_main;
     GtkWidget* chat_win;
     GtkWidget* main_chat_box;
     GtkWidget* profile_set_btn;
@@ -73,8 +102,23 @@ struct s_main_chat_window {
     GtkWidget* search_viewport1;
     GtkWidget* expand_users;
     GtkWidget* search_users;
+    GtkWidget* btn_choose_file;
+    GtkWidget* btn_logout;
     GtkWidget* list_box_users;
+    GtkWidget* send_img;
+    GtkWidget* exit_img;
+    GtkWidget* settings_img;
+    GtkWidget* stickers_img;
+    GtkWidget* attach_img;
+    GtkWidget* new_chat_img;
         GtkWidget **user_widgets; // mass
+
+    // stickers
+    GtkWidget* btn_show_sticker; // change
+    GtkWidget* notebook_stickers;
+
+    // settings
+    GtkWidget* btn_settings;
 };
 
 struct s_signin_window {
@@ -101,6 +145,12 @@ struct s_signup_window {
     GtkWidget* signup_vissible_pass;
     GtkWidget* signup_main_grid;
     GtkWidget* signup_child_box;
+};
+
+struct s_win_size {
+    int height;
+    int width;
+    int position;
 };
 
 #endif

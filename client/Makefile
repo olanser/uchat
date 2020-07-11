@@ -37,7 +37,6 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_get_user_info.c \
 	src/api/mx_api_send_file.c \
 	src/gtk_cycle/signals/main/mx_btn_send_msg_clicked.c \
-	src/gtk_cycle/signals/reg/reg_signals.c \
 	src/gtk_cycle/signals/signin/signin_signal.c \
 	src/gtk_cycle/signals/main/main_signals.c \
 	src/mx_get_text_textview.c \
@@ -56,6 +55,34 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/mx_is_chat_exist.c \
 	src/gtk_cycle/mx_go_to_dialog.c \
 	src/api/mx_api_create_dialog.c \
+	src/gtk_cycle/renderer/mx_scene_cycle.c \
+	src/listener/handlers/send_msg/mx_get_msg_widget.c \
+	src/gtk_cycle/signals/main/mx_btn_del_msg.c \
+	src/mx_get_chat_info.c \
+	src/mx_get_msg_by_id.c \
+	src/gtk_cycle/signals/main/mx_btn_edit_msg.c \
+	src/mx_find_msg.c \
+	src/listener/handlers/send_msg/mx_get_msg_from_resp.c \
+	src/listener/handlers/send_msg/mx_add_msg_to_box.c \
+	src/listener/handlers/send_msg/mx_add_msg_to_list.c \
+	src/mx_get_path_to_ava.c \
+	src/gtk_cycle/signals/signup/reg_signals.c \
+	src/gtk_cycle/signals/signup/mx_btn_signup.c \
+	src/gtk_cycle/signals/signin/mx_btn_signin.c \
+	src/mx_show_file_dialog.c \
+	src/gtk_cycle/signals/main/mx_btn_choose_file.c \
+	src/gtk_cycle/signals/main/mx_btn_exit.c \
+	src/gtk_cycle/signals/main/mx_btn_show_stickers.c \
+	src/init/init_gtk/mx_get_stickers_notebook.c \
+	src/gtk_cycle/signals/main/mx_btn_send_sticker.c \
+	src/gtk_cycle/signals/main/mx_btn_settings.c \
+	src/api/mx_api_get_unique_name_of_file.c \
+	src/listener/handlers/mx_h_get_unique_name.c \
+	src/file_sender/mx_thread_send_file.c \
+	src/api/mx_api_end_send_file.c \
+	src/mx_tsend_msg_.c \
+	src/mx_send_msg_.c \
+	src/listener/handlers/mx_h_who_is_that.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -65,12 +92,14 @@ A = $(foreach dir, $(dirs), $($(dir):%=)
 
 LIBS = mxinet.a \
 	libmx.a \
+	mxdraw.a \
 
 INC = -I inc
 
-CHECK_INC = inc/defines.h \
+CHECK_INC = inc/defines_client.h \
 	inc/client.h \
 	inc/objects.h \
+
 
 CFG = `pkg-config --cflags gtk+-3.0` 
 
@@ -96,6 +125,7 @@ libs_comile:
 	@mv $(addprefix libs/, $(LIBS)) .
 	@cp libs/mxinet/inc/mxinet.h inc
 	@cp libs/libmx/inc/libmx.h inc
+	@cp libs/mxdraw/inc/mxdraw.h inc
 
 copy:
 	@cp -p $(FULL_SRC) ./tmp

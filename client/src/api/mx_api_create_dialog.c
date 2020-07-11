@@ -19,6 +19,6 @@ int mx_api_create_dialog(int id_user, t_info *info) {
     memset(query, 0, size);
 
     get_query(query, id_user, info->query_id, size);
-    mx_tsend_msg(info->sock, query, size);
+    mx_tsend_msg_(info->sock, query, size, info);
     return 0;
 }
