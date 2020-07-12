@@ -76,22 +76,22 @@ static void set_icons(t_main_chat_window *main_chat, GtkBuilder *builder) {
     GdkPixbuf *pixbuf;
 
     main_chat->send_img = GTK_WIDGET(gtk_builder_get_object(builder, "image4"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SEND_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SEND_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->send_img), pixbuf);
     main_chat->exit_img = GTK_WIDGET(gtk_builder_get_object(builder, "image2"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EXIT_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_EXIT_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->exit_img), pixbuf);
     main_chat->settings_img = GTK_WIDGET(gtk_builder_get_object(builder, "image3"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SETTINGS_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_SETTINGS_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->settings_img), pixbuf);
     main_chat->new_chat_img = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_NEW_CHAT_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_NEW_CHAT_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->new_chat_img), pixbuf);
     main_chat->stickers_img = GTK_WIDGET(gtk_builder_get_object(builder, "image5"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_STICKERS_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_STICKERS_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->stickers_img), pixbuf);
     main_chat->attach_img = GTK_WIDGET(gtk_builder_get_object(builder, "image6"));
-    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_ATTACH_ICON_CO, 30, 30, NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_ATTACH_ICON, 30, 30, NULL);
     gtk_image_set_from_pixbuf(GTK_IMAGE (main_chat->attach_img), pixbuf);
 }
 

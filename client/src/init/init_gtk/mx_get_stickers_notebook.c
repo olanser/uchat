@@ -31,14 +31,17 @@ void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
 
 void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name, t_info *info) {
     char **names_stickers = 0;
-    int i = 1;
+    int i = -1;
     int len_dir = mx_strlen(name_dir);
-    names_stickers = mx_get_dir_filenames(name_dir);
 
+    names_stickers = mx_get_dir_filenames(name_dir);
     while (names_stickers[++i]) {
-        memset(&name_dir[len_dir], 0, 1024 - len_dir);
-        mx_strcat(name_dir, names_stickers[i]);
-        add_image(grid, name_dir, i, info);
+        if (names_stickers[i][0] != '.') {
+            memset(&name_dir[len_dir], 0, 1024 - len_dir);
+            mx_strcat(name_dir, names_stickers[i]);
+            add_image(grid, name_dir, i, info);
+        }
+        
     }
     mx_del_strarr(&names_stickers);
 }
@@ -51,7 +54,6 @@ GtkWidget* get_grid(char *name_of_pack, t_info *info) {
     mx_strcat(name_dir, MX_DIR_STICKERS);
     mx_strcat(name_dir, name_of_pack);
     mx_strcat(name_dir, "/");
-    
     fill_pack(grid, name_dir, name_of_pack, info);
     return grid;
 }
@@ -59,12 +61,15 @@ GtkWidget* get_grid(char *name_of_pack, t_info *info) {
 GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info) {
     GtkWidget *notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook_stickers"));
     char **packs = get_packs(MX_DIR_STICKERS);
-    int i = 1;
+    int i = -1;
 
     while (packs[++i]) {
-        GtkWidget *grid = get_grid(packs[i], info);
-        gtk_notebook_append_page(GTK_NOTEBOOK(notebook), grid,
+        if (packs[i][0] != '.') {
+            GtkWidget *grid = get_grid(packs[i], info);
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), grid,
                               gtk_label_new(packs[i]));
+        }
+        
     }    
     gtk_widget_show_all(notebook);
     mx_del_strarr(&packs);

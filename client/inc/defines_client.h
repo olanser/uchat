@@ -36,17 +36,6 @@
 
 //icons
 
-//BASIC SET
-#define MX_EXIT_ICON "res/imgs/basic_icons/exit_icon.png"
-#define MX_ATTACH_ICON "res/imgs/basic_icons/attach_icon.png"
-#define MX_INVISIBLE_ICON "res/imgs/basic_icons/invisible_icon.png"
-#define MX_NEW_CHAT_ICON "res/imgs/basic_icons/new_chat_icon.png"
-#define MX_SEND_ICON "res/imgs/basic_icons/send_icon.png"
-#define MX_SETTINGS_ICON "res/imgs/basic_icons/settings_icon.png"
-#define MX_STICKERS_ICON "res/imgs/basic_icons/stickers_icon.png"
-#define MX_VISIBLE_ICON "res/imgs/basic_icons/visible_icon.png"
-#define MX_DEL_MSG_BTN "res/imgs/basic_icons/delete_msg_icon.png"
-#define MX_EDIT_MSG_BTN "res/imgs/basic_icons/edit_msg_icon.png"
 
 //CUTE OUTLINE
 #define MX_EXIT_ICON_CO "res/imgs/cute_outline/exit_icon.png"
@@ -60,15 +49,17 @@
 #define MX_DEL_MSG_BTN_CO "res/imgs/cute_outline/delete_msg_icon.png"
 #define MX_EDIT_MSG_BTN_CO "res/imgs/cute_outline/edit_msg_icon.png"
 
-//CUTE SET
-#define MX_EXIT_ICON_C "res/imgs/cute_icons/exit_icon.png"
-#define MX_ATTACH_ICON_C "res/imgs/cute_icons/attach_icon.png"
-#define MX_INVISIBLE_ICON_C "res/imgs/cute_icons/invisible_icon.png"
-#define MX_NEW_CHAT_ICON_C "res/imgs/cute_icons/new_chat_icon.png"
-#define MX_SEND_ICON_C "res/imgs/cute_icons/send_icon.png"
-#define MX_SETTINGS_ICON_C "res/imgs/cute_icons/settings_icon.png"
-#define MX_STICKERS_ICON_C "res/imgs/cute_icons/stickers_icon.png"
-#define MX_VISIBLE_ICON_C "res/imgs/cute_icons/visible_icon.png"
+//blue outline
+#define MX_EXIT_ICON "res/imgs/blue_outline/exit_icon.png"
+#define MX_ATTACH_ICON "res/imgs/blue_outline/attach_icon.png"
+#define MX_INVISIBLE_ICON "res/imgs/blue_outline/invisible_icon.png"
+#define MX_NEW_CHAT_ICON "res/imgs/blue_outline/new_chat_icon.png"
+#define MX_SEND_ICON "res/imgs/blue_outline/send_icon.png"
+#define MX_SETTINGS_ICON "res/imgs/blue_outline/settings_icon.png"
+#define MX_STICKERS_ICON "res/imgs/blue_outline/stickers_icon.png"
+#define MX_VISIBLE_ICON "res/imgs/blue_outline/visible_icon.png"
+#define MX_DEL_MSG_BTN "res/imgs/blue_outline/delete_msg_icon.png"
+#define MX_EDIT_MSG_BTN "res/imgs/blue_outline/edit_msg_icon.png"
 
 #define MX_CSS_MAIN_STYLES "templates/main_styles.css"
 #endif
