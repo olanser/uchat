@@ -60,6 +60,18 @@
 #define MX_DEL_MSG_BTN_CO "client/res/imgs/cute_outline_white/delete_msg_icon.png"
 #define MX_EDIT_MSG_BTN_CO "client/res/imgs/cute_outline_white/edit_msg_icon.png"
 
+//WHITE SET
+#define MX_EXIT_ICON_W "client/res/imgs/cute_outline_white/exit_icon.png"
+#define MX_ATACH_ICON_W "client/res/imgs/cute_outline_white/attach_icon.png"
+#define MX_INVIS_ICON_W "client/res/imgs/cute_outline_white/invisible_icon.png"
+#define MX_NEWCH_ICON_W "client/res/imgs/cute_outline_white/new_chat_icon.png"
+#define MX_SEND_ICON_W "client/res/imgs/cute_outline_white/send_icon.png"
+#define MX_STNGS_ICON_W "client/res/imgs/cute_outline_white/settings_icon.png"
+#define MX_STICK_ICON_W "client/res/imgs/cute_outline_white/stickers_icon.png"
+#define MX_VISIBLE_ICON_W "client/res/imgs/cute_outline_white/visible_icon.png"
+#define MX_DEL_MSG_BTN_W "client/res/imgs/cute_outline_white/delete_msg_icon.png"
+#define MX_EDIT_MSG_BTN_W "client/res/imgs/cute_outline_white/edit_msg_icon.png"
+
 //CUTE SET
 #define MX_EXIT_ICON_C "client/res/imgs/cute_icons/exit_icon.png"
 #define MX_ATTACH_ICON_C "client/res/imgs/cute_icons/attach_icon.png"

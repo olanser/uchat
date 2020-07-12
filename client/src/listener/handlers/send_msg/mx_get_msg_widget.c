@@ -11,12 +11,15 @@ static void fill_sticker_widget(char *response, t_info *info,
     GtkWidget *avatar = gtk_image_new_from_file(
         mx_get_path_to_ava(response[41]));
 
-    gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
-    gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 1);
+    
     if (*(int*)&response[17] == info->user_info->id) { // our msg
+        gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 1);
+        gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
         gtk_widget_set_name(box, "send_sticker_msg");
     }
     else{
+        gtk_box_pack_start(GTK_BOX(box), avatar, TRUE, TRUE, 1);
+        gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 1);
         gtk_widget_set_name(box, "rec_sticker_msg");
     }
     gtk_widget_show_all(box);

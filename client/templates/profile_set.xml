@@ -112,7 +112,7 @@
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkToggleButton" id="theme1_btn">
-                        <property name="label" translatable="yes">theme1</property>
+                        <property name="label" translatable="yes">uCode</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>

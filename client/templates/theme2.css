@@ -69,47 +69,6 @@ button {
 
 }
 
-#image1 {
-    border: 1px black solid;
-    border-radius: 3px;
-    background-color: rgb(116, 116, 116);
-    /* background-image: url("../res/imgs/cute_outline/attach_icon.png"); */
-}
-
-/* log out */
-#image2 {
-    border: 1px black solid;
-    border-radius: 3px;
-    background-color: rgb(116, 116, 116);
-    /* background-image: url("../res/imgs/cute_outline/attach_icon.png"); */
-}
-
-/* settings out */
-#image3 {
-    border: 1px black solid;
-    border-radius: 3px;
-    background-color: rgb(116, 116, 116);
-    /* background-image: url("../res/imgs/cute_outline/attach_icon.png"); */
-}
-
-/* send file */
-#image6 {
-    border: 1px black solid;
-    border-radius: 3px;
-    background-color: rgb(0, 0, 0);
-    /* background-image: url("../res/imgs/cute_outline/attach_icon.png"); */
-}
-/* send sticker*/
-#image5 {
-    border-radius: 3px;
-    background-color: rgb(0, 0, 0);
-}
-/* send msg*/
-#image4 {
-    border-radius: 3px;
-    background-color: rgb(116, 116, 116);
-}
-
 #search_panel {
     background: #0b0c10;
 }

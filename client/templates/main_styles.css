@@ -116,3 +116,15 @@ paned separator.wide {
     border: 1px solid silver;
     background-color: #eeeeee;
 }
+
+notebook stack {
+    background: #060608;
+}
+
+notebook header.top {
+    background: #060608;
+}
+
+notebook header.top tabs {
+    color: #eeeeee;
+}
