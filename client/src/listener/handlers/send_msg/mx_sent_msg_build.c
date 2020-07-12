@@ -5,8 +5,8 @@ static void set_edit_btn(char *response, t_info *info, GtkBuilder* builder) {
     GtkWidget *edit_button = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *img = (GtkWidget *)malloc(sizeof(GtkWidget));
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
-        MX_EDIT_MSG_BTN, 10, 10, NULL);
-    int *id_msg = malloc(sizeof(int));
+        MX_EDIT_MSG_BTN, 25, 25, NULL);
+    int* id_msg = malloc(sizeof(int));
 
     *id_msg = *(int*)&response[9];
     edit_button = GTK_WIDGET(gtk_builder_get_object(builder, "edit_btn"));
@@ -21,7 +21,7 @@ static void set_del_btn(char *response, t_info *info, GtkBuilder* builder) {
     GtkWidget *del_button = (GtkWidget *)malloc(sizeof(GtkWidget));
     GtkWidget *img = (GtkWidget *)malloc(sizeof(GtkWidget));
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
-        MX_DEL_MSG_BTN, 10, 10, NULL);
+        MX_DEL_MSG_BTN, 25, 25, NULL);
     int* id_msg = malloc(sizeof(int));
 
     *id_msg = *(int*)&response[9];
@@ -51,7 +51,6 @@ static void mx_set1(GtkBuilder *builder, char *response) {
     time_lbl = mx_build_get(builder, "send_time_lbl");
     gtk_label_set_text(GTK_LABEL(time_lbl), &response[21]);
     gtk_widget_set_name(GTK_WIDGET (time_lbl), "time_lbl");
-    
 }
 
 GtkWidget *mx_sent_msg_build(char *response, 
@@ -73,7 +72,7 @@ GtkWidget *mx_sent_msg_build(char *response,
     del_button = mx_build_get(builder, "del_btn");
     gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
     edit_button = mx_build_get(builder, "edit_btn");
-    gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
+    gtk_widget_set_name(GTK_WIDGET (del_button), "edit_btn");
     set_del_btn(response, info, builder);
     set_edit_btn(response, info, builder);
     msg_wid->label = label;
