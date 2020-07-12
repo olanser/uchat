@@ -23,9 +23,8 @@ void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
     pixbuf = gdk_pixbuf_new_from_file_at_size(path_to_img, 100, 100, 0);
     img = gtk_image_new_from_pixbuf(pixbuf);
     gtk_container_add(GTK_CONTAINER(event_box), img);
-    gtk_grid_attach(GTK_GRID(grid), event_box, index, 0, 1, 1);
-    g_object_set_data(G_OBJECT(event_box), "path_to_sticker",
-                      path_to_sticker);
+    gtk_grid_attach(GTK_GRID(grid), event_box, index % 7 , index / 7, 1, 1);
+    g_object_set_data(G_OBJECT(event_box), "path_to_sticker", path_to_sticker);
     g_signal_connect(G_OBJECT(event_box), "button-press-event",
                      G_CALLBACK(mx_btn_send_sticker), info);
 }
@@ -35,13 +34,15 @@ void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name,
     char **names_stickers = 0;
     int i = -1;
     int len_dir = mx_strlen(name_dir);
+    int j = 0;
 
     names_stickers = mx_get_dir_filenames(name_dir);
     while (names_stickers[++i]) {
         if (names_stickers[i][0] != '.') {
             memset(&name_dir[len_dir], 0, 1024 - len_dir);
             mx_strcat(name_dir, names_stickers[i]);
-            add_image(grid, name_dir, i, info);
+            add_image(grid, name_dir, j, info);
+            j++;
         }
         
     }
@@ -68,13 +69,12 @@ GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info) {
 
     while (packs[++i]) {
         if (packs[i][0] != '.') {
+            GtkWidget *win = gtk_scrolled_window_new(0, 0);
             GtkWidget *grid = get_grid(packs[i], info);
-            GtkWidget *label = gtk_label_new(packs[i]);
 
-            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), grid,
-                                     label);
-            gtk_widget_set_name(grid, "grid_stickers");
-            gtk_widget_set_name(label, "label_stick_tab");
+            gtk_container_add(GTK_CONTAINER (win), GTK_WIDGET (grid));
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), win,
+                              gtk_label_new(packs[i]));
         }
     }
     gtk_widget_show_all(notebook);
