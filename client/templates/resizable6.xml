@@ -6,30 +6,36 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">chat-message-new-symbolic</property>
+    <property name="name">image1</property>
   </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">system-log-out-symbolic</property>
+    <property name="name">image2</property>
   </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">user-home-symbolic</property>
+    <property name="name">image3</property>
+  </object>
+  <object class="GtkImage" id="image6">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="name">image6</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">mail-send-symbolic</property>
+    <property name="name">image4</property>
   </object>
   <object class="GtkImage" id="image5">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">user-home-symbolic</property>
-  </object>
-  <object class="GtkImage" id="image6">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="name">image5</property>
   </object>
   <object class="GtkWindow" id="main_chat_window1">
     <property name="can_focus">False</property>

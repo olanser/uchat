@@ -192,6 +192,7 @@ typedef struct s_win_profile {
     GtkWidget* profile_img;
     GtkWidget* ev_box_profile_img;
     GtkWidget* grid_avatars;
+    GtkWidget* login_lbl;
 } t_win_profile;
 
 struct s_win_size {

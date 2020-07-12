@@ -67,12 +67,16 @@ GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info) {
     while (packs[++i]) {
         if (packs[i][0] != '.') {
             GtkWidget *grid = get_grid(packs[i], info);
+            GtkWidget *label = gtk_label_new(packs[i]);
+
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), grid,
-                              gtk_label_new(packs[i]));
+                                     label);
+            gtk_widget_set_name(grid, "grid_stickers");
+            gtk_widget_set_name(label, "label_stick_tab");
         }
-        
     }    
     gtk_widget_show_all(notebook);
+    gtk_widget_hide(notebook);
     mx_del_strarr(&packs);
     return notebook;
 }
