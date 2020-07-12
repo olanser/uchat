@@ -125,6 +125,9 @@ char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
 char *mx_show_users(t_server *server_info, t_server_users *user);
 char *mx_delete_msg(t_server *server_info, t_server_users *user);
 char *mx_send_file(t_server *server_info, t_server_users *user);
+int mx_check_file(t_file_message *message, t_server_users *user);
+void mx_creat_msg_to_database_and_rename_file(t_server *server_info,
+    t_server_users *user, t_file_message *message);
 char *mx_change_avatar(t_server *server_info, t_server_users *user);
 char *mx_join_chat(t_server *server_info, t_server_users *user);
 void mx_get_msg_response_10(char status, char *request, char **response);

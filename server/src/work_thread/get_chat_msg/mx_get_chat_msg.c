@@ -23,7 +23,6 @@ static void set_data(char *respons, int type, char **data) {
         sprintf(&respons[46], "%s", data[4]);
     }
 }
-
 /* 
 * data[0] - msg_id*
 * data[1] - msg_chat_id
@@ -69,12 +68,12 @@ char *mx_get_chat_msg(t_server *server_info, t_server_users *user) {
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
             "msg_data, msg_status, msg_avatar, msg_type, msg_file_type, "
             "msg_file_name, msg_file_size from (select * "
-            "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < %d"
-            " order by msg_id DESC LIMIT %d) order by msg_id ASC;",
+            "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < "
+            "%d order by msg_id DESC LIMIT %d) order by msg_id ASC;",
             *((int*)&user->buff[9]), *((int*)&user->buff[13]), 
             *((int*)&user->buff[17]));
     if (mx_do_query(sql, callback, user, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, 
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     return 0;
 }

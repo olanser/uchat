@@ -40,8 +40,8 @@ static bool check_size(t_server_users *user, t_server *server_info) {
     }
     else
         return true;
-    sprintf(log, "ERROR size query!! work ID user = %d, API = %d, SIZE = %d\n",
-            user->id_users, user->buff[0], *((int*)&user->buff[5]));
+    sprintf(log, "ERROR size query!! work ID user = %d, API = %d, SIZE = "
+            "%d\n", user->id_users, user->buff[0], *((int*)&user->buff[5]));
     mx_add_log(server_info, log);
     mx_write_socket(user, response);
     free(response);

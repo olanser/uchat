@@ -3,8 +3,8 @@
 bool mx_is_allowed_name(char *str) {
     int i = -1;
 
-    if (!((str[0] >= 65 && str[0] <= 90) 
-        || (str[0] >= 97 && str[0] <= 122))) 
+    if (!((str[0] >= 65 && str[0] <= 90)
+        || (str[0] >= 97 && str[0] <= 122)))
         return false;
     while (str[++i]) {
         if (!(((str[i] >= 65 && str[i] <= 90)

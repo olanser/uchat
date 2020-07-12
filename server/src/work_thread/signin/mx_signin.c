@@ -16,6 +16,7 @@ static void mx_free_tuser(t_table_user *tuser) {
 
 static t_table_user* get_tuser() {
     t_table_user *tuser = malloc(sizeof(t_table_user));
+
     tuser->first_name = 0;
     tuser->second_name = 0;
     tuser->nickname = 0;

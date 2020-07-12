@@ -17,7 +17,7 @@ static bool error_case(bool *close_conn, int rc, char *buffer) {
         printf("Wrong request  Connection closed\n");
         *close_conn = true;
     }
-    else if ((rc =*((int *)(&buffer[5]))) > MX_MAX_SIZE_REQUEST) {   // size
+    else if ((rc =*((int *)(&buffer[5]))) > MX_MAX_SIZE_REQUEST) {
         printf("Wrong Size  Connection closed\n");
         *close_conn = true;
     }
@@ -43,7 +43,6 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
     pthread_mutex_unlock(&(server_info->m_works));
     kill(getpid(), SIGUSR1);
 }
-
 
 static void free_user_connection_close(t_server *server_info, int id) {
     close(server_info->poll_set[id].fd);

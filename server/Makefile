@@ -49,6 +49,8 @@ SRC_PATH = src/mx_main_server.c \
 	src/mx_init_ssl.c \
 	src/work_thread/signup/mx_check_tuser.c \
 	src/work_thread/signin/mx_login_check_user.c \
+	src/work_thread/send_file/mx_check_file.c \
+	src/work_thread/send_file/mx_creat_msg_to_database_and_rename_file.c \
 
 # Variables
 

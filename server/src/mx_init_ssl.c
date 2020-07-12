@@ -2,16 +2,17 @@
 #include "defines.h"
 
 void mx_loadcertificates(SSL_CTX* ctx, char* certfile, char* keyfile) {
-    if ( SSL_CTX_use_certificate_file(ctx, certfile, SSL_FILETYPE_PEM) <= 0 ) {
+    if ( SSL_CTX_use_certificate_file(ctx, certfile, SSL_FILETYPE_PEM) <= 0) {
         ERR_print_errors_fp(stderr);
         exit(1);
     }
-    if ( SSL_CTX_use_PrivateKey_file(ctx, keyfile, SSL_FILETYPE_PEM) <= 0 ) {
+    if ( SSL_CTX_use_PrivateKey_file(ctx, keyfile, SSL_FILETYPE_PEM) <= 0) {
         ERR_print_errors_fp(stderr);
         exit(1);
     }
     if (!SSL_CTX_check_private_key(ctx)) {
-        fprintf(stderr, "Private key does not match the public certificate\n");
+        fprintf(stderr, "Private key does not match the public certificate"
+                "\n");
         exit(1);
     }
 }

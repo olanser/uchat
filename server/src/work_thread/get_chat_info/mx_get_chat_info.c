@@ -22,8 +22,8 @@ static int get_info_chat(t_server *server_info, t_server_users *user,
     char sql[80];
     int a = 0;
 
-    sprintf(sql, "select chat_name, chat_type, chat_id from chat where chat_id"
-            "=%d;", *((int*)&user->buff[9]));
+    sprintf(sql, "select chat_name, chat_type, chat_id from chat where "
+            "chat_id=%d;", *((int*)&user->buff[9]));
     a = mx_do_query(sql, callback, respons, server_info);
     if (a != SQLITE_OK)
         return 1;
@@ -39,8 +39,8 @@ char *mx_get_chat_info(t_server *server_info, t_server_users *user) {
         return mx_create_respons_error_and_log(server_info, user, 
             MX_DONT_HAVE_CHAT_USER, MX_QS_ERR_RIGHT);
     if (get_info_chat(server_info, user, &response))
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (response)
         return response;
     return 0;

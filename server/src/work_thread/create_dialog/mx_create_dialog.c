@@ -23,8 +23,8 @@ static char *check_users(t_server *server_info,
     sprintf(sql,"select usr_id from user where usr_id = %d;", 
             *((int*)&user->buff[9]));
     if (mx_do_query(sql, mx_return_one_str, &temp, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (temp == 0) {
         mx_add_error_work_log(server_info, user, "NOT FOND USER!");
         return mx_create_response(user->buff[0], id_query, MQ_QS_NOT_FOUND);
@@ -43,16 +43,16 @@ static char *check_dialog_or_create_new_dialog(t_server *server_info,
             "chat_name = '%d_%d';", user->id_users, *((int*)&user->buff[9]),
             *((int*)&user->buff[9]), user->id_users);
     if (mx_do_query(sql, mx_return_one_str, &temp, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (temp != 0)
         return create_response_create_dialog(&temp, user->buff);
     sprintf(sql,"INSERT INTO chat values (NULL, '%d_%d', 1, %d, %d, "
             "datetime('now'));", user->id_users, *((int*)&user->buff[9]),
             user->id_users, *((int*)&user->buff[9]));
     if (mx_do_query(sql, 0, 0, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     return 0;
 }
 
@@ -70,8 +70,8 @@ char *mx_create_dialog(t_server *server_info, t_server_users *user) {
             " chat_type = '1' and chat_id_user_dialog = %d;", user->id_users,
             *((int*)&user->buff[9]));
     if (mx_do_query(sql, mx_return_one_str, &temp, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (temp == 0)
         return mx_create_respons_error_and_log(server_info, user, "DON'T SEE "
             "NEW DIALOG!!!", MX_QS_ERR_SERV);

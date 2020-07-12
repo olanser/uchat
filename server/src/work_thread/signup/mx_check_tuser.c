@@ -5,7 +5,7 @@ int check_lens(t_table_user *tuser) {
     if (mx_strlen(tuser->first_name) > 50) {
         fprintf(MX_ERROR_THREAD, "Error: first name too long\n");
         return 1;
-    }   
+    }
     if (mx_strlen(tuser->second_name) > 50) {
         fprintf(MX_ERROR_THREAD, "Error: second name too long\n");
         return 2;

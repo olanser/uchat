@@ -40,15 +40,15 @@ int get_response(char *request, char **response, char status,
         *response = malloc(sizeof(char) * 10);
         mx_memcpy(*response,  request, 5);
         memset(&(*response)[5], 0, 4);
-        (*response)[5] = 10; // size
-        (*response)[9] = status; // status
+        (*response)[5] = 10; 
+        (*response)[9] = status;
         return 10;
     }
     *response = malloc(sizeof(char) * 21);
     mx_memcpy(*response,  request, 5);
     memset(&(*response)[5], 0, 4);
-    (*response)[5] = 14; // size
-    (*response)[9] = status; // status
+    (*response)[5] = 14;
+    (*response)[9] = status;
     *(int*)(&(*response)[10]) = user->id_users;
     return 14;
 }

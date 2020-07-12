@@ -25,8 +25,10 @@ static int get_ok_msg(char **response, t_table_user *tuser) {
     *response = malloc(total_len);
     memset(*response, 0, total_len);
     *((int*)&(*response)[9]) = tuser->id;
-    mx_memcpy(&(*response)[13], tuser->first_name, strlen(tuser->first_name));
-    mx_memcpy(&(*response)[64], tuser->second_name, strlen(tuser->second_name));
+    mx_memcpy(&(*response)[13], tuser->first_name,
+              strlen(tuser->first_name));
+    mx_memcpy(&(*response)[64], tuser->second_name,
+              strlen(tuser->second_name));
     mx_memcpy(&(*response)[115], tuser->nickname, strlen(tuser->nickname));
     return total_len;
 }

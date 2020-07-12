@@ -8,7 +8,8 @@ static int add_msg_to_db(t_server *server_info, t_server_users *user) {
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
             "msg_chat_id, msg_avatar, msg_type) VALUES (%d, datetime('now'"
             "), \'%s\', %d, '%c', %d);", user->id_users, &user->buff[18],
-            *((int*)&user->buff[9]), user->buff[13], *((int*)&user->buff[14]));
+            *((int*)&user->buff[9]), user->buff[13],
+            *((int*)&user->buff[14]));
     a = mx_do_query(sql, 0, 0, server_info);
     if (a != SQLITE_OK)
         return 1;
@@ -77,8 +78,8 @@ char *mx_send_message(t_server *server_info, t_server_users *user) {
     if (respons)
         return respons;
     if (add_msg_to_db(server_info, user))
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     respons = create_response_to_users(server_info, user);
     if (respons) {
         sprintf(sql, "select cou_usr_id from cou where cou_chat_id = "

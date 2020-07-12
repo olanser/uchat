@@ -26,10 +26,10 @@ static t_server *create_malloc(int max_connect, int count_thread) {
 
 static void set_signal_and_create_thread(t_server *server_info) {
     sigset_t newmask;
+
     sigemptyset(&newmask);
     sigaddset(&newmask, SIGUSR1);
     sigaddset(&newmask, SIGPIPE);
-
     sigprocmask(SIG_BLOCK, &newmask, 0);
     for (int i = 0; i < server_info->count_thread; i++)
         pthread_create(&(server_info->thread[i]), 0, mx_thread, server_info);
@@ -59,6 +59,7 @@ static void open_db(t_server *server_info) {
 
 static void open_log_file(t_server *server_info, int fd_server) {
     int fd = open(MX_LOG_FILE, O_RDWR | O_APPEND | O_CREAT , S_IRWXU);
+
     if (fd == -1) {
         printf("ERROR OPEN LOG FILE\n");
         exit(1);
@@ -84,7 +85,8 @@ t_server *mx_create_server(int fd_server) {
         server_info->table_users[i].id_users = 0;
         server_info->table_users[i].socket = 0;
         server_info->table_users[i].work = 0;
-        pthread_mutex_init(&(server_info->table_users[i].m_write_socket), NULL);
+        pthread_mutex_init(&(server_info->table_users[i].m_write_socket),
+                           NULL);
         pthread_mutex_init(&(server_info->table_users[i].m_if_work), NULL);
     }
     open_log_file(server_info, fd_server);

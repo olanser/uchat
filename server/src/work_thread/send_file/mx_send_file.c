@@ -1,7 +1,8 @@
 #include "server.h"
 #include "defines.h"
 
-static void save_file(t_server_users *user, char *unique_name, char *request) {
+static void save_file(t_server_users *user, char *unique_name,
+                      char *request) {
     char path[63];
     int file_fd;
     char *buf = &request[18];

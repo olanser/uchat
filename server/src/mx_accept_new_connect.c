@@ -25,7 +25,8 @@ static bool check_connekt(t_server *server_info, int pos) {
         SSL_free(server_info->table_users[pos].ssl);
         close(server_info->table_users[pos].socket);
         server_info->table_users[pos].socket = -1;
-        mx_add_log(server_info, "ERROR new user DONT SSL connekt to server\n");
+        mx_add_log(server_info, "ERROR new user DONT SSL connekt to "
+                   "server\n");
         return false;
     }
     return true;
@@ -42,9 +43,8 @@ static void dont_have_slot(t_server *server_info) {
 int mx_accept_new_connect(t_server *server_info, int max_connect) {
     int pos = check_pos(server_info, max_connect);
 
-    if (pos == 0) {
+    if (pos == 0)
         dont_have_slot(server_info);
-    }
     else {
         pthread_rwlock_wrlock(&(server_info->m_edit_users));
         if (check_connekt(server_info, pos)) {
