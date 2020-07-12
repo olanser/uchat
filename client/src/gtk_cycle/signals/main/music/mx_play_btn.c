@@ -1,49 +1,26 @@
 #include "client.h"
 #include "defines_client.h"
 
-void initialise(FMOD_SYSTEM **fmodsystem, bool *possible, FMOD_CHANNEL **channel) {
-    FMOD_RESULT result;    
 
-    //create the sound system. If fails, sound is set to impossible
-    result = FMOD_System_Create(fmodsystem);
-    if (result != FMOD_OK) 
-        *possible = false;
-    //if initialise the sound system. If fails, sound is set to impossible
-    if (*possible) {
-        result = FMOD_System_Init(*fmodsystem,2, FMOD_INIT_NORMAL, 0);
-        printf("initial system\n");
-    }
-    if (result != FMOD_OK) 
-        *possible = false;
-    //sets initial sound volume (mute)
-    if (*possible) {
-        printf("initial chanel\n");
-        FMOD_Channel_SetVolume(*channel,0.0f);
+void unload(t_fmod_info *music) {
+    FMOD_RESULT result;
+    if (music->possible) {
+        music->Sound_on = true;
+        FMOD_Channel_SetPosition(music->channel, 0, FMOD_TIMEUNIT_PCM);
+        result = FMOD_Sound_Release(music->sound);
+        music->pause = false;
+        music->sound = NULL;
+        music->currentSound = NULL;
+        music->scale = NULL;
+        music->sound_len = 0;
+        music->possition = 0;
+        mx_strdel(&(music->sound_to_pay));
     }
 }
-
-t_fmod_info *mx_init_music() {
-    t_fmod_info *music = (t_fmod_info *)malloc(sizeof(t_fmod_info));
-
-    music->channel = NULL;
-    music->currentSound = NULL;
-    music->fmodsystem =  NULL;
-    music->pause = false;
-    music->possible = true;
-    music->possition = 0;
-    music->sound = NULL;
-    music->Sound_on = true;
-    music->sound_to_pay = NULL;
-    music->sound_len = 0;
-
-    initialise(&(music->fmodsystem), &(music->possible), &(music->channel));
-    return music;
-}
-
 
 
 //loads a soundfile
-void load (t_fmod_info *music) {
+void load(t_fmod_info *music) {
     FMOD_RESULT result;
 
     music->currentSound = music->sound_to_pay;
@@ -57,18 +34,46 @@ void load (t_fmod_info *music) {
     }
 }
 
+static gboolean foo(void* data) {
+    GtkWidget *scale = (GtkWidget*)((void**)data)[0];
+    double value = (double)(long long)((void**)data)[1];
+    gtk_range_set_value(GTK_RANGE(scale), value);
+
+    free(data);
+    return 0;
+}
+
+static void build_data(t_fmod_info *music, double value) {
+    void **data = malloc(sizeof(void*) * 2);
+
+    data[0] = music->scale;
+    data[1] = (void*)(long long)value;
+    gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, foo, data, 0);
+}
+
 void *mx_music_scrol(void *data) {
     t_fmod_info *music = (t_fmod_info *)data;
     unsigned int position = 0;
-    int value = 0;
+    double value = 0;
+    int buf = 0;
 
-
-    while(1) {
+    while(value < 99 && music->Sound_on == false) {
         FMOD_Channel_GetPosition(music->channel, &position, FMOD_TIMEUNIT_PCM);
-        value = (position * 100)/music->sound_len;
-        gtk_range_set_value(GTK_RANGE(music->scale), value);
+        value = (double)((double)position * 100)/(double)music->sound_len;
+        if (value <= 100 && value >= 0 && music->scale != NULL) {
+            if (buf < (int) value + 1) {
+                buf = (int) value + 1;
+                build_data(music, value);
+            }
+            else
+                sleep(1);
+        }
     }
+    if (music->Sound_on == false)
+        unload(music);
+    return 0;
 }
+
 void play (t_fmod_info *music) {
     FMOD_RESULT result;
     if (music->possible && music->Sound_on) {
@@ -82,12 +87,6 @@ void play (t_fmod_info *music) {
 }
 
 
-// FMOD_RESULT FMOD_Sound_GetLength(
-//   FMOD_SOUND *sound,
-//   unsigned int *length,
-//   FMOD_TIMEUNIT lengthtype
-// );
-
 
 void togglePause (FMOD_CHANNEL *channel) {
     FMOD_BOOL p;
@@ -95,18 +94,7 @@ void togglePause (FMOD_CHANNEL *channel) {
     FMOD_Channel_SetPaused(channel,!p);
 }
 
-void unload (t_fmod_info *music) {
-    FMOD_RESULT result;
-    if (music->possible) {
-        result = FMOD_Sound_Release(music->sound);
-        music->Sound_on = true;
-        music->pause = false;
-        music->sound = NULL;
-        music->currentSound = NULL;
-        mx_strdel(&(music->sound_to_pay));
-        printf("delte_song\n");
-    }
-}
+
 static bool check_song(char *filename, char *currentname) {
     if (currentname != NULL && strcmp(currentname, filename) != 0)
         return true;
@@ -114,8 +102,7 @@ static bool check_song(char *filename, char *currentname) {
 }
 
 
-void toggleSound (t_fmod_info *mus) {
-    //*Sound_on  = !(*Sound_on);
+void toggleSound(t_fmod_info *mus) {
     if (mus->Sound_on == true) { 
         if (mus->pause == false) {
             load(mus);
@@ -128,58 +115,41 @@ void toggleSound (t_fmod_info *mus) {
         if (mus->pause == true)
             togglePause(mus->channel);
         }
-
-    // if (*Sound_on == false) { 
-    //     unload(*possible, sound, music);
-    //     *sound = NULL;
-    // }
 }
 
 
 
 void mx_play_btn(GtkButton *btn, void*data) {
-    printf("\n\n********CLECKEd********\n\n");
     t_fmod_info *music = (t_fmod_info *)data;
     char *name = g_object_get_data(G_OBJECT(btn), "name");
     GtkWidget *scale = g_object_get_data(G_OBJECT(btn), "scale");
-    music->scale = scale;
     char filepath[512];
 
-    printf("File Name: %s\n", name);
     memset(filepath , 0, 512);
+    music->scale = scale;
     sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);
-    
-    //gtk_range_set_value(GTK_RANGE(scale), 80.0);
-    if (music->sound_to_pay == NULL) {
+    if (music->sound_to_pay == NULL)
         music->sound_to_pay = strdup(filepath);
-        //printf("File Name1: %s\n", music->sound_to_pay);
-    }
     else {
         if (check_song(filepath, music->currentSound)) {
-            printf("********start unload********\n");
-            printf("ti play: %s\n", music->sound_to_pay);
-            printf("Curent: %s\n", music->currentSound);
             unload(music);
+            music->scale = scale;
             music->sound_to_pay = strdup(filepath);
-
         }
     }
-    printf("ti play: %s\n", music->sound_to_pay);
-    printf("Curent: %s\n", music->currentSound);
     toggleSound(music);
 }
 
 void mx_stop_btn(GtkButton *btn, void*data) {
-    printf("\n\n********CLECKEd STOP********\n\n");
     t_fmod_info *music = (t_fmod_info *)data;
     char *name = g_object_get_data(G_OBJECT(btn), "name");
     char filepath[512];
 
-    printf("File Name: %s\n", name);
-    printf("Curent: %s\n", music->currentSound);
     memset(filepath , 0, 512);
     sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);
 
-    if (strcmp(filepath, music->currentSound) == 0)
+    if (music->currentSound != NULL && strcmp(filepath, 
+        music->currentSound) == 0 && music->Sound_on == false) {
         unload(music);
+    }
 }

@@ -34,6 +34,7 @@ static GtkWidget* get_audio_widget(t_file *file, t_info *info) {
     g_object_set_data(G_OBJECT(send_play_btn), "scale", scale);
     g_object_set_data(G_OBJECT(send_play_btn), "name", file->msg_of_file->msg_f_name_of_file);
     g_object_set_data(G_OBJECT(stop_btn), "name", file->msg_of_file->msg_f_name_of_file);
+    g_object_set_data(G_OBJECT(scale), "name", file->msg_of_file->msg_f_name_of_file);
     //void arr[t_file *, t_info *] = {file, info};
     g_signal_connect(G_OBJECT (scale), "change-value",G_CALLBACK(mx_scale_changed), (void *)info->music);
     g_signal_connect(G_OBJECT (send_play_btn), "clicked",G_CALLBACK(mx_play_btn), (void *)info->music);
