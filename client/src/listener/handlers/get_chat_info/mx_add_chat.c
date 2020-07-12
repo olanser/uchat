@@ -1,7 +1,7 @@
 #include "client.h"
 #include "defines_client.h"
 
-static GtkWidget* mx_create_chat_widget(char *response) {
+GtkWidget* mx_create_chat_widget(char *response) {
     GtkWidget* widget = gtk_button_new_with_label(&response[14]);
 
     gtk_widget_set_name(GTK_WIDGET (widget), "chat_names");
@@ -11,6 +11,7 @@ static GtkWidget* mx_create_chat_widget(char *response) {
 static GtkWidget* create_dialog_widget(char *response) {
     GtkWidget* widget = gtk_button_new_with_label("\0");
 
+    gtk_widget_set_name(widget, "dialog_btn");
     return widget;
 }
 

@@ -26,6 +26,7 @@ void mx_set_theme(int fd) {
     GtkCssProvider *provider = gtk_css_provider_new();
 
     buff[count] = 0;
+    printf("buff = %s\n", buff);
     gtk_css_provider_load_from_path(provider, buff, NULL);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
                                             GTK_STYLE_PROVIDER(provider),
@@ -77,6 +78,6 @@ void mx_create_file_registration(char *login, char *password) {
     memcpy(&buff[0], login, mx_strlen(login));
     memcpy(&buff[101], password, mx_strlen(password));
     write(fd, buff, 202);
-    write(fd, "templates/theme1.css", 21);
+    write(fd, MX_DIR_THEME1, 27);
     close(fd);
 }

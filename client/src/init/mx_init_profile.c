@@ -13,6 +13,8 @@ static void init_prof1(t_info *info,
     prof->ev_box_profile_img = mx_build_get(builder, "ev_box_profile_img");
     prof->profile_img = mx_build_get(builder, "profile_img");
     prof->grid_avatars = mx_build_get(builder, "grid_avatars");
+    prof->login_lbl = mx_build_get(builder, "login_lbl");
+    gtk_label_set_text(GTK_LABEL(prof->login_lbl), "Settings");
     gtk_layout_put(
         GTK_LAYOUT(info->objs->chat_win->layout_main), 
         prof->box_profile,

@@ -1,3 +1,80 @@
 #box_profile {
-    background-color: #0ff;
+    background-color: rgb(7, 0, 0);
+    color: #f00;
+    border: black 2px solid;
+}
+
+button#chat_names:hover {
+    border:1px solid #f00;
+}
+
+button#chat_names {
+    background-color: #251818;
+    border: 1px solid#000;
+    color: white;
+}
+
+#box_profile button {
+    color: white;
+}
+
+button:hover {
+    border:1px solid rgb(255, 0, 0);
+    background-color: rgb(0, 0, 0);
+}
+
+notebook list {
+    background-image: url("../res/backgrounds/blood.png");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+#search_panel {
+    background: #0b0c10;
+}
+
+#other_msg {
+    padding: 10px;
+    border-radius: 5px;
+    background: #440000;
+    margin-right: 250px;
+    margin-bottom: 10px;
+    color: rgb(209, 209, 209);
+    border: rgb(146, 146, 146) 1px solid;
+}
+
+#time_lbl {
+    color: #fff;
+}
+
+#grid_stickers {
+    background: linear-gradient(45deg,#1b0000 5%, #ff0000 50%, #1b0000 95%);
+}
+
+#our_msg_box {
+    padding: 10px;
+    margin-left: 250px;
+    margin-right: 0px;
+    border-radius: 5px;
+    border: whitesmoke 1px solid;
+    background: #a80000;
+    color: rgb(219, 219, 219);
+}
+
+notebook header.top tabs {
+    border: 2px solid black;
+    background: rgb(175, 0, 0);
+}
+
+#text_entry.view text {
+    padding: 10px;
+    margin: 10px;
+    border: solid rgb(49, 0, 0) 1px;
+    color: red;
+    background: #000000;
+}
+
+#label_stick_tab {
+    color: #fff;
 }
