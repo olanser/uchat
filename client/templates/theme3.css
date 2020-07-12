@@ -25,9 +25,9 @@ button:hover {
 
 notebook list {
     background-image: url("../res/backgrounds/blood.png");
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat repeat;
+    /* background-size: cover; */
 }
 
 #search_panel {

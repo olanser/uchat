@@ -1,15 +1,11 @@
 #include "client.h"
 #include "defines_client.h"
 
-static t_user_info* get_user(t_info* info, char* response) {
-    t_user_info* uinfo = malloc(sizeof(t_user_info));
-
+static void get_user(t_user_info* uinfo, char* response) {
     uinfo->avatar = 1;
     uinfo->frst_name = 0; 
-    uinfo->nickname = 0;
     uinfo->scnd_name = 0;
     uinfo->id = *(int*)&response[10];
-    return uinfo;
 }
 
 gboolean signup(void *data) {
@@ -17,7 +13,7 @@ gboolean signup(void *data) {
     char *response = (char*)((void**)data)[1];
 
     if (response[9] == (char)200) {
-        info->user_info = get_user(info, response);
+        get_user(info->user_info, response);
         mx_set_profile_window(info);
         mx_chang_scene(info, MX_SCENE_MAIN_CHAT);
         mx_api_get_chats_info(info);

@@ -35,6 +35,7 @@ void mx_init_info(t_info **info) {
     (*info)->id_of_editing_msg = 0;
     (*info)->id_of_editing_chat = 0;
     (*info)->list_of_recv_files = 0;
+    (*info)->user_info = mx_crete_user(*info);
 }
 
 t_pacman *get_pacman(t_info *info) {

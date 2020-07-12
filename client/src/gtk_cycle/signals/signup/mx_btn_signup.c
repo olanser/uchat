@@ -17,6 +17,8 @@ void mx_btn_signup(GtkWidget* button, void* data) {
         GTK_ENTRY(info->objs->s_signup_win->signup_login));
     const char *parameters[4] = {"firstName", "secondName", login, pass1};
 
+    free(info->user_info->nickname);
+    info->user_info->nickname = mx_strdup(login);
     if (mx_strcmp(pass1, pass2) != 0) {
         return;
     }

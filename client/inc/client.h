@@ -60,6 +60,7 @@ void mx_init_main_chat_win(GtkBuilder *builder,
                            t_main_chat_window *main_chat, 
                            t_info *info);
 void mx_init_profile(t_info *info);
+t_user_info* mx_crete_user(t_info* info);
 
 // api
 int mx_api_delete_message(int id_msg, int id_chat, t_info *info);

@@ -2,7 +2,7 @@
 #include "defines_client.h"
 #include "icons.h"
 
-static void set_lbl(GtkBuilder *builder, char *response) {
+static void set_lbl(GtkBuilder *builder, char *response, t_info *info) {
     GtkWidget *time_lbl = 0;
     GtkWidget *msg_bbl = 0;
 
@@ -29,7 +29,7 @@ static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_in
     label = mx_build_get(builder, "rec_msg_lbl");
     gtk_label_set_label(GTK_LABEL (label), &response[46]);
     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
-    set_lbl(builder, response);
+    set_lbl(builder, response, info);
     msg_wid->label = label;
     return box;
 }
