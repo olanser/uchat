@@ -11,7 +11,7 @@ char *mx_do_request(t_server *server_info, t_server_users *user) {
         mx_change_avatar, mx_create_unique_name, mx_send_file,
         mx_end_of_file, mx_get_file
     };
-    char *(*foo)(t_server *, t_server_users *) = (*api[user->buff[0]]);
+    char *(*foo)(t_server *, t_server_users *) = (*api[(int)user->buff[0]]);
 
     return foo(server_info, user);
 }

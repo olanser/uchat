@@ -32,7 +32,5 @@ const char *mx_get_path_to_ava(int number) {
     if (number > dirlen - 2 || number < 0) {
         return MX_AVA_ERR;
     }
-    
-    
     return mas[number];
 }

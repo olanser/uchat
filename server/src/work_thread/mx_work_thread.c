@@ -1,7 +1,7 @@
 #include "server.h"
 #include "defines.h"
 
-static bool check_request(t_server_users *user, t_server *server_info) {
+static bool check_request(t_server_users *user) {
     char *response = 0;
 
     if (user->id_users != 0) {
@@ -33,8 +33,8 @@ static bool check_size(t_server_users *user, t_server *server_info) {
     char *response = 0;
     char log[75];
 
-    if (*((int*)&user->buff[5]) < min_size[user->buff[0]]
-        || *((int*)&user->buff[5]) > max_size[user->buff[0]]) {
+    if (*((int*)&user->buff[5]) < min_size[(int)user->buff[0]]
+        || *((int*)&user->buff[5]) > max_size[(int)user->buff[0]]) {
         response = mx_create_response(user->buff[0],
                 *(int*)&(user->buff[1]), MX_QS_ERR_FUNC);
     }
@@ -49,15 +49,13 @@ static bool check_size(t_server_users *user, t_server *server_info) {
 }
 
 void mx_work_thread(t_server *server_info, t_server_users *user) {
-    char comand = user->buff[0];
-    int size = *((int*)&(user->buff[5]));
     char *response;
     char log[75];
 
     sprintf(log, "Start work ID user = %d, API = %d\n", user->id_users,
             user->buff[0]);
     mx_add_log(server_info, log);
-    if (check_request(user, server_info) && check_size(user, server_info)) {
+    if (check_request(user) && check_size(user, server_info)) {
         response = mx_do_request(server_info, user);
         if (response) {
             mx_write_socket(user, response);

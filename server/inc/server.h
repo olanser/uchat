@@ -101,6 +101,7 @@ void mx_add_error_work_log(t_server *server_info, t_server_users *user,
                            char *msg);
 char *mx_create_respons_error_and_log(t_server *server_info,
     t_server_users *user, char *msg, char status);
+char *mx_chenge_symbol(char *str);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);

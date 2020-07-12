@@ -85,5 +85,4 @@ void mx_connect_signals(t_info* info) {
     connect_to_main_window(info);
     connect_to_signin_window(info);
     connect_to_signup_window(info);
-    // all signals here
 }

@@ -19,12 +19,14 @@ static void send_get_file(char *response, t_file *file, t_info *info) {
 
 static bool file_downloaded(char *response, t_file *file, t_info *info) {
     if (*(int*)&response[13] >= (int)file->size) {
-        GtkWidget *parent = gtk_widget_get_parent(file->msg_of_file->msg_widget->widget);
-    
+        GtkWidget *parent = gtk_widget_get_parent(
+            file->msg_of_file->msg_widget->widget);
+
         gtk_widget_destroy(file->msg_of_file->msg_widget->widget);
         file->msg_of_file->msg_widget->widget = mx_get_widget_of_file(file);
         gtk_widget_show_all(file->msg_of_file->msg_widget->widget);
-        gtk_container_add(GTK_CONTAINER(parent), file->msg_of_file->msg_widget->widget);
+        gtk_container_add(GTK_CONTAINER(parent),
+                          file->msg_of_file->msg_widget->widget);
         close(file->fd);
         return true;
     }
@@ -43,7 +45,6 @@ int mx_handler_get_file(char *response, t_info *info) {
         *(int*)&response[9]);
     pthread_mutex_unlock(&info->m_file_recv_list);
     if (file == 0) {
-        printf("ERR mx_h_get_file\n");
         return 0;
     }
     memcpy(buff, &response[21], size - 21);

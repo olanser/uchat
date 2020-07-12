@@ -21,8 +21,8 @@ gboolean mx_destroy_signin_window(GtkWidget *window) {
     return FALSE;
 }
 
-gboolean mx_go_fullscreen_signin_window(GtkWidget *window, 
-                                        GdkEventWindowState *event, 
+gboolean mx_go_fullscreen_signin_window(GtkWidget *window,
+                                        GdkEventWindowState *event,
                                         t_objects *objs) {
     if (event->changed_mask == GDK_WINDOW_STATE_FULLSCREEN) {
         sleep(1);

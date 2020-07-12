@@ -4,13 +4,15 @@
 static int add_msg_to_db(t_server *server_info, t_server_users *user) {
     char sql[10000];
     int a = 0;
+    char *temp_data = mx_chenge_symbol(&user->buff[18]);
 
     sprintf(sql, "INSERT INTO msg (msg_creator, msg_send_time, msg_data, "
             "msg_chat_id, msg_avatar, msg_type) VALUES (%d, datetime('now'"
-            "), \'%s\', %d, '%c', %d);", user->id_users, &user->buff[18],
+            "), \'%s\', %d, '%c', %d);", user->id_users, temp_data,
             *((int*)&user->buff[9]), user->buff[13],
             *((int*)&user->buff[14]));
     a = mx_do_query(sql, 0, 0, server_info);
+    free(temp_data);
     if (a != SQLITE_OK)
         return 1;
     return 0;
@@ -29,7 +31,6 @@ static int callback(void *data, int column, char **name, char **tabledata) {
     *((int*)&response[17]) = atoi(name[2]);
     sprintf(&response[21], "%s",name[3]);
     response[41] = name[4][0];
-    printf("ava = %d\n", name[4][0]);
     *((int*)&response[42]) = atoi(name[5]);
     sprintf(&response[46], "%s",name[6]);
     *(char**)data = response;
@@ -40,20 +41,20 @@ static char *create_response_to_users(t_server *server_info,
                                       t_server_users *user) {
     char *respons = 0;
     char sql[10000];
+    char *temp_data = mx_chenge_symbol(&user->buff[18]);
 
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
             "msg_avatar, msg_type, msg_data from msg where msg_creator = "
             "%d and msg_status = 2 and msg_chat_id = %d and msg_data = '%s' "
             "ORDER by msg_id DESC LIMIT 1;", user->id_users,
-            *((int*)&user->buff[9]), &user->buff[18]);
+            *((int*)&user->buff[9]), temp_data);
     mx_do_query(sql, callback, &respons, server_info);
+    free(temp_data);
     return respons;
 }
 
 
 static char *check_query(t_server *server_info, t_server_users *user) {
-    int query = *((int*)&user->buff[1]);
-
     if (user->buff[*((int*)(&user->buff[5])) - 1] != 0)
         return mx_create_respons_error_and_log(server_info, user,
             MX_ERROR_END_STR, MX_QS_ERR_FUNC);

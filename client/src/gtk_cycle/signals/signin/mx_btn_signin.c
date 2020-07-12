@@ -6,6 +6,7 @@ static bool check_valid(char** params) {
     }
     return true;
 }
+
 gboolean mx_btn_signin(GtkButton *button, t_info *info) {
     const char *login = gtk_entry_get_text(
         GTK_ENTRY(info->objs->s_signin_win->signin_login));

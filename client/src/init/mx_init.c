@@ -52,7 +52,7 @@ void mx_init_signals() {
     sigset_t newmask;
 
     sigemptyset(&newmask);
-    sigaddset(&newmask, SIGUSR1); // new file sending
+    sigaddset(&newmask, SIGUSR1);
     sigprocmask(SIG_BLOCK, &newmask, 0);
 }
 

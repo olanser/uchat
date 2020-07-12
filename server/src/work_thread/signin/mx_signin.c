@@ -27,7 +27,6 @@ static t_table_user* get_tuser() {
 char *mx_signin(t_server *server_info, t_server_users *user) {
     t_table_user *tuser = get_tuser();
     char status = 0;
-    int len = 0;
     char *response = 0;
 
     read_request(user->buff, tuser);

@@ -14,6 +14,6 @@
 #define MX_AVA_8 "res/avatars/ava4.jpg"
 #define MX_AVA_9 "res/avatars/ava4.jpg"
 #define MX_AVA_10 "res/avatars/ava4.jpg"
-
 #define MX_AVA_ERR "res/avatars/errava.png"
+
 #endif

@@ -45,7 +45,6 @@ void mx_btn_choose_file(GtkWidget *button, t_info *info) {
     if (file->size == 0 || file->fd == -1) {
         free(file->name);
         free(file);
-        printf(" file is empty\n");
         return;
     }
     pthread_mutex_lock(&info->m_file_list);

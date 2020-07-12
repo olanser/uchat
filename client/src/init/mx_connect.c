@@ -37,7 +37,7 @@ static void init_ssl(void) {
 
 void mx_connect(t_info *info, int argc, char **argv) {
     const SSL_METHOD *method;
-    
+
     check_connect(argc, argv);
     info->sock = mx_create_tcp_csock(atoi(argv[2]), argv[1]);
     init_ssl();

@@ -49,7 +49,6 @@ static char *create_response_to_users(t_server *server_info,
 
 static char *check_query(t_server *server_info, t_server_users *user) {
     int query = *((int*)&user->buff[1]);
-    char log[1024];
 
     if (user->buff[*((int*)(&user->buff[5])) - 1] != 0) {
         mx_add_error_work_log(server_info, user, MX_ERROR_END_STR);

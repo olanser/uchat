@@ -15,7 +15,7 @@ static int get_ok_msg(char **response, t_table_user *tuser) {
     return size;
 }
 
-static int get_err_msg(char **response, char status) {
+static int get_err_msg(char **response) {
     int total_len = 10;
 
     *response = malloc(total_len);
@@ -31,7 +31,7 @@ int mx_get_msg_login(char status, char *request, t_table_user *tuser,
         total_len = get_ok_msg(response, tuser);
     }
     else {
-        total_len = get_err_msg(response, status);
+        total_len = get_err_msg(response);
     }
     mx_memcpy(*response, request, 5);
     (*response)[9] = status;

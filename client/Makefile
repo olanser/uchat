@@ -35,7 +35,6 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/api/mx_api_edit_message.c \
 	src/api/mx_api_get_chat_users.c \
 	src/api/mx_api_get_user_info.c \
-	src/api/mx_api_send_file.c \
 	src/gtk_cycle/signals/main/mx_btn_send_msg_clicked.c \
 	src/gtk_cycle/signals/signin/signin_signal.c \
 	src/gtk_cycle/signals/main/main_signals.c \
@@ -139,20 +138,20 @@ CHECK_INC = inc/defines_client.h \
 	inc/objects.h \
 
 
-CFG = `pkg-config --cflags gtk+-3.0` 
+CFG = `pkg-config --cflags gtk+-3.0`
 
 CFG2 = `pkg-config --libs gtk+-3.0` \
 	-pthread \
 	-lsqlite3 \
 	-rdynamic \
-	-L libs -lssl -lcrypto
+	-L libs -lssl -lcrypto -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 SANITIZE = -fsanitize=address
 
 I = 0
 
 all: premake libs_comile copy $(FULL_OBJS)
-	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2) $(SANITIZE)
+	@clang $(FULL_OBJS) $(LIBS) -o $(TARGET) $(CFG) $(CFG2)
 	@printf "\x1b[1m\x1b[38;5;10m \x1b[4m=UCHAT=\x1b[0m \x1b[38;5;226mready\x1b[38;5;8m [$I]\x1b[0m\n"
 
 premake:

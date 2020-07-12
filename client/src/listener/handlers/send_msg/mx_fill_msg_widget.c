@@ -20,7 +20,6 @@ static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_in
     label = mx_build_get(builder, "rec_msg_lbl");
     gtk_label_set_label(GTK_LABEL (label), &response[46]);
     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
-    // gtk_label_set_max_width_chars(GTK_LABEL (label), 75);
     msg_wid->label = label;
     return mx_build_get(builder, "rec_mainbox");
 }

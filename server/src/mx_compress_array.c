@@ -13,7 +13,6 @@ static void chenge_array(t_server *server_info, int i) {
 }
 
 void mx_compress_array(t_server *server_info) {
-    t_server_users *temp;
     bool check = true;
 
     if (mx_check_not_work(&(server_info->table_users[

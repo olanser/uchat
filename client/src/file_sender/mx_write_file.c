@@ -37,7 +37,6 @@ static void send_end_file(t_info *info, t_file *file) {
 
 
 static void get_head(char *buff, t_file *file, t_info *info) {
-    // memset(buff, 0, 1024);
     buff[0] = 20;
     *(int*)&buff[1] = info->query_id;
     *(int*)&buff[5] = MX_SIZE_SEND_BYTES;
@@ -45,7 +44,7 @@ static void get_head(char *buff, t_file *file, t_info *info) {
 }
 
 void mx_write_file(t_info *info) {
-    t_file *file = 0; // LEAK
+    t_file *file = 0;
     char buff[MX_SIZE_SEND_BYTES];
     int count  = 0;
 

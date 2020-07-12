@@ -18,7 +18,6 @@ void mx_btn_signup(GtkWidget* button, void* data) {
     const char *parameters[4] = {"firstName", "secondName", login, pass1};
 
     if (mx_strcmp(pass1, pass2) != 0) {
-        printf("passwords not equal\n");
         return;
     }
     if (check_valid((char**)parameters) == false)

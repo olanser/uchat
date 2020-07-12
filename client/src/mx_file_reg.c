@@ -45,7 +45,6 @@ bool mx_check_file_registration(t_info *info) {
         return false;
     len = read(fd, buff, 202);
     if (len != 202) {
-        printf("ERROR FILE registration\n");
         return false;
     }
     if (check_buff(buff)){
@@ -57,7 +56,6 @@ bool mx_check_file_registration(t_info *info) {
     argv[0] = &buff[0];
     argv[1] = &buff[101];
     mx_api_signin(argv, info);
-    
     return true;
 }
 
@@ -73,7 +71,6 @@ void mx_create_file_registration(char *login, char *password) {
         close(fd);
         return;
     }
-   ;
     memcpy(&buff[0], login, mx_strlen(login));
     memcpy(&buff[101], password, mx_strlen(password));
     write(fd, buff, 202);

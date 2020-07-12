@@ -1,7 +1,7 @@
 #include "client.h"
 #include "defines_client.h"
 
-static void init_prof1(t_info *info, 
+static void init_prof1(t_info *info,
                        t_win_profile *prof, GtkBuilder *builder) {
     prof->box_profile = mx_build_get(builder, "box_profile");
     prof->theme1_btn = mx_build_get(builder, "theme1_btn");
@@ -14,7 +14,7 @@ static void init_prof1(t_info *info,
     prof->profile_img = mx_build_get(builder, "profile_img");
     prof->grid_avatars = mx_build_get(builder, "grid_avatars");
     gtk_layout_put(
-        GTK_LAYOUT(info->objs->chat_win->layout_main), 
+        GTK_LAYOUT(info->objs->chat_win->layout_main),
         prof->box_profile,
         (MX_WIN_WIDTH / 2) - (MX_WIN_PROF_W / 2),
         (MX_WIN_HEIGHT / 2) - (MX_WIN_PROF_H / 2));

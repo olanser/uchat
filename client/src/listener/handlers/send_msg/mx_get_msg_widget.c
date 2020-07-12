@@ -2,7 +2,8 @@
 #include "icons.h"
 #include "defines_client.h"
 
-static void fill_sticker_widget(char *response, t_info *info, t_msg_widget* msg_wid) {
+static void fill_sticker_widget(char *response, t_info *info,
+                                t_msg_widget* msg_wid) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
         &response[46], 100, 100, 0);
@@ -22,9 +23,9 @@ static void fill_sticker_widget(char *response, t_info *info, t_msg_widget* msg_
     msg_wid->widget = box;
 }
 
-static void fill_file_widget(char *response, 
-                             t_info *info, 
-                             t_msg_widget* msg_wid, 
+static void fill_file_widget(char *response,
+                             t_info *info,
+                             t_msg_widget* msg_wid,
                              t_msg *msg) {
     msg_wid->widget = gtk_button_new_with_label(&response[46]);
     g_object_set_data(G_OBJECT(msg_wid->widget), "msg", msg);

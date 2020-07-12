@@ -31,7 +31,6 @@ static int get_info_chat(t_server *server_info, t_server_users *user,
 }
 
 char *mx_get_chat_info(t_server *server_info, t_server_users *user) {
-    char sql[80];
     char *response = 0;
 
     if (mx_check_user_in_chat(*((int*)&user->buff[9]), user->id_users,

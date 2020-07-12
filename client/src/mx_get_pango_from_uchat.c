@@ -3,12 +3,14 @@
 static char *get_format(char *str) {
     int n = mx_get_char_index(str, ':');
     char *format = mx_strndup(str, n);
+
     return format;
 }
 
 static char *get_string(char *str) {
     int n = mx_get_char_index(str, ':');
     char *string = mx_strndup(&str[n + 1], mx_strlen(str) - n);
+
     return string;
 }
 
@@ -24,10 +26,12 @@ static char *get_pango_attributes(char **attributes) {
 
     while (attributes[++i]) {
         if (attributes[i][0] == '#') { // color
-            asprintf(&attributes_str, "<span foreground=\"%s\">%s</span>",attributes[i], att_buff);
+            asprintf(&attributes_str, "<span foreground=\"%s\">%s</span>",
+                     attributes[i], att_buff);
         }
         else {
-            asprintf(&attributes_str, "<%s>%s</%s>", attributes[i], att_buff, attributes[i]);
+            asprintf(&attributes_str, "<%s>%s</%s>", attributes[i], att_buff,
+                     attributes[i]);
         }
         free(att_buff);
         att_buff = attributes_str;

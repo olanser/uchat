@@ -56,7 +56,6 @@ bool mx_is_substr_valid(char *substr) {
     int end = mx_get_char_index(substr, ':');
     
     if (end == -1) {// ':' dont finded
-        printf(" ':' - dont finded\n");
         return false;
     }
     if (!check_tags(substr, end))

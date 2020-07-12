@@ -9,12 +9,12 @@ static int get_query(char *query, int avatar, int query_id, int size) {
     query[0] = 18;
     *(int*)(&query[1]) = query_id;
     *(int*)(&query[5]) = size;
-    *(int*)(&query[9]) = avatar;
+    query[9] = (char)avatar;
     return 0;
 }
 
 int mx_api_change_avatar(int avatar, t_info *info) {
-    int size = 13;
+    int size = 10;
     char *query = malloc(sizeof(char) * size);
 
     memset(query, 0, size);

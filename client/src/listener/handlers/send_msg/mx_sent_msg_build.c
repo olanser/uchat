@@ -6,7 +6,7 @@ static void set_edit_btn(char *response, t_info *info, GtkBuilder* builder) {
     GtkWidget *img = (GtkWidget *)malloc(sizeof(GtkWidget));
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
         MX_EDIT_MSG_BTN, 10, 10, NULL);
-    int* id_msg = malloc(sizeof(int));
+    int *id_msg = malloc(sizeof(int));
 
     *id_msg = *(int*)&response[9];
     edit_button = GTK_WIDGET(gtk_builder_get_object(builder, "edit_btn"));
@@ -57,7 +57,8 @@ static void mx_set1(GtkBuilder *builder, char *response) {
 GtkWidget *mx_sent_msg_build(char *response, 
                              t_msg_widget* msg_wid,
                              t_info *info) {
-    GtkBuilder *builder = gtk_builder_new_from_file("client/templates/message_box.xml");
+    GtkBuilder *builder = gtk_builder_new_from_file(
+        "client/templates/message_box.xml");
     GtkWidget *box = 0;
     GtkWidget *label = 0;
     GtkWidget *del_button = 0;
@@ -75,7 +76,6 @@ GtkWidget *mx_sent_msg_build(char *response,
     gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
     set_del_btn(response, info, builder);
     set_edit_btn(response, info, builder);
-    
     msg_wid->label = label;
     return box;
 }

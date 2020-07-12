@@ -22,15 +22,16 @@ void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
     event_box = gtk_event_box_new();
     pixbuf = gdk_pixbuf_new_from_file_at_size(path_to_img, 100, 100, 0);
     img = gtk_image_new_from_pixbuf(pixbuf);
-
     gtk_container_add(GTK_CONTAINER(event_box), img);
     gtk_grid_attach(GTK_GRID(grid), event_box, index, 0, 1, 1);
-    g_object_set_data(G_OBJECT(event_box), "path_to_sticker", path_to_sticker);
+    g_object_set_data(G_OBJECT(event_box), "path_to_sticker",
+                      path_to_sticker);
     g_signal_connect(G_OBJECT(event_box), "button-press-event",
                      G_CALLBACK(mx_btn_send_sticker), info);
 }
 
-void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name, t_info *info) {
+void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name,
+               t_info *info) {
     char **names_stickers = 0;
     int i = 1;
     int len_dir = mx_strlen(name_dir);
@@ -57,16 +58,17 @@ GtkWidget* get_grid(char *name_of_pack, t_info *info) {
 }
 
 GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info) {
-    GtkWidget *notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook_stickers"));
+    GtkWidget *notebook = GTK_WIDGET(gtk_builder_get_object(builder,
+                                     "notebook_stickers"));
     char **packs = get_packs(MX_DIR_STICKERS);
     int i = 1;
 
     while (packs[++i]) {
         GtkWidget *grid = get_grid(packs[i], info);
-    
+
         gtk_notebook_append_page(GTK_NOTEBOOK(notebook), grid,
                               gtk_label_new(packs[i]));
-    }    
+    }
     gtk_widget_show_all(notebook);
     mx_del_strarr(&packs);
     return notebook;

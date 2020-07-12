@@ -7,6 +7,8 @@ void mx_btn_change_chat(GtkWidget* button, void* data) {
 
     ch = g_object_get_data(G_OBJECT(button), "chat_info");
     info->id_chat = ch->chat_id;
-    gtk_notebook_set_current_page(GTK_NOTEBOOK(info->objs->chat_win->notebook), ch->node_index);
-    mx_api_get_chat_msgs(chat_info->chat_id, chat_info->last_id_msg, 10, info);
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(
+        info->objs->chat_win->notebook), ch->node_index);
+    mx_api_get_chat_msgs(chat_info->chat_id, chat_info->last_id_msg, 10,
+                         info);
 }

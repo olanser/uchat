@@ -51,6 +51,7 @@ SRC_PATH = src/mx_main_server.c \
 	src/work_thread/signin/mx_login_check_user.c \
 	src/work_thread/send_file/mx_check_file.c \
 	src/work_thread/send_file/mx_creat_msg_to_database_and_rename_file.c \
+	src/function/mx_chenge_symbol.c \
 
 # Variables
 
@@ -72,6 +73,7 @@ INC = inc/defines.h \
 
 CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror -L libs -lssl -lcrypto
 SANITIZE = -fsanitize=address
+FLAG = -std=c11 -Wall -Wextra -Wpedantic -Werror
 
 SERVER = chat_server
 # Rules
