@@ -168,6 +168,9 @@ struct s_signin_window {
     GtkWidget *image_name;
     GtkWidget *broken_screen;
     GtkWidget *broken_lbl;
+    GtkWidget* vis_img;
+    //trigs
+    bool vis;
 };
 
 struct s_signup_window {
@@ -179,6 +182,9 @@ struct s_signup_window {
     GtkWidget* signup_vissible_pass;
     GtkWidget* signup_main_grid;
     GtkWidget* signup_child_box;
+    GtkWidget* vis_img;
+    //trigers
+    bool vis;
 };
 
 typedef struct s_win_profile {

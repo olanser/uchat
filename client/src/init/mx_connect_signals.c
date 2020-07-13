@@ -27,6 +27,9 @@ static void connect_to_signin_window(t_info* info) {
     g_signal_connect(
         GTK_WIDGET(win->signin_win), "key-press-event",
         (GCallback)mx_key_press_signin, info);
+    g_signal_connect(
+        GTK_WIDGET (win->signin_vissible_pass), "clicked",
+        (GCallback)mx_vis_pass_signin, info);
 }
 
 static void connect_to_signup_window(t_info* info) {
@@ -42,6 +45,9 @@ static void connect_to_signup_window(t_info* info) {
     g_signal_connect(
         GTK_WIDGET (info->objs->s_signup_win->signup_win), "key-press-event",
         (GCallback) mx_key_press_signup, info);
+    g_signal_connect(
+        GTK_WIDGET (info->objs->s_signup_win->signup_vissible_pass), "clicked",
+        (GCallback)mx_vis_pass, info);
 }
 
 static void conect2(t_info* info) {

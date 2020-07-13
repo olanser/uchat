@@ -168,6 +168,8 @@ gboolean mx_destroy_main_window(GtkWidget *window);
 gboolean mx_destroy_signup_window(GtkWidget *window);
 gboolean mx_destroy_signin_window(GtkWidget *window);
 gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
+gboolean mx_vis_pass(GtkWidget *button, void *data);
+gboolean mx_vis_pass_signin(GtkWidget *button, void *data);
 
 // file_sender
 void *mx_thread_send_file(void *data);
