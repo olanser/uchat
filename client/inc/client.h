@@ -4,6 +4,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include "objects.h"
+
 #include <stdbool.h>
 
 #include "openssl/ssl.h"
@@ -14,6 +15,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include "fmod.h"
 
 
 char *get_text_of_textview(GtkWidget *text_view);
@@ -107,6 +109,10 @@ void mx_btn_theme4(GtkWidget* button, t_info *info);
 void mx_btn_theme5(GtkWidget* button, t_info *info);
 void mx_btn_save(GtkWidget* button, t_info *info);
 
+void mx_play_btn(GtkButton *btn, void*data);
+gboolean mx_scale_changed (GtkRange *range, GtkScrollType scroll,
+                            gdouble value, void *user_data);
+void mx_stop_btn(GtkButton *btn, void*data);
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
 gboolean mx_key_press_signup(GtkWidget*widget, GdkEvent *event, t_info *info);
@@ -151,7 +157,7 @@ int mx_handler_get_file(char *response, t_info *info);
 
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg);
-GtkWidget* mx_get_widget_of_file(t_file *file);
+GtkWidget* mx_get_widget_of_file(t_file *file, t_info *info);
 void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid);
 void mx_set_markup(GtkWidget *label, char *str);
 GtkWidget *mx_sent_msg_build(char *response, 
@@ -174,5 +180,8 @@ gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *
 void *mx_thread_send_file(void *data);
 void mx_write_file(t_info *info);
 void mx_free_file(t_file *file);
+
+//music
+t_fmod_info *mx_init_music();
 
 #endif

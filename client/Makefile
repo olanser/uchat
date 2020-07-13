@@ -121,6 +121,9 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/listener/handlers/mx_get_file/mx_handler_get_file.c \
 	src/listener/handlers/send_msg/mx_handle_add_msg.c \
 	src/init/mx_create_user.c \
+	src/gtk_cycle/signals/main/music/mx_play_btn.c \
+	src/gtk_cycle/signals/main/music/mx_scale_changed.c \
+	src/gtk_cycle/signals/main/music/mx_init_music.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 
@@ -145,7 +148,8 @@ CFG2 = `pkg-config --libs gtk+-3.0` \
 	-pthread \
 	-lsqlite3 \
 	-rdynamic \
-	-L libs -lssl -lcrypto -std=c11 -Wall -Wextra -Werror -Wpedantic
+	-L libs -lssl -lcrypto -std=c11 -Wall -Wextra -Werror -Wpedantic \
+	-lfmodex
 
 SANITIZE = -fsanitize=address
 

@@ -5,8 +5,8 @@
 
 #define MX_PACMAN_ANIM_DUR 8 /* iterations */
 #define MX_PACMAN_COUNT_SP 2
-#define MX_PAC_SP1 "res/anim/pacman/pacman1.tiff"
-#define MX_PAC_SP2 "res/anim/pacman/pacman2.tiff"
+#define MX_PAC_SP1 "client/res/anim/pacman/pacman1.tiff"
+#define MX_PAC_SP2 "client/res/anim/pacman/pacman2.tiff"
 
 typedef struct s_pacman t_pacman;
 

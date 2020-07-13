@@ -23,7 +23,8 @@ static bool file_downloaded(char *response, t_file *file, t_info *info) {
             file->msg_of_file->msg_widget->widget);
 
         gtk_widget_destroy(file->msg_of_file->msg_widget->widget);
-        file->msg_of_file->msg_widget->widget = mx_get_widget_of_file(file);
+        file->msg_of_file->msg_widget->widget = mx_get_widget_of_file(file,
+                                                                      info);
         gtk_widget_show_all(file->msg_of_file->msg_widget->widget);
         gtk_container_add(GTK_CONTAINER(parent),
                           file->msg_of_file->msg_widget->widget);

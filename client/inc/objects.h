@@ -6,6 +6,7 @@
 #include "characters.h"
 #include "openssl/ssl.h"
 #include "openssl/err.h"
+#include "fmod.h"
 
 typedef struct s_objects t_objects;
 typedef struct s_signin_window t_signin_window;
@@ -16,6 +17,7 @@ typedef struct s_msg_widget t_msg_widget;
 typedef struct s_msg t_msg;
 typedef struct s_win_profile t_win_profile;
 typedef struct s_win_size t_win_size;
+typedef struct s_fmod_info t_fmod_info;
 
 typedef struct s_info {
     int sock;
@@ -35,7 +37,24 @@ typedef struct s_info {
     pthread_mutex_t m_file_recv_list;
     pthread_mutex_t m_write_sock;
     t_characters *chars;
+    t_fmod_info *music;
 }              t_info;
+
+
+typedef struct s_fmod_info {
+    bool Sound_on; 
+    bool possible; 
+    char *currentSound;
+    char *sound_to_pay;
+    bool pause;
+    unsigned int possition;
+    unsigned int sound_len;
+    FMOD_SYSTEM *fmodsystem;
+    FMOD_SOUND *sound;
+    FMOD_CHANNEL *channel;
+    pthread_t thread;
+    GtkWidget *scale;
+}               t_fmod_info;
 
 typedef struct s_user_info {
     char id;
@@ -93,7 +112,7 @@ typedef struct s_msg{
     char *msg_f_name_of_file;
     char msg_f_type;
     int msg_f_size; // size_of_file
-    t_msg_widget *msg_widget;    
+    t_msg_widget *msg_widget;
 } t_msg;
 
 typedef struct s_tag {
