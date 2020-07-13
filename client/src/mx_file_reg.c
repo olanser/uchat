@@ -44,10 +44,7 @@ bool mx_check_file_registration(t_info *info) {
     if (fd == -1)
         return false;
     len = read(fd, buff, 202);
-    if (len != 202) {
-        return false;
-    }
-    if (check_buff(buff)){
+    if (len != 202 && check_buff(buff)) {
         close(fd);
         return false;
     }

@@ -10,10 +10,9 @@ static char *get_last(char **mas) {
     return mas[i - 1];
 }
 
-static int get_file_type(char *file_name) {
+
+static int check_type(char *extension) {
     int file_type = 6;
-    char **file_res = mx_strsplit(file_name, '.');
-    char *extension = get_last(file_res);
 
     if (strcmp(extension, "png") == 0 || strcmp(extension, "jpg") == 0
         || strcmp(extension, "bmp") == 0) {
@@ -23,6 +22,15 @@ static int get_file_type(char *file_name) {
         || strcmp(extension, "docx") == 0) {
         file_type = 2;
     }
+    return file_type;
+}
+
+static int get_file_type(char *file_name) {
+    int file_type = 6;
+    char **file_res = mx_strsplit(file_name, '.');
+    char *extension = get_last(file_res);
+
+    file_type = check_type(extension);
     if (strcmp(extension, "mp4") == 0 || strcmp(extension, "avi") == 0
         || strcmp(extension, "mov") == 0 || strcmp(extension, "wav") == 0) {
         file_type = 3;
@@ -35,6 +43,13 @@ static int get_file_type(char *file_name) {
     return file_type;
 }
 
+void init_tmp(t_msg *msg) {
+    msg->msg_data = 0;
+    msg->msg_f_name_of_file = 0;
+    msg->msg_f_size = 0;
+    msg->msg_f_type = 0;
+}
+
 t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
     t_msg *msg = malloc(sizeof(t_msg));
 
@@ -44,10 +59,7 @@ t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
     msg->msg_avatar = resp[41];
     msg->msg_type = *(int*)&resp[42];
     msg->msg_time = mx_strdup(&resp[21]);
-    msg->msg_data = 0;
-    msg->msg_f_name_of_file = 0;
-    msg->msg_f_size = 0;
-    msg->msg_f_type = 0;
+    init_tmp(msg);
     if (msg->msg_type == 3) {
         msg->msg_f_name_of_file = mx_strdup(&resp[46]);
         msg->msg_f_type = get_file_type(msg->msg_f_name_of_file);

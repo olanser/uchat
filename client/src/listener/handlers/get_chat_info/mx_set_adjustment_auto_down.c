@@ -1,7 +1,8 @@
 #include "client.h"
 #include "defines_client.h"
 
-static void change_value_adjustment(GtkAdjustment *adjustment, gpointer user_data) {
+static void change_value_adjustment(GtkAdjustment *adjustment,
+                                    gpointer user_data) {
     static gdouble upper = 0;
 
     if (upper != gtk_adjustment_get_upper(adjustment)) {

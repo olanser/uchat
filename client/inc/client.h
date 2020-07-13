@@ -45,6 +45,7 @@ char *mx_insert_str_between3(int start, int end, char*str_f, char*substr_f);
 void mx_set_adjustment_auto_down(GtkBuilder* builder);
 void mx_init_info(t_info **info);
 void mx_init_signals(void);
+char *mx_get_pango_attributes(char **attributes);
 
 gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info, int argc, char **argv);

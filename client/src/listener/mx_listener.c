@@ -21,6 +21,7 @@ int mx_read_head(t_info* info, char *head) {
 
 char *init_response(int size, char *params) {
     char *new_request = malloc(sizeof(char) * size);
+
     mx_memcpy(new_request, params, 9); // save params
     return new_request;
 }
