@@ -209,5 +209,6 @@ void mx_unload(t_fmod_info *music);
 void *mx_music_scrol(void *data);
 void mx_music_signal_one(GtkWidget *send_play_btn, GtkWidget *stop_btn,
                          t_file *file, t_info *info);
+void mx_change_btn(GtkButton *btn);
 
 #endif

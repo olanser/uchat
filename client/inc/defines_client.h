@@ -72,6 +72,9 @@
 #define MX_VISIBLE_ICON_W "client/res/imgs/cute_outline_white/visible_icon.png"
 #define MX_DEL_MSG_BTN_W "client/res/imgs/cute_outline_white/delete_msg_icon.png"
 #define MX_EDIT_MSG_BTN_W "client/res/imgs/cute_outline_white/edit_msg_icon.png"
+#define MX_PLAY_BTN "client/res/imgs/play_btn.png"
+#define MX_STOP_BTN "client/res/imgs/stop_btn.png"
+#define MX_PAUSE_BTN "client/res/imgs/pause_btn.png"
 
 //CUTE SET
 #define MX_EXIT_ICON_C "client/res/imgs/cute_icons/exit_icon.png"

@@ -66,3 +66,22 @@ void mx_stop_btn(GtkButton *btn, void*data) {
         mx_unload(music);
     }
 }
+
+void mx_change_btn(GtkButton *btn) {
+    GdkPixbuf *pixbuf1 = gdk_pixbuf_new_from_file_at_size(MX_PAUSE_BTN, 25,
+                                                          25, NULL);
+    GtkWidget *img1 = gtk_image_new_from_pixbuf(pixbuf1);
+    GdkPixbuf *pixbuf2 = gdk_pixbuf_new_from_file_at_size(MX_PLAY_BTN, 25,
+                                                          25, NULL);
+    GtkWidget *img2 = gtk_image_new_from_pixbuf(pixbuf2);
+    static bool clicked = true;
+
+    if (clicked) {
+        gtk_button_set_image(GTK_BUTTON (btn), img1);
+        clicked = false;
+    }
+    else {
+        gtk_button_set_image(GTK_BUTTON (btn), img2);
+        clicked = true;
+    }
+}
