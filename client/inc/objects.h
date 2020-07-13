@@ -198,6 +198,7 @@ struct s_signup_window {
     GtkWidget* signup_vissible_pass;
     GtkWidget* signup_main_grid;
     GtkWidget* signup_child_box;
+    GtkWidget* btn_go_to_signin;
 };
 
 typedef struct s_win_profile {

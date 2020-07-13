@@ -124,6 +124,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/gtk_cycle/signals/main/music/mx_play_btn.c \
 	src/gtk_cycle/signals/main/music/mx_scale_changed.c \
 	src/gtk_cycle/signals/main/music/mx_init_music.c \
+	src/gtk_cycle/signals/signup/mx_btn_go_to_signin.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

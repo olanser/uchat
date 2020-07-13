@@ -116,6 +116,7 @@ void mx_stop_btn(GtkButton *btn, void*data);
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
 gboolean mx_key_press_signup(GtkWidget*widget, GdkEvent *event, t_info *info);
+void mx_btn_go_to_signin(GtkWidget* widget, t_info *info);
 
 // signin
 gboolean mx_btn_signin(GtkButton *button, t_info *info);
