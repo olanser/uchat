@@ -185,8 +185,6 @@ struct s_signin_window {
     GtkWidget* save_user_tick;
     GtkWidget *layout;
     GtkWidget *image_name;
-    GtkWidget *broken_screen;
-    GtkWidget *broken_lbl;
     GtkWidget* vis_img;
     //trigs
     bool vis;
@@ -203,6 +201,8 @@ struct s_signup_window {
     GtkWidget* signup_child_box;
     GtkWidget* btn_go_to_signin;
     GtkWidget* vis_img;
+    GtkWidget *layout;
+    GtkWidget *image_name;
     //trigers
     bool vis;
 };

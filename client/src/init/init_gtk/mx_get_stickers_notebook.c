@@ -1,7 +1,7 @@
 #include "client.h"
 #include "defines_client.h"
 
-static static char **get_packs(char *rel_path) {
+static char **get_packs(char *rel_path) {
     int len = mx_dirlen(rel_path);
     char **strs = 0;
 
