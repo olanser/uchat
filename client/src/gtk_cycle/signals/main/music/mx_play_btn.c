@@ -45,14 +45,13 @@ static void toggleSound(t_fmod_info *mus) {
         }
 }
 
-
-
 void mx_play_btn(GtkButton *btn, void*data) {
     t_fmod_info *music = (t_fmod_info *)data;
     char *name = g_object_get_data(G_OBJECT(btn), "name");
     GtkWidget *scale = g_object_get_data(G_OBJECT(btn), "scale");
     char filepath[512];
 
+    mx_change_btn(btn);
     memset(filepath , 0, 512);
     music->scale = scale;
     sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);
