@@ -84,7 +84,7 @@ typedef struct s_chat_info {
     t_list *msgs; // t_msg list of msgs
     GtkWidget* list_box; // list box of msgs
     GtkWidget* chat_widget; // button widget(in left box)
-}t_chat_info;
+}              t_chat_info;
 
 /*
 * structure for describe msg
@@ -113,14 +113,14 @@ typedef struct s_msg{
     char msg_f_type;
     int msg_f_size; // size_of_file
     t_msg_widget *msg_widget;
-} t_msg;
+}              t_msg;
 
 typedef struct s_tag {
     int start;
     int end;
     char *pango; // pango format
     char *uchat; // uchat format
-} t_tag;
+}              t_tag;
 
 typedef struct s_msg_widget {
     GtkWidget *widget;
@@ -132,7 +132,7 @@ typedef struct s_objects {
     t_signup_window *s_signup_win;
     t_win_profile *s_win_profile;
     t_main_chat_window *chat_win;
-} t_objects;
+}              t_objects;
 
 
 struct s_main_chat_window {

@@ -24,12 +24,13 @@ void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
     img = gtk_image_new_from_pixbuf(pixbuf);
     gtk_container_add(GTK_CONTAINER(event_box), img);
     gtk_grid_attach(GTK_GRID(grid), event_box, index % 7 , index / 7, 1, 1);
-    g_object_set_data(G_OBJECT(event_box), "path_to_sticker", path_to_sticker);
+    g_object_set_data(G_OBJECT(event_box), 
+                      "path_to_sticker", path_to_sticker);
     g_signal_connect(G_OBJECT(event_box), "button-press-event",
                      G_CALLBACK(mx_btn_send_sticker), info);
 }
 
-void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name,
+static void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name,
                t_info *info) {
     char **names_stickers = 0;
     int i = -1;

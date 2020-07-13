@@ -3,13 +3,6 @@
 */
 #include "client.h"
 
-void delay(double number_of_seconds) { 
-    double milli_seconds = 1000 * number_of_seconds; 
-    clock_t start_time = clock(); 
-
-    while (clock() < start_time + milli_seconds);
-}
-
 static void connect_to_signin_window(t_info* info) {
     t_signin_window *win = info->objs->s_signin_win;
 

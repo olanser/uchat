@@ -41,7 +41,8 @@ static void place_label(t_signin_window *signin) {
 }
 
 void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(MX_INVIS_ICON_W, 30, 30, NULL);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
+        MX_INVIS_ICON_W, 30, 30, NULL);
 
     memset(&signin->vis, 0, sizeof(bool));
     signin->signin_win = mx_build_get(builder, "signin_window");
@@ -59,55 +60,6 @@ void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
     signin->signin_child_box = mx_build_get(builder, "signin_child_box");
     signin->layout = mx_build_get(builder, "signin_layout");
     place_label(signin);
-}
-
-void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
-    mx_init_signin_win(builder, objs->s_signin_win);
-    mx_init_signup_win(builder, objs->s_signup_win);
-    mx_init_main_chat_win(builder, objs->chat_win, info);
-}
-
-void mx_set_signin_win_properties(t_signin_window *signin) {
-    gtk_widget_set_size_request(signin->signin_win, 1350, 750);
-    gtk_widget_show_all(signin->signin_win);
-}
-
-void mx_set_signup_win_properties(t_signup_window *signup) {
-    gtk_widget_set_size_request(signup->signup_win, 540, 300);
-    gtk_widget_show_all(signup->signup_win);
-}
-
-void mx_set_main_chat_properties(t_main_chat_window *main_chat) {
-    gtk_widget_set_size_request(main_chat->chat_win, 
-                                MX_WIN_WIDTH, MX_WIN_HEIGHT);
-    gtk_widget_set_size_request(GTK_WIDGET (main_chat->main_chat_box), 
-                                MX_WIN_WIDTH, MX_WIN_HEIGHT);
-    gtk_paned_set_position(GTK_PANED (main_chat->paned_chat), 171);
-    gtk_widget_hide(main_chat->chat_win);
-}
-
-void mx_set_properties(t_objects *objs) {
-    mx_set_signin_win_properties(objs->s_signin_win);
-    mx_set_signup_win_properties(objs->s_signup_win);
-    mx_set_main_chat_properties(objs->chat_win);
-}
-
-
-
-void mx_connect_builder(t_info* info) {
-    GtkBuilder* builder = gtk_builder_new_from_file(MX_PATH_TO_TEMPLATE);
-    mx_init_objects(builder, info->objs, info);
-    mx_set_properties(info->objs);
-    mx_init_profile(info);
-}
-
-void mx_connect_css(void) {
-    GtkCssProvider *provider = gtk_css_provider_new();
-
-    gtk_css_provider_load_from_path(provider, MX_CSS_MAIN_STYLES, NULL);
-    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-                                            GTK_STYLE_PROVIDER(provider),
-                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
 
 void mx_init_gtk(t_info* info) {

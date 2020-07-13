@@ -64,6 +64,20 @@ void mx_init_main_chat_win(GtkBuilder *builder,
                            t_info *info);
 void mx_init_profile(t_info *info);
 t_user_info* mx_crete_user(t_info* info);
+void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info);
+void mx_set_signin_win_properties(t_signin_window *signin);
+void mx_set_signup_win_properties(t_signup_window *signup);
+void mx_set_main_chat_properties(t_main_chat_window *main_chat);
+void mx_set_properties(t_objects *objs);
+void mx_connect_builder(t_info* info);
+void mx_connect_css(void);
+void mx_init_search_user(GtkBuilder *builder, 
+                         t_main_chat_window *main_chat, t_info*info);
+void mx_init_main_chat_win1(GtkBuilder *builder, 
+                           t_main_chat_window *main_chat, 
+                           t_info *info);
+void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup);
+void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin);
 
 // api
 int mx_api_delete_message(int id_msg, int id_chat, t_info *info);
@@ -77,7 +91,8 @@ int mx_api_send_message(int chat_id, char *msg, int type, t_info *info);
 int mx_api_show_users(char *str, t_info *info);
 int mx_api_signin(char **parameters, t_info *info);
 int mx_api_signup(char **parameters, t_info *info);
-int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info);
+int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, 
+                         int count, t_info *info);
 int mx_api_create_dialog(int id_user, t_info *info);
 int mx_api_get_unique_name_of_file(t_info *info);
 int mx_api_end_send_file(void **parameters, t_info *info);
@@ -176,7 +191,8 @@ gboolean mx_resize_main_window (GtkWidget *window, t_objects *objs);
 gboolean mx_destroy_main_window(GtkWidget *window);
 gboolean mx_destroy_signup_window(GtkWidget *window);
 gboolean mx_destroy_signin_window(GtkWidget *window);
-gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
+gboolean mx_go_fullscreen_signin_window(
+    GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
 gboolean mx_vis_pass(GtkWidget *button, void *data);
 gboolean mx_vis_pass_signin(GtkWidget *button, void *data);
 

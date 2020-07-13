@@ -23,6 +23,7 @@ static void set_data(char *respons, int type, char **data) {
         sprintf(&respons[46], "%s", data[4]);
     }
 }
+
 /* 
 * data[0] - msg_id*
 * data[1] - msg_chat_id
