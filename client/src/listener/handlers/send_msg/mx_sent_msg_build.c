@@ -53,6 +53,16 @@ static void mx_set1(GtkBuilder *builder, char *response) {
     gtk_widget_set_name(GTK_WIDGET (time_lbl), "time_lbl");
 }
 
+static void set_button_name(GtkBuilder *builder) {
+    GtkWidget *del_button = 0;
+    GtkWidget *edit_button = 0;
+
+    del_button = mx_build_get(builder, "del_btn");
+    gtk_widget_set_name(GTK_WIDGET(del_button), "del_btn");
+    edit_button = mx_build_get(builder, "edit_btn");
+    gtk_widget_set_name(GTK_WIDGET(edit_button), "edit_btn");
+}
+
 GtkWidget *mx_sent_msg_build(char *response, 
                              t_msg_widget* msg_wid,
                              t_info *info) {
@@ -60,8 +70,6 @@ GtkWidget *mx_sent_msg_build(char *response,
         "client/templates/message_box.xml");
     GtkWidget *box = 0;
     GtkWidget *label = 0;
-    GtkWidget *del_button = 0;
-    GtkWidget *edit_button = 0;
 
     mx_set1(builder, response);
     box = mx_build_get(builder, "send_mainbox");
@@ -69,10 +77,7 @@ GtkWidget *mx_sent_msg_build(char *response,
     mx_set_markup(label, &response[46]);
     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
     gtk_label_set_max_width_chars(GTK_LABEL (label), 5);
-    del_button = mx_build_get(builder, "del_btn");
-    gtk_widget_set_name(GTK_WIDGET (del_button), "del_btn");
-    edit_button = mx_build_get(builder, "edit_btn");
-    gtk_widget_set_name(GTK_WIDGET (del_button), "edit_btn");
+    set_button_name(builder);
     set_del_btn(response, info, builder);
     set_edit_btn(response, info, builder);
     msg_wid->label = label;
