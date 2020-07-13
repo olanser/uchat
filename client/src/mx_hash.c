@@ -1,7 +1,7 @@
 #include "openssl/sha.h"
 #include "client.h"
 
-void mx_hash(const char *pass, const char *log) {
+char *mx_hash(const char *pass, const char *log) {
     SHA512_CTX ctx;
     unsigned char *hash = malloc(sizeof(unsigned char) * 64);
     char *temp = mx_strjoin(pass, log);
@@ -19,9 +19,5 @@ void mx_hash(const char *pass, const char *log) {
         exit(1);
     }
     free(temp);
-    for (int i = 0; i < 64; i++)
-        printf("%02x", hash[i]);
-    printf("\n");
-    free(hash);
-    // return hash;
+    return (char*)hash;
 }

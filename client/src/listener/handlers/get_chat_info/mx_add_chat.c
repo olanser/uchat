@@ -21,6 +21,7 @@ t_chat_info* mx_create_chat_info(char* response, t_info *info,
     GtkBuilder* builder = gtk_builder_new_from_file(MX_TEMPLATE_SHITS);
     GtkWidget* chat_scroll_box = mx_build_get(builder, "chat_scroll_box");
 
+    mx_set_adjustment_auto_down(builder);
     chat_info->list_box = mx_build_get(builder, "listbox_chat");
     chat_info->node_index = gtk_notebook_append_page(
             GTK_NOTEBOOK(info->objs->chat_win->notebook), // notebook

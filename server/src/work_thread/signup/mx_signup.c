@@ -27,10 +27,16 @@ static char get_status(t_table_user *tuser, t_server *server_info) {
 }
 
 static int set_tuser(char *request, t_table_user *tuser) {
+    int j = 0;
+    char temp[256];
+
+    for (int i = 212; i < 276; i++, j += 2)
+        sprintf(&temp[j], "%02x", (unsigned char)request[i]);
+    temp[124] = 0;
+    tuser->pass = mx_strdup(temp);
     tuser->first_name = &request[9];
     tuser->second_name = &request[60];
     tuser->nickname = &request[111];
-    tuser->pass = &request[212];
     return 0;
 }
 
@@ -67,6 +73,7 @@ char *mx_signup(t_server *server_info, t_server_users *user) {
     if (status == (char)MX_QS_OK)
         mx_update_user(tuser, user, server_info);
     get_response(user->buff, &respons, status, user);
+    free(tuser->pass);
     free(tuser);
     return respons;
 }

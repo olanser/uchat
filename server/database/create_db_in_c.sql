@@ -36,7 +36,6 @@ create table if not exists chat(
 );
 
 insert OR IGNORE into chat values(1, 'General', '2', '1' , '0', datetime('now'));
-insert OR IGNORE into chat values(2, 'test_room', '2', '1', '0', datetime('now'));
 
 create table if not exists msg(
     msg_id integer not null primary key AUTOINCREMENT,
@@ -53,12 +52,6 @@ create table if not exists msg(
     foreign key(msg_creator) references user(usr_id),
     foreign key(msg_chat_id) references chat(chat_id)
 );
-
-INSERT OR IGNORE INTO msg (msg_id, msg_creator, msg_send_time, msg_data, msg_chat_id, msg_file_name) VALUES (1, 1, datetime('now'), "TEST message!", 1, "PIC.png");
-INSERT OR IGNORE INTO msg (msg_id, msg_creator, msg_send_time, msg_data, msg_chat_id, msg_file_name) VALUES (2, 1, datetime('now'), "TEST1 message!", 1, "PIC1.png");
-
-INSERT OR IGNORE INTO msg (msg_id, msg_creator, msg_send_time, msg_data, msg_chat_id, msg_file_name) VALUES (3, 1, datetime('now'), "TEST2 message!", 1, "PIC2.png");
-INSERT OR IGNORE INTO msg (msg_id, msg_creator, msg_send_time, msg_data, msg_chat_id, msg_file_name) VALUES (4, 2, datetime('now'), "TEST3 message!", 1, "PIC3.png");
 
 create table if not exists group_l(
    gl_id integer not null primary key AUTOINCREMENT,
