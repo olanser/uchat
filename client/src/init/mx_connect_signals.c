@@ -23,6 +23,9 @@ static void connect_to_signin_window(t_info* info) {
     g_signal_connect(
         GTK_WIDGET (win->signin_vissible_pass), "clicked",
         (GCallback)mx_vis_pass_signin, info);
+    g_signal_connect(
+        GTK_WIDGET (win->go_to_signup), "clicked",
+        (GCallback)mx_btn_go_to_signup, info);
 }
 
 static void connect_to_signup_window(t_info* info) {

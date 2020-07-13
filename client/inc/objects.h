@@ -186,6 +186,7 @@ struct s_signin_window {
     GtkWidget *layout;
     GtkWidget *image_name;
     GtkWidget* vis_img;
+    GtkWidget* go_to_signup;
     //trigs
     bool vis;
 };

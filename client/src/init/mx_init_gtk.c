@@ -65,6 +65,7 @@ void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
     signin->signin_main_box = mx_build_get(builder, "signin_main_grid");
     signin->signin_child_box = mx_build_get(builder, "signin_child_box");
     signin->layout = mx_build_get(builder, "signin_layout");
+    signin->go_to_signup = mx_build_get(builder, "go_to_signup");
     place_label_signin(signin);
 }
 

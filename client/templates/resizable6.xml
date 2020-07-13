@@ -617,7 +617,7 @@
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="go_to_signup">
                         <property name="label" translatable="yes">create new account</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>

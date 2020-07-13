@@ -46,6 +46,7 @@ void mx_init_info(t_info **info);
 void mx_init_signals(void);
 char *mx_get_pango_attributes(char **attributes);
 
+void mx_btn_go_to_signup(GtkWidget* widget, t_info *info);
 gboolean mx_scene_cycle(void *data);
 void mx_init(t_info **info, int argc, char **argv);
 void mx_init_gtk(t_info* info);

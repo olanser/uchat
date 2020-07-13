@@ -18,6 +18,7 @@ static void set_data(char *respons, int type, char **data) {
         sprintf(&respons[46], "%s", data[9]);
         respons[302] = (char)atoi(data[8]);
         *(int*)&respons[303] = atoi(data[10]);
+        respons[0] = 2;
     }
     else {
         sprintf(&respons[46], "%s", data[4]);
