@@ -2,37 +2,6 @@
 #include "defines_client.h"
 
 
-void unload(t_fmod_info *music) {
-    FMOD_RESULT result;
-    if (music->possible) {
-        music->Sound_on = true;
-        FMOD_Channel_SetPosition(music->channel, 0, FMOD_TIMEUNIT_PCM);
-        result = FMOD_Sound_Release(music->sound);
-        music->pause = false;
-        music->sound = NULL;
-        music->currentSound = NULL;
-        music->scale = NULL;
-        music->sound_len = 0;
-        music->possition = 0;
-        mx_strdel(&(music->sound_to_pay));
-    }
-}
-
-
-//loads a soundfile
-void load(t_fmod_info *music) {
-    FMOD_RESULT result;
-
-    music->currentSound = music->sound_to_pay;
-    if (music->possible && music->Sound_on) {
-        result = FMOD_Sound_Release(music->sound);
-        result = FMOD_System_CreateStream(music->fmodsystem, 
-                music->currentSound, FMOD_SOFTWARE, 0, &(music->sound));
-        if (result != FMOD_OK) {
-            music->possible = false;
-        }
-    }
-}
 
 static gboolean foo(void* data) {
     GtkWidget *scale = (GtkWidget*)((void**)data)[0];
@@ -70,7 +39,7 @@ void *mx_music_scrol(void *data) {
         }
     }
     if (music->Sound_on == false)
-        unload(music);
+        mx_unload(music);
     return 0;
 }
 
@@ -105,7 +74,7 @@ static bool check_song(char *filename, char *currentname) {
 void toggleSound(t_fmod_info *mus) {
     if (mus->Sound_on == true) { 
         if (mus->pause == false) {
-            load(mus);
+            mx_load(mus);
             play(mus);
             mus->pause = true;
             mus->Sound_on = !(mus->Sound_on);
@@ -132,7 +101,7 @@ void mx_play_btn(GtkButton *btn, void*data) {
         music->sound_to_pay = strdup(filepath);
     else {
         if (check_song(filepath, music->currentSound)) {
-            unload(music);
+            mx_unload(music);
             music->scale = scale;
             music->sound_to_pay = strdup(filepath);
         }
@@ -150,6 +119,6 @@ void mx_stop_btn(GtkButton *btn, void*data) {
 
     if (music->currentSound != NULL && strcmp(filepath, 
         music->currentSound) == 0 && music->Sound_on == false) {
-        unload(music);
+        mx_unload(music);
     }
 }

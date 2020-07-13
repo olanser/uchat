@@ -183,5 +183,6 @@ void mx_free_file(t_file *file);
 
 //music
 t_fmod_info *mx_init_music();
+void mx_load(t_fmod_info *music);
 
 #endif
