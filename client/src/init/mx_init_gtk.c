@@ -5,8 +5,18 @@
 #include "client.h"
 #include "defines_client.h"
 
+static void place_label_signup(t_signup_window *signup) {
+    GdkPixbuf *pixbuf;
+
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_CHAT_NAME1, 540, 300, NULL);
+    signup->image_name = gtk_image_new_from_pixbuf(pixbuf);
+    gtk_layout_put(
+        GTK_LAYOUT(signup->layout), GTK_WIDGET (signup->image_name), 0, 0);
+}
+
 void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(MX_INVIS_ICON_W, 30, 30, NULL);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
+                            MX_INVIS_ICON_W, 30, 30, NULL);
 
     memset(&signup->vis, 0, sizeof(bool));
     signup->signup_win = mx_build_get(builder, "signup_window");
@@ -23,25 +33,22 @@ void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
     signup->signup_main_grid = mx_build_get(builder, "signup_main_grid");
     signup->signup_child_box = mx_build_get(builder, "signup_child_box");
     signup->btn_go_to_signin = mx_build_get(builder, "btn_go_to_signin");
+    signup->layout = mx_build_get(builder, "signup_layout");
+    place_label_signup(signup);
 }
 
-static void place_label(t_signin_window *signin) {
-    signin->image_name = gtk_image_new_from_file(
-        "templates/signin_background1.png");
-    signin->broken_screen = gtk_image_new_from_file(
-        "templates/signin_background.png");
-    signin->broken_lbl = gtk_image_new_from_file(
-        "templates/signin_background3.png");
+static void place_label_signin(t_signin_window *signin) {
+    GdkPixbuf *pixbuf;
+
+    pixbuf = gdk_pixbuf_new_from_file_at_size(MX_CHAT_NAME1, 540, 300, NULL);
+    signin->image_name = gtk_image_new_from_pixbuf(pixbuf);
     gtk_layout_put(
         GTK_LAYOUT(signin->layout), GTK_WIDGET (signin->image_name), 0, 0);
-    gtk_layout_put(
-        GTK_LAYOUT(signin->layout), GTK_WIDGET (signin->broken_screen), 0, 0);
-    gtk_layout_put(
-        GTK_LAYOUT(signin->layout), GTK_WIDGET (signin->broken_lbl), 0, 0);
 }
 
 void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(MX_INVIS_ICON_W, 30, 30, NULL);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(
+                            MX_INVIS_ICON_W, 30, 30, NULL);
 
     memset(&signin->vis, 0, sizeof(bool));
     signin->signin_win = mx_build_get(builder, "signin_window");
@@ -58,7 +65,7 @@ void mx_init_signin_win(GtkBuilder *builder, t_signin_window *signin) {
     signin->signin_main_box = mx_build_get(builder, "signin_main_grid");
     signin->signin_child_box = mx_build_get(builder, "signin_child_box");
     signin->layout = mx_build_get(builder, "signin_layout");
-    place_label(signin);
+    place_label_signin(signin);
 }
 
 void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
@@ -68,7 +75,7 @@ void mx_init_objects(GtkBuilder *builder, t_objects *objs, t_info*info) {
 }
 
 void mx_set_signin_win_properties(t_signin_window *signin) {
-    gtk_widget_set_size_request(signin->signin_win, 1350, 750);
+    gtk_widget_set_size_request(signin->signin_win, 540, 300);
     gtk_widget_show_all(signin->signin_win);
 }
 

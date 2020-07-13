@@ -19,6 +19,7 @@
 #define MX_DIR_THEME5 "client/templates/theme5.css"
 #define MX_MESSAGE_BOX_PATH "client/templates/message3.xml"
 #define MX_MSG_DIV_PATH "client/templates/main_msg_box.xml"
+#define MX_CHAT_NAME1 "/Users/akrasnosel/Desktop/client/client/res/anim/sigfault/signin_background1.png"
 
 #define MX_SCENE_SIGNUP 0
 #define MX_SCENE_SIGNIN 1

@@ -713,19 +713,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAspectFrame">
+                      <object class="GtkFixed">
                         <property name="can_focus">False</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">none</property>
-                        <child>
-                          <object class="GtkCheckButton" id="save_user_tick">
-                            <property name="label" translatable="yes">remember me</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
