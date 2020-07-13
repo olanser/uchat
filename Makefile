@@ -29,13 +29,11 @@ lib:
 uninstall: clean
 	@make -sC server $@
 	@make -sC client $@
-	@make -sC unit_test/client $@
 	@make -sC libfile $@
 	@rm -rf $(name_client) $(name_server)
 
 clean:
 	@make -sC server $@
 	@make -sC client $@
-	@make -sC unit_test/client $@
 
 reinstall: uninstall all

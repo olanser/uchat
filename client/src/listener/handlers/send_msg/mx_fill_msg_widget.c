@@ -29,7 +29,7 @@ static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid,
     gtk_image_set_from_file(
         GTK_IMAGE (avatar), mx_get_path_to_ava(response[41]));
     label = mx_build_get(builder, "rec_msg_lbl");
-    gtk_label_set_label(GTK_LABEL (label), &response[46]);
+    mx_set_markup(label, &response[46]);
     gtk_label_set_line_wrap(GTK_LABEL (label), TRUE);
     set_lbl(builder, response, info);
     msg_wid->label = label;

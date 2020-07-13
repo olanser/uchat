@@ -13,7 +13,8 @@ static char **get_packs(char *rel_path) {
     return strs;
 }
 
-static void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
+static void add_image(GtkWidget *grid, char *path_to_img, 
+                      int index, t_info *info) {
     GtkWidget *img = 0;
     GdkPixbuf *pixbuf = 0;
     GtkWidget* event_box = 0;
