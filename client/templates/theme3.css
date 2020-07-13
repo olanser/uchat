@@ -24,14 +24,37 @@ button:hover {
 }
 
 notebook list {
-    background-image: url("../res/backgrounds/blood.png");
+    background: url("../res/backgrounds/blood.png");
     background-position: center;
     background-repeat: no-repeat repeat;
-    /* background-size: cover; */
+    background-size: cover;
 }
 
 #search_panel {
     background: #0b0c10;
+}
+
+
+/* to change general chat button */
+button#chat_names {
+    background: #460000;
+}
+
+/* to change rest chats button */
+#dialog_btn {
+    background: #460000;
+    color: #fff;
+}
+ /* to change buttons with searched chats */
+#search_user {
+    background: #460000;
+    color: #fff;
+}
+
+/* to change search panel background */
+#searchbox_bg {
+    background: #0b0c10;
+    color: #fff;
 }
 
 #other_msg {
@@ -47,6 +70,8 @@ notebook list {
 #time_lbl {
     color: #fff;
 }
+
+
 
 #grid_stickers {
     background: linear-gradient(45deg,#1b0000 5%, #ff0000 50%, #1b0000 95%);

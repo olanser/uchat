@@ -2,8 +2,14 @@
 #include "defines.h"
 
 static int read_request(char *request, t_table_user *tuser) {
+    char temp[256];
+    int j = 0;
+
+    for (int i = 110; i < 176; i++, j += 2)
+        sprintf(&temp[j], "%02x", (unsigned char)request[i]);
+    temp[124] = 0;
+    tuser->pass = mx_strdup(temp);
     tuser->nickname = mx_strdup(&request[9]);
-    tuser->pass = mx_strdup(&request[110]);
     return 0;
 }
 

@@ -5,8 +5,8 @@ static int edit_msg_to_db(t_server *server_info, t_server_users *user) {
     char sql[1024];
     int a = 0;
 
-    sprintf(sql, "update msg set msg_data='%s', msg_status='3', msg_avatar=%c"
-            ", msg_send_time=datetime('now') where msg_id=%d;",
+    sprintf(sql, "update msg set msg_data='%s', msg_status='3', msg_avatar="
+            "'%c', msg_send_time=datetime('now') where msg_id=%d;",
             &user->buff[18], user->buff[17], *((int*)&user->buff[13]));
     a = mx_do_query(sql, 0, 0,server_info);
     if (a != SQLITE_OK)

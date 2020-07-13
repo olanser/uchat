@@ -36,12 +36,13 @@ int mx_send_msg_(int socket, char *buff, int size, t_info *info);
 int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
 t_file *mx_get_file_by_msg_id(t_list *list, int id);
 GtkWidget* mx_get_sized_img(const char *path, int width, int height);
-void mx_hash(const char *pass, const char *log);
+char *mx_hash(const char *pass, const char *log);
 char *mx_get_pango_from_uchat(char *uchat_format);
 t_tag* mx_create_tag(char *uchat_f, char *pango_f, int start, int end) ;
 char *mx_str_insert(char *string, char *substr, int index_to);
 void mx_write_theme(char *theme_path);
 char *mx_insert_str_between3(int start, int end, char*str_f, char*substr_f);
+void mx_set_adjustment_auto_down(GtkBuilder* builder);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);

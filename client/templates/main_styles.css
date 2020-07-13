@@ -102,6 +102,7 @@ button {
     padding: 3px;
     background: #0b0c10;
     background: linear-gradient(to right, #060608, #0b0c10);
+    color: #66fcf1;
 }
 
 #chat_names {

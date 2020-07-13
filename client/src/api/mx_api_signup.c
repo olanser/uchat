@@ -12,7 +12,7 @@ static int get_query(char *query, char **parameters, int query_id) {
     memcpy(&query[9], parameters[0], mx_strlen(parameters[0]));
     memcpy(&query[60], parameters[1], mx_strlen(parameters[1]));
     memcpy(&query[111], parameters[2], mx_strlen(parameters[2]));
-    memcpy(&query[212], parameters[3], mx_strlen(parameters[3]));
+    memcpy(&query[212], parameters[3], 64);
     return 0;
 }
 

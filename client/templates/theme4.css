@@ -21,6 +21,27 @@ button#chat_names {
     color: black;
 }
 
+/* to change rest chats button */
+#dialog_btn {
+    background-color: rgb(156, 218, 32);
+    color: black;
+}
+
+button#dialog_btn:hover {
+    border:2px solid rgb(255, 0, 221);
+}
+
+ /* to change buttons with searched chats */
+#search_user {
+    background-color: rgb(156, 218, 32);
+    color: black;
+}
+
+/* to change search panel background */
+#searchbox_bg {
+    background-color: #00ff00;
+}
+
 #box_profile button {
     color: white;
 }
