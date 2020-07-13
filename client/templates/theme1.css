@@ -167,6 +167,12 @@ box #text_entry {
     background: linear-gradient(to right, #1d1e22, #26272b);
 }
 
+#send_audio_box {
+    border: 2px rgb(225, 251, 252) solid;
+    background-color: rgb(196, 201, 201);
+    border-radius: 4px;
+}
+
 #chat_names {
     background: #060608;
 }

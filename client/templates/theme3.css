@@ -30,6 +30,12 @@ notebook list {
     background-size: cover;
 }
 
+#send_audio_box {
+    border: 2px rgb(3, 3, 3) solid;
+    background-color: rgb(63, 44, 44);
+    border-radius: 4px;
+}
+
 #search_panel {
     background: #0b0c10;
 }

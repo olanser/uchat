@@ -21,8 +21,6 @@ static GtkWidget* get_img_widget(t_file *file) {
     return widget;
 }
 
-
-
 static void use_audio_wiget(GtkBuilder *builder, t_file *file, t_info *info) {
     GtkWidget *send_play_btn = mx_build_get(builder, "send_play_btn");
     GtkWidget *send_name_btn = mx_build_get(builder, "send_name_btn");

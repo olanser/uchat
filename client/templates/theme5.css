@@ -21,6 +21,12 @@ button#chat_names {
     border: 1px solid rgb(107, 178, 182);
 }
 
+#send_audio_box {
+    border: 2px rgb(213, 254, 255) solid;
+    background-color: rgb(230, 245, 245);
+    border-radius: 4px;
+}
+
 /* to change rest chats button */
 #dialog_btn {
     background-color: rgb(127, 241, 245);
