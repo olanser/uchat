@@ -17,6 +17,7 @@ void mx_init_signup_win(GtkBuilder *builder, t_signup_window *signup) {
         builder, "signup_show_pass_tick");
     signup->signup_main_grid = mx_build_get(builder, "signup_main_grid");
     signup->signup_child_box = mx_build_get(builder, "signup_child_box");
+    signup->btn_go_to_signin = mx_build_get(builder, "btn_go_to_signin");
 }
 
 static void place_label(t_signin_window *signin) {

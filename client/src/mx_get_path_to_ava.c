@@ -8,12 +8,14 @@ static char **inti_avatars() {
     char **mas_buff = mx_get_dir_filenames(MX_DIR_AVATARS);
     int dirlen = mx_dirlen(MX_DIR_AVATARS);
     int i = 1;
+    int j = 0;
 
-    mas = malloc(sizeof(char*) * (dirlen - 1));
+    mas = malloc(sizeof(char*) * (dirlen));
     while (mas_buff[++i]) {
-        mas[i - 2] = mx_strjoin(MX_DIR_AVATARS, mas_buff[i]);
+        if (mas_buff[i][0] != '.')
+            mas[j++] = mx_strjoin(MX_DIR_AVATARS, mas_buff[i]);
     }
-    mas[i - 2] = 0;
+    mas[j] = 0;
     mx_del_strarr(&mas_buff);
     return mas;
 }
