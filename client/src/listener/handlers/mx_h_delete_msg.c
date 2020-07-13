@@ -8,7 +8,7 @@ static bool check(char *response) {
 }
 
 void mx_delete_msg(t_msg *msg) {
-    gtk_widget_destroy(msg->msg_widget->widget);
+    gtk_widget_destroy(gtk_widget_get_parent(msg->msg_widget->widget));
     free(msg->msg_widget);
     free(msg->msg_time);
     free(msg->msg_data);
@@ -23,7 +23,8 @@ static gboolean handle_delete_msg(void* data) {
 
     if (check(response) == false)
         return 1;
-    msg = mx_find_msg(info->list_of_chats, *(int*)&response[9], *(int*)&response[13]);
+    msg = mx_find_msg(info->list_of_chats, *(int*)&response[9],
+                      *(int*)&response[13]);
     if (msg == 0)
         return 0;
     mx_delete_msg(msg);
@@ -38,6 +39,7 @@ int mx_h_delete_msg(char *response, t_info *info) {
     data[0] = info;
     data[1] = malloc(*(int*)&response[5]);
     memcpy(data[1], response, *(int*)&response[5]);
-    gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, handle_delete_msg, data, 0);
+    gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, handle_delete_msg, data,
+                              0);
     return 0;
 }

@@ -1,0 +1,80 @@
+#box_profile {
+    background-color: #b7fdf2;
+    color: #000;
+    border: 2px rgb(255, 255, 230) solid;
+}
+
+#label_stick_tab {
+    color: #fff4b5;
+}
+
+notebook list {
+    background:linear-gradient(135deg, rgb(125, 255, 244) 0%, rgb(255, 255, 255) 70%);
+}
+
+button#chat_names:hover {
+    border:1px solid rgb(216, 241, 255);
+}
+
+button#chat_names {
+    background-color: rgb(127, 241, 245);
+    border: 1px solid rgb(107, 178, 182);
+}
+
+#box_profile button {
+    color: black;
+}
+
+#search_panel {
+    background: #d3ffff;
+}
+
+button:hover {
+    border:1px solid rgb(255, 255, 255);
+    background: rgb(225, 252, 250);
+}
+
+#other_msg {
+    padding: 10px;
+    border-radius: 5px;
+    background: #fdffe3;
+    margin-right: 250px;
+    margin-bottom: 10px;
+    color: rgb(31, 31, 31);
+    border: rgb(255, 254, 254) 1px solid;
+}
+
+#time_lbl {
+    color: #000;
+}
+
+#grid_stickers {
+    background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(215, 249, 255) 70%);
+}
+
+#our_msg_box {
+    padding: 10px;
+    margin-left: 250px;
+    margin-right: 0px;
+    border-radius: 5px;
+    border: whitesmoke 1px solid;
+    background: #cefdff;
+    color: black;
+}
+
+notebook header.top tabs {
+    border: 2px solid black;
+    background: rgb(180, 216, 211);
+}
+
+#text_entry.view text {
+    padding: 10px;
+    margin: 10px;
+    border: solid rgb(49, 0, 0) 1px;
+    color: rgb(0, 0, 0);
+    background: #d6d6d6;
+}
+
+#label_stick_tab {
+    color: #fff;
+}

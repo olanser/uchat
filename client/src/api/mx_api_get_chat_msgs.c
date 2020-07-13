@@ -15,7 +15,8 @@ static int get_query(char *query, int* mas, int query_id, int size) {
     return 0;
 }
 
-int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count, t_info *info) {
+int mx_api_get_chat_msgs(int id_chat, int last_msgs_id, int count,
+                         t_info *info) {
     int size = 21;
     char *query = malloc(sizeof(char) * size);
     int mas[3] = {id_chat, last_msgs_id, count};

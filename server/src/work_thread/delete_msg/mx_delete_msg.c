@@ -17,8 +17,9 @@ static int delete_msg_to_db(t_server *server_info, t_server_users *user) {
     char sql[1024];
     int a = 0;
 
-    sprintf(sql, "update msg set msg_status='4', msg_send_time=datetime('now') "
-            "where msg_id=%d;", *((int*)&user->buff[9]));
+    sprintf(sql, "update msg set msg_status='4', "
+            "msg_send_time=datetime('now') where msg_id=%d;",
+            *((int*)&user->buff[9]));
     a = mx_do_query(sql, 0, 0,server_info);
     if (a != SQLITE_OK)
         return 1;
@@ -41,7 +42,8 @@ char *mx_delete_msg(t_server *server_info, t_server_users *user) {
     }
     sprintf(sql, "select cou_usr_id from cou where cou_chat_id = "
             "%d;", *(int*)&user->buff[13]);
-    response = create_response(*((int*)&user->buff[9]), *((int*)&user->buff[13]));
+    response = create_response(*((int*)&user->buff[9]),
+                               *((int*)&user->buff[13]));
     mx_send_response_user(server_info, response, sql);
     free(response);
     return 0;

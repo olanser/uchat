@@ -4,7 +4,7 @@ void mx_update_user(t_table_user* tuser, t_server_users *user,
                     t_server *server_info) {
     char sql[300];
     char *temp = 0;
-    
+
     sprintf(sql, "select usr_id from user where user.usr_nickname = '%s';",
             tuser->nickname);
     mx_do_query(sql, mx_return_one_str, &temp, server_info);

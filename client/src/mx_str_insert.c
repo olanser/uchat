@@ -16,7 +16,8 @@ char *mx_str_insert(char *string, char *substr, int index_to) {
         index_to = mx_strlen(string);
     memcpy(new_str, string, index_to);
     memcpy(&new_str[index_to], substr, mx_strlen(substr));
-    memcpy(&new_str[index_to + mx_strlen(substr)], &string[index_to], mx_strlen(string) - index_to);
+    memcpy(&new_str[index_to + mx_strlen(substr)], &string[index_to],
+           mx_strlen(string) - index_to);
     new_str[len - 1] = 0;
     return new_str;
 }

@@ -1,29 +1,26 @@
 #include "client.h"
 #include "defines_client.h"
 
-static t_user_info* get_user(t_info* info, char* response) {
-    t_user_info* uinfo = malloc(sizeof(t_user_info));
-    uinfo->avatar = '1';
+void get_user(t_user_info *uinfo, char *response) {
+    uinfo->avatar = response[217];
     uinfo->frst_name = 0; 
-    uinfo->nickname = 0;
+    uinfo->nickname = mx_strdup(&response[116]);
     uinfo->scnd_name = 0;
     uinfo->id = *(int*)&response[10];
-    return uinfo;
 }
 
 gboolean signin(void *data) {
     t_info *info = (t_info*)((void**)data)[0];
     char *response = (char*)((void**)data)[1];
+
     if (response[9] == (char)200) {
-        info->user_info = get_user(info, response);
+        get_user(info->user_info, response);
+        mx_set_profile_window(info);
         mx_chang_scene(info, MX_SCENE_MAIN_CHAT);
         mx_api_get_chats_info(info);
-        mx_api_get_chat_msgs(info->id_chat, 0, 10, info);
     }
     else {
         mx_create_file_registration(0, 0);
-        // NOT REGISTERED
-        printf("SIGNIN ERR STATUS = %d\n", response[9]);
     }
     free(response);
     free(data);

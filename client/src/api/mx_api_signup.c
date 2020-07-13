@@ -24,13 +24,9 @@ static int get_query(char *query, char **parameters, int query_id) {
 */
 int mx_api_signup(char **parameters, t_info *info) {
     char *query = malloc(sizeof(char) * 313);
-    memset(query, 0, 313);
 
+    memset(query, 0, 313);
     get_query(query, parameters, info->query_id);
-    printf("frst = %s\n", &query[9]);
-    printf("scnd = %s\n", &query[60]);
-    printf("nick = %s\n", &query[111]);
-    printf("pass = %s\n", &query[212]);
     mx_tsend_msg_(info->sock, query, 313, info);
     return 0;
 }

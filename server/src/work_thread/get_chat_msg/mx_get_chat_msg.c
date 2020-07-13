@@ -3,7 +3,7 @@
 
 static int get_size(int type, char**data) {
     int size = 0;
-    
+
     if (type == 3) {
         size = 47 + 255 + 1 + 5;
     }
@@ -18,12 +18,11 @@ static void set_data(char *respons, int type, char **data) {
         sprintf(&respons[46], "%s", data[9]);
         respons[302] = (char)atoi(data[8]);
         *(int*)&respons[303] = atoi(data[10]);
-    } 
+    }
     else {
         sprintf(&respons[46], "%s", data[4]);
     }
 }
-
 /* 
 * data[0] - msg_id*
 * data[1] - msg_chat_id
@@ -40,6 +39,7 @@ static void set_data(char *respons, int type, char **data) {
 static int callback(void *param, int column, char **data, char **names) {
     char *respons = 0;
     int size = get_size(atoi(data[7]) ,data);
+
     respons =  malloc(sizeof(char) * size);
     memset(respons, 0, size);
     respons[0] = data[5][0] - '0';
@@ -48,7 +48,7 @@ static int callback(void *param, int column, char **data, char **names) {
     *((int*)&respons[13]) = atoi(data[1]);
     *((int*)&respons[17]) = atoi(data[2]);
     sprintf(&respons[21], "%s", data[3]);
-    sprintf(&respons[41], "%s", data[6]);
+    respons[41] = data[6][0];
     *((int*)&respons[42]) = atoi(data[7]);
     set_data(respons, *((int*)&respons[42]), data);
     mx_write_socket(param, respons);
@@ -66,13 +66,14 @@ char *mx_get_chat_msg(t_server *server_info, t_server_users *user) {
     if (*((int*)&user->buff[13]) == 0)
         *((int*)&user->buff[13]) = 2147483647;
     sprintf(sql, "select msg_id, msg_chat_id, msg_creator, msg_send_time, "
-            "msg_data, msg_status, msg_avatar, msg_type, msg_file_type, msg_file_name, msg_file_size from (select * "
-            "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < %d"
-            " order by msg_id DESC LIMIT %d) order by msg_id ASC;",
+            "msg_data, msg_status, msg_avatar, msg_type, msg_file_type, "
+            "msg_file_name, msg_file_size from (select * "
+            "from msg where msg_chat_id =%d and msg_status != 4 and msg_id < "
+            "%d order by msg_id DESC LIMIT %d) order by msg_id ASC;",
             *((int*)&user->buff[9]), *((int*)&user->buff[13]), 
             *((int*)&user->buff[17]));
     if (mx_do_query(sql, callback, user, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, user, 
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     return 0;
 }

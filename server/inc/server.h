@@ -10,9 +10,12 @@
 
 #include "libmx.h"
 #include "mxinet.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 
 typedef struct s_server_users {
     int socket;
+    SSL *ssl;
     int id_users;
     char *buff;
     bool work;
@@ -30,6 +33,7 @@ typedef struct s_user_in_chat {
 
 typedef struct s_server {
     int size_connekt;
+    SSL_CTX *ctx;
     pthread_mutex_t m_edit_database;
     sqlite3 *db;
     pthread_mutex_t m_logfile;
@@ -68,7 +72,7 @@ typedef struct s_file_message {
 
 
 
-t_server *mx_create_server(int max_connect, int fd_server, int count_thread);
+t_server *mx_create_server(int fd_server);
 void *mx_thread(void *data);
 int mx_accept_new_connect(t_server *server_info, int max_connect);
 int mx_new_data_to_socket(t_server *server_info, int id);
@@ -77,6 +81,8 @@ bool mx_check_not_work(t_server_users *user);
 void mx_work_thread(t_server *server_info, t_server_users *user);
 char *mx_do_request(t_server *server_info, t_server_users *user);
 void mx_write_socket(t_server_users *user, char *response);
+void mx_start_demon(t_server *server_info);
+void mx_init_ssl(t_server *server_info);
 
 //function
 char *mx_create_response(char id_request, int query, char status);
@@ -95,14 +101,18 @@ void mx_add_error_work_log(t_server *server_info, t_server_users *user,
                            char *msg);
 char *mx_create_respons_error_and_log(t_server *server_info,
     t_server_users *user, char *msg, char status);
+char *mx_chenge_symbol(char *str);
 
 //API
 char *mx_signup(t_server *server_info, t_server_users *user);
 bool mx_is_allowed_name(char *str);
 int mx_check_symbols(t_table_user *tuser);
+int mx_check_tuser(t_table_user *tuser, t_server *server_info);
 void mx_update_user(t_table_user* tuser, t_server_users *user,
                     t_server *server_info);
 char *mx_signin(t_server *server_info, t_server_users *user);
+char mx_login_check_user(t_table_user *tuser, t_server *server_info,
+                                t_server_users *user);
 int mx_get_msg_login(char status, char *request, t_table_user *tuser,
                      char **response);
 char *mx_send_message(t_server *server_info, t_server_users *user);
@@ -116,6 +126,9 @@ char *mx_get_msgs_time(t_server *server_info, t_server_users *user);
 char *mx_show_users(t_server *server_info, t_server_users *user);
 char *mx_delete_msg(t_server *server_info, t_server_users *user);
 char *mx_send_file(t_server *server_info, t_server_users *user);
+int mx_check_file(t_file_message *message, t_server_users *user);
+void mx_creat_msg_to_database_and_rename_file(t_server *server_info,
+    t_server_users *user, t_file_message *message);
 char *mx_change_avatar(t_server *server_info, t_server_users *user);
 char *mx_join_chat(t_server *server_info, t_server_users *user);
 void mx_get_msg_response_10(char status, char *request, char **response);

@@ -10,7 +10,7 @@ unisntall u:
 	@make -sC libmx $@
 	@make -sC mxinet $@
 	@make -sC mxdraw $@
-	@rm -rf libmx.a mxinet.a mxdraw.a
+	@rm -rf libmx.a mxinet.a mxdraw.a libcrypto.dylib libssl.dylib
 
 # uninstall one lib. usge: u[libname]. example: ulibmx
 u%:

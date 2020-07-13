@@ -9,13 +9,17 @@ static bool check_valid(char** params) {
 
 void mx_btn_signup(GtkWidget* button, void* data) {
     t_info *info = (t_info*) data;
-    const char *pass1 = gtk_entry_get_text(GTK_ENTRY(info->objs->s_signup_win->signup_pass1));
-    const char *pass2 = gtk_entry_get_text(GTK_ENTRY(info->objs->s_signup_win->signup_pass2));
-    const char *login = gtk_entry_get_text(GTK_ENTRY(info->objs->s_signup_win->signup_login));
+    const char *pass1 = gtk_entry_get_text(
+        GTK_ENTRY(info->objs->s_signup_win->signup_pass1));
+    const char *pass2 = gtk_entry_get_text(
+        GTK_ENTRY(info->objs->s_signup_win->signup_pass2));
+    const char *login = gtk_entry_get_text(
+        GTK_ENTRY(info->objs->s_signup_win->signup_login));
     const char *parameters[4] = {"firstName", "secondName", login, pass1};
 
+    free(info->user_info->nickname);
+    info->user_info->nickname = mx_strdup(login);
     if (mx_strcmp(pass1, pass2) != 0) {
-        printf("passwords not equal\n");
         return;
     }
     if (check_valid((char**)parameters) == false)

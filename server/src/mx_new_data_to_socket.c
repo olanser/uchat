@@ -3,22 +3,21 @@
 #include "defines.h"
 
 static bool error_case(bool *close_conn, int rc, char *buffer) {
-    // printf("buff = %d\n", buffer[0]);
     if (rc < 0) {
         if (errno != EWOULDBLOCK) {
-            // perror("  recv() failed");
+            perror("recv() failed");
             *close_conn = true;
         }
     }
     else if (rc == 0) {
-        // printf("Connection closed\n");
+        printf("Connection closed\n");
         *close_conn = true;
     }
     else if (buffer[0] > MX_COUNT_FUCTIONS) {
-        // printf("Wrong request  Connection closed\n");
+        printf("Wrong request  Connection closed\n");
         *close_conn = true;
     }
-    else if ((rc =*((int *)(&buffer[5]))) > MX_MAX_SIZE_REQUEST) {   // size
+    else if ((rc =*((int *)(&buffer[5]))) > MX_MAX_SIZE_REQUEST) {
         printf("Wrong Size  Connection closed\n");
         *close_conn = true;
     }
@@ -29,8 +28,8 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
     int len = *(int*)(&(*buffer)[5]);
     char log[MX_MAX_SIZE_REQUEST];
 
-    recv(server_info->poll_set[id].fd, &(*buffer)[9], len - 9, 0);
-   
+    if (len != 9)
+        SSL_read(server_info->table_users[id].ssl, &(*buffer)[9], len - 9);
     server_info->table_users[id].buff = *buffer;
     *buffer = 0;
     server_info->poll_set[id].revents = 0;
@@ -45,9 +44,19 @@ static void read_socket(t_server *server_info, int id, char **buffer) {
     kill(getpid(), SIGUSR1);
 }
 
+static void free_user_connection_close(t_server *server_info, int id) {
+    close(server_info->poll_set[id].fd);
+    SSL_free(server_info->table_users[id].ssl);
+    server_info->poll_set[id].fd = -1;
+    server_info->table_users[id].socket = -1;
+    server_info->table_users[id].id_users = 0;
+    server_info->poll_set[id].events = 0;
+    server_info->compress_array = true;
+}
+
 int mx_new_data_to_socket(t_server *server_info, int id) {
     char *buffer = malloc(sizeof(char) * MX_MAX_SIZE_REQUEST);
-    int rc = recv(server_info->poll_set[id].fd, buffer, 9, 0);
+    int rc = SSL_read(server_info->table_users[id].ssl, buffer, 9);
     bool close_conn = false;
     char log[100];
 
@@ -59,12 +68,7 @@ int mx_new_data_to_socket(t_server *server_info, int id) {
                 server_info->table_users[id].id_users);
         mx_add_log(server_info, log);
         pthread_rwlock_wrlock(&(server_info->m_edit_users));
-        close(server_info->poll_set[id].fd);
-        server_info->poll_set[id].fd = -1;
-        server_info->table_users[id].socket = -1;
-        server_info->table_users[id].id_users = 0;
-        server_info->poll_set[id].events = 0;
-        server_info->compress_array = true;
+        free_user_connection_close(server_info, id);
         pthread_rwlock_unlock(&(server_info->m_edit_users));
     }
     if (buffer)

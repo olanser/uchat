@@ -13,10 +13,6 @@ static int get_query(char *query, int size, void **parameters, int query_id) {
     *(int*)(&query[13]) = *(int*)parameters[1];
     *(int*)(&query[17]) = *(int*)parameters[2];
     *(int*)(&query[21]) = *(int*)parameters[3];
-    printf("\nchat_id = %d\n", *(int*)parameters[0]);
-    printf("msg_id = %d\n", *(int*)parameters[1]);
-    printf("pos = %d\n", *(int*)parameters[2]);
-    printf("count = %d\n\n", *(int*)parameters[3]);
     return 0;
 }
 
@@ -29,8 +25,8 @@ static int get_query(char *query, int size, void **parameters, int query_id) {
 int mx_api_get_file(void **parameters, t_info *info) {
     int size = 25;
     char *query = malloc(sizeof(char) * size);
-    memset(query, 0, size);
 
+    memset(query, 0, size);
     get_query(query, size, parameters, info->query_id);
     mx_tsend_msg_(info->sock, query, size, info);
     return 0;

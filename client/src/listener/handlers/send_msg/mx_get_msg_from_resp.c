@@ -41,7 +41,7 @@ t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
     msg->msg_id = *(int*)&resp[9];
     msg->msg_id_chat = *(int*)&resp[13];
     msg->msg_id_user = *(int*)&resp[17];
-    msg->msg_avatar = *(int*)&resp[41];
+    msg->msg_avatar = resp[41];
     msg->msg_type = *(int*)&resp[42];
     msg->msg_time = mx_strdup(&resp[21]);
     msg->msg_data = 0;
@@ -54,9 +54,7 @@ t_msg* mx_get_msg_from_resp(char *resp, t_info *info) {
         msg->msg_f_size = *(int*)&resp[303];
     }
     else
-    {
         msg->msg_data = mx_strdup(&resp[46]);
-    }
     msg->msg_widget = mx_get_msg_widget(resp, info, msg);
     return msg;
 }

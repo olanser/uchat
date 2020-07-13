@@ -45,6 +45,13 @@ SRC_PATH = src/mx_main_server.c \
 	src/function/mx_check_avatar.c \
 	src/function/mx_add_log.c \
 	src/work_thread/send_file/mx_get_file.c \
+	src/mx_start_demon.c \
+	src/mx_init_ssl.c \
+	src/work_thread/signup/mx_check_tuser.c \
+	src/work_thread/signin/mx_login_check_user.c \
+	src/work_thread/send_file/mx_check_file.c \
+	src/work_thread/send_file/mx_creat_msg_to_database_and_rename_file.c \
+	src/function/mx_chenge_symbol.c \
 
 # Variables
 
@@ -64,11 +71,11 @@ LIBS = libs/libmx.a \
 INC = inc/defines.h \
 	inc/server.h
 
-CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror
-
+CFLSGS = -lsqlite3 -std=c11 -Wall -Wextra -Wpedantic -Werror -L libs -lssl -lcrypto
 SANITIZE = -fsanitize=address
+FLAG = -std=c11 -Wall -Wextra -Wpedantic -Werror
 
-SERVER = server
+SERVER = chat_server
 # Rules
 
 VPATH = $(dir $(SRC_PATH));
@@ -97,9 +104,11 @@ db:
 uninstall: clean
 	@make -sC libs $@
 	@rm -rf ./download
-	@rm -rf server
+	@rm -rf $(SERVER)
 	@rm -rf database/database.db
 	@rm -rf database/log.txt
+	@rm -rf database/log2.txt
+	@rm -rf inc/openssl
 	@printf "\x1b[32mserver:\x1b[34;1m [$@]\x1b[0m\n"
 
 clean:

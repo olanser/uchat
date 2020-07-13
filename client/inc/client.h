@@ -7,6 +7,9 @@
 
 #include <stdbool.h>
 
+#include "openssl/ssl.h"
+#include "openssl/err.h"
+
 // dirs
 #include <sys/types.h>
 #include <dirent.h>
@@ -32,22 +35,33 @@ int mx_send_msg_(int socket, char *buff, int size, t_info *info);
 int mx_tsend_msg_(int socket, char *abuff, int size, t_info *info);
 t_file *mx_get_file_by_msg_id(t_list *list, int id);
 GtkWidget* mx_get_sized_img(const char *path, int width, int height);
+void mx_hash(const char *pass, const char *log);
 char *mx_get_pango_from_uchat(char *uchat_format);
 t_tag* mx_create_tag(char *uchat_f, char *pango_f, int start, int end) ;
 char *mx_str_insert(char *string, char *substr, int index_to);
+void mx_write_theme(char *theme_path);
+char *mx_insert_str_between3(int start, int end, char*str_f, char*substr_f);
 
 void mx_init_signals();
 gboolean mx_scene_cycle(void *data);
-void mx_init(t_info **info);
+void mx_init(t_info **info, int argc, char **argv);
 void mx_init_gtk(t_info* info);
 int mx_chang_scene(t_info *info, int scene);
 void mx_do_iteration(t_info* info);
 void mx_show_window(t_info* info);
 void mx_connect_signals(t_info* info);
-void mx_connect(t_info *info);
+void mx_connect(t_info *info, int argc, char **argv);
+void mx_init_characters(t_info *info);
 
 // init gtk
 GtkWidget* mx_get_stickers_notebook(GtkBuilder *builder, t_info *info);
+void mx_set_profile_window(t_info *info);
+GtkWidget* mx_build_get(GtkBuilder *builder, char *name);
+void mx_init_main_chat_win(GtkBuilder *builder, 
+                           t_main_chat_window *main_chat, 
+                           t_info *info);
+void mx_init_profile(t_info *info);
+t_user_info* mx_crete_user(t_info* info);
 
 // api
 int mx_api_delete_message(int id_msg, int id_chat, t_info *info);
@@ -66,6 +80,7 @@ int mx_api_create_dialog(int id_user, t_info *info);
 int mx_api_get_unique_name_of_file(t_info *info);
 int mx_api_end_send_file(void **parameters, t_info *info);
 int mx_api_get_file(void **parameters, t_info *info);
+int mx_api_change_avatar(int avatar, t_info *info);
 
 // signals
 void mx_btn_send_msg_clicked(GtkWidget* button, void* data);
@@ -79,21 +94,31 @@ void mx_btn_edit_msg(GtkButton *button, GdkEvent *event, void *data);
 void mx_btn_choose_file(GtkWidget *button, t_info *info);
 void mx_btn_show_stickers(GtkWidget* button, t_info* info);
 void mx_btn_send_sticker(GtkWidget *button, GdkEvent*event, void *data);
-void mx_btn_settings(GtkWidget *btn, void*data);
+void mx_btn_settings(GtkWidget *btn, t_info *info);
 void mx_btn_exit(GtkButton *button, t_info *info);
 void mx_btn_get_file(GtkButton *button, t_info *info);
 void mx_btn_downloaded_click(GtkButton *button, void*data);
+void mx_btn_change_avatar(GtkWidget *button, GdkEvent *event,  t_info *info);
+
+//profile signals
+void mx_btn_theme1(GtkWidget* button, t_info *info);
+void mx_btn_theme2(GtkWidget* button, t_info *info);
+void mx_btn_theme3(GtkWidget* button, t_info *info);
+void mx_btn_theme4(GtkWidget* button, t_info *info);
+void mx_btn_theme5(GtkWidget* button, t_info *info);
+void mx_btn_save(GtkWidget* button, t_info *info);
+
 void mx_play_btn(GtkButton *btn, void*data);
-gboolean mx_scale_changed (GtkRange     *range,
-               GtkScrollType scroll,
-               gdouble       value,
-               void *user_data);
+gboolean mx_scale_changed (GtkRange *range, GtkScrollType scroll,
+                            gdouble value, void *user_data);
 void mx_stop_btn(GtkButton *btn, void*data);
 //signup
 void mx_btn_signup(GtkWidget* button, void* data);
+gboolean mx_key_press_signup(GtkWidget*widget, GdkEvent *event, t_info *info);
 
 // signin
 gboolean mx_btn_signin(GtkButton *button, t_info *info);
+gboolean mx_key_press_signin(GtkWidget*widget, GdkEvent *event, t_info *info);
 
 //listener
 void* mx_listener(void *data);
@@ -123,12 +148,23 @@ int mx_h_signup(char *response, t_info* info);
 int mx_h_get_chats_info(char *response, t_info *info);
 int mx_h_get_unique_name(char *response, t_info *info);
 
+gboolean mx_handle_edit_msg(void* data);
+gboolean mx_add_chat(void*data);
+t_chat_info* mx_create_dialog_info(char* response, t_info *info, 
+                                    GtkWidget *chat_widget);
+int mx_handler_get_file(char *response, t_info *info);
 
 //sendmsg
 t_msg_widget* mx_get_msg_widget(char *response, t_info *info, t_msg* msg);
 GtkWidget* mx_get_widget_of_file(t_file *file, t_info *info);
 void mx_fill_msg_widget(char *response, t_info *info, t_msg_widget* msg_wid);
 void mx_set_markup(GtkWidget *label, char *str);
+GtkWidget *mx_sent_msg_build(char *response, 
+                             t_msg_widget* msg_wid,
+                             t_info *info);
+char *mx_get_formated_substr(char *str, int *index, int *start_, int *end_);
+bool mx_is_substr_valid(char *substr);
+gboolean mx_handle_add_msg(void* data);
 
 //signals_callback_func
 gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs);
@@ -138,12 +174,18 @@ gboolean mx_destroy_main_window(GtkWidget *window);
 gboolean mx_destroy_signup_window(GtkWidget *window);
 gboolean mx_destroy_signin_window(GtkWidget *window);
 gboolean mx_go_fullscreen_signin_window(GtkWidget *window, GdkEventWindowState *event, t_objects *objs);
-//
 
-// thread send file
+// file_sender
 void *mx_thread_send_file(void *data);
+void mx_write_file(t_info *info);
+void mx_free_file(t_file *file);
 
 //music
 t_fmod_info *mx_init_music();
+void mx_load(t_fmod_info *music);
+void mx_unload(t_fmod_info *music);
+void *mx_music_scrol(void *data);
+void mx_music_signal_one(GtkWidget *send_play_btn, GtkWidget *stop_btn,
+                         t_file *file, t_info *info);
 
 #endif

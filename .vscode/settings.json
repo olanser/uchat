@@ -24,11 +24,6 @@
         "server/inc",
         "client/inc"
     ],
-    "files.associations": {
-        "array": "c",
-        "iterator": "c",
-        "string": "c",
-        "string_view": "c",
-        "vector": "c"
-    },
+    "editor.rulers": [78],
+    
 }

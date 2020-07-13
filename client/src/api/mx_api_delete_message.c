@@ -18,8 +18,8 @@ int mx_api_delete_message(int id_msg, int id_chat, t_info *info) {
     int size = 17;
     char *query = malloc(sizeof(char) * size);
     int parameters[2] = {id_msg, id_chat};
-    memset(query, 0, size);
 
+    memset(query, 0, size);
     get_query(query, parameters, info->query_id, size);
     mx_tsend_msg_(info->sock, query, size, info);
     return 0;

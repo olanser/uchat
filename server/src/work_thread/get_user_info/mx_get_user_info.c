@@ -25,8 +25,10 @@ static int get_ok_msg(char **response, t_table_user *tuser) {
     *response = malloc(total_len);
     memset(*response, 0, total_len);
     *((int*)&(*response)[9]) = tuser->id;
-    mx_memcpy(&(*response)[13], tuser->first_name, strlen(tuser->first_name));
-    mx_memcpy(&(*response)[64], tuser->second_name, strlen(tuser->second_name));
+    mx_memcpy(&(*response)[13], tuser->first_name,
+              strlen(tuser->first_name));
+    mx_memcpy(&(*response)[64], tuser->second_name,
+              strlen(tuser->second_name));
     mx_memcpy(&(*response)[115], tuser->nickname, strlen(tuser->nickname));
     return total_len;
 }
@@ -49,8 +51,8 @@ char *mx_get_user_info(t_server *server_info, t_server_users *serv_user) {
     sprintf(sql,"select usr_frst_name, usr_scnd_name, usr_nickname, usr_id "
     "from user where usr_id = '%d';", *((int*)&req[9]));
     if (mx_do_query(sql,callback, &user, server_info) != SQLITE_OK)
-        return mx_create_respons_error_and_log(server_info, serv_user, MX_SQL_ERROR,
-                                               MQ_QS_ERR_SQL);
+        return mx_create_respons_error_and_log(server_info, serv_user,
+            MX_SQL_ERROR, MQ_QS_ERR_SQL);
     if (user != 0) {
         mx_get_msg_user(req, user, &response);
         mx_free_tuser(user);

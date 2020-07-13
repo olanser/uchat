@@ -8,15 +8,14 @@ static int get_ok_msg(char **response, t_table_user *tuser) {
     memset(*response, 0, size);
     (*response)[9] = (char)200;
     *((int*)(&(*response)[10])) = tuser->id;
-    // mx_strcpy(&(*response)[10], tuser->id);//10
-    mx_strcpy(&(*response)[14], tuser->first_name);//21
-    mx_strcpy(&(*response)[65], tuser->second_name);//72
-    mx_strcpy(&(*response)[116], tuser->nickname);//123
-    (*response)[217] = tuser->avatar;//224
+    mx_strcpy(&(*response)[14], tuser->first_name);
+    mx_strcpy(&(*response)[65], tuser->second_name);
+    mx_strcpy(&(*response)[116], tuser->nickname);
+    (*response)[217] = tuser->avatar;
     return size;
 }
 
-static int get_err_msg(char **response, char status) {
+static int get_err_msg(char **response) {
     int total_len = 10;
 
     *response = malloc(total_len);
@@ -32,7 +31,7 @@ int mx_get_msg_login(char status, char *request, t_table_user *tuser,
         total_len = get_ok_msg(response, tuser);
     }
     else {
-        total_len = get_err_msg(response, status);
+        total_len = get_err_msg(response);
     }
     mx_memcpy(*response, request, 5);
     (*response)[9] = status;

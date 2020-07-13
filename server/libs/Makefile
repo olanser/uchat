@@ -21,6 +21,7 @@ uninstall: clean
 	@make -sC libmx $@
 	@make -sC mxinet $@
 	@rm -rf $(LIB_FILES_TMP)
+	@rm -rf libcrypto.dylib libssl.dylib
 	@printf "\x1b[32mlibs:\x1b[34;1m [$@]\x1b[0m\n"
 
 clean:

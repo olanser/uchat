@@ -19,7 +19,7 @@ void mx_add_error_work_log(t_server *server_info, t_server_users *user,
                            char *msg) {
     char log[1024];
 
-     sprintf(log, "%s work ID user = %d, API = %d", 
-                msg, user->id_users, user->buff[0]);
+     sprintf(log, "%s work ID user = %d, API = %d",
+             msg, user->id_users, user->buff[0]);
     mx_add_log(server_info, log);
 }
