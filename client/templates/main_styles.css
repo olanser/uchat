@@ -18,6 +18,10 @@ window * {
     -gtk-icon-shadow: none;
 }
 
+entry {
+    color: #c5c6c7;
+}
+
 /* notebook.frame {
     background: #F2F4F4;
     border: none;
