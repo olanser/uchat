@@ -9,9 +9,9 @@ gboolean mx_scale_changed (GtkRange *range, GtkScrollType scroll,
     char filepath[512];
 
     memset(filepath , 0, 512);
-    sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);    
-    if (music->currentSound != NULL && strcmp(filepath, music->currentSound) == 0 
-        && value <= 100) {
+    sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);
+    if (music->currentSound != NULL 
+        && strcmp(filepath, music->currentSound) == 0 && value <= 100) {
         position = (value * music->sound_len)/100;
         music->possition = position;
         if (position < music->sound_len)
@@ -51,5 +51,18 @@ void mx_load(t_fmod_info *music) {
         if (result != FMOD_OK) {
             music->possible = false;
         }
+    }
+}
+
+void mx_stop_btn(GtkButton *btn, void*data) {
+    t_fmod_info *music = (t_fmod_info *)data;
+    char *name = g_object_get_data(G_OBJECT(btn), "name");
+    char filepath[512];
+
+    memset(filepath , 0, 512);
+    sprintf(filepath, "%s%s", MX_DIR_DOWNLOAD, name);
+    if (music->currentSound != NULL && strcmp(filepath, 
+        music->currentSound) == 0 && music->Sound_on == false) {
+        mx_unload(music);
     }
 }

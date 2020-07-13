@@ -133,6 +133,7 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/init/mx_init_search_user.c \
 	src/init/mx_init_characters.c \
 	src/mx_get_pango_attributes.c \
+	src/init/mx_connect_music_signal.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

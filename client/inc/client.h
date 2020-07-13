@@ -17,7 +17,6 @@
 #include <errno.h>
 #include "fmod.h"
 
-
 char *get_text_of_textview(GtkWidget *text_view);
 char *mx_get_path_to_sticker(int number);
 bool mx_check_file_registration(t_info *info);
@@ -206,5 +205,9 @@ void mx_free_file(t_file *file);
 //music
 t_fmod_info *mx_init_music();
 void mx_load(t_fmod_info *music);
+void mx_unload(t_fmod_info *music);
+void *mx_music_scrol(void *data);
+void mx_music_signal_one(GtkWidget *send_play_btn, GtkWidget *stop_btn,
+                         t_file *file, t_info *info);
 
 #endif
