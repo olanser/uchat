@@ -39,7 +39,7 @@ void mx_init_info(t_info **info) {
     (*info)->music = mx_init_music();
 }
 
-void mx_init_signals() {
+void mx_init_signals(void) {
     sigset_t newmask;
 
     sigemptyset(&newmask);

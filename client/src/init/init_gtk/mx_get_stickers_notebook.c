@@ -1,7 +1,7 @@
 #include "client.h"
 #include "defines_client.h"
 
-char **get_packs(char *rel_path) {
+static static char **get_packs(char *rel_path) {
     int len = mx_dirlen(rel_path);
     char **strs = 0;
 
@@ -13,7 +13,7 @@ char **get_packs(char *rel_path) {
     return strs;
 }
 
-void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
+static void add_image(GtkWidget *grid, char *path_to_img, int index, t_info *info) {
     GtkWidget *img = 0;
     GdkPixbuf *pixbuf = 0;
     GtkWidget* event_box = 0;
@@ -50,7 +50,7 @@ static void fill_pack(GtkWidget *grid, char *name_dir, char *pack_name,
     mx_del_strarr(&names_stickers);
 }
 
-GtkWidget* get_grid(char *name_of_pack, t_info *info) {
+static GtkWidget* get_grid(char *name_of_pack, t_info *info) {
     GtkWidget *grid = gtk_grid_new();
     char name_dir[1024];
 
