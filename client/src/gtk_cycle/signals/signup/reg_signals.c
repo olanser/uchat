@@ -9,6 +9,8 @@ gboolean mx_resize_signup_window (GtkWidget *window, t_objects *objs) {
         GTK_WIDGET(objs->s_signup_win->signup_main_grid), width, height);
     gtk_widget_set_size_request(
         GTK_WIDGET(objs->s_signup_win->signup_child_box), width, height);
+    gtk_widget_set_size_request(
+        GTK_WIDGET(objs->s_signup_win->image_name), width, -1);
     return FALSE;
 }
 

@@ -12,12 +12,16 @@ gboolean mx_btn_signin(GtkButton *button, t_info *info) {
         GTK_ENTRY(info->objs->s_signin_win->signin_login));
     const char *pass = gtk_entry_get_text(
         GTK_ENTRY(info->objs->s_signin_win->signin_password));
-    const char *parameters[2] = {login, pass};
+    const char *new_pass = mx_hash(pass, login);
+    const char *parameters[2] = {login, new_pass};
 
-    if (check_valid((char**)parameters) == false)
+    if (check_valid((char**)parameters) == false) {
+        free((char*)new_pass);
         return true;
+    }
     mx_create_file_registration(0, 0);
-    mx_create_file_registration((char*)login, (char*)pass);
+    mx_create_file_registration((char*)login, (char*)new_pass);
     mx_api_signin((char**)parameters, info);
+    free((char*)new_pass);
     return TRUE;
-}   
+}

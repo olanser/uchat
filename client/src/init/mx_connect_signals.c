@@ -3,13 +3,6 @@
 */
 #include "client.h"
 
-void delay(double number_of_seconds) { 
-    double milli_seconds = 1000 * number_of_seconds; 
-    clock_t start_time = clock(); 
-
-    while (clock() < start_time + milli_seconds);
-}
-
 static void connect_to_signin_window(t_info* info) {
     t_signin_window *win = info->objs->s_signin_win;
 
@@ -27,21 +20,30 @@ static void connect_to_signin_window(t_info* info) {
     g_signal_connect(
         GTK_WIDGET(win->signin_win), "key-press-event",
         (GCallback)mx_key_press_signin, info);
+    g_signal_connect(
+        GTK_WIDGET (win->signin_vissible_pass), "clicked",
+        (GCallback)mx_vis_pass_signin, info);
 }
 
 static void connect_to_signup_window(t_info* info) {
     g_signal_connect(
-        GTK_WIDGET (info->objs->s_signup_win->signup_win),
-        "check-resize", (GCallback) mx_resize_signup_window, info->objs);
+        GTK_WIDGET(info->objs->s_signup_win->signup_win),
+        "check-resize", (GCallback)mx_resize_signup_window, info->objs);
     g_signal_connect(
-        GTK_WIDGET (info->objs->s_signup_win->signup_win), "destroy",
-        (GCallback) mx_destroy_signup_window, NULL);
+        GTK_WIDGET(info->objs->s_signup_win->signup_win), "destroy",
+        (GCallback)mx_destroy_signup_window, NULL);
     g_signal_connect(
-        GTK_WIDGET (info->objs->s_signup_win->signup_buton), "clicked",
-        (GCallback) mx_btn_signup, info);
+        GTK_WIDGET(info->objs->s_signup_win->signup_buton), "clicked",
+        (GCallback)mx_btn_signup, info);
     g_signal_connect(
-        GTK_WIDGET (info->objs->s_signup_win->signup_win), "key-press-event",
-        (GCallback) mx_key_press_signup, info);
+        GTK_WIDGET(info->objs->s_signup_win->signup_win), "key-press-event",
+        (GCallback)mx_key_press_signup, info);
+    g_signal_connect(
+        GTK_WIDGET(info->objs->s_signup_win->btn_go_to_signin), "clicked",
+        (GCallback)mx_btn_go_to_signin, info);
+    g_signal_connect(
+        GTK_WIDGET(info->objs->s_signup_win->signup_vissible_pass), "clicked",
+        (GCallback)mx_vis_pass, info);
 }
 
 static void conect2(t_info* info) {

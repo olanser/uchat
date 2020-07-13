@@ -17,7 +17,7 @@ static int check_and_create_socket(int argc, char *argv[]) {
             exit(1);
         }
     }
-    signal(SIGINT, signal_stop);
+    // signal(SIGINT, signal_stop);
     return mx_create_sockl(atoi(argv[1]));
 }
 

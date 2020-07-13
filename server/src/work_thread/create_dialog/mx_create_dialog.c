@@ -1,7 +1,6 @@
 #include "server.h"
 #include "defines.h"
 
-
 static char *create_response_create_dialog(char **temp, char *request) {
     int total_len = 17;
     char *respons = malloc(total_len);

@@ -26,7 +26,6 @@ void mx_set_theme(int fd) {
     GtkCssProvider *provider = gtk_css_provider_new();
 
     buff[count] = 0;
-    printf("buff = %s\n", buff);
     gtk_css_provider_load_from_path(provider, buff, NULL);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
                                             GTK_STYLE_PROVIDER(provider),
@@ -45,10 +44,7 @@ bool mx_check_file_registration(t_info *info) {
     if (fd == -1)
         return false;
     len = read(fd, buff, 202);
-    if (len != 202) {
-        return false;
-    }
-    if (check_buff(buff)){
+    if (len != 202 && check_buff(buff)) {
         close(fd);
         return false;
     }

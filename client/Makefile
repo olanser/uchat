@@ -124,6 +124,15 @@ FULL_SRC = src/api/mx_api_send_message.c \
 	src/gtk_cycle/signals/main/music/mx_play_btn.c \
 	src/gtk_cycle/signals/main/music/mx_scale_changed.c \
 	src/gtk_cycle/signals/main/music/mx_init_music.c \
+	src/gtk_cycle/signals/signup/mx_btn_go_to_signin.c \
+	src/gtk_cycle/signals/signup/mx_vis_pass.c \
+	src/gtk_cycle/signals/signin/mx_vis_pass_signin.c \
+	src/listener/handlers/get_chat_info/mx_set_adjustment_auto_down.c \
+	src/init/mx_init_objects.c \
+	src/init/mx_connect_css.c \
+	src/init/mx_init_search_user.c \
+	src/init/mx_init_characters.c \
+	src/mx_get_pango_attributes.c \
 
 TMP_SRC = $(addprefix tmp/, $(notdir $(FULL_SRC)))
 

@@ -14,8 +14,10 @@ static void set_lbl(GtkBuilder *builder, char *response, t_info *info) {
         GTK_IMAGE (msg_bbl), "client/res/imgs/rec_msg_tail.png");
 }
 
-static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid, t_info *info) {
-    GtkBuilder *builder = gtk_builder_new_from_file("client/templates/message_box.xml");
+static GtkWidget *received_msg_build(char *response, t_msg_widget* msg_wid,
+                                     t_info *info) {
+    GtkBuilder *builder = gtk_builder_new_from_file(
+        "client/templates/message_box.xml");
     GtkWidget *msg_box = 0;
     GtkWidget *avatar = 0;
     GtkWidget *label = 0;

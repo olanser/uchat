@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define MX_PATH_TO_TEMPLATE "client/templates/resizable8.xml" //resizable6 - has expander; resizable2 - without;
+#define MX_PATH_TO_TEMPLATE "client/templates/resizable8.xml"
 #define MX_TEMPLATE_SHITS "client/templates/notebook_chats.xml"
 #define MX_COUNT_API 17
 #define MX_FILE_REG "client/database/reg"

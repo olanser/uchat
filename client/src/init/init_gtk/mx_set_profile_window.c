@@ -1,7 +1,7 @@
 #include "client.h"
 #include "defines_client.h"
 
-GtkWidget* attach_img_at_pos(GtkGrid*grid, const char *path, int index,
+static GtkWidget* attach_img_at_pos(GtkGrid*grid, const char *path, int index,
                              int w) {
     GtkWidget *ev_box = gtk_event_box_new();
     GtkWidget *image = mx_get_sized_img(path, 80, 80);

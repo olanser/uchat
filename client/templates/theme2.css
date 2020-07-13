@@ -91,6 +91,12 @@ list row.activatable {
     background-color: #f00;
 }
 
+ /* to change buttons with searched chats */
+#search_user {
+    background-color: #f00;
+}
+
+
 button {
     background: transparent;
 }

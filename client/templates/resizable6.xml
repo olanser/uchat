@@ -37,6 +37,17 @@
     <property name="icon_name">user-home-symbolic</property>
     <property name="name">image5</property>
   </object>
+  <object class="GtkImage" id="image7">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">chat-message-new-symbolic</property>
+    <property name="name">image7</property>
+  </object>
+  <object class="GtkImage" id="image8">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="name">image8</property>
+  </object>
   <object class="GtkWindow" id="main_chat_window1">
     <property name="can_focus">False</property>
     <child>
@@ -541,11 +552,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <object class="GtkCheckButton" id="show_pass_tick">
+                              <object class="GtkButton" id="signin_show_pass_tick">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="draw_indicator">True</property>
+                                <property name="image">image8</property>
                               </object>
                             </child>
                           </object>
@@ -702,19 +713,8 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAspectFrame">
+                      <object class="GtkFixed">
                         <property name="can_focus">False</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">none</property>
-                        <child>
-                          <object class="GtkCheckButton" id="save_user_tick">
-                            <property name="label" translatable="yes">remember me</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -886,11 +886,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <object class="GtkCheckButton" id="show_pass_tic">
+                              <object class="GtkButton" id="signup_show_pass_tick">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="draw_indicator">True</property>
+                                <property name="image">image7</property>
                               </object>
                             </child>
                           </object>
@@ -1005,7 +1005,7 @@
                     <property name="can_focus">False</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="btn_go_to_signin">
                         <property name="label" translatable="yes">already have account?</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>

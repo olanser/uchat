@@ -8,6 +8,7 @@
 */
 static void add_new_chat(char *response, t_info *info) {
     void **data = malloc(sizeof(void*) * 3);
+
     data[0] = info;
     data[1] = malloc(*(int*)&response[5]);
     memcpy(data[1], response, *(int*)&response[5]);
@@ -23,7 +24,7 @@ static int check(char *response) {
 }
 
 int mx_h_get_chat_info(char *response, t_info *info) {
-    if(check(response) == 1)
+    if (check(response) == 1)
         return 1;
     add_new_chat(response, info);
     return 0;

@@ -39,18 +39,7 @@ void mx_init_info(t_info **info) {
     (*info)->music = mx_init_music();
 }
 
-t_pacman *get_pacman(t_info *info) {
-    t_pacman* pacman = malloc(sizeof(t_pacman));
-    t_movable mov = {100, 100, 2, 0};
-    const char *sprites[] = {MX_PAC_SP1, MX_PAC_SP2};
-
-    pacman->draw_obj = mx_create_drobject(mov, sprites, 2, MX_PACMAN_ANIM_DUR);
-    mx_put_obj(GTK_LAYOUT(info->objs->chat_win->layout_main), 
-               pacman->draw_obj);
-    return pacman;
-}
-
-void mx_init_signals() {
+void mx_init_signals(void) {
     sigset_t newmask;
 
     sigemptyset(&newmask);
