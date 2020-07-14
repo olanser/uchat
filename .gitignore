@@ -1,3 +1,4 @@
 client/client
 *.DS_Store
 .vscode
+.vscode/settings.json
