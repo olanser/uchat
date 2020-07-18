@@ -1,0 +1,75 @@
+#content {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+div#uchat_div {
+    margin-left: 6%;
+}
+
+span#uchat {
+    font-size: 200%;
+    font-weight: bold;
+}
+
+span#uchat_first {
+    color: rgb(255, 255, 255);
+    background-color: black;
+}
+
+.text1 {
+    font-size: large;
+}
+
+.text2 {
+    margin-left: 2%;
+}
+
+img {
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+#implement_list {
+    font-size: 120%;
+}
+
+#client {
+    font-weight: bold;
+    color: rgb(1, 35, 100);
+}
+
+#server {
+    font-weight: bold;
+    color: rgb(155, 0, 0);
+}
+li {
+    margin: 5px;
+}
+
+div.screenshots {
+    margin-left: 1%;
+}
+
+.block_of_screen {
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+    background-color: black;
+}
+
+#implement_list li:hover {
+    color: #fff;
+    background-color: black;
+}
