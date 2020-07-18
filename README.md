@@ -8,7 +8,7 @@
     <p><span class="text1">Apllication composed of two parts: <span id = "client">client</span> and <span id = "server">server</span></span></p>
     <h2><b>what we have implemented:</b></h2>
         <ul id="implement_list" type="disc">
-            <li><a href="#a_gr_channel">Group channels</a></li>
+            <li>Group channels</li>
             <li>Private messages</li>
             <li>Sticker packs</li>
             <li>File sending</li>
