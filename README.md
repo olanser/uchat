@@ -3,7 +3,7 @@
 </head>
 <body>
     <div id="content">
-    <div id="uchat_div"><span id="uchat"><span id="uchat_first">u</span>Chat</span></div>
+        <h1><div id="uchat_div"><span id="uchat"><span id="uchat_first">u</span>Chat</span></div></h1>
     <p><span class="text1">Сreating messaging application for MacOS. Last challenge of C thread in uCode.</span></p>
     <p><span class="text1">Apllication composed of two parts: <span id = "client">client</span> and <span id = "server">server</span></span></p>
     <h2><b>what we have implemented:</b></h2>
